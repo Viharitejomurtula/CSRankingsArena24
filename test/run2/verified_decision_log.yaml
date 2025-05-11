@@ -1,0 +1,864 @@
+verified:
+- title: "MX: Enhancing RISC-V's Vector ISA for Ultra-Low Overhead,\n  Energy-Efficient\
+    \ Matrix Multiplication"
+  verification: 'Correct: The paper demonstrates novelty, thorough evaluation, and
+    meaningful engagement with related work, justifying its qualification.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a section labeled "IV.
+      EXPERIMENT SETUP AND RESULTS" that provides a detailed evaluation of the proposed
+      MX implementation. It discusses performance, power, and energy efficiency metrics,
+      presents tables and figures with quantitative data, and compares the results
+      of the MX-ready system against a baseline.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content. It includes numerous academic citations,
+      discusses related work, and compares its methods to previous work, particularly
+      in the introduction and references sections.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new ISA extension called
+      Matrix eXtension (MX) for the RISC-V Vector (RVV) architecture, which is designed
+      to improve energy efficiency and performance in matrix multiplication tasks.
+      The paper makes clear claims of contribution, such as introducing a lightweight
+      and non-intrusive ISA extension, providing theoretical justification for its
+      benefits, and implementing MX on different computing clusters to demonstrate
+      its impact on performance and energy efficiency. These contributions indicate
+      novelty in the method and application of the proposed extension.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions,
+      specifically the Matrix eXtension (MX), an ISA extension for energy-efficient
+      matrix operations, and provides detailed analysis and implementation results,
+      rather than merely summarizing existing work.'
+- title: A Statically and Dynamically Scalable Soft GPGPU
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets the criteria for empirical evaluation, engagement with related work,
+    novelty, and contribution of new research findings.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains multiple sections and
+      discussions that provide empirical evaluation, including benchmarking several
+      algorithms, performance tables, and comparisons with other processors. There
+      are sections labeled "Results" and "Benchmarks" that discuss the evaluation
+      of the proposed method.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes numerous academic citations, discusses
+      previous work on soft GPGPU architectures, and compares its proposed method
+      with existing solutions. The paper provides context and discussion for the tools,
+      frameworks, and datasets it cites, and it explains and compares its methodology
+      to previous work in sections such as the Introduction and Background.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel parameterized SIMT
+      processor architecture for FPGAs, called the eGPU, which is both statically
+      and dynamically scalable. It claims to achieve high performance by matching
+      the processor pipeline structure to the physical structure of the FPGA fabric.
+      The paper also demonstrates the eGPU''s performance advantages over existing
+      soft RISC processors and other soft GPGPUs, highlighting its novelty in design
+      and application.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel parameterized
+      SIMT processor for FPGA, describes its architecture, and presents new contributions
+      such as dynamic and static scalability, benchmarking results, and comparisons
+      with existing processors. It does not primarily summarize existing work but
+      rather focuses on presenting new research and findings.'
+- title: "X-HEEP: An Open-Source, Configurable and Extendible RISC-V\n  Microcontroller\
+    \ for the Exploration of Ultra-Low-Power Edge Accelerators"
+  verification: 'Correct: The paper is justified in its acceptance as it demonstrates
+    evaluation, engages with related work, presents novelty, and introduces new contributions.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper provides evidence of evaluation
+      through multiple sections discussing experimental results, performance measurements,
+      and comparisons with state-of-the-art microcontrollers. It includes phrases
+      like "We run a set of healthcare applications and measure their energy consumption,"
+      and presents performance tables and figures, such as Figure 5 and Figure 6,
+      which show energy consumption comparisons.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout the text. It includes an extensive "State-of-the-Art" section
+      that discusses existing accelerators and host platforms, comparing their strengths
+      and limitations. The paper also references numerous prior works in the introduction
+      and other sections, providing context and comparison for the proposed X-HEEP
+      platform.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces X-HEEP, a novel open-source,
+      configurable, and extendible RISC-V microcontroller platform designed for the
+      exploration of ultra-low-power edge accelerators. It claims novelty by proposing
+      a new platform (X-HEEP) and a new interface (XAIF) for integrating accelerators,
+      which are tailored to meet specific application requirements. The paper also
+      presents a real-world integration example, HEEPocrates, demonstrating the platform''s
+      applicability in healthcare applications. These contributions indicate clear
+      novelty in terms of new methods, architectures, and applications.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new platform,
+      X-HEEP, and provides detailed information about its architecture, features,
+      and real-world applications, demonstrating new contributions rather than merely
+      summarizing existing work.'
+- title: "A Composable Dynamic Sparse Dataflow Architecture for Efficient\n  Event-based\
+    \ Vision Processing on FPGA"
+  verification: 'Correct: The paper demonstrates novelty, provides empirical evaluation,
+    engages with related work, and introduces new contributions, justifying the final
+    decision to qualify it.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Evaluations" section
+      that discusses experimental results, comparisons with other methods, and performance
+      metrics, indicating that it provides empirical evaluation of the proposed architecture.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes a dedicated "Background and Related
+      Work" section that discusses previous work on event-based vision and hardware
+      acceleration. The paper also provides numerous academic citations, compares
+      its proposed method to existing solutions, and discusses how it builds upon
+      or differs from prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel composable dynamic
+      sparse dataflow architecture (ESDA) for efficient event-based vision processing
+      on FPGA, which is a new method. It also claims to be the first to fully exploit
+      the intrinsic sparsity in event data using submanifold sparse convolutions,
+      and it presents a co-optimizing framework for network architecture and hardware
+      implementation. These contributions demonstrate novelty in both the method and
+      application context.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new architecture
+      called ESDA for event-based vision processing on FPGA, presenting novel contributions
+      and experimental results, rather than summarizing existing work.'
+- title: "Accelerating Boolean Constraint Propagation for Efficient SAT-Solving on\n\
+    \  FPGAs"
+  verification: 'Correct: The paper demonstrates novelty, thorough evaluation, and
+    engagement with related work, justifying its acceptance.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experiments and
+      Results" section where the authors evaluate their SAT solver on a Xilinx Zynq
+      platform. They provide quantitative results, including speedup comparisons with
+      prior state-of-the-art solutions and throughput measurements. Additionally,
+      performance tables and figures are presented to support their evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes a "State of the Art" section that
+      discusses historical solutions and compares them to the proposed method. The
+      paper also references numerous prior works in its background and implementation
+      sections, providing context and comparison to existing solutions.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel architecture for
+      hardware-accelerated SAT-solving on FPGAs, which eliminates costly clause lookup
+      operations and introduces a method for hot-swapping partitions during runtime.
+      It claims to outperform state-of-the-art solutions and is presented as the first
+      open-source hardware-accelerated SAT solver for the Xilinx Zynq platform. These
+      elements demonstrate novelty in both method and application.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel hardware-accelerated
+      SAT solver architecture for FPGAs, presenting new contributions such as a methodology
+      for mapping and runtime management of clauses, an open-source prototype system,
+      and performance evaluations against state-of-the-art solutions. It does not
+      primarily summarize existing work but rather builds upon it to propose and evaluate
+      new advancements.'
+- title: "DeMM: A Decoupled Matrix Multiplication Engine Supporting Relaxed\n  Structured\
+    \ Sparsity"
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it presents novel contributions, engages with existing research, and provides
+    a thorough evaluation of its proposed method.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Evaluation" section
+      that discusses experimental results, comparisons with state-of-the-art architectures,
+      and provides performance metrics and figures (e.g., Figures 6, 7, and 8) to
+      demonstrate the effectiveness of the proposed DeMM engine.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes numerous academic citations, discusses
+      various methods and frameworks, and compares its proposed method to existing
+      work. The paper also provides context and discussion for the tools and frameworks
+      it cites, ensuring a comprehensive engagement with the existing body of research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel matrix-multiplication
+      engine called DeMM, which supports relaxed structured sparsity patterns with
+      a decoupled hardware organization. This approach is distinct from conventional
+      systolic arrays and offers improvements in execution latency and power consumption.
+      The paper clearly claims contributions such as "this work proposes a novel matrix-multiplication
+      engine" and "unlike conventional systolic arrays," indicating novelty in both
+      method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel matrix-multiplication
+      engine (DeMM) that supports relaxed structured sparsity patterns and provides
+      new contributions in terms of hardware design and performance improvements over
+      existing architectures. It does not primarily summarize existing work but rather
+      presents original research and experimental results.'
+- title: "Energy-adaptive Buffering for Efficient, Responsive, and Persistent\n  Batteryless\
+    \ Systems"
+  verification: 'Correct: The paper is well-supported by empirical evaluation, engages
+    with related work, presents a novel contribution, and introduces a new system,
+    REACT, with clear performance benefits.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an evaluation section
+      that discusses the performance of the proposed REACT system on real-world platforms.
+      It provides evidence of empirical evaluation through performance metrics, comparisons
+      with baseline systems, and results from experiments conducted under various
+      power conditions. The paper also includes performance tables and figures that
+      illustrate the results of these evaluations.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text. It includes a "Background and Related Work"
+      section that discusses previous work on energy harvesting systems, buffer capacity,
+      power-responsive performance scaling, multiplexed energy storage, and unified
+      dynamic buffering. The paper also compares its proposed method, REACT, to existing
+      solutions like Morphy, and cites numerous academic sources to provide context
+      and support for its claims.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel method called REACT,
+      which is a responsive buffering circuit that dynamically varies capacitance
+      to optimize energy capture and usage in batteryless systems. It claims to improve
+      upon existing static and dynamic buffering systems by eliminating the tradeoff
+      between responsiveness and capacity, and it provides empirical evidence of its
+      performance benefits over previous approaches. The paper clearly states its
+      contributions, including the design and evaluation of REACT, making it a novel
+      contribution to the field.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new contribution,
+      REACT, a dynamic energy buffering system for batteryless systems, and evaluates
+      its performance against existing systems, rather than primarily summarizing
+      existing work.'
+- title: "LRSCwait: Enabling Scalable and Efficient Synchronization in Manycore\n\
+    \  Systems through Polling-Free and Retry-Free Operation"
+  verification: 'Correct: The paper is qualified in all aspects, including evaluation,
+    related work, novelty, and original contributions, justifying the final decision.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes an evaluation section
+      where the performance of the proposed Colibri system is assessed against various
+      hardware and software approaches. It provides results from experiments, including
+      throughput and energy efficiency comparisons, and discusses the impact on unrelated
+      workers, demonstrating empirical evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content. It includes a dedicated "Related Work"
+      section that discusses various existing approaches to synchronization in manycore
+      systems, comparing them to the proposed methods. The paper also references numerous
+      academic sources, providing context and discussion about how the proposed work
+      builds upon or differs from existing solutions.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel set of instructions
+      (LRwait, SCwait, and Mwait) and a scalable implementation called Colibri, which
+      addresses synchronization issues in manycore systems. The paper claims novelty
+      by introducing these new methods and demonstrating their effectiveness in reducing
+      polling and improving performance and energy efficiency. Additionally, the paper
+      provides a detailed evaluation of the proposed methods, showing significant
+      improvements over existing approaches.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions,
+      specifically the novel LRwait and SCwait synchronization primitives and their
+      implementation, Colibri, which address synchronization issues in manycore systems.
+      It presents original research findings, including performance evaluations and
+      comparisons with existing approaches, rather than merely summarizing existing
+      work.'
+- title: Analyzing and Improving Hardware Modeling of Accel-Sim
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it demonstrates a thorough evaluation methodology, meaningful engagement with
+    related work, novelty in its contributions, and introduces new improvements to
+    the Accel-Sim framework.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Evaluation Methodology"
+      section and a "Results" section, which discuss the evaluation of the proposed
+      improvements using benchmarks and provide performance metrics such as speed-up
+      and Absolute Variation in Cycles (AVC). Additionally, figures and tables are
+      used to present the evaluation results, indicating a clear empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes numerous academic citations, discusses
+      existing tools and frameworks with context, and compares its methods to previous
+      work. The paper provides a detailed discussion of prior research in various
+      sections, including the introduction and improvements to Accel-Sim, demonstrating
+      a thorough engagement with the academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes several improvements to
+      the Accel-Sim framework, including a more realistic front-end model, enhanced
+      result bus modeling, and a revised memory execution pipeline. These contributions
+      demonstrate novelty by addressing existing limitations and inaccuracies in the
+      simulator, thus providing new insights and methods for more accurate GPU simulation.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions
+      by analyzing and improving the hardware modeling of Accel-Sim, a GPGPU simulator.
+      It presents specific enhancements to the simulator''s front-end, result bus,
+      and memory execution pipeline, rather than merely summarizing existing work.'
+- title: "Study on the Particle Sorting Performance for Reactor Monte Carlo\n  Neutron\
+    \ Transport on Apple Unified Memory GPUs"
+  verification: 'Correct: The paper presents novel contributions, thorough evaluation,
+    and meaningful engagement with related work, justifying its acceptance.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes multiple sections that
+      provide evidence of evaluation, such as "Performance of Sorting on Apple Chip,"
+      "Reactor Simulation Benchmarks," and "Performance Study," which discuss experiments,
+      comparisons, and results. Additionally, there are performance tables and figures
+      that illustrate the evaluation of the proposed methods.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research by citing and discussing various studies and codes related to Monte
+      Carlo neutron transport methods, particularly in the context of GPU performance
+      and particle sorting strategies. It provides a comparison of its methods with
+      previous work, as seen in the discussion of sorting algorithms and the verification
+      of the in-house code against established benchmarks.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes the use of Apple unified
+      memory computing devices to study the collaboration between CPUs and GPUs in
+      Monte Carlo neutron transport methods, which is a novel application of known
+      techniques. Additionally, it discusses the programming for the Apple M2 Max
+      chip, studies sorting performance on CPU-GPU for partially sorted data, and
+      verifies in-house merged CPU-GPU code with benchmark problems, all of which
+      contribute new insights and applications.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions,
+      such as the proposal to use Apple unified memory computing devices for Monte
+      Carlo neutron transport methods, the study of sorting performance on CPU-GPU
+      for partially sorted data, and the verification and comparison of CPU and GPU
+      sorting strategies on simulation power efficiency. It does not primarily summarize
+      existing work.'
+- title: "An Irredundant and Compressed Data Layout to Optimize Bandwidth\n  Utilization\
+    \ of FPGA Accelerators"
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets the criteria for evaluation, related work engagement, novelty, and new
+    contributions.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an evaluation section
+      (Section 5) where it discusses the evaluation of the proposed approach on FPGA
+      accelerators. It provides details on compile-time performance, design quality,
+      runtime performance, and applicability. The paper also includes benchmarks,
+      performance metrics, and comparisons, fulfilling the criteria for empirical
+      evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout the text. It includes numerous academic citations,
+      discusses related work in the context of its contributions, and compares its
+      methods to previous work. The paper also provides a detailed background section
+      that references prior research, demonstrating a thorough engagement with existing
+      literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel compiler-based
+      approach to optimize memory bandwidth for FPGA accelerators by introducing a
+      new data layout strategy, data packing, and runtime compression techniques.
+      It claims to decrease I/O cycles significantly compared to unoptimized memory
+      accesses, which demonstrates novelty in method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions,
+      including a compiler-based approach to data layout optimization for FPGA accelerators,
+      data packing, and runtime compression techniques, rather than primarily summarizing
+      existing work.'
+- title: "ACS: Concurrent Kernel Execution on Irregular, Input-Dependent\n  Computational\
+    \ Graphs"
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets the criteria for evaluation, related work, novelty, and original contributions.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes multiple sections
+      discussing evaluation, experiments, and results. It provides evidence of evaluation
+      through phrases like "We evaluate our method on…", "Our evaluations demonstrate…",
+      and includes performance tables and figures. The paper also discusses benchmarks,
+      metrics, comparisons, and datasets, fulfilling the criteria for qualification.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout the text. It includes numerous academic citations,
+      discusses existing tools and frameworks with context, and compares its proposed
+      method (ACS) to previous works in various sections, including the Introduction,
+      Approach, and Related Work. The paper also provides a detailed comparison of
+      ACS with other scheduling frameworks, demonstrating a thorough engagement with
+      existing literature.'
+    novelty_prompt: '- Qualified. Reason: The paper proposes ACS, a novel framework
+      for Automatic Concurrent Scheduling, which addresses the challenge of GPU underutilization
+      due to small kernels in applications with input-dependent irregular computational
+      graphs. The paper introduces two implementations, ACS-SW and ACS-HW, and claims
+      significant contributions, including a new runtime mechanism for improving GPU
+      utilization and performance. The paper also provides a detailed evaluation of
+      the proposed framework, demonstrating its effectiveness in various GPU applications.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new framework
+      called ACS for improving GPU utilization by enabling concurrent execution of
+      GPU kernels. It presents original contributions, including the design and implementation
+      of ACS, and evaluates its effectiveness, rather than primarily summarizing existing
+      work.'
+- title: A modular architecture for IMU-based data gloves
+  verification: 'Correct: The final decision to qualify the paper appears valid, as
+    it presents original contributions with a novel modular architecture, provides
+    experimental results, and engages meaningfully with existing literature.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a "Results" section
+      that discusses the experimental setup and provides quantitative data on the
+      performance of the data glove, such as autonomy, acquisition frequencies, and
+      root mean square error (RMSE) in both static and dynamic conditions.'
+    related_work_prompt: 'Qualified. Reason: The paper includes meaningful engagement
+      with prior research, as evidenced by the citations throughout the Introduction
+      and other sections. It discusses various technological solutions for hand motion
+      tracking and compares them to the proposed modular architecture. The paper also
+      references specific studies and technologies, providing context and demonstrating
+      an understanding of existing literature in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a modular, open hardware
+      and software architecture for creating customized data gloves based on IMU technology,
+      which is a novel contribution. It also claims to provide an architecture implementation
+      and an experimental protocol to evaluate device performance, addressing the
+      lack of standardization and reproducibility in existing literature.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new modular architecture
+      for IMU-based data gloves, providing details on hardware and software implementation,
+      experimental results, and potential for future research. It does not primarily
+      summarize existing work but rather presents original contributions.'
+- title: "A RISC-V SOC for Terahertz IoT Devices: Implementation and design\n  challenges"
+  verification: 'Correct: The paper demonstrates novelty, thorough evaluation, and
+    engagement with related work, justifying its qualification.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains multiple sections that
+      discuss evaluation, including performance metrics and comparisons. Specifically,
+      it includes a section on the "Performance of MPWM-DACs" with detailed analysis
+      of static error, integral nonlinearity, differential nonlinearity, and dynamic
+      characteristics. Additionally, there are tables and figures summarizing the
+      state-of-the-art THz antennas and their performance, as well as FPGA testing
+      results for MPWM-DACs.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research, as evidenced by numerous academic citations throughout the text.
+      It discusses and compares its methods to previous work, particularly in the
+      sections on THz multi-antenna transceivers and MPWM-DACs. The paper also includes
+      a comprehensive examination of related work in the introduction and other sections,
+      demonstrating a thorough engagement with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel modulation technique
+      called Modified PWM (MPWM) for DACs, which is claimed to provide enhanced versatility
+      for DAC designers and is specifically tailored for THz IoT applications. The
+      paper also presents the design of an MPWM-DAC and RISC-V SoC, which are new
+      contributions to the field. Additionally, the paper makes clear claims of contribution,
+      such as "We present a comprehensive overview" and "By implementing a novel modulation
+      technique called Modified PWM (MPWM).'
+    review_only_prompt: 'Qualified. Reason: The paper introduces new contributions,
+      such as the novel modulation technique called Modified PWM (MPWM) and the design
+      of an MPWM-DAC and RISC-V SoC specifically tailored for THz IoT applications.
+      It goes beyond merely summarizing existing work by presenting original research
+      and developments.'
+- title: "HOPE: Holistic STT-RAM Architecture Exploration Framework for Future\n \
+    \ Cross-Platform Analysis"
+  verification: 'Correct: The paper demonstrates empirical evaluation, engages with
+    prior research, introduces novel contributions, and presents new research findings,
+    justifying the final decision to qualify it.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an evaluation section
+      where the authors discuss the evaluation of their proposed HOPE framework using
+      HPC applications from the SPEC CPU 2017 benchmark suite. They provide results
+      and comparisons, including performance metrics, power and energy breakdowns,
+      and latency analyses, which demonstrate empirical evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content. It includes numerous academic citations,
+      discusses previous work in the context of STT-RAM technology, and compares its
+      proposed framework to existing tools and methodologies. The paper also provides
+      a detailed "Background and Related Works" section, which further demonstrates
+      its engagement with existing research.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel, extendable STT-RAM
+      memory controller design integrated into the gem5 simulator, which is a new
+      method for evaluating STT-RAM systems. The authors claim several contributions,
+      including the proposal of the HOPE framework, integration of a third memory
+      interface tailored for STT-RAM, extension of the power model in gem5, and the
+      open-sourcing of the framework to facilitate further research. These elements
+      demonstrate novelty in both method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel STT-RAM
+      architecture exploration framework called HOPE, which is integrated into the
+      gem5 simulator. It provides new contributions by proposing a new memory interface,
+      extending the power model, and evaluating the framework using HPC applications.
+      The paper does not primarily summarize existing work but instead focuses on
+      presenting new research and findings.'
+- title: 'TOP: Towards Open & Predictable Heterogeneous SoCs'
+  verification: 'Correct: All relevant sections passed, and the paper appears to present
+    a novel and comprehensive methodology.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: All relevant sections passed.'
+    related_work_prompt: 'Qualified. Reason: All relevant sections passed.'
+    novelty_prompt: 'Qualified. Reason: All relevant sections passed.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
+- title: "Green Adaptation of Real-Time Web Services for Industrial CPS within a\n\
+    \  Cloud Environment"
+  verification: 'Correct: The paper demonstrates empirical evaluation, meaningful
+    engagement with related work, novelty in its contributions, and introduces new
+    methods, justifying the final decision to qualify it.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experimental results"
+      section (Section VI) that discusses tests conducted on real data from servers,
+      presents performance metrics, and provides tables and figures showing results.
+      This indicates that the paper contains empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes a dedicated "Related Work" section
+      that discusses various existing studies and methods related to energy-efficient
+      scheduling, DVFS, and real-time systems. The paper also compares its proposed
+      method to previous work, highlighting differences and improvements, which demonstrates
+      a meaningful engagement with the academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new method for solving
+      CPS problems by introducing new adaptive real-time scheduling algorithms in
+      distributed computing infrastructures that consider energy efficiency. It also
+      presents a novel power model for data centers that incorporates static power
+      consumption and its dependency on temperature, which is used in a multi-objective
+      optimization framework. These contributions demonstrate novelty in the proposed
+      methods and their application to energy-efficient scheduling in cloud computing
+      environments.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions
+      by proposing a method for solving CPS problems with new adaptive real-time scheduling
+      algorithms and presents an accurate power model for data centers, which are
+      not merely summaries of existing work.'
+- title: "WideSA: A High Array Utilization Mapping Scheme for Uniform Recurrences\n\
+    \  on the Versal ACAP Architecture"
+  verification: 'Correct: The paper is qualified in all key areas, including evaluation,
+    related work, novelty, and original contributions, supporting the final decision.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Evaluation" section
+      where it discusses the performance of the proposed WideSA framework using benchmarks
+      and experimental setups. It provides evidence of evaluation through performance
+      tables (Table III and Table IV) and figures (Figure 6) that compare throughput
+      and efficiency metrics, demonstrating empirical evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text. It includes numerous academic citations
+      and discusses previous work in the context of its proposed methods, particularly
+      in sections like the Introduction, Background, and Systolic Mapping Scheme on
+      ACAP. The paper compares its approach to state-of-the-art methods and builds
+      upon existing research frameworks, demonstrating a thorough engagement with
+      the academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new mapping scheme called
+      WideSA for high array utilization of uniform recurrences on the Versal ACAP
+      architecture. It introduces several novel elements, such as a routing-aware
+      PLIO assignment algorithm, an automatic framework for generating code for heterogeneous
+      backends, and demonstrates improvements over state-of-the-art methods. The paper
+      clearly claims contributions and novelty in its approach and results.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new mapping scheme
+      called WideSA for high array utilization on the Versal ACAP architecture, along
+      with several optimizations and an automatic mapping framework. It presents original
+      contributions and experimental evaluations, rather than merely summarizing existing
+      work.'
+- title: "A Scalable RISC-V Vector Processor Enabling Efficient Multi-Precision\n\
+    \  DNN Inference"
+  verification: 'Correct: The paper demonstrates a thorough evaluation, engagement
+    with related work, and introduces novel contributions, justifying its qualification.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experimental Results"
+      section with subsections such as "Experimental Setup" and "Model Evaluation,"
+      which discuss benchmarks, metrics, and comparisons. It also contains performance
+      tables and figures, such as Table I and Figures 3 and 4, providing quantitative
+      evaluation of the proposed method.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes numerous academic citations, discusses
+      the context and challenges of deploying multiprecision quantized DNNs on RISC-V
+      processors, and compares its proposed method (SPEED) with previous work, particularly
+      the Ara processor. The paper provides a detailed comparison of its contributions
+      to existing solutions, demonstrating a thorough engagement with related work.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new scalable RISC-V vector
+      processor named SPEED, which introduces several novel elements such as customized
+      RISC-V vector instructions, a mixed dataflow strategy, and enhancements in parallel
+      processing capabilities. These contributions are clearly stated as new methods
+      and improvements over existing solutions, demonstrating novelty in the field
+      of efficient multi-precision DNN inference.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new scalable
+      RISC-V vector processor named SPEED, which includes customized instructions
+      and a mixed dataflow strategy for efficient multi-precision DNN inference. It
+      provides experimental results and comparisons with existing work, demonstrating
+      new contributions rather than merely summarizing existing research.'
+- title: "SAL-PIM: A Subarray-level Processing-in-Memory Architecture with\n  LUT-based\
+    \ Linear Interpolation for Transformer-based Text Generation"
+  verification: 'Correct: The final decision to qualify the paper appears valid as
+    it demonstrates empirical evaluation, engages with related work, presents novel
+    contributions, and introduces a new architecture for a specific application.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes multiple sections
+      and discussions that provide evidence of evaluation, such as "We evaluated the
+      SAL-PIM architecture using a simulator," "SAL-PIM achieves a maximum 4.72× speedup,"
+      and "Figure 11 shows the speedup compared to the GPU by input and output sizes."
+      These indicate empirical and quantitative evaluation of the proposed architecture.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content. It includes numerous academic citations,
+      discusses previous works in the "Related Works" section, and compares its proposed
+      method to existing solutions, particularly in the context of processing-in-memory
+      architectures and transformer models.'
+    novelty_prompt: '- Qualified. Reason: The paper proposes a novel subarray-level
+      processing-in-memory (PIM) architecture named SAL-PIM, which is the first HBM-based
+      PIM architecture designed for end-to-end acceleration of transformer-based text
+      generation. It introduces several innovative features, such as subarray-level
+      ALUs, LUT-based linear interpolation for non-linear functions, and a channel-level
+      ALU for accumulation and reduce-sum operations. The paper clearly claims contributions,
+      including optimized data mapping schemes and the integration of multiple subarray-level
+      arithmetic logic units next to memory subarrays, which demonstrate novelty in
+      both method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel architecture,
+      SAL-PIM, for accelerating transformer-based text generation, presenting new
+      contributions in processing-in-memory technology and its application to deep
+      learning models.'
+- title: 'STAR: An Efficient Softmax Engine for Attention Model with RRAM Crossbar'
+  verification: 'Correct: The paper provides a novel contribution with experimental
+    validation and engages with related work, justifying its acceptance.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experimental Results"
+      section where it discusses comparisons of the proposed RRAM-based Softmax engine
+      with other accelerators, provides simulation details, and presents performance
+      metrics such as area and power efficiency. Additionally, it includes a table
+      and figures showing quantitative results, which demonstrate empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research by citing and discussing various related works throughout the text.
+      It references previous RRAM-based accelerators and compares the proposed STAR
+      engine with existing solutions like ReTransformer and Softermax. The paper also
+      discusses the significance of its contributions in the context of existing research,
+      demonstrating a clear understanding and engagement with prior work.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new RRAM-based softmax
+      engine called STAR, which is designed to improve the efficiency of softmax operations
+      in attention models. It introduces a novel approach by utilizing the versatility
+      and flexibility of RRAM crossbars to balance computing precision and efficiency.
+      Additionally, the paper claims novelty in its enhanced pipeline for balancing
+      matrix multiplication and softmax operations, and it provides experimental results
+      demonstrating the effectiveness of the proposed method compared to existing
+      solutions.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new contribution,
+      STAR, an RRAM-based softmax engine, and provides experimental results comparing
+      it with existing accelerators, indicating it is not primarily a survey or review
+      of existing work.'
+- title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions\n\
+    \  from Design Specifications via Multi-LLMs"
+  verification: 'Correct: The paper demonstrates novelty, comprehensive evaluation,
+    and engagement with related work, justifying its qualification.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes multiple sections
+      discussing evaluation, such as the "Experimental Results" and "Evaluation Metrics"
+      sections. It mentions the use of Cadence JasperGold® for evaluating the quality
+      of generated SVAs, provides performance metrics, and includes tables summarizing
+      the evaluation results.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its sections, including the Introduction, Methodology,
+      and Discussion. It cites numerous academic sources, discusses existing methods,
+      and compares its proposed method to previous work, demonstrating a comprehensive
+      engagement with the relevant academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes AssertLLM, a novel automatic
+      assertion generation framework that incorporates multiple specialized LLMs to
+      address challenges in generating SystemVerilog Assertions (SVAs) from natural
+      language specifications. It claims to be the first method capable of handling
+      full-size specification files and generating various types of SVAs for each
+      architectural signal. Additionally, it introduces the first open-source benchmark
+      for assertion generation and evaluation, demonstrating novelty in both methodology
+      and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel framework,
+      AssertLLM, for automatic assertion generation from natural language specifications,
+      addressing specific challenges in the field and providing new contributions
+      such as an open-source benchmark and specialized techniques for assertion generation.'
+- title: "Optimization of a Line Detection Algorithm for Autonomous Vehicles on a\n\
+    \  RISC-V with Accelerator"
+  verification: 'Correct: The paper demonstrates novelty, provides experimental results,
+    and engages with related work, justifying its qualification.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experimental results"
+      section (Section 5) that details the evaluation of the proposed line detection
+      algorithm on various hardware platforms. It discusses performance metrics such
+      as clock cycles, instructions retired, and speedup comparisons, and provides
+      tables and figures illustrating the results.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text. It includes a "Basic notions and state of
+      the art" section that discusses the current state of autonomous vehicles and
+      related technologies, citing relevant literature. Additionally, the paper references
+      previous work on the Canny algorithm and the Hough transform, and it compares
+      the performance of different platforms and algorithms, citing multiple sources
+      to support its analysis and conclusions.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel approach by accelerating
+      a line detection algorithm for autonomous vehicles using a heterogeneous system
+      with a RISC-V core and a domain-specific accelerator. It claims contributions
+      such as analyzing the application to identify computationally intensive parts
+      and adapting it for more efficient processing, achieving a 3.7x speedup. These
+      elements demonstrate novelty in method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces new contributions
+      by exploring the acceleration of a line detection algorithm for autonomous vehicles
+      using a RISC-V core and a domain-specific accelerator. It provides detailed
+      analysis, experimental results, and modifications to existing algorithms, indicating
+      original research rather than a summary of existing work.'
+- title: 'Reuse Detector: Improving the Management of STT-RAM SLLCs'
+  verification: 'Correct: All relevant sections were qualified, indicating a thorough
+    evaluation.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: All relevant sections passed.'
+    related_work_prompt: 'Qualified. Reason: All relevant sections passed.'
+    novelty_prompt: 'Qualified. Reason: All relevant sections passed.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
+- title: "Cocco: Hardware-Mapping Co-Exploration towards Memory\n  Capacity-Communication\
+    \ Optimization"
+  verification: 'Correct: The paper demonstrates empirical evaluation, engages with
+    related work, introduces novel contributions, and focuses on new methodologies,
+    justifying its qualification.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper contains multiple references
+      to empirical evaluation, including sections discussing experiments, results,
+      and comparisons with other methods. It mentions experiments demonstrating the
+      performance of the proposed framework, Cocco, and provides quantitative results
+      such as cost reductions and memory usage. Additionally, there are figures and
+      tables presenting evaluation data, such as Figure 3 and Table 1, which further
+      support the presence of empirical evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content, including a detailed discussion of related
+      works, comparisons to previous methods, and numerous academic citations that
+      provide context and support for the proposed methods.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces Cocco, a novel hardware-mapping
+      co-exploration framework that leverages graph-level features of networks to
+      optimize memory capacity and communication. It proposes a new subgraph execution
+      scheme, an efficient dataflow and memory management method, and a genetic-based
+      algorithm for co-exploration, which are claimed to be novel contributions in
+      the context of optimizing DNN accelerators. The paper makes clear claims of
+      contribution and demonstrates novelty in its approach to memory and communication
+      optimization.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new framework
+      called Cocco for hardware-mapping co-exploration, which optimizes memory capacity
+      and communication in DNN accelerators. It presents novel contributions, including
+      a graph-level execution scheme, a genetic-based optimization framework, and
+      experimental results demonstrating the effectiveness of the proposed methods.
+      The paper does not primarily summarize existing work but instead focuses on
+      new contributions and methodologies.'
+- title: Floating Point HUB Adder for RISC-V Sargantana Processor
+  verification: 'Correct: The final decision to disqualify the paper due to the lack
+    of empirical evaluation is justified, as the paper does not provide any experimental
+    results or performance metrics to support its claims.'
+  decisions:
+    evaluation_prompt: '- Disqualified: no evaluation. Reason: The paper lacks any
+      form of empirical, experimental, or quantitative evaluation. There are no sections
+      or discussions on evaluation, experiments, results, benchmarks, metrics, comparisons,
+      datasets, or performance figures. The paper primarily focuses on the theoretical
+      aspects and implementation details of the HUB adder without providing evidence
+      of evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research by citing and discussing previous work related to the HUB format
+      and the Sargantana processor. It provides context and comparison to existing
+      methods, particularly in the sections discussing the HUB format background and
+      the FP HUB adder for Sargantana.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel integration of
+      the HUB format into the Sargantana RISC-V processor, specifically by developing
+      a tailored floating-point HUB adder. This integration reduces the number of
+      stages in the adder and eliminates the need for certain rounding operations,
+      which is a clear contribution to the field. The paper also claims novelty by
+      stating, "Unlike the 6 stage original FPU adder, our floating point HUB adder
+      has 5 stages," and discusses the unique benefits of using the HUB format in
+      this context.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new contribution
+      by presenting a tailored floating point HUB adder implemented in the Sargantana
+      RISC-V processor, rather than primarily summarizing existing work.'
+- title: "SpecLLM: Exploring Generation and Review of VLSI Design Specification\n\
+    \  with Large Language Model"
+  verification: 'Incorrect: The paper introduces new contributions, such as a framework
+    for utilizing LLMs in generating and reviewing architecture specifications, structured
+    definitions, and a dataset, which contradicts the disqualification as a review
+    paper.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes multiple sections discussing
+      experiments and evaluations, such as "We evaluate our method on…" and "Our experimental
+      results indicate…". It also references specific experiments and results, demonstrating
+      empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research by citing a range of studies and references throughout the text, particularly
+      in the introduction and dataset overview sections. It discusses the application
+      of LLMs in chip design and compares its methods to previous work, indicating
+      a thorough engagement with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper demonstrates novelty by proposing
+      a new framework for utilizing large language models (LLMs) in generating and
+      reviewing architecture specifications. It introduces structured definitions
+      of architecture specifications, creates a dataset, and explores novel applications
+      of LLMs in this context. The paper also claims to be the first to focus on this
+      topic, as stated in "To the best of our knowledge, there has been no prior design
+      automation or LLM research focusing on this important topic.'
+    review_only_prompt: '- Disqualified: review paper. Reason: The main body of the
+      paper primarily summarizes existing work and explores the use of LLMs in generating
+      and reviewing architecture specifications without introducing new contributions.'
+- title: "The Landscape of Compute-near-memory and Compute-in-memory: A Research\n\
+    \  and Commercial Overview"
+  verification: 'Correct: The final decision to qualify the paper appears valid as
+    it passed the review-only prompt, indicating it met the necessary criteria despite
+    earlier disqualifications in specific sections.'
+  decisions:
+    evaluation_prompt: 'Disqualified: Chunk 2: Disqualified: no evaluation. Reason:
+      The provided section does not contain any form of empirical, experimental, or
+      quantitative evaluation. It primarily describes various companies and their
+      technologies without presenting any evaluation, results, or comparisons. | Chunk
+      3: Disqualified: no evaluation. Reason: The provided section does not contain
+      any empirical, experimental, or quantitative evaluation. It only describes a
+      company''s claims without providing evidence or results from any evaluation.'
+    related_work_prompt: 'Disqualified: Chunk 3: Disqualified: no related work. Reason:
+      The section does not engage with prior research, lacks academic citations, and
+      does not compare or discuss its method in the context of existing work. | Chunk
+      4: Disqualified: no related work. Reason: The section provided does not include
+      any meaningful engagement with prior research. It lists companies, technologies,
+      and funding details without discussing or comparing these to existing research
+      or methodologies. There are no academic citations or discussions of how these
+      technologies relate to or build upon previous work.'
+    novelty_prompt: 'Disqualified: Chunk 3: Disqualified: no novelty. Reason: The
+      section does not present any new ideas, methods, applications, or results. It
+      merely describes a company''s claim about its AI accelerator without providing
+      specific details or evidence of novelty.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
+- title: Efficient yet Accurate End-to-End SC Accelerator Design
+  verification: 'Incorrect: The paper introduces novel contributions and experimental
+    results, contradicting the disqualification as a review paper.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes multiple sections that
+      provide empirical and experimental evaluations, such as "Experimental Results"
+      sections, performance tables, and figures demonstrating the evaluation of the
+      proposed methods. Additionally, it discusses benchmarks, metrics, and comparisons
+      with state-of-the-art methods, fulfilling the criteria for qualification.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes numerous academic citations, discusses
+      existing SC-based accelerators, compares its methods to previous work, and provides
+      context and discussion for the tools and frameworks it cites. The paper also
+      includes a detailed comparison of its proposed methods with prior research in
+      various sections, such as the introduction, motivation, and experimental results.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces several novel contributions,
+      including a deterministic thermometer coding scheme for SC accelerators, SC-friendly
+      models with high precision residual fusion, and an approximate spatial-temporal
+      sorting network. It also claims to be the first silicon-proven end-to-end SC
+      accelerator and presents experimental results demonstrating significant improvements
+      in energy efficiency and accuracy.'
+    review_only_prompt: '- Disqualified: review paper. Reason: The paper primarily
+      summarizes existing work on end-to-end stochastic computing neural network acceleration,
+      including previous efforts and contributions, without introducing new contributions.'
+- title: "Rethinking the Producer-Consumer Relationship in Modern DRAM-Based\n  Systems"
+  verification: 'Correct: The paper lacks empirical evaluation, engagement with related
+    work, and novelty, justifying disqualification.'
+  decisions:
+    evaluation_prompt: 'Disqualified: Chunk 2: Disqualified: no evaluation. Reason:
+      The provided section discusses DRAM standards and their implications without
+      any mention of empirical, experimental, or quantitative evaluation. | Chunk
+      3: Disqualified: no evaluation. Reason: The provided section from the paper
+      discusses DRAM standards, advantages, and processes but does not include any
+      empirical, experimental, or quantitative evaluation. There are no mentions of
+      evaluation, experiments, results, benchmarks, metrics, comparisons, datasets,
+      performance tables, figures, or graphs. | Chunk 8: Disqualified: no evaluation.
+      Reason: The provided section discusses challenges related to accessing information
+      about DRAM chips and the implications of this lack of transparency. However,
+      it does not include any empirical, experimental, or quantitative evaluation,
+      nor does it reference any evaluation methods or results. | Chunk 11: Disqualified:
+      no evaluation. Reason: The provided section does not contain any evidence of
+      empirical, experimental, or quantitative evaluation. It discusses conceptual
+      changes and a call-to-action but lacks any mention of evaluation, experiments,
+      results, or similar evidence. | Chunk 12: Disqualified: no evaluation. Reason:
+      The provided section is an acknowledgment and does not contain any form of empirical,
+      experimental, or quantitative evaluation. | Chunk 13: Disqualified: no evaluation.
+      Reason: The provided section is solely a list of references and does not contain
+      any form of empirical, experimental, or quantitative evaluation. | Chunk 18:
+      Disqualified: no evaluation. Reason: The provided section is a list of survey
+      sources and does not contain any empirical, experimental, or quantitative evaluation.
+      There is no mention of evaluation, experiments, results, benchmarks, metrics,
+      comparisons, datasets, or performance figures.'
+    related_work_prompt: 'Disqualified: Chunk 2: Disqualified: no related work. Reason:
+      The provided section does not include any citations or discussion of prior research.
+      It focuses solely on explaining DRAM standards without engaging with existing
+      academic literature or comparing its content to previous work. | Chunk 11: Disqualified:
+      no related work. Reason: The provided section does not contain any citations
+      or discussion of prior research, nor does it compare its methods to previous
+      work. There is no evidence of meaningful engagement with existing academic literature.
+      | Chunk 12: Disqualified: no related work. Reason: The provided section is an
+      acknowledgment and does not contain any engagement with prior research or academic
+      citations. There is no discussion or comparison of the paper''s methods to previous
+      work. | Chunk 13: Disqualified: no related work. Reason: The provided section
+      is solely a list of references without any context, discussion, or comparison
+      to prior research within the text. There is no indication of meaningful engagement
+      with these references elsewhere in the paper. | Chunk 14: Disqualified: no related
+      work. Reason: The section provided does not include any meaningful engagement
+      with prior research, such as citations or comparisons to previous work. It only
+      describes the collection and release of data from DRAM datasheets without discussing
+      how this relates to or builds upon existing academic literature. | Chunk 16:
+      Disqualified: no related work. Reason: The provided section discusses DRAM refresh
+      timing trends and observations without any citations or comparisons to prior
+      research. There is no engagement with existing literature or discussion of how
+      these findings relate to or differ from previous work. | Chunk 17: Disqualified:
+      no related work. Reason: The section provided does not include any meaningful
+      engagement with prior research. It lists datasheets used in a survey without
+      discussing or comparing the findings to existing literature or previous studies.
+      | Chunk 18: Disqualified: no related work. Reason: The section provided lists
+      various sources, primarily datasheets, without any context, discussion, or comparison
+      to prior research. There is no meaningful engagement with prior academic work
+      or explanation of how these sources relate to the paper''s contributions.'
+    novelty_prompt: 'Disqualified: Chunk 2: Disqualified: no novelty. Reason: The
+      section provided is a review of existing DRAM standards and does not present
+      any new ideas, methods, applications, or results. It lacks claims of novelty
+      or contribution. | Chunk 3: Disqualified: no novelty. Reason: The provided section
+      discusses existing DRAM standards, their advantages, and the process of creating
+      or modifying these standards. It does not introduce any new methods, applications,
+      or insights, nor does it apply known techniques in a novel context. There are
+      no claims of contribution or novelty in the text provided. | Chunk 4: Disqualified:
+      no novelty. Reason: The section provided discusses challenges in DRAM technology
+      scaling, such as the slowdown of generational improvements and worsening refresh
+      overheads, but it does not propose any new methods, insights, or applications.
+      It primarily reviews existing challenges and trends without making claims of
+      novel contributions. | Chunk 6: Disqualified: no novelty. Reason: The provided
+      section of the paper discusses existing solutions and techniques for reducing
+      DRAM refresh overheads and mitigating the RowHammer vulnerability. It does not
+      present any new methods, algorithms, architectures, datasets, or insights, nor
+      does it apply known techniques in a novel context or domain. The section primarily
+      summarizes prior work without making clear claims of novel contributions. |
+      Chunk 8: Disqualified: no novelty. Reason: The section discusses the challenges
+      and limitations faced by consumers in accessing DRAM chip information but does
+      not propose any new methods, solutions, or insights to address these challenges.
+      It highlights existing issues without contributing novel ideas or approaches.
+      | Chunk 12: Disqualified: no novelty. Reason: The provided section is an acknowledgment
+      and does not contain any claims of novelty or contributions related to new methods,
+      applications, or insights. | Chunk 13: Disqualified: no novelty. Reason: The
+      provided section is solely a list of references and does not contain any claims
+      or evidence of novelty, such as new methods, applications, or insights. | Chunk
+      15: Disqualified: no novelty. Reason: The section provided is a survey of existing
+      DRAM timing and current consumption trends over time. It does not propose any
+      new methods, algorithms, architectures, datasets, or insights, nor does it apply
+      known techniques in a novel context or domain. The content is purely observational
+      and descriptive of existing data without any claims of novel contributions.
+      | Chunk 16: Disqualified: no novelty. Reason: The section provides an analysis
+      of DRAM refresh timing trends but does not propose any new methods, algorithms,
+      architectures, datasets, or insights. It does not apply known techniques in
+      a novel context or domain, nor does it make any clear claims of contribution
+      or novelty. | Chunk 17: Disqualified: no novelty. Reason: The section provided
+      is a summary of data sources used in a survey, listing DRAM datasheets and their
+      specifications. There is no indication of a new method, application, or insight,
+      nor any claims of novelty or contribution in this section. | Chunk 18: Disqualified:
+      no novelty. Reason: The provided section is a list of survey sources, which
+      does not contain any claims of novelty, new methods, algorithms, applications,
+      or insights. It is purely a compilation of existing data sources without any
+      indication of novel contributions.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
