@@ -1,0 +1,609 @@
+verified:
+- title: A modular architecture for IMU-based data gloves
+  verification: 'Correct: The paper meets all the evaluation criteria, including structured
+    evaluation, engagement with prior research, novelty, and original contributions
+    beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a "Results" section
+      that provides structured evaluation through experiments, presenting quantifiable
+      outcomes such as autonomy, acquisition frequencies, and root mean square error
+      (RMSE) measurements.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research by citing various studies related to hand kinematics, sensor technologies,
+      and data gloves. It discusses the existing literature''s lack of standardization
+      and compares its proposed modular architecture to previous solutions, highlighting
+      the novelty and advantages of their approach.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a modular, open hardware
+      and software architecture for creating customized data gloves based on IMU technology,
+      which is a novel contribution. The authors clearly state their contribution
+      by introducing a new architecture that addresses the lack of standardization
+      and reusability in existing data glove designs. Additionally, the paper provides
+      an implementation and experimental protocol, further supporting its novelty.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a modular, open hardware
+      and software architecture for creating customized data gloves based on IMU technology.
+      It includes an architecture implementation, an experimental protocol to evaluate
+      device performance, and presents original experiments and results, indicating
+      novel contributions.'
+- title: 'WideSA: A High Array Utilization Mapping Scheme for Uniform Recurrences
+    on ACAP'
+  verification: 'Correct: The final decision to qualify the paper is valid as it meets
+    all the evaluation criteria, including structured evaluation, engagement with
+    related work, novelty, and original contributions beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains a dedicated "Evaluation"
+      section, presents tables and figures with quantifiable outcomes, and discusses
+      benchmarks and experimental setups, demonstrating structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content. It includes numerous academic citations,
+      discusses previous work in the context of its proposed methods, and compares
+      its approach to existing solutions. The paper references prior research in sections
+      such as the Introduction, Background, and Evaluation, demonstrating a thorough
+      engagement with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel mapping scheme
+      called WideSA for high array utilization of uniform recurrences on the Versal
+      ACAP architecture. It introduces a routing-aware PLIO assignment algorithm and
+      an automatic framework for generating code for heterogeneous backends. The paper
+      clearly states its contributions and demonstrates novelty in the proposed methods
+      and their applications.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces WideSA, a novel high
+      array utilization mapping scheme for uniform recurrences on the Versal ACAP
+      architecture. It proposes new methods, including a routing-aware PLIO assignment
+      algorithm and an automatic framework for code generation, and presents original
+      experiments demonstrating the effectiveness of these contributions.'
+- title: 'MX: Enhancing RISC-V''s Vector ISA for Ultra-Low Overhead, Energy-Efficient
+    Matrix Multiplication'
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets all the evaluation criteria, including structured evaluation, engagement
+    with related work, novelty, and original contributions beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains structured evaluation
+      sections, including "Experiment Setup and Results," with detailed quantitative
+      analysis, performance metrics, and empirical results presented in tables and
+      figures.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research by citing relevant works throughout the introduction and other
+      sections. It discusses the context of existing technologies and methods, compares
+      its proposed method to previous work, and provides a comprehensive list of references,
+      indicating a thorough engagement with the academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces Matrix eXtension (MX),
+      a novel ISA extension for the RISC-V Vector (RVV) architecture. MX is designed
+      to enhance energy efficiency and performance in matrix multiplication tasks
+      by minimizing VRF accesses and utilizing existing processing resources. The
+      paper claims novelty in several areas, including the introduction of a lightweight
+      and non-intrusive ISA extension, a theoretical justification of its benefits,
+      and its implementation on multi-core clusters with detailed performance and
+      energy efficiency analysis. These contributions demonstrate clear novelty in
+      method, application, and results.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel ISA extension
+      called Matrix eXtension (MX) for the RISC-V Vector (RVV) architecture, which
+      enhances energy efficiency and performance for matrix operations. It provides
+      original contributions, including the definition of MX, theoretical justifications,
+      implementation details, and experimental results demonstrating the benefits
+      of MX in terms of power, performance, and area metrics.'
+- title: LLM-Based Human-Robot Collaboration Framework for Manipulation Tasks
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets the criteria for evaluation, related work, novelty, and is not a review-only
+    paper.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper contains a section titled "Experiment
+      and Result" where multiple experiments are conducted to assess success rates,
+      executability, and feasibility. It includes a table presenting quantifiable
+      outcomes, fulfilling the criteria for structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research by citing and discussing previous works in the context of LLM-based
+      task planning and DMP-based task correction. It references specific studies
+      in the introduction and throughout the text, explaining how the current work
+      builds upon and differentiates from these prior efforts.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel approach to enhance
+      human supervision in LLM-based autonomy through "LLM-Based task planning with
+      human-robot collaboration." It proposes a new method for converting high-level
+      language commands into executable motion functions, integrates teleoperation
+      and DMP for motion demonstration, and uses a YOLO-based perception module for
+      environmental perception. These elements collectively contribute to the novelty
+      of the paper by opening new possibilities for seamless human-robot collaboration
+      in household tasks.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel approach
+      to LLM-based task planning with human-robot collaboration, proposes new methods
+      such as integrating teleoperation and DMP for motion demonstration, and presents
+      original experiments and results.'
+- title: 'Cocco: Hardware-Mapping Co-Exploration towards Memory Capacity-Communication
+    Optimization'
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets all the evaluation criteria, including structured evaluation, engagement
+    with related work, novelty, and original contributions beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains multiple sections and
+      phrases indicating structured evaluation, including "Experiments demonstrate
+      that Cocco obtains lower external memory access, lower bandwidth requirements,
+      and more stable optimization for graph partition compared to the greedy algorithm
+      and dynamic programming introduced in prior works." Additionally, there are
+      tables and figures presenting quantifiable outcomes, such as Table 1 and Figure
+      11, which show evaluation results.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text, including in the Introduction, Background,
+      and Related Works sections. It provides numerous academic citations, discusses
+      previous methods, and compares its proposed method to existing work, demonstrating
+      a thorough engagement with the academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces Cocco, a novel hardware-mapping
+      co-exploration framework that leverages graph-level features of networks to
+      optimize memory capacity and communication. It proposes a new subgraph execution
+      scheme, an efficient dataflow and memory management method, and a genetic-based
+      algorithm for hardware-mapping co-exploration. These contributions demonstrate
+      novelty in method, application, and results.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel hardware-mapping
+      co-exploration framework called Cocco, which proposes new methods for optimizing
+      memory capacity and communication in DNN accelerators. It includes original
+      contributions such as a graph-level execution scheme, a genetic-based optimization
+      framework, and experimental results demonstrating its effectiveness compared
+      to existing methods.'
+- title: Accelerating Boolean Constraint Propagation for Efficient SAT-Solving on
+    FPGAs
+  verification: 'Correct: The paper meets all the evaluation criteria, including structured
+    evaluation, engagement with prior research, novelty, and original contributions
+    beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a dedicated section
+      titled "Experiments and Results," which provides structured evaluation through
+      benchmarks, metrics, and performance measurements. It presents tables and figures
+      with quantifiable outcomes, such as speedup comparisons and throughput measurements,
+      demonstrating empirical analysis of the proposed method.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes a detailed discussion of previous
+      work in the "State of the Art" section, comparing the proposed method with existing
+      solutions by Davis et al. and Thong et al. Additionally, the paper provides
+      citations and context in the introduction and background sections, demonstrating
+      an understanding of the existing literature and how the new approach builds
+      upon it.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel architecture for
+      hardware-accelerated SAT-solving that eliminates costly clause lookup operations
+      by assigning clauses directly to clause processors on the FPGA and dividing
+      large formulas into smaller partitions. It claims to outperform state-of-the-art
+      solutions and is released in open-source form for the Xilinx Zynq platform.
+      The paper makes clear claims of contribution, such as "Unlike prior state-of-the-art
+      solutions, our solver eliminates costly clause lookup operations" and "To the
+      best of our knowledge, this is the first open-source hardware-accelerated SAT
+      solver.'
+    review_only_prompt: 'Qualified. Reason: The paper presents a novel architecture
+      for hardware-accelerated SAT-solving on FPGAs, introduces a new methodology
+      for mapping and managing clauses, and provides original experimental results
+      demonstrating performance improvements over existing solutions.'
+- title: '**HOPE: Holistic STT-RAM Architecture Exploration Framework for Future Cross-Platform
+    Analysis**'
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets all the evaluation criteria, including structured evaluation, engagement
+    with prior research, novelty, and original contributions beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a section titled "IV.
+      RESULTS" that discusses the evaluation of the proposed framework using simulations.
+      It mentions the use of SPEC CPU 2017 benchmarks, provides details on the evaluation
+      setup, and presents results with figures and tables that show performance and
+      energy metrics.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text. It includes a comprehensive set of academic
+      citations, discusses the context and limitations of existing tools and frameworks,
+      and compares its proposed method to previous work, particularly in the "Background
+      and Related Works" section.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel, extendable STT-RAM
+      memory controller design integrated inside the gem5 simulator, which is a new
+      method for evaluating STT-RAM systems. The authors claim novelty by stating,
+      "We propose HOPE which is an STT-RAM modeling and simulation framework integrated
+      into the full system simulator gem5," and they highlight the framework''s unique
+      integration approach and its potential to fuel further research and development.
+      Additionally, the paper makes clear claims of contribution, such as the introduction
+      of a third memory interface tailored specifically for STT-RAM, and the extension
+      of the power model in gem5 to support the proposed STT-RAM model.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a novel STT-RAM memory
+      controller design integrated into the gem5 simulator, introduces the HOPE framework,
+      and presents original contributions such as new methods, experiments, and evaluations.
+      It is not merely a summary of existing work.'
+- title: 'TOP: Towards Open & Predictable Heterogeneous SoCs'
+  verification: 'Correct: All relevant sections passed, and the paper provides structured
+    evaluation, engages with prior research, and demonstrates novelty.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: All relevant sections passed.'
+    related_work_prompt: 'Qualified. Reason: All relevant sections passed.'
+    novelty_prompt: 'Qualified. Reason: All relevant sections passed.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
+- title: 'POSTER: Identifying and Mitigating Vulnerabilities in LLM-Integrated Applications'
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets all evaluation criteria, including structured evaluation, engagement
+    with prior research, novelty, and original contributions beyond a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains sections titled "Threat
+      Evaluation" and "Evaluation," which describe empirical assessments of threats
+      and the proposed defense mechanism, Shield. It includes tables and figures presenting
+      quantifiable outcomes, such as targeted attack success rates (TSR) and the effectiveness
+      of the defense mechanism.'
+    related_work_prompt: '- Qualified. Reason: The paper includes meaningful engagement
+      with prior research, as evidenced by the citations throughout the text. It references
+      previous work on data poisoning attacks, the cyber kill chain, and techniques
+      for language model attacks, among others. These citations are used to contextualize
+      the current study and its contributions, indicating a meaningful engagement
+      with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel defense mechanism
+      called "Shield" to mitigate vulnerabilities in LLM-integrated applications,
+      which is claimed to be the first known defense of its kind. The paper also identifies
+      new attack surfaces and vulnerabilities specific to LLM-integrated applications,
+      which have not been previously studied. These contributions demonstrate novelty
+      in both identifying new security challenges and proposing a new solution.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces novel contributions
+      by identifying vulnerabilities in LLM-integrated applications and proposing
+      a defense mechanism called "Shield" to mitigate these threats. It includes original
+      experiments and evaluations demonstrating the efficacy of the proposed defense,
+      which qualifies it as a research paper with novel contributions.'
+- title: 'LRSCwait: Enabling Scalable and Efficient Synchronization in Manycore Systems
+    through Polling-Free and Retry-Free Operation'
+  verification: 'Correct: The paper was correctly qualified as it includes structured
+    evaluation, meaningful engagement with prior research, novelty in its proposed
+    methods, and is not a review paper.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes a dedicated "RESULTS"
+      section with structured evaluation, including benchmarking, throughput comparisons,
+      and energy efficiency analysis. It presents tables and figures showing quantifiable
+      outcomes, such as throughput and energy per operation, and discusses performance
+      improvements and comparisons with other methods.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content, particularly in the "Related Work" section,
+      where it discusses various existing approaches to synchronization in manycore
+      systems, compares them to the proposed solution, and cites relevant academic
+      sources. Additionally, the introduction and other sections reference prior work
+      to provide context and justify the need for the new methods proposed in the
+      paper.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel set of instructions
+      (LRwait, SCwait, and Mwait) and a scalable implementation called Colibri, which
+      addresses synchronization issues in manycore systems. The paper clearly states
+      its contributions, including the introduction of new methods and architectures,
+      and demonstrates novelty by improving performance and scalability compared to
+      existing solutions.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces novel contributions,
+      including the LRwait and SCwait synchronization primitives, the Colibri implementation,
+      and the Mwait instruction. It presents new methods, experiments, and results
+      that demonstrate improvements over existing approaches, indicating original
+      research and contributions.'
+- title: Dimensions for Designing LLM-based Writing Support
+  verification: 'Correct: The paper meets all the evaluation criteria, including structured
+    evaluation, engagement with prior research, novelty, and contributions beyond
+    a review.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      through experiments with chatGPT, assessing the quality of outputs for various
+      writing tasks. It discusses the interplay between task complexity and output
+      quality, and presents a Task Complexity-Output Quality matrix (Figure 1) as
+      part of the evaluation. Additionally, Table 1 lists LLM capabilities and example
+      writing tasks, indicating a structured approach to understanding LLM performance
+      in writing support.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout the text, including in the Introduction and other sections.
+      It includes numerous academic citations that provide context and discussion,
+      compares its methods to previous work, and discusses prior research in relation
+      to designing LLM-based writing support.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel taxonomy for designing
+      LLM-based writing support by introducing dimensions such as LLM capabilities,
+      task complexity, and output quality. It also suggests a complexity-output quality
+      matrix as a tool for navigating the design space of LLMs, which could guide
+      model developers and assistive tool designers. These contributions indicate
+      novelty in the context of designing writing support systems using LLMs.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a new taxonomy for
+      designing LLM-based writing support, introduces original experiments with LLM
+      capabilities, and discusses novel dimensions for writing assistants, indicating
+      novel contributions beyond merely summarizing existing work.'
+- title: 'KG4Diagnosis: A Hierarchical Multi-Agent LLM Framework with Knowledge Graph
+    Enhancement for Medical Diagnosis'
+  verification: 'Correct: The paper includes structured evaluation, meaningful engagement
+    with prior research, clear novelty, and original contributions beyond a survey,
+    justifying its qualification.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      elements such as a discussion of benchmarks, performance metrics, and a comprehensive
+      framework for evaluation. It mentions the use of comprehensive benchmarks to
+      validate the framework''s performance and discusses future evaluation work,
+      indicating a structured approach to empirical analysis.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text, including the Introduction, Methodology,
+      and Related Work sections. It provides numerous academic citations, discusses
+      existing methods, and compares its proposed framework to previous work in the
+      field.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes KG4Diagnosis, a novel hierarchical
+      multi-agent framework for constructing and reasoning over medical knowledge
+      graphs. It introduces a new method that integrates a general practitioner agent
+      with specialized agents, and incorporates advanced techniques for semantic entity
+      extraction and decision-making reconstruction. The paper also claims novelty
+      in addressing LLM hallucination challenges and provides a modular architecture
+      for integrating new medical domains. These elements demonstrate clear contributions
+      and novelty.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes KG4Diagnosis, a novel
+      hierarchical multi-agent framework for medical diagnosis, which includes original
+      contributions such as a new end-to-end knowledge graph construction pipeline,
+      innovative techniques for semantic entity extraction, and a multi-agent system
+      for medical decision-making. It also provides detailed implementation protocols
+      and demonstrates the framework''s practical value through real-world scenarios,
+      indicating novel contributions beyond a mere survey or review.'
+- title: A Statically and Dynamically Scalable Soft GPGPU
+  verification: 'Correct: The final decision to qualify the paper is justified as
+    it meets the criteria for evaluation, related work, novelty, and is not a review-only
+    paper.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains multiple sections dedicated
+      to evaluation, including "RESULTS" and "BENCHMARKS", and provides empirical
+      data through tables and figures. It discusses benchmarking against other processors,
+      uses metrics for performance assessment, and includes phrases indicating structured
+      evaluation, such as "We benchmark several algorithms" and "We ran a number of
+      workloads to evaluate absolute and relative performance.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research by discussing and comparing its approach to existing soft GPGPU
+      architectures and processors. It includes a substantial number of citations
+      and references to previous work throughout the text, particularly in the Introduction
+      and Background sections, where it compares its method to previous designs and
+      discusses the limitations and advantages of its approach relative to existing
+      solutions.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel parameterized SIMT
+      processor for FPGA, introduces the concept of both static and dynamic scalability
+      in a soft GPGPU context, and demonstrates a soft processor that consistently
+      closes timing at high performance levels. It also claims to offer improvements
+      over existing methods and provides a detailed comparison with other architectures,
+      highlighting its unique contributions and performance advantages.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel parameterized
+      SIMT processor for FPGA, demonstrates dynamic and static scalability, and provides
+      original experiments and benchmarks comparing the proposed architecture with
+      existing solutions. It clearly makes novel contributions to the field.'
+- title: '**Quantum-dot Cellular Automata (QCA): A Survey**'
+  verification: 'Correct: The paper is a survey and does not introduce any novel contributions
+    or empirical evaluations, justifying its disqualification.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a survey
+      and discussion of Quantum-dot Cellular Automata (QCA) technologies, defects,
+      and testing methods, but it lacks any empirical, experimental, or quantitative
+      evaluation of its own. It does not include sections or paragraphs dedicated
+      to evaluation, experiments, results, or empirical analysis, nor does it present
+      any benchmarks, metrics, comparisons, datasets, or performance measurements.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research by providing numerous academic citations throughout the text,
+      discussing various aspects of Quantum-dot Cellular Automata (QCA) technology,
+      and comparing different implementations and methodologies. It includes a comprehensive
+      survey of existing literature, tools, defect analysis, and testing methods,
+      demonstrating a thorough engagement with previous work in the field.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a comprehensive
+      survey on Quantum-dot Cellular Automata (QCA) technology, covering its basics,
+      implementation, fabrication, tools, defect characterization, fault models, and
+      testing. It does not propose any new methods, algorithms, architectures, datasets,
+      or insights, nor does it apply known techniques in a novel context or domain.
+      The paper primarily summarizes existing literature and suggests potential research
+      areas without making any clear claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on Quantum-dot
+      Cellular Automata (QCA) basics, implementation, fabrication, tools, defect characterization,
+      fault model, and testing without introducing new methods, datasets, experiments,
+      or frameworks.'
+- title: 'Machine Learning in VLSI Design: A Comprehensive Review'
+  verification: 'Correct: The paper is a review paper, as indicated by the title and
+    content, and does not introduce any novel contributions, justifying the disqualification
+    under the review-only rule.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains a "Results Analysis
+      and Discussion" section, multiple references to empirical studies, and figures
+      and tables presenting quantifiable outcomes, indicating structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper includes a comprehensive literature
+      review section that meaningfully engages with prior research. It cites numerous
+      academic sources throughout the text, compares its methods to previous work,
+      and discusses the state-of-the-art in the field of ML applications in VLSI design
+      and CAD EDA.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper provides a comprehensive
+      review of existing machine learning applications in VLSI design and EDA, but
+      it does not propose any new methods, algorithms, architectures, datasets, or
+      insights. It primarily summarizes and discusses the state-of-the-art without
+      making any clear claims of novel contributions or applications.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "review," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+- title: Towards Next-Generation Intelligent Assistants Leveraging LLM Techniques
+  verification: 'Incorrect: The paper was disqualified under the review-only rule,
+    but it does propose novel insights and applications specific to AR/VR assistants,
+    indicating it should be qualified.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It primarily consists
+      of design discussions, conceptual proposals, and literature reviews without
+      structured or reproducible testing.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research by reviewing related literature across multiple domains and tasks,
+      discussing state-of-the-art modeling techniques, and comparing its focus with
+      previous tutorials on similar topics. It provides context and discussion of
+      previous work in sections such as "Multi-modal Context-Aware Conversations"
+      and "Knowledge-Enhanced and Personalized Conversations," and references prior
+      tutorials in the "PREVIOUS EDITIONS" section.'
+    novelty_prompt: '- Qualified. Reason: The paper proposes novel insights and applications
+      in the context of AR/VR assistants, such as processing multimodal inputs, managing
+      personal knowledge, and addressing privacy concerns with on-device and federated
+      learning. It also claims to focus on practical challenges and industrial solutions
+      specific to AR/VR, which are not covered in previous tutorials. Additionally,
+      it mentions incorporating recent progress on large language models to improve
+      intelligent assistants, indicating a novel contribution.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper primarily summarizes
+      existing work and techniques related to AR/VR assistants, conversational AI,
+      and multimodal interactions without introducing any novel methods, datasets,
+      experiments, or frameworks. The content is structured as a tutorial, focusing
+      on reviewing state-of-the-art methods and literature rather than presenting
+      original contributions.'
+- title: '**European Data Protection Supervisor**'
+  verification: 'Correct: The paper lacks empirical evaluation, meaningful engagement
+    with prior research, novelty, and is primarily a review without novel contributions.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper contains only
+      design discussions, conceptual proposals, and subjective reflections on large
+      language models without any structured or reproducible testing or empirical
+      evaluation.'
+    related_work_prompt: '- Disqualified: no related work. Reason: The paper does
+      not meaningfully engage with prior research. It lacks a discussion or comparison
+      of its methods to previous work and does not provide context or discussion for
+      the citations it includes. The citations are listed without integration into
+      the text, and there is no explanation of how the current work relates to or
+      builds upon these prior studies.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper provides an overview
+      of large language models (LLMs) and their implications for data protection,
+      but it does not propose any new methods, applications, or insights. It summarizes
+      existing knowledge and developments in the field without making any clear claims
+      of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper primarily summarizes
+      existing work on large language models, discussing their development, applications,
+      and impacts on data protection without introducing any novel methods, datasets,
+      experiments, or frameworks. The title and content indicate it is a review of
+      existing technologies and their implications.'
+- title: '**A Comprehensive Review of the Influence of Technology on Psychology**'
+  verification: 'Correct: The paper is a review without empirical evaluation or novel
+    contributions, justifying disqualification.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It primarily consists
+      of a review and discussion of existing literature and concepts without presenting
+      any structured or reproducible testing, benchmarks, metrics, or performance
+      measurements.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its sections, including the Introduction, Related
+      Work, and In-Depth Discussion. It includes numerous citations and discussions
+      of previous studies, theories, and methodologies, comparing them to the current
+      work.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a comprehensive
+      review of existing literature on the influence of technology on psychology but
+      does not propose any new methods, algorithms, applications, or insights. It
+      summarizes existing knowledge and applications without making any clear claims
+      of novel contributions or applying known techniques in a novel context.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "review," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+- title: Use of large language model (LLM) to enhance content and structure of a school
+    of dentistry LibGuide Emily P. Jones
+  verification: 'Incorrect: The final decision should have been qualified. The paper
+    provides empirical evaluation evidence with a 131% increase in access, demonstrates
+    novelty by applying LLMs in a new context, and is not a review paper. The lack
+    of related work engagement was the only disqualifying factor, but the paper meets
+    other criteria for qualification.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper provides empirical evidence
+      of evaluation through the reported 131% increase in LibGuide access post-revision,
+      compared to the same period the previous year. This is a quantifiable outcome
+      indicating structured evaluation of the method''s impact.'
+    related_work_prompt: 'Disqualified: no related work. Reason: The paper does not
+      meaningfully engage with prior research. It contains few academic citations,
+      and the references included are primarily to tools (ChatGPT and Claude) without
+      context or discussion of previous academic work. There is no explanation or
+      comparison of the method to previous work, and it lacks a discussion of prior
+      research entirely.'
+    novelty_prompt: '- Qualified. Reason: The paper demonstrates novelty by applying
+      a known technique, the use of large language models (LLMs), in a novel context—specifically,
+      the enhancement of a dentistry LibGuide. The paper also claims a contribution
+      by showing a significant increase in LibGuide access post-revision, suggesting
+      improved usability and discoverability due to the application of LLMs.'
+    review_only_prompt: 'Qualified. Reason: The paper describes a practical application
+      of large language models (LLMs) to enhance a dentistry LibGuide, resulting in
+      increased access and positive feedback. It includes novel contributions such
+      as the use of LLMs for restructuring and summarizing content, and presents original
+      data on the impact of these changes.'
+- title: A Survey on Effective Invocation Methods of Massive LLM Services
+  verification: 'Correct: The paper is a survey and primarily summarizes existing
+    work without introducing new methods, datasets, experiments, or frameworks, justifying
+    the disqualification under the review-only rule.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a survey
+      and does not contain any empirical, experimental, or quantitative evaluation
+      of its own. It discusses various methods and frameworks but does not present
+      any structured evaluation or testing of these methods.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout the text, including in the Introduction, Background, and
+      various sections discussing components like input abstract, semantic cache,
+      solution design, and output enhancement. It provides citations and comparisons
+      to previous work, demonstrating a comprehensive review of existing methods and
+      situating its contributions within the context of prior research.'
+    novelty_prompt: '- Qualified. Reason: The paper proposes a comprehensive taxonomy
+      and framework for effective invocation methods in Language Models as a Service
+      (LMaaS), categorizing existing methods into input abstract, semantic cache,
+      solution design, and output enhancement. It formalizes the problem as a multi-objective
+      optimization task and highlights open challenges, providing novel insights and
+      a roadmap for future research in this domain.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+- title: 'ACM Reference Format:'
+  verification: 'Incorrect: The paper was disqualified under the review-only rule
+    for being a survey, but it was qualified under the novelty rule for providing
+    novel insights and applications in the context of post-quantum cryptography.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains a section titled "SCA
+      AGAINST POST-QUANTUM ALGORITHMS AND COUNTERMEASURES" that evaluates various
+      side-channel attacks (SCAs) and countermeasures on post-quantum cryptographic
+      algorithms. It includes tables, figures, and references to empirical studies
+      and experiments, demonstrating structured evaluation and analysis.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes numerous academic citations, discusses
+      previous work, and compares its methods and findings to existing research in
+      the field of post-quantum cryptography and side-channel attacks.'
+    novelty_prompt: 'Qualified. Reason: The paper provides a comprehensive survey
+      on emerging security concerns in the post-quantum era, specifically focusing
+      on implementation attacks and side-channel attacks (SCAs) against post-quantum
+      cryptography (PQC) algorithms. It offers insights into the vulnerabilities of
+      these algorithms to SCAs and discusses various countermeasures. The paper claims
+      to provide forward-looking insights and discussions that can be used to scrutinize
+      new standards, which indicates a novel application of known techniques in the
+      context of PQC.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on post-quantum
+      cryptography and side-channel attacks without introducing new methods, datasets,
+      experiments, or frameworks.'
+- title: 'AI for Education (AI4EDU): Advancing Personalized Education with LLM and
+    Adaptive Learning'
+  verification: 'Correct: The paper lacks empirical evaluation, engagement with prior
+    research, novelty, and is primarily a review without novel contributions.'
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper does not contain
+      any sections or content that indicate empirical, experimental, or quantitative
+      evaluation. It primarily discusses the workshop''s objectives, topics of interest,
+      and format without presenting any structured evaluation or results.'
+    related_work_prompt: 'Disqualified: no related work. Reason: The paper does not
+      include any meaningful engagement with prior research. It lacks academic citations
+      and does not explain or compare its methods to previous work. The content focuses
+      on workshop organization and objectives without discussing related research
+      or situating its contributions within the existing body of knowledge.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper primarily describes
+      the organization and objectives of a workshop rather than presenting new research
+      findings, methods, or applications. It does not make specific claims of novel
+      contributions or propose new methods, algorithms, or insights in the field of
+      AI for education.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper''s title contains
+      the word "Advancing," which does not explicitly indicate a survey or review,
+      but the content primarily summarizes existing work and discusses the state-of-the-art
+      without introducing new methods, datasets, experiments, or frameworks. The focus
+      is on reviewing current technologies and identifying challenges and opportunities,
+      which aligns with the characteristics of a review paper without novel contributions.'
+- title: '**1. Introduction**'
+  verification: 'Correct: The final decision to disqualify based on novelty is justified
+    as the paper lacks new contributions or insights.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: All relevant sections passed.'
+    related_work_prompt: 'Qualified. Reason: All relevant sections passed.'
+    novelty_prompt: 'Disqualified: Chunk 3: Disqualified: no novelty. Reason: The
+      section primarily discusses existing methods and applications of Support Vector
+      Machines (SVMs) for detecting counterfeit integrated circuits (ICs) and does
+      not introduce any new methods, algorithms, applications, or insights. The described
+      approaches and studies are based on previously established techniques without
+      any clear claims of novel contributions or applications in a new context.'
+    review_only_prompt: 'Qualified. Reason: All relevant sections passed.'
+- title: A Survey of Aging Monitors and Reconfiguration Techniques
+  verification: 'Incorrect: The paper was disqualified as a review paper, but it proposes
+    a new classification and fills a gap in the literature, which indicates novel
+    contributions.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains structured evaluation
+      with sections dedicated to empirical analysis, including tables and figures
+      presenting quantifiable outcomes, and mentions of experiments and metrics used
+      to assess performance.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes numerous academic citations, discusses
+      previous works in the introduction, and provides a detailed literature review.
+      The paper also compares its findings and methods to existing research, particularly
+      in the sections discussing aging monitors and reconfiguration techniques.'
+    novelty_prompt: '- Qualified. Reason: The paper proposes a new classification
+      for aging monitors and reconfiguration techniques, extending the taxonomy of
+      previous works. It also claims to fill a gap by covering the most recent works
+      from 2012 to 2019, which were not addressed in previous surveys.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
