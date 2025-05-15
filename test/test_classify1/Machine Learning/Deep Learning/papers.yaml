@@ -1,0 +1,2946 @@
+papers:
+- title: "DeMM: A Decoupled Matrix Multiplication Engine Supporting Relaxed\n  Structured\
+    \ Sparsity"
+  abstract: 'Deep Learning (DL) has achieved unprecedented success in various application
+
+    domains. Meanwhile, model pruning has emerged as a viable solution to reduce
+
+    the footprint of DL models in mobile applications, without compromising their
+
+    accuracy. To enable the matrix engines built for dense DL models to also handle
+
+    their pruned counterparts, pruned DL models follow a fine-grained structured
+
+    sparsity pattern of 1:4, or 2:4, whereby in each group of four contiguous
+
+    values, at least one, or two, respectively, must be non-zero. Structured
+
+    sparsity has recently also moved to coarser (relaxed) cases of N:128, or N:256,
+
+    for small values of N, targeting a wider range of sparsity (10%-90%) for the DL
+
+    models. In this work, we design an accelerator that operates, by construction,
+
+    on wide blocks with relaxed structured sparsity. In contrast to the
+
+    conventional systolic array archetype, the new engine decouples the memory part
+
+    of the systolic array from the multiply-add units. The memory block comprises
+    1
+
+    write and N read ports, with the number of read ports being equal to the number
+
+    of non-zero elements per row. The multiply-add units connect directly to each
+
+    read port and complete the multiplication in a row-wise product-first order.
+
+    More importantly, simple reconfiguration facilitates more dense patterns. The
+
+    experimental evaluation demonstrates substantial latency improvements over
+
+    current state-of-the-art systolic array engines built for fine-grained and
+
+    relaxed structured sparsity.'
+  url: http://arxiv.org/abs/2401.08179v1
+  keywords: Structured sparsity, Matrix-multiplication engine, Machine learning accelerator,
+    Systolic computation
+  document: '## I. INTRODUCTION
+
+
+    The acceleration of DL models, for both training and inference, relies primarily
+    on equivalent matrix multiplications that inherently map to systolic arrays. To
+    reduce memory storage and computation cost, the weights of DL models are pruned,
+    thereby leading to sparse models [\[1\]](#page-3-0), [\[2\]](#page-3-1). The derived
+    zero weights are not stored and the corresponding computation is skipped. When
+    sparsification occurs during training, the possible accuracy loss is ameliorated
+    by allowing the model to adapt to the removal of certain weights.
+
+
+    The achieved sparsity can either be *unstructured* [\[3\]](#page-3-2), or *structured*
+    [\[4\]](#page-3-3), [\[5\]](#page-3-4). In unstructured sparsity, there is no
+    constraint on the locations of the zeros, as shown in Fig. [1\(](#page-0-0)a).
+    In this case, together with the non-zero elements, multiple metadata indexes are
+    also required to identify the original position of each non-zero element.
+
+
+    On the contrary, in structured sparsity, there is an upper limit on the number
+    of non-zero elements that may be present within a block of consecutive elements
+    (other forms of structured sparsity are also possible). For instance, in Fig.
+    [1\(](#page-0-0)b), for every 4 elements in each row, there is up to one non-zero
+    element. Such structured sparsity simplifies both the indexing required to identify
+    the position of each non-zero element inside each block, and the hardware needed
+    to operate on such sparse data. This simplicity is of paramount importance to
+    *lightweight* engines (the focus of this work) found in mobile and embedded applications.
+
+
+    Christodoulos Peltekis, Vasileios Titopoulos and Giorgos Dimitrakopoulos are with
+    the Department of Electrical and Computer Engineering, Democritus University of
+    Thrace, Xanthi, Greece, (e-mail: cpeltekis@ee.duth.gr, vtitopou@ee.duth.gr, dimitrak@ee.duth.gr)
+
+
+    Chrysostomos Nicopoulos is with the Department of Electrical and Computer Engineering
+    at the University of Cyprus, Nicosia, Cyprus (e-mail: nicopoulos@ucy.ac.cy).
+
+
+    ![](_page_0_Figure_13.jpeg)
+
+
+    <span id="page-0-0"></span>Fig. 1. Examples of (a) unstructured sparsity; (b)
+    structured block sparsity of 1:4 (i.e., up to 1 non-zero element in every 4 consecutive
+    elements); and (c) relaxed structured sparsity 4:16, and the corresponding packed
+    representation of the non-zero elements. A blue square indicates a non-zero element.
+
+
+    In most practical applications [\[4\]](#page-3-3), [\[6\]](#page-3-5), [\[7\]](#page-3-6),
+    blocks are small and *fine-grained* N : M sparsity patterns of 1:2, 1:4 or 2:4
+    are supported, where each block of M elements may contain up to N non-zero elements.
+    Nevertheless, while fine-grained structured sparsity promises high performance
+    and low storage overhead, it may also lead to less accurate ML models [\[2\]](#page-3-1),
+    [\[8\]](#page-3-7). This possible weakness is attributed to the constraints imposed
+    during the fine-grained sparsification, where a fixed amount of non-zero elements
+    is required for all consecutive small blocks.
+
+
+    To increase the flexibility during model training, sparsity could refer to much
+    coarser blocks [\[9\]](#page-3-8), [\[10\]](#page-3-9). For instance, a *relaxed*
+    (coarser) structured sparsity of 8:128 allows the presence of at most 8 non-zero
+    elements in every 128 consecutive elements. Fig. [1\(](#page-0-0)c) shows an example
+    of 4:16 relaxed structured sparsity, together with the packed representation of
+    each row, which contains the non-zero element values and their corresponding column
+    indexes. Moving to coarser blocks complicates the operation of the corresponding
+    hardware modules – e.g., systolic arrays – that operate optimally on well-structured
+    data with small block sizes.
+
+
+    To effectively reconcile these two conflicting attributes of relaxed (coarser)
+    sparsity vs. hardware complexity, this work proposes a novel matrix-multiplication
+    engine that supports *relaxed* structured sparsity patterns, while still employing
+    a simple and *decoupled* hardware organization. Unlike conventional systolic arrays
+    that colocate the Multiply-Accumulate (MAC) and storage units within each tile,
+    the proposed Decoupled Matrix-Multiplication (DeMM) engine decouples the two.
+    It essentially re-organizes the (dispersed) memory portion of a traditional systolic
+    array into a regular standardcell memory structure with multiple read ports. This
+    transformation enables the support of relaxed structured sparsity and maintains
+    the required regularities in the data flow and the physical layout.
+
+
+    Overall, the proposed DeMM engine provides a two-fold benefit.
+
+
+    This work was supported by a research grant from Codasip, a provider of customizable
+    RISC-V IP and Codasip Studio design toolset, to DUTh.
+
+
+    ![](_page_1_Figure_1.jpeg)
+
+
+    <span id="page-1-0"></span>Fig. 2. Read and multiply operations are sufficient
+    to perform matrix multiplication when the sparse matrix contains at most one non-zero
+    element per row.
+
+
+    First, it enables support for relaxed structured sparsity patterns that combine
+    hardware simplicity (similar to handling fine-grained sparsity) with additional
+    flexibility during DL model pruning [\[2\]](#page-3-1), [\[8\]](#page-3-7). Secondly,
+    through appropriate reconfiguration, the DeMM engine can also support denser sparsity,
+    which allows for the tackling of more common fine-grained structured sparsity
+    patterns [\[4\]](#page-3-3).
+
+
+    The experimental results demonstrate substantial improvements in overall execution
+    latency over state-of-the-art matrix engines built to support fine-grained [\[7\]](#page-3-6)
+    and relaxed structured sparsity [\[9\]](#page-3-8), [\[11\]](#page-3-10) when
+    executing structured-sparse CNN models. It should be noted that, even though said
+    approaches – including the proposed DeMM engine – are effective for the low-sparsity
+    levels of DNNs (i.e., 10%-90%), they are not as efficient in high-sparsity levels
+    of above 95%. At such high-sparsity levels, other accelerator architectures perform
+    better. Examples include architectures following a non-systolic dataflow-like
+    organization [\[12\]](#page-3-11), [\[13\]](#page-3-12) and ones that optimize
+    memory traffic by operating either near-memory [\[14\]](#page-3-13), [\[15\]](#page-3-14),
+    or in-memory [\[16\]](#page-3-15).
+
+
+    ## II. SIMPLIFYING SPARSE×DENSE MATRIX MULTIPLICATION
+
+
+    The proposed DeMM engine employs a row-wise approach [\[17\]](#page-3-16) in computing
+    the matrix product A × B. Matrix A follows a relaxed structured sparsity template
+    and B is dense. The product of the multiplication is produced row-by-row, as follows:
+
+
+    $$C[i,:] = \sum\_{k} A[i,k]B[k,:] \tag{1}$$
+
+
+    All the non-zero elements in a single row of matrix A should be multiplied in
+    parallel with the corresponding rows of matrix B, where the row index of matrix
+    B is determined by the column index of the non-zero value in matrix A.
+
+
+    ## *A. The proposed DeMM engine*
+
+
+    To achieve the desired parallelism, we *decouple* the *storage* (as used in a
+    systolic array) from the *multiply-add* units and treat each portion separately.
+    Matrix B is assumed to be pre-loaded in the storage area of DeMM. The pre-loading
+    resembles the pre-loading operation of the input- (or weight-) stationary dataflow
+    applied in systolic arrays. In each cycle, another row of B is written into the
+    memory block, using the one available write port. Subsequently, multiplication
+    is computed row-by-row, by feeding the engine with all the non-zero elements of
+    each row of stuctured-sparse matrix A.
+
+
+    Let us initially assume the trivial case where each row of A consists of at most
+    one non-zero element. This element is passed to the engine, together with its
+    column index, one after the other. For each {value, column index} pair, multiplication
+    is performed in two serial steps, as depicted in Fig. [2.](#page-1-0) First, the
+    column index is treated as a row address to the memory that stores matrix B. This
+    address allows us to read out all elements of the corresponding row of B. In the
+    second
+
+
+    ![](_page_1_Figure_12.jpeg)
+
+
+    <span id="page-1-1"></span>Fig. 3. Multiplying a sparse matrix with at most two
+    non-zero elements per row requires two separate memory read ports and two rows
+    of multipliers. The products of each port are then independently added in parallel
+    to form the final result of the output row.
+
+
+    ![](_page_1_Figure_14.jpeg)
+
+
+    <span id="page-1-2"></span>Fig. 4. The overall organization of a DeMM engine that
+    supports relaxed structured sparsity of 4:64 using a memory block of four read
+    ports and four multipliers and one add-reduction unit per output element. The
+    example assumes that 64 outputs (columns) are computed in parallel.
+
+
+    step, the read elements are all multiplied in parallel with the value of the non-zero
+    element of A. Repeating these two steps for all rows of matrix A would complete
+    the multiplication. The hardware engine required in this trivial case of a single
+    non-zero element per row is just a memory block with 1 read port and a row of
+    multipliers.
+
+
+    To support more than one non-zero element per row, one must simply increase the
+    number of read ports in the memory block and, correspondingly, the number of multipliers
+    per read port. Adders are also needed for the final addition. Fig. [3](#page-1-1)
+    illustrates an example of the operation of the proposed engine when operating
+    with a row sparsity of two non-zero elements per row. In this case, the pairs
+    of nonzero elements of each row of matrix A are sent in parallel to the multiplication
+    engine, one after the other. Each non-zero element is forwarded to its dedicated
+    read port. The column index of each nonzero element selects (reads) the corresponding
+    row of matrix B, and the value of each non-zero element is multiplied in parallel
+    with all the elements of the selected row. The two products generated at each
+    read port are added to finalize the result for this output row.
+
+
+    In the general case, matrix A follows an N:M row-sparsity pattern, where M is
+    much larger than N, e.g., N=8 and M=128, or M=256. Hence, the proposed DeMM engine
+    consists of a regular memory of N read and 1 write port. Each read port of DeMM''s
+    memory block outputs one data item per column, as selected by the column index
+    address (''col idx'') , which points to a row of matrix B. Fig. [4](#page-1-2)
+    depicts a complete DeMM engine supporting 4:64 structured sparsity (N=4 and M=64).
+    Each read port is associated with a multiplier and the products of all read ports
+    are reduced to one sum. Summation at the bottom of Fig. [4](#page-1-2) is implemented
+    as a pipelined multi-operand adder
+
+
+    ![](_page_2_Figure_1.jpeg)
+
+
+    <span id="page-2-0"></span>Fig. 5. The overall architecture of the DeMM engine
+    that supports an N:M relaxed structured sparsity and can be reconfigured for all
+    kN:M denser variants.
+
+
+    of logarithmic depth.
+
+
+    ## *B. Supporting denser structured sparsity*
+
+
+    To support denser structured sparsity, e.g., kN:M, in a reconfigurable manner,
+    DeMM should be able to read more than N non-zero elements from *the same* M rows
+    of matrix B. Since the memory block of each DeMM engine consists of N read ports,
+    it means that reading the kN non-zero elements of the same row of A requires time-sharing
+    of the N read ports for k× more cycles. To enable this sharing, every read port
+    is associated with a k-to-1 multiplexer. Note that, irrespective of the exact
+    structured sparsity pattern supported, the memory of the DeMM engine is pre-loaded
+    with the same M rows of matrix B. The value of k just determines how many times
+    this block would be read before completing the computation for a row of A.
+
+
+    The overall organization of the DeMM engine is depicted in Fig. [5.](#page-2-0)
+    The value chosen for k reflects the reconfiguration properties of the proposed
+    engine. For instance, by selecting k=4 for the engine depicted in Fig. [4,](#page-1-2)
+    which operates by default on 4:64 relaxed structured sparsity (N=4 and M=64),
+    it means that all denser (and more fine-grained) structured sparsities can also
+    be supported by the proposed design, e.g., 4:32 (as 8:64), 4:16 (as 16:64). Moving
+    to an even denser scenario, such as 4:8, implemented in DeMM as a 32:64 pattern,
+    would need larger multiplexers at each read port, i.e., k=8.
+
+
+    To identify the various design options, we define the DeMM(N, M, C, k) configuration
+    as the one that operates on a structured-sparse matrix A of row size M (this is
+    also the number of rows in matrix B) and a matrix B with C columns. Structured
+    sparsity can be as relaxed as N:M, or as dense as kN:M. The corresponding hardware
+    block requires N ×C multipliers, C N-to-1 reduction trees, and an M × C memory
+    block of N read ports.
+
+
+    ## III. EVALUATION
+
+
+    The effectiveness of the proposed decoupled matrix engine is evaluated by running
+    inference in state-of-the-art CNN applications [\[18\]](#page-3-17),
+
+
+    [\[19\]](#page-3-18) with inputs from ImageNet. In the first set of experiments,
+    we consider highly sparse CNN models derived from unstructured pruning. As reported
+    in [\[2\]](#page-3-1), [\[8\]](#page-3-7), unstructured pruning can achieve higher
+    model compaction with better performance, as compared to structured pruning. In
+    particular, we employ ResNet50 [\[18\]](#page-3-17), pruned with RigL [\[3\]](#page-3-2)
+    at 95% sparsity that roughly matches the relaxed sparsity of 8:128 targeted by
+    this work. Any rows exceeding the sparsity of 8:128 are computed in multiple consecutive
+    cycles. For completeness, in the second set of experiments, we also include scenarios
+    with fine-grained structured sparsity of 1:2, 1:4 and 1:8, derived with Tensorflow
+    for ResNet50 [\[18\]](#page-3-17) and ConvNeXt [\[19\]](#page-3-18).
+
+
+    ## *A. Relaxed structured sparsity*
+
+
+    For relaxed row sparsity of 8:128, we compare DeMM with three state-of-the-art
+    architectures: (a) VEGETA [\[9\]](#page-3-8), which is able to support such sparsity
+    degrees in a structured form of 1:16 blocks, operating with a weight-stationary
+    dataflow [\[20\]](#page-3-19); (b) a version of S2TA [\[7\]](#page-3-6) configured
+    to support block density 1:16 using output stationarity; and (c) SPOTS [\[11\]](#page-3-10),
+    which skips groups of weights and input data that consist of only zero elements,
+    following an outputstationary dataflow. Specifically, we compare DeMM(8,128,64,8)
+    following an input-stationary dataflow to VEGETA-S-4-2 [\[9\]](#page-3-8), to
+    S2TA-4×16×4 8×4 [\[7\]](#page-3-6), and to SPOTS [\[11\]](#page-3-10), with *all*
+    designs under evaluation having *the same amount of computational resources of
+    512 multiply-add units*. The evaluated VEGETA and S2TA designs have array sizes
+    of 32 × 16 PEs, while SPOTS has an array size of 128 × 4 that can be reconfigured
+    as four 32×4 blocks operating in parallel. The configuration selected is the one
+    that offers the best performance depending on the size of the input matrices.
+
+
+    The obtained results are summarized in Fig. [6,](#page-2-1) which shows the execution
+    latencies of all CNN layers of ResNet50 [\[18\]](#page-3-17). DeMM''s performance
+    in the first layers is not the best, but it substantially outperforms the other
+    three designs in the later layers. This behavior is the combined result of DeMM''s
+    engine architecture and the size of the stationary matrices in each case [\[20\]](#page-3-19).
+    DeMM leads to an *overall* (across all CNN layers) latency improvement of 18%,
+    54% and 67%, as compared to S2TA [\[7\]](#page-3-6), VEGETA [\[9\]](#page-3-8),
+    and SPOTS [\[11\]](#page-3-10), respectively.
+
+
+    ## *B. Hardware complexity*
+
+
+    All four evaluated designs were implemented in SystemVerilog and synthesized using
+    the Cadence digital implementation flow and a 28 nm standard-cell library. The
+    designs operate on 16-bit integer quantized inputs and weights, while the accumulations
+    are performed with 32 bits. A block density of 8:128 is used, which is DeMM''s
+    primary target. However, the instance of DeMM that is evaluated can also support
+    more fine-grained patterns, down to the equivalent of 1:2. The equivalent density
+    for S2TA and VEGETA is 1:16. All designs under evaluation operate at a clock frequency
+    of 500 MHz at 0.88 V.
+
+
+    Fig. [7\(](#page-3-20)a) compares the hardware area of the four architectures.
+    Compared to S2TA and VEGETA, the DeMM engine requires 2.7% and 10.4%, respectively,
+    lower area, which is a testament to the
+
+
+    ![](_page_2_Figure_18.jpeg)
+
+
+    <span id="page-2-1"></span>Fig. 6. The execution latencies of all CNN layers of
+    ResNet50 [\[18\]](#page-3-17), when using the proposed DeMM(8,128, 64, 8) design,
+    the S2TA-4×16×4 8×4 design [\[7\]](#page-3-6), the VEGETA-S-4-2 design [\[9\]](#page-3-8),
+    and the SPOTS design [\[11\]](#page-3-10). All three architectures have equal
+    amount of computational resources.
+
+
+    ![](_page_3_Figure_1.jpeg)
+
+
+    <span id="page-3-20"></span>Fig. 7. Hardware (a) area, and (b) power consumption
+    comparisons between DeMM(8,128,64,8), S2TA-4×16×4 8×4 [\[7\]](#page-3-6), VEGETA-S-4-2
+    [\[9\]](#page-3-8) and SPOTS [\[11\]](#page-3-10). DeMM and SPOTS use a block
+    density of 8:128; S2TA and VEGETA use the equivalent 1:16.
+
+
+    simplicity of its organization. DeMM is slightly larger than SPOTS (the overhead
+    is less than 10%), due to the additional multiplexing logic required for supporting
+    reconfigurability and multi-porting. Each additional read port added to the 128×64
+    standard-cell-based memory block used in this DeMM setup costs 16% more area.
+
+
+    In terms of power consumption, DeMM demonstrates significantly better behavior
+    than the other designs. As shown in Fig. [7\(](#page-3-20)b), DeMM consumes 36.4%,
+    45.8% and 56.1% lower power than SPOTS, S2TA, and VEGETA, respectively. This substantial
+    power reduction is mainly attributed to the minimization of data movement in pipeline
+    registers. Both S2TA and VEGETA have an input data demand of a multiple-of-M inputs
+    and C weights, while DeMM has a much lower input data demand of C inputs and kN
+    weights, for a kN:M structured sparsity, along with their addresses. The extra
+    hardware cost of VEGETA relative to S2TA stems from its reconfiguration-rich organization
+    that is also offered by the DeMM engine. SPOTS has a low multiplexing overhead
+    that reduces its area requirements. However, its deeply pipelined operation increases
+    its power consumption relative to DeMM.
+
+
+    ## *C. Fine-grained structured sparsity*
+
+
+    Furthermore, we also compare DeMM to VEGETA and S2TA in use-cases that better
+    fit these two architectures, i.e., in scenarios with fine-grained block densities.
+    The designs are evaluated using ResNet50 [\[18\]](#page-3-17) and ConvNeXt [\[19\]](#page-3-18).
+    The selected workloads are pruned to fine-grained structured block sparsities
+    of 1:2, 1:4 and 1:8 to ensure optimal conditions for both VEGETA and S2TA, even
+    if this choice is not the best option for DeMM, which inherently supports a wide
+    range of sparsity formats. SPOTS is omitted in this comparison, since – under
+    such fine-grained structured sparsity – it is very difficult to find contiguous
+    groups of zero data, as required by SPOTS. Consequently, SPOTS exhibits significantly
+    higher latencies.
+
+
+    The results are shown in Fig. [8.](#page-3-21) DeMM engine *outperforms both*
+    S2TA and VEGETA architectures in terms of overall latency. Specifically, for block
+    sparsity 1:8, DeMM achieves average latency improvements of 29% and 39%, as compared
+    to S2TA and VEGETA, respectively. For block sparsity 1:4, DeMM''s respective improvement
+    in average latency is 19% and 12%. Finally, for block sparsity 1:2, DeMM still
+    yields 14% and 5% average latency improvements, as compared to S2TA and VEGETA,
+    respectively.
+
+
+    ## IV. CONCLUSIONS
+
+
+    This paper proposes DeMM, a matrix-multiplication engine that natively supports
+    *relaxed* structured sparsity patterns, without sacrificing the simplicity and
+    regularity of the hardware organization. Contrary to conventional systolic arrays,
+    the DeMM design employs a disaggregated micro-architecture that decouples the
+    memory elements from the MAC units. Fine-grained sparsity patterns are also supported
+
+
+    ![](_page_3_Figure_10.jpeg)
+
+
+    <span id="page-3-21"></span>Fig. 8. Overall execution latencies of ResNet50 [\[18\]](#page-3-17)
+    and ConvNeXt [\[19\]](#page-3-18) for configurations with block densities of 1:8,
+    1:4 and 1:2.
+
+
+    with minimal reconfiguration. The experimental evaluation demonstrates substantial
+    improvements in the overall execution latency of modern CNN workloads, as compared
+    to two existing state-ofthe-art architectures [\[9\]](#page-3-8), [\[7\]](#page-3-6),
+    [\[11\]](#page-3-10) for structured sparse workloads. Most importantly, these
+    performance improvements are achieved with markedly lower power consumption.
+
+
+    ## REFERENCES
+
+
+    - <span id="page-3-0"></span>[1] S. Han *et al.*, "Deep compression: Compressing
+    deep neural networks with pruning, trained quantization and huffman coding," in
+    *Inter. Conf. on Learning Representations (ICLR)*, 2016.
+
+    - <span id="page-3-1"></span>[2] T. Hoefler *et al.*, "Sparsity in deep learning:
+    Pruning and growth for efficient inference and training in neural networks," *The
+    Journal of Machine Learning Research*, vol. 22, no. 1, pp. 10 882–11 005, 2021.
+
+    - <span id="page-3-2"></span>[3] U. Evci *et al.*, "Rigging the lottery: Making
+    all tickets winners," in *Inter. Conf. on Machine Learning*, Jul. 2020, pp. 2943–2952.
+
+    - <span id="page-3-3"></span>[4] A. Mishra *et al.*, "Accelerating sparse deep
+    neural networks," *arXiv preprint arXiv:2104.08378*, 2021.
+
+    - <span id="page-3-4"></span>[5] A. Zhou *et al.*, "Learning N:M fine-grained
+    structured sparse neural networks from scratch," in *Inter. Conf. on Learning
+    Representations (ICLR)*, May 2021.
+
+    - <span id="page-3-5"></span>[6] Z.-G. Liu *et al.*, "Systolic tensor array: An
+    efficient structured-sparse gemm accelerator for mobile CNN inference," *IEEE
+    Computer Architecture Letters*, vol. 19, no. 1, pp. 34–37, 2020.
+
+    - <span id="page-3-6"></span>[7] ——, "S2TA: Exploiting structured sparsity for
+    energy-efficient mobile CNN acceleration," in *IEEE Inter. Symp. on High-Performance
+    Computer Architecture (HPCA)*, Apr. 2022, pp. 573–586.
+
+    - <span id="page-3-7"></span>[8] M. Zhu *et al.*, "Sparse tensor core: Algorithm
+    and hardware co-design for vector-wise sparse neural networks on modern gpus,"
+    in *IEEE/ACM Inter. Symp. on Microarchitecture (MICRO)*, Oct. 2019, pp. 359–371.
+
+    - <span id="page-3-8"></span>[9] G. Jeong *et al.*, "Vegeta: Vertically-integrated
+    extensions for sparse/dense gemm tile acceleration on cpus," in *IEEE Inter. Symp.
+    on High-Performance Computer Architecture (HPCA)*, Feb. 2023, pp. 259–272.
+
+    - <span id="page-3-9"></span>[10] S. Muralidharan, "Uniform sparsity in deep neural
+    networks," *Proc. of Machine Learning and Systems*, vol. 5, 2023.
+
+    - <span id="page-3-10"></span>[11] M. Soltaniyeh *et al.*, "An accelerator for
+    sparse convolutional neural networks leveraging systolic general matrix-matrix
+    multiplication," *ACM Trans. on Arch. and Code Opt. (TACO)*, vol. 19, no. 3, pp.
+    1–26, 2022.
+
+    - <span id="page-3-11"></span>[12] O. Hsu *et al.*, "The sparse abstract machine,"
+    in *ACM Inter. Conf. on Architectural Support for Programming Languages and Operating
+    Systems (ASPLOS)*, 2023, pp. 710–726.
+
+    - <span id="page-3-12"></span>[13] G. Zhang *et al.*, "Gamma: Leveraging gustavson''s
+    algorithm to accelerate sparse matrix multiplication," in *ACM Inter. Conf. on
+    Architectural Support for Programming Languages and Operating Systems (ASPLOS)*,
+    2021, pp. 687–701.
+
+    - <span id="page-3-13"></span>[14] G. Gerogiannis *et al.*, "Spade: A flexible
+    and scalable accelerator for spmm and sddmm," in *Inter. Symp. on Computer Arch.
+    (ISCA)*, 2023.
+
+    - <span id="page-3-14"></span>[15] S. Feng *et al.*, "MeNDA: a near-memory multi-way
+    merge solution for sparse transposition and dataflows," in *Inter. Symp. on Comp.
+    Arch. (ISCA)*, 2022, pp. 245–258.
+
+    - <span id="page-3-15"></span>[16] Z. Li *et al.*, "RRAM-DNN: An RRAM and model-compression
+    empowered all-weights-on-chip DNN accelerator," *IEEE Journal of Solid-State Circuits*,
+    vol. 56, no. 4, pp. 1105–1115, 2020.
+
+    - <span id="page-3-16"></span>[17] N. Srivastava *et al.*, "Matraptor: A sparse-sparse
+    matrix multiplication accelerator based on row-wise product," in *IEEE/ACM Inter.
+    Symp. on Microarchitecture (MICRO)*, Oct. 2020, pp. 766–780.
+
+    - <span id="page-3-17"></span>[18] K. He *et al.*, "Deep residual learning for
+    image recognition," in *IEEE CVPR*, 2016, pp. 770–778.
+
+    - <span id="page-3-18"></span>[19] Z. Liu *et al.*, "A ConvNet for the 2020s,"
+    in *IEEE Conf. on Comp. Vision and Pattern Recognition (CVPR)*, 2022, pp. 11 976–11
+    986.
+
+    - <span id="page-3-19"></span>[20] A. Samajdar *et al.*, "Scale-sim: Systolic
+    CNN accelerator simulator," *arXiv preprint arXiv:1811.02883*, 2018.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Evaluation" section
+      that discusses experimental results, comparisons with state-of-the-art architectures,
+      and provides performance metrics and figures (e.g., Figures 6, 7, and 8) to
+      demonstrate the effectiveness of the proposed DeMM engine.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes numerous academic citations, discusses
+      various methods and frameworks, and compares its proposed method to existing
+      work. The paper also provides context and discussion for the tools and frameworks
+      it cites, ensuring a comprehensive engagement with the existing body of research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel matrix-multiplication
+      engine called DeMM, which supports relaxed structured sparsity patterns with
+      a decoupled hardware organization. This approach is distinct from conventional
+      systolic arrays and offers improvements in execution latency and power consumption.
+      The paper clearly claims contributions such as "this work proposes a novel matrix-multiplication
+      engine" and "unlike conventional systolic arrays," indicating novelty in both
+      method and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel matrix-multiplication
+      engine (DeMM) that supports relaxed structured sparsity patterns and provides
+      new contributions in terms of hardware design and performance improvements over
+      existing architectures. It does not primarily summarize existing work but rather
+      presents original research and experimental results.'
+  topics:
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on designing a matrix multiplication engine,
+      which is a fundamental component of computer architecture, particularly in the
+      context of deep learning accelerators and hardware optimization for structured
+      sparsity.
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper indirectly relates to machine learning through
+      its discussion of deep learning models and model pruning, which are essential
+      concepts in the field of machine learning.
+    main_topic_sub: Accelerator-based, application-specific, and reconfigurable architectures
+    secondary_topic_sub: Deep Learning
+- title: "A Scalable RISC-V Vector Processor Enabling Efficient Multi-Precision\n\
+    \  DNN Inference"
+  abstract: 'RISC-V processors encounter substantial challenges in deploying
+
+    multi-precision deep neural networks (DNNs) due to their restricted precision
+
+    support, constrained throughput, and suboptimal dataflow design. To tackle
+
+    these challenges, a scalable RISC-V vector (RVV) processor, namely SPEED, is
+
+    proposed to enable efficient multi-precision DNN inference by innovations from
+
+    customized instructions, hardware architecture, and dataflow mapping. Firstly,
+
+    dedicated customized RISC-V instructions are proposed based on RVV extensions,
+
+    providing SPEED with fine-grained control over processing precision ranging
+
+    from 4 to 16 bits. Secondly, a parameterized multi-precision systolic array
+
+    unit is incorporated within the scalable module to enhance parallel processing
+
+    capability and data reuse opportunities. Finally, a mixed multi-precision
+
+    dataflow strategy, compatible with different convolution kernels and data
+
+    precision, is proposed to effectively improve data utilization and
+
+    computational efficiency. We perform synthesis of SPEED in TSMC 28nm
+
+    technology. The experimental results demonstrate that SPEED achieves a peak
+
+    throughput of 287.41 GOPS and an energy efficiency of 1335.79 GOPS/W at 4-bit
+
+    precision condition, respectively. Moreover, when compared to the pioneer
+
+    open-source vector processor Ara, SPEED provides an area efficiency improvement
+
+    of 2.04$\times$ and 1.63$\times$ under 16-bit and 8-bit precision conditions,
+
+    respectively, which shows SPEED''s significant potential for efficient
+
+    multi-precision DNN inference.'
+  url: http://arxiv.org/abs/2401.16872v2
+  keywords: ''
+  document: '## I. INTRODUCTION
+
+
+    RISC-V processors [\[1\]](#page-4-0)–[\[11\]](#page-4-1) are distinguished by
+    the concise open-source RISC-V instruction set architecture (ISA) [\[12\]](#page-4-2),
+    which defines a fundamental set of instructions while offering opportunities to
+    incorporate application-specific custom instructions. This unique feature enables
+    RISC-V processors as a promising solution ranging from energy-efficient embedded
+    systems [\[10\]](#page-4-3) to high-throughput servers [\[1\]](#page-4-0). On
+    these RISC-V hardware platforms, deep neural networks (DNNs) exhibit substantial
+    deployment demands [\[13\]](#page-4-4)–[\[15\]](#page-4-5) but face the extensive
+    storage and computational costs. Aiming to reduce resource overhead and improve
+    inference speed, multiprecision quantized DNNs [\[16\]](#page-4-6)–[\[18\]](#page-4-7)
+    have emerged as an efficient choice for deployment. However, deploying multiprecision
+    quantized DNNs also incurs a series of significant challenges on prior RISC-V
+    processors.
+
+
+    The emergence of the RISC-V Vector (RVV) extension instruction set has made RVV
+    processors a promising choice for deploying multi-precision DNNs. These RVV processors
+    [\[5\]](#page-4-8)–[\[9\]](#page-4-9) excel in throughput enhancement through
+    their parallel processing capabilities and minimize instruction overhead by employing
+    a minimal number of configuration-setting instructions to define data precision.
+    Notably, Ara [\[6\]](#page-4-10) stands out as the pioneer open-source vector
+    processor compatible with the standard RVV 1.0 ISA. It achieves an exceptional
+    throughput improvement of up to 380× in comparison to a scalar core [\[19\]](#page-4-11),
+    rendering it highly efficient for tasks such as DNN inference. However, the potential
+    performance improvement of the Ara is constrained due to limited support for low-bitwidth
+    (e.g., 4-bit) operations, which are widely used in quantized DNNs to reduce computational
+    complexity and accelerate inference processing with little loss in accuracy [\[20\]](#page-4-12).
+    Furthermore, Ara''s parallelism is constrained by the number of scalable modules.
+    When handling intensive computational tasks, increasing the number of scalable
+    modules can cause excessive hardware consumption. Meanwhile, inefficient dataflow
+    of Ara can lead to increased off-chip data movement and underutilization of on-chip
+    memory, thereby lowering computational efficiency. In summary, deploying multi-precision
+    quantized DNNs on prior RISC-V processors still struggles with (1) limited precision
+    support, (2) constrained throughput, and (3) inefficient dataflow mapping.
+
+
+    To address the issues above, we propose SPEED, a scalable RVV processor enabling
+    efficient DNN inference across 4, 8, and 16 bits through customized instructions
+    based on the standard RVV ISA. Moreover, SPEED significantly improves data throughput
+    and computational efficiency by increasing the data-level parallelism of scalable
+    modules and utilizing a mixed multi-precision dataflow strategy tailored for various
+    convolution kernels. Specifically, the contributions of this work can be summarized
+    in the three following aspects:
+
+
+    - 1) Customized instructions: Dedicated customized RISC-V instructions are proposed
+    based on RVV extensions, providing SPEED with fine-grained control over processing
+    precision and dataflow strategy, while supporting multi-precision computations
+    ranging from 4 to 16 bits.
+
+    - 2) Hardware architecture: A scalable RVV processor is developed, namely SPEED,
+    for efficient multi-precision DNN inference by enhancing parallel processing capability
+    of scalable modules. Compared to Ara [\[6\]](#page-4-10), SPEED improves an area
+    efficiency by 2.04× and 1.63× under 16-bit and 8-bit precision conditions, respectively.
+
+    - 3) Dataflow mapping: A mixed dataflow strategy embracing feature map-first (FF)
+    and channel-first (CF) strategies is proposed, aiming to achieve high computational
+
+
+    efficiency of convolution kernels across various kernel sizes and data precisions.
+    The mixed dataflow strategy improves area efficiency of SPEED by 1.87∼3.53× over
+    Ara [\[6\]](#page-4-10) under various convolution kernels.
+
+
+    ![](_page_1_Figure_2.jpeg)
+
+
+    Fig. 1. Customized instructions and overall architecture of SPEED.
+
+
+    ## <span id="page-1-0"></span>II. THE PROPOSED SPEED ARCHITECTURE
+
+
+    SPEED is a scalable RVV processor augmented with customized instructions enabling
+    high-throughput multi-precision DNN inference, which is built on the RVV v1.0
+    ISA. Additionally, the RVV processor is tightly coupled to a RISC-V scalar core
+    for programmable instructions and an external memory for fetching necessary data.
+    In this section, SPEED will be described from three perspectives: customized instructions,
+    hardware architecture, and dataflow mapping.
+
+
+    ## *A. Customized Instructions*
+
+
+    To facilitate efficient inference of multi-precision DNNs, several customized
+    instructions are proposed to enhance the computational efficiency of DNN operations
+    compared to the standard RVV extensions. Specifically, the customized instructions
+    mainly contain the configuration-setting (VSACFG), load (VSALD), and arithmetic
+    (VSAM), as depicted in Fig. [1.](#page-1-0)
+
+
+    VSACFG serves as a vector configuration-setting instruction that effectively provides
+    the necessary information for subsequent instructions, such as data precision
+    (4-∼16-bit) and dataflow strategy (FF/CF strategy). This information is encoded
+    within the *zimm9* and *uimm5* encoding spaces, as shown in Fig. [1,](#page-1-0)
+    to prepare for processing of subsequent RVV and customized instructions.
+
+
+    VSALD is a customized load instruction responsible for loading data from the base
+    address of external memory and storing it into vector register files (VRFs) at
+    the specified destination address, aiming to maximize data utilization. In contrast
+    to the ordered allocation operation of the standard RVV load instruction VLE,
+    the loaded data from the external memory are broadcast to each lane for improving
+    data reuse.
+
+
+    VSAM is a customized arithmetic instruction that exploits data-level parallelism
+    in efficiency, thereby enhancing computational efficiency. As shown in Fig. [1,](#page-1-0)
+    VSAM requests data from the base addresses *vs1* and *vs2* where they locate in
+    the VRFs, respectively. The performed results of above data are stored at the
+    accumulation address *Acc Addr* within the VRFs.
+
+
+    ## <span id="page-1-1"></span>*B. Hardware Architecture*
+
+
+    The overall hardware architecture of SPEED is shown in Fig. [1.](#page-1-0) To
+    realize efficient multi-precision DNN inference, ➊ vector instruction decode unit
+    (VIDU) is developed to decode customized instructions as well as the standard
+    RVV instruction set. Furthermore, ➋ vector load unit (VLDU) is designed to distribute
+    data through broadcast or ordered allocation, enabling our design to meet the
+    diverse computation requirements of mixed dataflow strategy. Scalable modules
+    for vector processors, namely ➌ lane, serve as the main computational components
+    of the proposed processor, which consists of lane sequencer, VRFs, systolic array
+    unit (SAU) and arithmetic logic unit (ALU).
+
+
+    To enhance the processor''s parallel processing capability and fully exploit data
+    reuse opportunities, a highly flexible and parameterized multi-precision ➍ SAU
+    is presented as the main computing unit of SPEED, which is composed of three components:
+    operand requester, queues, and systolic array core (SA Core). The operand requester
+    consists of an address generator and a request arbiter, enabling efficient data
+    access by concurrently generating addresses and prioritizing data requests. The
+    queue is responsible for buffering the data involved in the computation, including
+    inputs, weights, accumulation results, and outputs. The SA Core is a reconfigurable
+    twodimensional array of processing elements (PEs) determined by the parameters
+    T ILE R and T ILE C, which can be flexibly adjusted for different computation
+    requirements. For convolution operations, SA Core architecture employs three levels
+    of parallelism: within each PE on input channel dimension, across the PE array
+    within each lane on output channel dimension and on the height dimension of feature
+    map. Moreover, each PE consists of sixteen 4-bit multipliers that can be dynamically
+    combined to perform multiply-accumulate operation (MAC) with 16-bit precision,
+    four sets of MACs at 8-bit precision, or sixteen sets of MACs at 4-bit precision.
+
+
+    ## *C. Dataflow Mapping*
+
+
+    To enhance SPEED''s computational efficiency, an optimized multi-precision dataflow
+    strategy, combined with FF and CF strategies, is developed to flexibly handle
+    DNN layers with varying kernel sizes. Specifically, the proposed FF strategy is
+    suitable for convolutional layers with large kernel size, while the CF strategy
+    is better suited for those with small kernel size. Detailed descriptions are provided
+    as follows.
+
+
+    To unify multi-precision data representation, all inputs and weights are preprocessed
+    into multiple elements along the input channel dimension. Specifically, every
+    adjacent 1, 4, and 16 operands are combined into a unified element under 16 bit,
+    8-bit, and 4-bit precision modes, respectively. Both the FF and CF strategies
+    support continuous multi-stage convolution computations. To clearly show how these
+    strategies work, we select the first and second stages as examples of broadcasting
+    the inputs and allocating the weights to the lanes, as shown in Fig. [2.](#page-2-0)
+    Here, the size of weight kernel is 3 × 3, and the parameter T ILE H is set to
+    4, which is determined by the parallelism of the SAU and kernel size.
+
+
+    ![](_page_2_Figure_1.jpeg)
+
+
+    <span id="page-2-0"></span>Fig. 2. Examples on how CF strategy and FF strategy
+    work with multiprecision elements. Note that the 4-bit data is operated in the
+    same way as 16-bit and 8-bit.
+
+
+    For example, as shown on the left of Fig. [2](#page-2-0) (a), 16-bit input (X16)
+    elements are pre-fetched to the VRF during two-stage convolution operations. In
+    FF strategy, to facilitate parallel computing and reduce off-chip data movement,
+    we pre-fetch 4×4 elements on a single input channel of inputs. These prefetched
+    elements are requested from the VRFs and calculated in the SAU during the two-stage
+    convolution operations, and the request process is as depicted in the right of
+    Fig. [2](#page-2-0) (a). When the first stage is completed, the results are stored
+    to the VRFs, and the elements in the overlapping areas of the blue and red boxes
+    are reused. However, multi-stage convolution results occupy a large portion of
+    the storage space in VRFs, and extra time is wasted in transferring the partial
+    results between stages. In order to reduce the memory footprint of VRFs and avoid
+    output transfer latency, the CF strategy is proposed to pre-fetch elements along
+    the input channel dimension. The two-stage convolution operations pre-fetch elements
+    from the two input channels of inputs. The first stage and the second stage respectively
+    request the first and the second input channels of the pre-fetched elements for
+    computations, and the results of the two stages accumulate inside the SAU.
+
+
+    Fig. [2](#page-2-0) (b) and (c) illustrate how to the pre-fetch and the request
+    of 16-bit weight (W16) and 8-bit weight (W8) elements in a two-stage convolution
+    operations. In W16+CF mode, we prefetch 2 weights along the output channel dimension
+    to enhance parallel computing within a single lane, where the number of weights
+    is determined by T ILE C. The elements at the same position in the first channel
+    of both weights are simultaneously requested by the SAU and participate in the
+    convolution computations for the first stage. After the first stage, the second
+    channel elements of the weights participate in the computations. In W8+FF mode,
+    as discussed in Sec. [II-B,](#page-1-1) unified W8 element has a parallelism of
+    4 along the input channel dimension, thereby enhancing computational efficiency.
+    Weights are reused in the second stage to minimize off-chip data movement when
+    the computations in the first stage are completed. In summary, the FF strategy
+    takes advantage of calculating larger convolution kernels due to its high data
+    reuse. The CF strategy is suitable for smaller convolution kernels with low reuse
+    requirements, as it reduces the memory footprint of partial results and avoids
+    additional output transfer consumption.
+
+
+    ## III. EXPERIMENTAL RESULTS
+
+
+    ## *A. Experimental Setup*
+
+
+    To highlight the effectiveness of our design, we select Ara [\[6\]](#page-4-10)
+    as a baseline design for comparison, which is the first opensource implementation
+    of RISC-V vector processor. Several popular DNNs are implemented as benchmarks
+    for evaluation, including VGG16 [\[21\]](#page-4-13), ResNet18 [\[22\]](#page-4-14),
+    GoogLeNet [\[23\]](#page-4-15), and SqueezeNet [\[24\]](#page-4-16). Note that
+    the evaluated metric is area efficiency (GOPS/mm<sup>2</sup> ), measured across
+    the convolutional layers in the DNN model using cycle-accurate simulation with
+    QuestaSim, consistent with the experimental method in [\[6\]](#page-4-10). To
+    evaluate the impact of our architectural modifications at the hardware level,
+    we synthesize both SPEED and Ara using Synopsys Design Compiler 2014.09 on the
+    TSMC 28 nm process. For a fair comparison, we use 4 lanes and a vector length
+    of 4096 bits for both SPEED and Ara. And we set both T ILE R and T ILE C of SAU
+    in each SPEED''s lane to 4 for these experiments. Finally, we conduct a comprehensive
+    comparison between our design and Ara to demonstrate the effectiveness of SPEED
+    in multi-precision DNN deployments.
+
+
+    ![](_page_2_Figure_9.jpeg)
+
+
+    <span id="page-2-1"></span>Fig. 3. Layer-wise area efficiency breakdown of GoogLeNet
+    on SPEED under 16-bit precision. Our mixed dataflow strategy surpasses the FF-only
+    and CFonly strategies by 1.88× and 1.38×, respectively.
+
+
+    ## *B. Model Evaluation*
+
+
+    To evaluate the impact of convolution kernel size on different dataflow strategies,
+    a layer-wise evaluation of GoogleNet, which employs diverse convolution kernel
+    sizes, is conducted on SPEED using various strategies under the 16-bit precision
+    condition. The mixed strategy dynamically selects the FF-only or CF-only strategy
+    with the best performance in each layer to further improve area efficiency. As
+    shown in Fig. [3,](#page-2-1) the mixed dataflow strategy achieves a area efficiency
+    improvement of 1.88× and 1.38× in comparison with the FF-only and CFonly dataflow
+    strategies, respectively. Meanwhile, compared with Ara, the FF-only and CF-only
+    dataflow strategies have a area efficiency improvement of 1.87× and 2.55×, respectively,
+    and the mixed dataflow strategy achieves a 3.53× increase in area efficiency.
+    To more clearly illustrate the composition of the mixed strategy in the evaluation
+    of GoogleNet, Fig. [3](#page-2-1) presents a layer-wise breakdown of the mixed
+    strategy and annotates the specific strategy used. The results indicate that the
+    CF-only strategy is better suited for conv1x1, while the FFonly strategy is suitable
+    for other convolution kernels, where convKxK denotes a convolutional operator
+    with a kernel size of K. Meanwhile, it shows that with larger convolution kernel
+    sizes, the area efficiency improves. Therefore, employing the mixed dataflow strategy
+    can significantly enhance SPEED''s performance for DNN deployment.
+
+
+    ![](_page_3_Figure_2.jpeg)
+
+
+    <span id="page-3-0"></span>Fig. 4. Average area efficiency under multi-precision
+    DNN benchmarks, SPEED outperforms Ara by 2.77× and 6.39× at 16-bit and 8-bit precision,
+    respectively.
+
+
+    As illustrated in Fig. [4,](#page-3-0) we conduct a comprehensive area efficiency
+    evaluation of SPEED with the mixed dataflow strategy using multiple popular DNNs
+    across various precisions. SPEED achieves 2.77× and 6.39× higher area efficiency
+    over Ara on average under 16-bit and 8-bit precision conditions, respectively.
+    Moreover, SPEED enables efficient 4 bit inference with an average area efficiency
+    of up to 94.6 GOPS/mm<sup>2</sup> , surpassing the best of Ara by 12.78× on these
+    DNN benchmarks.
+
+
+    ![](_page_3_Figure_5.jpeg)
+
+
+    <span id="page-3-1"></span>Fig. 5. Area Breakdown of (a) SPEED and (b) a single
+    lane. SAU occupies only 26% of the area in a single lane while achieving significant
+    computational performance.
+
+
+    ## *C. Analysis of Synthesized Results*
+
+
+    Fig. [5](#page-3-1) (a) illustrates the area breakdown of SPEED with a total area
+    of 1.10 mm<sup>2</sup> . It reveals that the majority of SPEED''s area, up to
+    90%, is occupied by the lanes. Moreover, Fig. [5](#page-3-1) (b) shows that the
+    area of a lane is primarily consumed by four components: OP Queues (25%), OP Requester
+    (17%), VRFs (18%) and SAU (26%). Notably, SAU serves as a key component of SPEED,
+    enabling a 12.78× area efficiency improvement in DNN inference performance on
+    SPEED compared to Ara. Despite the substantial performance boost, SAU accounts
+    for only 26% of the lane area, which corresponds to about 24% of the total area
+    of SPEED.
+
+
+    TABLE I SYNTHESIZED RESULTS OF ARA AND SPEED
+
+
+    <span id="page-3-2"></span>
+
+
+    |                                             | Ara [6]           | SPEED (Ours)         |
+
+    |---------------------------------------------|-------------------|----------------------|
+
+    | ISA                                         | RV64GCV1.0        | RV64GCV1.0           |
+
+    | Frequency                                   | 500 MHz @ 0.9 V   | 500 MHz @
+    0.9 V      |
+
+    | Chip Area (mm2<br>)                         | 0.44              | 1.10                 |
+
+    | Int. Formats (bit)                          | 8, 16, 32, and 64 | 4, 8, 16,
+    32, and 64 |
+
+    | Power (mW)                                  | 61.14             | 215.16               |
+
+    | Peak Int. Throughput<br>(GOPS)              | 6.82 (16b)        | 34.89 (16b)          |
+
+    |                                             | 22.95 (8b)        | 93.65 (8b)           |
+
+    |                                             | -                 | 287.41 (4b)          |
+
+    | Peak Int. Area Efficiency<br>(GOPS/mm2<br>) | 15.51 (16b)       | 31.72 (16b)          |
+
+    |                                             | 52.16 (8b)        | 85.13 (8b)           |
+
+    |                                             | -                 | 261.28 (4b)          |
+
+    | Peak Int. Energy Efficiency<br>(GOPS/W)     | 111.61 (16b)      | 162.15 (16b)         |
+
+    |                                             | 373.68 (8b)       | 435.25 (8b)          |
+
+    |                                             | -                 | 1335.79 (4b)         |
+
+    |                                             |                   |                      |
+
+
+    Table [I](#page-3-2) provides a comprehensive comparison between SPEED and Ara
+    [\[6\]](#page-4-10), showing the peak throughput results of Ara and SPEED across
+    various precision conditions through evaluating each convolutional layer in all
+    DNN benchmarks. Based on the results in Table [I,](#page-3-2) SPEED shows 5.12×
+    and 4.14× throughput improvement under 16-bit and 8-bit precision condition, respectively.
+    In addition, SPEED enables efficient 16-bit and 8-bit inference that surpasses
+    the best of Ara by 2.04× and 1.63×, respectively, on area efficiency. In terms
+    of energy efficiency, SPEED also demonstrates enhancements of 1.45× for 16-bit
+    and 1.16× for 8-bit cases, respectively.
+
+
+    ## IV. CONCLUSION
+
+
+    In this paper, a scalable RISC-V vector processor, namely SPEED, is proposed to
+    enable efficient multi-precision DNN inference. SPEED develops several customized
+    RISC-V vector instructions to efficiently support DNN operations ranging from
+    4-bit to 16-bit precision. It also enhances the parallel processing capabilities
+    of scalable modules to boost throughput. Moreover, a mixed dataflow strategy is
+    presented that significantly improves the computational efficiency for various
+    convolution kernels. Experimental results show that SPEED achieves 2.04× and 1.63×
+    higher area efficiency over the pioneer open-source vector processor, Ara, under
+    16-bit and 8-bit precision conditions, respectively, demonstrating its good potential
+    for multi-precision DNN inference.
+
+
+    ## ACKNOWLEDGMENT
+
+
+    This work was supported in part by the National Key R&D Program of China under
+    Grant 2022YFB4400604, in part by the National Natural Science Foundation of China
+    under Grant 62174084 and 62341408, and in part by the AI & AI for Science Project
+    of Nanjing University.
+
+
+    ## REFERENCES
+
+
+    - <span id="page-4-0"></span>[1] Y. Xu *et al.*, "Towards Developing High Performance
+    RISC-V Processors Using Agile Methodology," in *2022 55th IEEE/ACM International
+    Symposium on Microarchitecture (MICRO)*, 2022, pp. 1178–1199.
+
+    - [2] D. Rossi *et al.*, "Vega: A Ten-Core SoC for IoT Endnodes With DNN Acceleration
+    and Cognitive Wake-Up From MRAM-Based State-Retentive Sleep Mode," *IEEE Journal
+    of Solid-State Circuits (JSSC)*, vol. 57, no. 1, pp. 127–139, 2022.
+
+    - [3] A. Garofalo *et al.*, "Dustin: A 16-Cores Parallel Ultra-Low-Power Cluster
+    With 2b-to-32b Fully Flexible Bit-Precision and Vector Lockstep Execution Mode,"
+    *IEEE Transactions on Circuits and Systems I: Regular Papers (TCAS-I)*, vol. 70,
+    no. 6, pp. 2450–2463, 2023.
+
+    - [4] A. Garofalo *et al.*, "DARKSIDE: A Heterogeneous RISC-V Compute Cluster
+    for Extreme-Edge On-Chip DNN Inference and Training," *IEEE Open Journal of the
+    Solid-State Circuits Society (OJSSCS)*, vol. 2, pp. 231–243, 2022.
+
+    - <span id="page-4-8"></span>[5] M. Perotti *et al.*, "Yun: An Open-Source, 64-Bit
+    RISC-V-Based Vector Processor With Multi-Precision Integer and Floating-Point
+    Support in 65-nm CMOS," *IEEE Transactions on Circuits and Systems II: Express
+    Briefs (TCAS-II)*, vol. 70, no. 10, pp. 3732–3736, 2023.
+
+    - <span id="page-4-10"></span>[6] M. Perotti *et al.*, "A "New Ara" for Vector
+    Computing: An Open Source Highly Efficient RISC-V V 1.0 Vector Processor Design,"
+    in *2022 IEEE 33rd International Conference on Application-specific Systems, Architectures
+    and Processors (ASAP)*, 2022, pp. 43–51.
+
+    - [7] M. Cavalcante *et al.*, "Ara: A 1-GHz+ Scalable and Energy-Efficient RISC-V
+    Vector Processor With Multiprecision Floating-Point Support in 22-nm FD-SOI,"
+    *IEEE Transactions on Very Large Scale Integration Systems (TVLSI)*, vol. 28,
+    no. 2, pp. 530–543, 2020.
+
+    - [8] M. Askarihemmat *et al.*, "Quark: An Integer RISC-V Vector Processor for
+    Sub-Byte Quantized DNN Inference," in *2023 IEEE International Symposium on Circuits
+    and Systems (ISCAS)*, 2023, pp. 1–5.
+
+    - <span id="page-4-9"></span>[9] T. Dupuis *et al.*, "Sparq: A Custom RISC-V Vector
+    Processor for Efficient Sub-Byte Quantized Inference," in *2023 21st IEEE Interregional
+    NEWCAS Conference (NEWCAS)*, 2023, pp. 1–5.
+
+    - <span id="page-4-3"></span>[10] Z. He *et al.*, "Agile Hardware and Software
+    Co-design for RISC-V-based Multi-precision Deep Learning Microprocessor," in *2023
+    28th Asia and South Pacific Design Automation Conference (ASP-DAC)*, 2023, pp.
+    490–495.
+
+    - <span id="page-4-1"></span>[11] L. Huang *et al.*, "A Precision-Scalable RISC-V
+    DNN Processor with On-Device Learning Capability at the Extreme Edge," *arXiv
+    preprint arXiv:2309.08186*, 2023.
+
+    - <span id="page-4-2"></span>[12] A. Waterman, "Design of the RISC-V Instruction
+    Set Architecture," Ph.D. dissertation, EECS Department, University of California,
+    Berkeley, Jan 2016. [Online]. Available: [http://www2.eecs.berkeley.edu/](http://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-1.html)
+    [Pubs/TechRpts/2016/EECS-2016-1.html](http://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-1.html)
+
+    - <span id="page-4-4"></span>[13] M. Askarihemmat *et al.*, "BARVINN: Arbitrary
+    Precision DNN Accelerator Controlled by a RISC-V CPU," in *2023 28th Asia and
+    South Pacific Design Automation Conference (ASP-DAC)*, 2023, pp. 483–489.
+
+    - [14] X. Wu *et al.*, "A Flexible and Efficient FPGA Accelerator for Various
+    Large-scale and Lightweight CNNs," *IEEE Transactions on Circuits and Systems
+    I: Regular Papers (TCAS-I)*, vol. 69, no. 3, pp. 1185–1198, 2022.
+
+    - <span id="page-4-5"></span>[15] C. Fang *et al.*, "Accelerating 3D Convolutional
+    Neural Networks Using 3D Fast Fourier Transform," in *2021 IEEE International
+    Symposium on Circuits and Systems (ISCAS)*, 2021, pp. 1–5.
+
+    - <span id="page-4-6"></span>[16] R. Ding *et al.*, "Quantized Deep Neural Networks
+    for Energy Efficient Hardware-based Inference," in *2018 23rd Asia and South Pacific
+    Design Automation Conference (ASP-DAC)*, 2018, pp. 1–8.
+
+    - [17] J. Tian *et al.*, "BEBERT: Efficient and Robust Binary Ensemble BERT,"
+    in *2023 IEEE International Conference on Acoustics, Speech and Signal Processing
+    (ICASSP)*, 2023, pp. 1–5.
+
+    - <span id="page-4-7"></span>[18] A. Zhou *et al.*, "Explicit Loss-Error-Aware
+    Quantization for Low-Bit Deep Neural Networks," in *2018 IEEE/CVF Conference on
+    Computer Vision and Pattern Recognition (CVPR)*, 2018, pp. 9426–9435.
+
+    - <span id="page-4-11"></span>[19] F. Zaruba *et al.*, "The Cost of Application-Class
+    Processing: Energy and Performance Analysis of a Linux-Ready 1.7-GHz 64-Bit RISC-V
+    Core in 22-nm FDSOI Technology," *IEEE Transactions on Very Large Scale Integration
+    Systems (TVLSI)*, vol. 27, no. 11, pp. 2629–2640, Nov 2019.
+
+    - <span id="page-4-12"></span>[20] K. Li *et al.*, "A Precision-Scalable Energy-Efficient
+    Bit-Split-and-Combination Vector Systolic Accelerator for NAS-Optimized DNNs on
+    Edge," in *2022 Design, Automation & Test in Europe Conference & Exhibition (DATE)*,
+    2022, pp. 730–735.
+
+    - <span id="page-4-13"></span>[21] S. Liu *et al.*, "Very deep convolutional neural
+    network based image classification using small training sample size," in *2015
+    3rd IAPR Asian Conference on Pattern Recognition (ACPR)*, 2015, pp. 730–734.
+
+    - <span id="page-4-14"></span>[22] K. He *et al.*, "Deep Residual Learning for
+    Image Recognition," in *2016 IEEE Conference on Computer Vision and Pattern Recognition
+    (CVPR)*, 2016, pp. 770–778.
+
+    - <span id="page-4-15"></span>[23] C. Szegedy *et al.*, "Going Deeper with Convolutions,"
+    in *2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2015,
+    pp. 1–9.
+
+    - <span id="page-4-16"></span>[24] F. N. Iandola *et al.*, "SqueezeNet: AlexNet-level
+    Accuracy with 50x Fewer Parameters and <0.5MB Model Size," *CoRR*, 2016. [Online].
+    Available: <http://arxiv.org/abs/1602.07360>'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experimental Results"
+      section with subsections such as "Experimental Setup" and "Model Evaluation,"
+      which discuss benchmarks, metrics, and comparisons. It also contains performance
+      tables and figures, such as Table I and Figures 3 and 4, providing quantitative
+      evaluation of the proposed method.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its text. It includes numerous academic citations, discusses
+      the context and challenges of deploying multiprecision quantized DNNs on RISC-V
+      processors, and compares its proposed method (SPEED) with previous work, particularly
+      the Ara processor. The paper provides a detailed comparison of its contributions
+      to existing solutions, demonstrating a thorough engagement with related work.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new scalable RISC-V vector
+      processor named SPEED, which introduces several novel elements such as customized
+      RISC-V vector instructions, a mixed dataflow strategy, and enhancements in parallel
+      processing capabilities. These contributions are clearly stated as new methods
+      and improvements over existing solutions, demonstrating novelty in the field
+      of efficient multi-precision DNN inference.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new scalable
+      RISC-V vector processor named SPEED, which includes customized instructions
+      and a mixed dataflow strategy for efficient multi-precision DNN inference. It
+      provides experimental results and comparisons with existing work, demonstrating
+      new contributions rather than merely summarizing existing research.'
+  topics:
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on a RISC-V vector processor designed
+      to enhance efficiency in multi-precision DNN inference, which relates directly
+      to the design and performance optimization of computer architectures.
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper discusses deep neural networks (DNNs), which
+      are a key aspect of machine learning, particularly in the context of improving
+      inference efficiency.
+    main_topic_sub: Processor, memory, and storage architectures
+    secondary_topic_sub: Deep Learning
+- title: "Cocco: Hardware-Mapping Co-Exploration towards Memory\n  Capacity-Communication\
+    \ Optimization"
+  abstract: "Memory is a critical design consideration in current data-intensive DNN\n\
+    accelerators, as it profoundly determines energy consumption, bandwidth\nrequirements,\
+    \ and area costs. As DNN structures become more complex, a larger\non-chip memory\
+    \ capacity is required to reduce data movement overhead, but at\nthe expense of\
+    \ silicon costs. Some previous works have proposed memory-oriented\noptimizations,\
+    \ such as different data reuse and layer fusion schemes. However,\nthese methods\
+    \ are not general and potent enough to cope with various graph\nstructures.\n\
+    \  In this paper, we explore the intrinsic connection between network structures\n\
+    and memory features to optimize both hardware and mapping. First, we introduce\n\
+    a graph-level execution scheme with a corresponding dataflow and memory\nmanagement\
+    \ method. This scheme enables the execution of arbitrary graph\npatterns with\
+    \ high data reuse and low hardware overhead. Subsequently, we\npropose Cocco,\
+    \ a hardware-mapping co-exploration framework leveraging\ngraph-level features\
+    \ of networks. It aims to minimize communication overhead,\nsuch as energy consumption\
+    \ and bandwidth requirements, with a smaller memory\ncapacity. We formulate the\
+    \ graph-partition scheduling and memory configuration\nsearch as an optimization\
+    \ problem and employ a genetic-based method to achieve\nefficient co-exploration\
+    \ for large and irregular networks. Experiments\ndemonstrate that Cocco obtains\
+    \ lower external memory access, lower bandwidth\nrequirements, and more stable\
+    \ optimization for graph partition compared to the\ngreedy algorithm and dynamic\
+    \ programming introduced in prior works. Cocco also\nreduces the costs by 1.89%\
+    \ to 50.33% using co-exploration compared to other\ntypical methods."
+  url: http://arxiv.org/abs/2402.00629v1
+  keywords: ''
+  document: '# Cocco: Hardware-Mapping Co-Exploration towards Memory Capacity-Communication
+    Optimization
+
+
+    Zhanhong Tan tanzh19@mails.tsinghua.edu.cn IIIS, Tsinghua University Beijing,
+    China
+
+
+    Zijian Zhu zhuzj23@mails.tsinghua.edu.cn IIIS, Tsinghua University Beijing, China
+
+
+    Kaisheng Ma<sup>∗</sup> kaisheng@mail.tsinghua.edu.cn IIIS, Tsinghua University
+    Beijing, China
+
+
+    # Abstract
+
+
+    Memory is a critical design consideration in current dataintensive DNN accelerators,
+    as it profoundly determines energy consumption, bandwidth requirements, and area
+    costs. As DNN structures become more complex, a larger on-chip memory capacity
+    is required to reduce data movement overhead, but at the expense of silicon costs.
+    Some previous works have proposed memory-oriented optimizations, such as different
+    data reuse and layer fusion schemes. However, these methods are not general and
+    potent enough to cope with various graph structures.
+
+
+    In this paper, we explore the intrinsic connection between network structures
+    and memory features to optimize both hardware and mapping. First, we introduce
+    a graph-level execution scheme with a corresponding dataflow and memory management
+    method. This scheme enables the execution of arbitrary graph patterns with high
+    data reuse and low hardware overhead. Subsequently, we propose Cocco, a hardware-mapping
+    co-exploration framework leveraging graph-level features of networks. It aims
+    to minimize communication overhead, such as energy consumption and bandwidth requirements,
+    with a smaller memory capacity. We formulate the graph-partition scheduling and
+    memory configuration search as an optimization problem and employ a genetic-based
+    method to achieve efficient co-exploration for large and irregular networks. Experiments
+    demonstrate that Cocco obtains lower external memory access, lower bandwidth requirements,
+    and more stable optimization for graph partition compared to the greedy algorithm
+    and dynamic programming introduced in prior works. Cocco also reduces the costs
+    by 1.89% to 50.33% using co-exploration compared to other typical methods.
+
+
+    ASPLOS ''24, April 27-May 1, 2024, La Jolla, CA, USA © 2024 Copyright held by
+    the owner/author(s). ACM ISBN 979-8-4007-0372-0/24/04. <https://doi.org/10.1145/3617232.3624865>
+
+
+    CCS Concepts: • Hardware → Design reuse and communication-based design; On-chip
+    resource management; • Computer systems organization → Parallel architectures;
+    • Software and its engineering → Compilers.
+
+
+    Keywords: Design space exploration, Memory, Graph analysis, Subgraph, Genetic
+    algorithm, Deep learning accelerator
+
+
+    #### ACM Reference Format:
+
+
+    Zhanhong Tan, Zijian Zhu, and Kaisheng Ma. 2024. Cocco: Hardware-Mapping Co-Exploration
+    towards Memory Capacity-Communication Optimization. In 29th ACM International
+    Conference on Architectural Support for Programming Languages and Operating Systems,
+    Volume 1 (ASPLOS ''24), April 27-May 1, 2024, La Jolla, CA, USA. ACM, New York,
+    NY, USA, [16](#page-15-0) pages. <https://doi.org/10.1145/3617232.3624865>
+
+
+    ## <span id="page-0-0"></span>1 Introduction
+
+
+    The evolution of neural network topology has driven the remarkable progress of
+    artificial intelligence from the early single-layer perceptron (SLP) [\[45,](#page-14-0)
+    [54\]](#page-14-1) and multi-layer perceptron (MLP) [\[17,](#page-13-0) [22,](#page-13-1)
+    [39\]](#page-13-2) to modern DNNs with plain [\[36,](#page-13-3) [57\]](#page-14-2)/inception
+    [\[59\]](#page-14-3)/residual [\[20,](#page-13-4) [55\]](#page-14-4) structures
+    based on manual design, and even irregular structures using neural architecture
+    search (NAS) [\[53,](#page-14-5) [75\]](#page-15-1) or random network generation
+    [\[68\]](#page-14-6). These technological innovations have resulted in increasingly
+    complex computation graphs, which pose challenges for efficient memory design
+    and deployment.
+
+
+    Memory design is crucial in the accelerator system, as it performs data preparation
+    at the start of each processing stage according to the scheduling scheme, determining
+    energy consumption, bandwidth requirements, and area costs. Figure [1](#page-1-0)
+    shows the trade-off between the on-chip memory size and the external memory access
+    in DNN accelerators. A smaller on-chip buffer (left side) saves area but requires
+    more data reloading. A larger buffer (right side) can reduce external memory access
+    and save energy and bandwidth but at the cost of increasing the memory overhead.
+    An excessively large SRAM may not be feasible due to the high silicon area cost,
+    typically ranging from 1 to 2 mm<sup>2</sup> /MB in 12nm, and the high energy
+    overhead, dozens of times that of a MAC operation for a large SRAM.
+
+
+    Therefore, the key problem is: between the two extremes in Figure [1,](#page-1-0)
+    how to find an appropriate memory configuration with efficient workload mapping
+    and data management, especially under the growing complexity of neural network
+    architectures.
+
+
+    <sup>∗</sup>Corresponding author.
+
+
+    Permission to make digital or hard copies of part or all of this work for personal
+    or classroom use is granted without fee provided that copies are not made or distributed
+    for profit or commercial advantage and that copies bear this notice and the full
+    citation on the first page. Copyrights for thirdparty components of this work
+    must be honored. For all other uses, contact the owner/author(s).
+
+
+    ASPLOS ''24, April 27-May 1, 2024, La Jolla, CA, USA Zhanhong Tan, Zijian Zhu,
+    and Kaisheng Ma
+
+
+    <span id="page-1-0"></span>![](_page_1_Figure_1.jpeg)
+
+
+    Figure 1. The effect of different memory capacities for a computation graph. Intermediate
+    results can be buffered in the on-chip memory if it is large enough. The on-chip
+    memory of small capacity can only buffer two nodes (marked in the red dotted box),
+    and the larger memory can cover a larger subgraph (right side).
+
+
+    The critical status of memory design has attracted extensive research. Most previous
+    studies focus on simple layer-level optimization (the left one of Figure [1\)](#page-1-0)
+    by applying loop transformation techniques such as tiling and reordering to fit
+    the memory size and reuse the on-chip data [\[23,](#page-13-5) [43,](#page-14-7)
+    [44,](#page-14-8) [61,](#page-14-9) [70\]](#page-15-2). In addition, several works
+    also guide the memory capacity and hierarchy design using designspace exploration
+    [\[12,](#page-12-0) [32,](#page-13-6) [37,](#page-13-7) [66,](#page-14-10) [67\]](#page-14-11).
+    However, these layerlevel optimizations are confined to the limited intra-layer
+    reuse, which is insufficient for memory-intensive networks. A subgraph-level scheme
+    (e.g., the middle one and the right one of Figure [1\)](#page-1-0) provides a
+    larger optimization space via inter-layer reuse [\[3,](#page-12-1) [4,](#page-12-2)
+    [38,](#page-13-8) [73\]](#page-15-3) to reduce the I/O overhead. Therefore, this
+    paper aims to leverage the subgraph-level computing flow to optimize the memory
+    capacity and external communication for networks with any topology.
+
+
+    However, there are three primary challenges to fully exploit the subgraph-level
+    optimization.
+
+
+    First, we need a general execution flow for any sub-graph. Due to the various
+    kernel sizes and strides, a parent node in a subgraph may have unbalanced data
+    requirements from its consumers, which makes it difficult to determine the tensor
+    tiling scheme and the memory allocation for each node (layer). In the traditional
+    single-layer execution, we usually divide a large tensor into loop tiles, which
+    are processed through a series of regular computing steps. Similarly, we want
+    the sub-graph execution to be a series of elementary computing steps with a simple
+    control flow.
+
+
+    Second, we require a suitable memory management method for the subgraph execution.
+    Due to complicated dependency among nodes in a subgraph, careful management is
+    needed to reuse overlapping and inter-layer intermediate data.
+
+
+    Solving these two challenges contributes to a basic hardware execution model compatible
+    with subgraph-level optimization. However, we also encounter the third challenge:
+    how to partition a model into subgraphs and how much memory to allocate. The optimization
+    space is huge, so we need to devise a search method with high sampling efficiency
+    to find a proper subgraph partition and memory configuration result.
+
+
+    In this paper, we first introduce a complete graph-level scheme for memory. In
+    particular, it contains a consumptioncentric flow that enables the execution of
+    arbitrary subgraphs with low memory footprints (for challenge 1). Accordingly,
+    we provide an explicit memory dataflow and the corresponding memory management
+    scheme for effective data reuse (for challenge 2). Building on the graph-level
+    memory scheme, we propose Cocco, a hardware-mapping co-exploration framework,
+    to establish a connection between model features and the memory configuration
+    (for challenge 3).
+
+
+    Cocco aims to find a combination of on-chip buffers and the corresponding graph-level
+    scheduling for lower memory and communication overhead. In particular, we develop
+    a genetic-based algorithm to efficiently explore the search space of graph partitions
+    and the associated memory configuration for a series of neural networks.
+
+
+    In summary, this work makes the following contributions:
+
+
+    - Subgraph execution scheme. We first introduce a consumption-centric flow to
+    determine a low-cost execution sequence by throttling and aligning the dataflow.
+
+    - Efficient dataflow and memory management for subgraph data reuse. We propose
+    a memory management scheme featuring multiple reconfigurable regions and the corresponding
+    dataflow to support arbitrary subgraph execution with full data reuse.
+
+    - Hardware-mapping co-exploration framework. Based on the subgraph execution scheme
+    and memory dataflow, we propose Cocco, a genetic-based framework combining the
+    graph-level partition and memory design-space exploration together. Cocco achieves
+    1.89% to 50.33% lower costs (lower communication with a smaller size) using co-exploration
+    in contrast to other methods.
+
+
+    ## 2 Background and Motivation
+
+
+    #### 2.1 Design of Neural Network Accelerators
+
+
+    The DNN accelerator unit is the most basic execution unit in a computing system,
+    on top of which, we can scale it out to many-core, many-socket, and many-drawer
+    systems [\[24,](#page-13-9) [40,](#page-13-10) [48,](#page-14-12) [60\]](#page-14-13).
+    An accelerator unit usually employs a processing element (PE) array on a sophisticated
+    interconnection network to enable efficient tensor-level computation. Each PE
+    typically contains local scratchpads and ALUs to process basic data packets. The
+    global buffer and the weight buffer store activations and weights, and they are
+    generally
+
+
+    <span id="page-2-0"></span>![](_page_2_Figure_1.jpeg)
+
+
+    *\* Those designs only support INT8 precision for tensor, we scale to FP16 performance
+    by a factor of 0.5. \*\* For most designs fabricated under 12nm (or close to)
+    process, we align all areas to 12nm. The SRAM area is estimated as 1.2mm<sup>2</sup>/MB.*
+
+
+    Figure 2. Left: performance v.s. memory capacity of several industrial NPUs. Right:
+    a summary of SRAM area ratio in these accelerators.
+
+
+    located next to the PE array to serve as the data interface and manage data between
+    the PE array and the external memory (e.g., DRAM or other cores). Due to the limited
+    capacity of the global buffer, the compiler has to partition the network execution
+    into a series of elementary workloads that are scheduled along the parallel spatial
+    resources and the temporal dimension [\[18,](#page-13-11) [61,](#page-14-9) [72\]](#page-15-4).
+    The capacity of the global buffer usually dominates the external memory access
+    and bandwidth requirements, significantly impacting system performance. If the
+    global memory is larger, it is more likely to buffer more intermediate data and
+    avoid data being evicted to DRAM. As shown in Figure [1,](#page-1-0) a larger
+    buffer expands the scope of elementary workloads from a single layer to a larger
+    subgraph, reducing the communication overhead.
+
+
+    However, choosing an appropriate memory specification is always a challenge. In
+    Figure [2,](#page-2-0) we surveyed 16 popular industrial neural network processors
+    with various memory/performance/area characteristics, where nine of them target
+    the training domain [\[6,](#page-12-3) [11,](#page-12-4) [24,](#page-13-9) [34,](#page-13-12)
+    [35,](#page-13-13) [40,](#page-13-10) [41,](#page-13-14) [48,](#page-14-12) [60,](#page-14-13)
+    [63,](#page-14-14) [69\]](#page-14-15) and seven target model inference [\[1,](#page-12-5)
+    [7,](#page-12-6) [8,](#page-12-7) [26–](#page-13-15)[28,](#page-13-16) [49,](#page-14-16)
+    [65\]](#page-14-17). According to the survey, we can observe several trends as
+    follows:
+
+
+    - 1. Memory occupies a significant portion of the silicon footprint on an NPU
+    chip, ranging from 4% to 79% of the area, with capacities from 2.5MB to 896MB.
+
+    - 2. Figure [2](#page-2-0) Left shows a trend of diminishing marginal benefit
+    of memory capacity. This is because there is a critical capacity to meet the data
+    reuse and bandwidth requirement at the beginning, and the increments become negligible
+    with higher memory capacity.
+
+    - 3. We can infer that there is a saturated capacity equivalent to the ideal unlimited
+    memory, especially for the inference design. For example, Hanguang [\[26\]](#page-13-15)
+    is a special SRAM-only inference system without DDR, and the 394MB buffers are
+    large enough to hold the intermediate data in their scenarios.
+
+
+    <span id="page-2-1"></span>![](_page_2_Figure_10.jpeg)
+
+
+    Figure 3. Evaluations on subgraphs fusing different number of layers (denoted
+    as L=1,3,5). Y-axis is in the log domain. The 2TOPS NPU accelerator is configured
+    with a 1MB global buffer and a 1.125MB weight buffer. The bandwidth requirement
+    of weights is from the prefetch of the next subgraph, while that of activations
+    is from the inputs and outputs of each subgraph.
+
+
+    This survey implies a design trade-off between memory capacity and performance
+    based on workloads and commercial considerations. Motivated by the observations
+    above, this paper aims to provide several memory design considerations and study
+    the connection between workload features and memory capacity in an NPU accelerator.
+
+
+    #### 2.2 Workload Deployment
+
+
+    A neural network is usually executed in a DNN accelerator with layer or graph
+    granularities based on the buffer capacity and dataflow.
+
+
+    2.2.1 Layer-level Assignment. This manner assigns tasks layer by layer. Most previous
+    studies employ a tiling-based layer-wise execution manner [\[10,](#page-12-8)
+    [21,](#page-13-17) [30,](#page-13-18) [37,](#page-13-7) [50,](#page-14-18) [61\]](#page-14-9),
+    which elaborates the tiling sizes of tensors to fit in the accelerator buffers
+    and maintain performance. A proper tiling scheme should overlap the data loading
+    latency with the computing time of each tile and try to reduce the repeated access
+    of local weight buffers. Tiles of data are transferred between the external memory
+    and the global buffer, and PEs subsequently fetch data from the global to their
+    local buffers. Given the larger bit-width of partial sums (e.g., 24bit partial
+    sums v.s. 8bit inputs in Simba), the output-centric tiling scheme is more commonly
+    used to calculate the final results before writing back to the global buffer [\[61\]](#page-14-9).
+
+
+    2.2.2 Graph-level Assignment. Unlike the layer-level assignment that restrains
+    from leveraging inter-layer reuse, a graph-level assignment processes several
+    layers of a neural network as a whole. To demonstrate the effectiveness of the
+    layer-level assignment, we evaluate four networks on a 2TOPS accelerator model,
+    as shown in Figure [3.](#page-2-1) The results show that fusing layers into subgraphs
+    significantly reduces external memory access by 42.3% ∼ 74.7% and average bandwidth
+    requirements by 26.8% ∼ 67.8%. However, the improvements of larger subgraphs are
+    marginal, indicating that there is an optimal trade-off between inter-layer
+
+
+    reuse and subgraph size, which determines the memory requirement. For example,
+    executing three-layer subgraphs reduces external memory access by 53.7% in ResNet50,
+    while executing five-layer subgraphs only further reduces it by 13.6%.
+
+
+    Several works have studied inter-layer reuse and graph partition. However, they
+    have several limitations in terms of performance and flexibility. LCP [\[42\]](#page-14-19)
+    groups similar layers into a cluster and executes them as a whole, which makes
+    it challenging to generalize into an arbitrary graph. Fused-CNN [\[4\]](#page-12-2)
+    and SR-CNN [\[38\]](#page-13-8) fuse large contiguous layers for plain networks
+    using manually-designed strategies. Irregular-NN [\[73\]](#page-15-3) attempts
+    to execute a complex subgraph using a DP-based algorithm, but the constrained
+    search space limits the exploration.
+
+
+    To overcome these challenges, we propose an end-to-end framework that automatically
+    optimizes the graph partition and memory configuration for any neural network.
+    Our framework consists of two main components: a graph-level dataflow and a hardware-mapping
+    co-exploration algorithm. We first introduce the graph-level dataflow and its
+    hardware implementation. Then, we present Cocco, an efficient algorithm that explores
+    the trade-offs among memory configurations and graph partition schemes based on
+    workload features.
+
+
+    ## <span id="page-3-1"></span>3 The Proposed Graph-Level Scheme
+
+
+    To execute layers on an NPU core in a graph-level manner, we need an effective
+    approach to reuse intermediate data and decide the memory allocation. This section
+    presents our comprehensive scheme for subgraph execution, which addresses the
+    first two challenges mentioned in Section [1.](#page-0-0) First, we describe a
+    multi-layer execution flow that minimizes the memory footprint by a friendly tiling
+    approach (for challenge 1). Second, we explain how to implement this flow on a
+    real NPU using an efficient data reuse pattern (for challenge 2). The consistent
+    target is to reduce the memory footprint and be friendly to implementation.
+
+
+    #### 3.1 Subgraph execution scheme
+
+
+    It is common practice for the layer-level scheduling to partition the output tensor
+    into several tiles as layer-level elementary operations [\[56,](#page-14-20) [61,](#page-14-9)
+    [72,](#page-15-4) [74\]](#page-15-5), simplifying the scheduling and instruction
+    generation. Likewise, our high-level idea is also to generate a series of explicit
+    subgraph-level elementary operations. However, we need to address the challenges
+    of various kernel sizes and strides in different paths to prevent unbalanced data
+    production and unnecessary memory.
+
+
+    A model''s subgraph consists of multiple layers (nodes) with dependencies. Section
+    [4](#page-5-0) provides detailed information on subgraph partition. In Figure
+    [4\(](#page-3-0)a), we present a straightforward production-centric scheme for
+    executing a subgraph
+
+
+    with different kernel sizes in two branches, deriving tile sizes of the subsequent
+    layers based on the predetermined input tile sizes. For example, we can produce
+    a 1 × 1 tile of Node(0) and a 2 × 2 tile of Node(2) with a given 5 × 5 feature
+    map of input Node(-1). In this case, these intermediate results only reduce to
+    1 × 1 in Node(3), limited by the smallest input of Node(0), so the remaining results
+    of Node(2) can not be consumed immediately. As shown in Figure [4,](#page-3-0)
+    three extra data of Node(2) along with sixteen extra source data of Node(1) take
+    up extra memory space. There are more redundant cached data when the subgraph
+    becomes larger and more complicated. Disadvantages of this manner are attributed
+    to the production-centric idea that consumes all related activations from the
+    producers at once.
+
+
+    To avoid the memory overhead of storing unused data, we propose a consumption-centric
+    scheme in Figure [4\(](#page-3-0)b), where results of each node are produced on
+    demand based on consumer(s) (i.e., output node(s)). For example, given a 1 × 1
+    tile of Node(3), we derive the 1 × 1 tile size for Node(2), which subsequently
+    decides a 3 × 3 tile for Node(1).
+
+
+    The backward-derivation for each producer node is nontrivial because of diverse
+    kernel sizes and strides in different paths. Therefore, we propose a three-stage
+    flow to determine the behavior of each node, as illustrated in Figure [5.](#page-4-0)
+    The highlevel idea is to let output nodes drive the whole execution and match
+    the data consumption and production in each subgraph-level elementary operation.
+
+
+    The stage-1 is similar to the traditional single-layer scheduling, where the tile
+    size is optimized for higher computation utilization. In order to hold a larger
+    subgraph, the tile size
+
+
+    <span id="page-3-0"></span>![](_page_3_Figure_14.jpeg)
+
+
+    Figure 4. A conceptual comparison between two manners to process a subgraph. The
+    node marked with a negative number represents the input node. The corresponding
+    subgraph is shown in the upper right, where × / refers to the convolution kernel
+    size ( ) and stride ().
+
+
+    Cocco: Hardware-Mapping Co-Exploration towards Memory ... ASPLOS ''24, April 27-May
+    1, 2024, La Jolla, CA, USA
+
+
+    <span id="page-4-0"></span>![](_page_4_Figure_1.jpeg)
+
+
+    Figure 5. The flow to determine the execution scheme of a subgraph (i.e., the
+    computed tile size of each node, the tile offset, and the processing sequence
+    of nodes). For simplicity, we discuss the 1D-CONV in this example and it is similar
+    in the 2D-CONV case.
+
+
+    tends to be smaller. In the 1D-CONV example, we set the tile size to be 2 for
+    output nodes.
+
+
+    The stage-2 aims to determine the data update offset Δ and the memory allocation
+    size for each node based on the consumer(s), processing in the reverse topological
+    order. We use the least common multiply (LCM) operation to determine Δ () of producers
+    for aligning different input offset requirements (Δ () () ) from consumers. Hence,
+    one producer update may correspond to multiple updates of a consumer. For example,
+    Δ (−2) = lcm{Δ (0) (0) , Δ (1) (1) } = 4 = 2Δ (1) (1) , one update of Node(-2)
+    corresponds to two updates of Node(1). As for the tile size deduction, (Δ () /
+    () ) is to derive the required input tile size (,) for output node [1](#page-4-1)
+    , where Δ () / () is the consumer offset (updated data) per producer update. The
+    maximum result (,) of all outputs is the tile size () of input node . In this
+    example, (−2) = max{<sup>0</sup> (2), <sup>1</sup> (4)} = 6 and (−1) = max{<sup>1</sup>
+    (2), <sup>2</sup> (2)} = 4.
+
+
+    As mentioned above, since we use LCM to align production and consumption, one
+    producer update may correspond to multiple updates of a consumer. In the stage-3,
+    we use \_ to represent the number of memory update per subgraph elementary operation.
+    The generated result of the example in Figure [5](#page-4-0) is shown in Figure
+    [6.](#page-4-2) \_ of Node(-1), Node(1), and Node(2) are two, where the second
+    updates are highlighted in red boxes. Note that the {\_(−2) , . . . , \_(2) }
+    solution is not unique, but the unique co-prime one {1, 2, 1, 2, 2} corresponds
+    to the minimal elementary operation.
+
+
+    <span id="page-4-2"></span>![](_page_4_Figure_8.jpeg)
+
+
+    Figure 6. The memory snapshot during two subgraph elementary operations based
+    on the execution scheme of Figure [5](#page-4-0) example. The allocated memory
+    size and update offset correspond to and Δ, respectively (the [:] notation denotes
+    data ranging from index to ). The arrows denote the data dependency according
+    to the node relation in the subgraph.
+
+
+    The proposed flow is based on a general directed acyclic computation graph and
+    is not limited to specific layer features. In this way, we can determine the execution
+    scheme for any complex irregular network like NasNet [\[75\]](#page-15-1) and
+    RandWire [\[68\]](#page-14-6).
+
+
+    #### 3.2 Memory Management for the subgraph execution
+
+
+    Up to now, we have inferred the execution scheme for subgraphs, and the remaining
+    challenge is how to implement it on hardware efficiently. Figure [7](#page-5-1)
+    shows the memory allocation and update scheme for the subgraph execution. Before
+    computing a subgraph, the compiler determines logical blocks for input, intermediate,
+    and output nodes, where the block sizes depend on the tile sizes derived from
+    the execution flow.
+
+
+    For convenient management, we introduce two types of memory regions: MAIN and
+    SIDE. The MAIN region stores the source data for PE (i.e., the tile of <sup>0</sup>
+    × <sup>0</sup> × in Figure [7\)](#page-5-1). The SIDE region reserves the horizontally
+    overlapping data[2](#page-4-3) . Considering no reuse requirement for some output
+    nodes, we only need a MAIN region to buffer the results of the current tile. Except
+    for the input nodes (negative numbers) loading data from DRAM, the other nodes
+    update data locally based on the computed results of the input node(s).
+
+
+    In detail, the update scheme leverages the collaboration between the MAIN region
+    and the SIDE region to achieve full reuse across sliding tiles (we consider kernel
+    size > stride). As shown in Figure [7,](#page-5-1) when the convolution windows
+    slide across the feature maps, the vertical overlap data (e.g., column = 5) are
+    reused locally in the MAIN region. In contrast, the horizontally overlapping data
+    (e.g., the first row of = 6 ∼ 8) are loaded from the SIDE region (path ①). Only
+    a subset of data is replaced by the newly calculated results
+
+
+    <span id="page-4-1"></span><sup>1</sup>For example, assume node is a convolution
+    layer with kernel size () and stride () , then ( ) = () + ( − 1) × () .
+
+
+    <span id="page-4-3"></span><sup>2</sup>We assume the column is the inner loop
+    while the row is the outer loop.
+
+
+    (marked in green). Besides, the bottom horizontal slices write new data to the
+    SIDE region for the next row loop (path ②).
+
+
+    The extra hardware overhead for the proposed memory scheme is slight. Figure [8](#page-5-2)
+    presents our 12nm NPU core for the subgraph processing, with a buffer region manager
+    to logically partition the global buffer to support contiguous layer processing.
+    The buffer region manager is a 2-depth register file, where determines the maximum
+    subgraph size, and each entry pair indicates the start and the end address for
+    each region. The area overhead is quite small, and in our test chip, the area
+    ratio is only 0.18% with = 64 and 272-byte size (17-bit address for the 1MB 64bit-width
+    global buffer).
+
+
+    In summary, our high-level idea is to divide the buffer into logical blocks for
+    different layers and try to reuse data for sliding convolution windows. The memory
+    management approach can be compatible with an accelerator as long as it supports
+    the data movement inside the on-chip memory and flexible data assignment for computing.
+    Coupled with our subgraph execution scheme introduced before, intermediate outputs
+    in the subgraph can avoid being recomputed. Only those layers required by other
+    subgraphs are written back to DRAM for further reuse.
+
+
+    # <span id="page-5-0"></span>4 Memory Communication-Capacity Co-Exploration
+
+
+    <span id="page-5-1"></span>**A subgraph example**
+
+
+    The aforementioned hardware model enables arbitrary subgraph execution, but there
+    is always limited buffer capacity
+
+
+    **Data update diagram**
+
+
+    ![](_page_5_Figure_6.jpeg)
+
+
+    Figure 7. Memory allocation and data update scheme in the global buffer for full
+    data reuse. The data layout used in our implementation is NWHC8c (aligned to 8
+    channels), which can be changed in another design. <sup>0</sup> and <sup>0</sup>
+    are the height and width of an input tile; is the input channel size; is the global
+    width-dimension index of the input tensor; and <sup>0</sup> is the width-dimension
+    index of an input tile.
+
+
+    <span id="page-5-2"></span>![](_page_5_Figure_9.jpeg)
+
+
+    Figure 8. Hardware implementation with the buffer region manager in our 12nm NPU
+    as a demonstration. The layout is an NPU core extracted from part of our in-house
+    chip.
+
+
+    in hardware. Therefore, we need to partition the whole computation graph into
+    a series of subgraphs that fit the memory. Below, we move up to the optimization
+    for graph partition and memory design-space exploration for challenge 3.
+
+
+    #### 4.1 Problem Formulation
+
+
+    4.1.1 Graph-Level Partition. Formally, a DNN model can be represented as a computation
+    graph = ( , ), where is the vertex set consisting of all the layers in a DNN model,
+    and is the edge set that defines the structure of DNN. In particular, an edge
+    (, ) ∈ represents that the output of layer is an input of layer .
+
+
+    We aim to find a partition scheme : → N that assigns each layer to a subgraph,
+    where layer ∈ is computed in the ()-th subgraph. A valid partition scheme should
+    satisfy that any layer is computed before use. Therefore, for any (, ) ∈ , we
+    have () ≤ (). Moreover, any subgraph should be connected in , otherwise meaningless.
+
+
+    We cast the partition exploration as an optimization problem. The objective is
+    to find a valid partition scheme that minimizes the total cost:
+
+
+    <span id="page-5-4"></span>
+
+    $$\sum\_{i} Cost\_{\mathcal{M}}(\{v \in V \mid P(v) = i\}),\tag{1}$$
+
+
+    where is a cost function of a given subgraph based on a target metric (e.g., external
+    memory access (EMA) and energy). For each subgraph, the EMA cost contains the
+    loading of weights and input activations and the storage of output activations[3](#page-5-3)
+    . The energy cost includes the overhead of EMA, on-chip buffers, and computation
+    units.
+
+
+    4.1.2 Design-Space Exploration (DSE). Our work further extends the optimization
+    to combine with the memory design-space exploration. In this paper, we focus on
+    the global buffer and the weight buffer, given that they dominate
+
+
+    <span id="page-5-3"></span><sup>3</sup>The nodes that are required to write-back
+    to DRAM can be the model output layer or the layers required by the future subgraph.
+
+
+    the overhead of energy and area in an NPU core. As illustrated in Figure [1,](#page-1-0)
+    a larger buffer capacity can take in more layers inside a subgraph, reducing communication
+    costs but compromising the silicon area. To co-explore the hardware configuration
+    and mapping, we construct an objective function by a linear combination of the
+    hardware and mapping costs:
+
+
+    <span id="page-6-0"></span>
+
+    $$\text{BUF\\_SIZE} + \alpha \cdot \sum\_{i} Cost\_{\mathcal{M}}(\{v \in V \mid
+    P(v) = i\}),\qquad \text{(2)}$$
+
+
+    where is a preference hyper-parameter to adjust the proportion between two costs.
+
+
+    #### 4.2 Baseline Methods
+
+
+    Several optimization methods that exist today can perform graph-level partition.
+    However, most of them fail to directly co-explore hardware and partition. Below,
+    we list four typical methods as our baselines and sketch their features.
+
+
+    4.2.1 Enumeration-based Algorithm. Fused-CNN [\[4\]](#page-12-2) applies a straightforward
+    way to enumerate all possible partition schemes and return the best one. Jangda
+    et al. [\[25\]](#page-13-19) proposed state compression dynamic programming to
+    speed up the enumeration-based algorithm. We migrate their methods as our baseline
+    and further improve them by only recording one subgraph in the state to reduce
+    the time complexity.
+
+
+    Nonetheless, there are still exponential states in the improved implementation.
+    Let be the number of nodes in a graph, and the enumeration-based method may explore
+    up to (2 <sup>2</sup> ) states for irregular networks. Consequently, the search
+    is hard to complete within a reasonable search time for large-scale networks,
+    not to mention the co-exploration with DSE.
+
+
+    4.2.2 Greedy Algorithm. Halide [\[47\]](#page-14-21) employs a greedy algorithm
+    to perform function grouping, which can be applied to the graph-level partition.
+    Specifically, it first assigns each layer into a single-layer subgraph. Then it
+    iteratively fuses a pair of subgraphs contributing the greatest benefit until
+    all benefits are negative.
+
+
+    Therefore, this algorithm tends to be trapped at the local minimum. Moreover,
+    since the fusion decision rules are based on a given hardware, the greedy method
+    cannot co-explore with DSE.
+
+
+    4.2.3 Dynamic Programming (DP)-based Algorithm. For the irregular network scheduling
+    problem, Zheng et al. [\[73\]](#page-15-3) proposed a DP-based algorithm. They
+    arrange the layers based on their depth and perform DP in a sequential manner.
+
+
+    This method is restricted to assigning layers that are contiguous in the depth
+    order into a subgraph, hence the exploration is confined to constrained search
+    space. It is unlikely to find the global optimum, especially for non-plain network
+
+
+    structures. In addition, since the state transition of DP depends on the predefined
+    buffer size, it is also tough to carry out co-exploration.
+
+
+    4.2.4 Simulated Annealing (SA). SA [\[33\]](#page-13-20) is a popular optimization
+    algorithm that samples a point and updates it iteratively to improve. It adopts
+    the new sample points with a probability affected by the performance difference
+    and a hyper-parameter named temperature. We employ the customized mutation operations
+    (described in Section [4.4.3\)](#page-7-0) to update the sample points and implement
+    an SA-based algorithm as a baseline.
+
+
+    SA is an alternative optimization method for our framework with compatible operators,
+    but it is not stable as the genetic algorithm in a range of benchmarks, which
+    will be shown in later experiments.
+
+
+    #### 4.3 Genetic Algorithm
+
+
+    Previous research shows competitive performance of the Genetic Algorithm (GA)
+    in several scheduling optimization problems [\[30,](#page-13-18) [31\]](#page-13-21).
+    We summarize several benefits of GA for our hardware-mapping co-exploration problem:
+
+
+    - 1. White-box property: We can track and tune its optimization process conveniently.
+    Therefore, it is easy and intuitive to understand.
+
+    - 2. Complete search space: It has the potential to explore the complete search
+    space by customized mutation and crossover operations.
+
+    - 3. Avoid local optima: In contrast to the greedy algorithm, GA can naturally
+    jump out of the local minimum benefiting from the diversity of the population.
+
+    - 4. Flexible initialization: We can use the results of other optimization algorithms
+    to initialize GA and use GA to finetune the result.
+
+    - 5. Co-exploration: Through the proposed GA operations and genome encoding, it
+    can further support partition-DSE co-exploration.
+
+
+    We encode each candidate solution (partition scheme and the corresponding memory
+    configuration for our problem) as a genome, and the population contains a set
+    of genomes. The GA goes through a series of generations to obtain a lower cost.
+    It performs the crossover and mutation operations on the population in each generation.
+    Specifically, a crossover operation blends two genomes selected from the population
+    to generate one offspring while a mutation operation modifies a genome randomly.
+    At the end of each generation, the evaluation environment evaluates the fitness
+    of each genome, and the population in the new generation is selected based on
+    the fitness results.
+
+
+    #### 4.4 Cocco Optimization Framework
+
+
+    Cocco is a GA-based optimization framework that enables the co-exploration of
+    memory configuration and graph-level partition, as shown in Figure [10.](#page-7-1)
+    The core of Cocco is a
+
+
+    <span id="page-7-2"></span>![](_page_7_Figure_2.jpeg)
+
+
+    Figure 9. Illustration of crossover and mutation operations in Cocco.
+
+
+    series of operations that explore a complete search space. We build a genetic
+    algorithm based on these customized operations. Fed with the neural network structure
+    and DSE requirements, Cocco goes through several steps to get the optimization
+    results. The execution model described in Section [3](#page-3-1) is embedded in
+    the evaluation environment. In the following, we introduce the five stages of
+    Cocco.
+
+
+    4.4.1 Initialization. The first step in Cocco is to generate the initial population,
+    where each genome contains a partition scheme of the computation graph and a memory
+    configuration for DSE. For the DSE part, every genome selects a capacity value
+    in a given range following a uniform distribution. There are two options in Cocco
+    to initialize the partition scheme of each genome. The first option is random
+    initialization. Precisely, we determine the () for each layer ∈ in topological
+    order, and each () is selected randomly within the valid range. The other option
+    is to initialize the partition scheme from other optimization algorithms.
+
+
+    4.4.2 Crossover. We designed a customized crossover operation to inherit and blend
+    the features of two parents selected from the population. Specifically, each hardware
+    configuration (i.e., memory capacity) in the offspring is the average of its parents
+    and then rounds to the nearest candidate value. For the partition scheme, we assign
+    layers to subgraphs in topological order. Each undecided layer chooses one parent
+    randomly to reproduce the corresponding subgraph. If the reproduced subgraph contains
+    layers that have been decided, we split out a new one excluding those layers,
+    or merge it with one of the subgraphs to which the decided layers belong.
+
+
+    As shown in Figure [9\(](#page-7-2)b), layer 1 and layer 3 select Dad as the parent
+    to reproduce the subgraphs {1, 2} and {3, 4}, respectively. Next, layer 5 selects
+    Mom as its parent, so it
+
+
+    <span id="page-7-1"></span>![](_page_7_Figure_8.jpeg)
+
+
+    Figure 10. Cocco framework overview.
+
+
+    intends to reproduce subgraph {4, 5, 6}. However, since we have already decided
+    on layer 4 in subgraph {3, 4}, there are two alternatives: creating a new subgraph
+    {5, 6} (Child-1) or merging with subgraph {3, 4} to obtain {3, 4, 5, 6} (Child-2).
+
+
+    <span id="page-7-0"></span>4.4.3 Mutation. Four mutation operations are customized
+    for the optimization flow to explore the search space extensively. We guarantee
+    the validity of genomes after each mutation in the implementation. At the bottom
+    of Figure [9,](#page-7-2) we show a node-level operation (modify-node) and two
+    subgraph-level ones (split-subgraph and merge-subgraph):
+
+
+    - modify-node (Figure [9\(](#page-7-2)c)): Modify the assignment of a randomly
+    selected node : from → () to → ′ (), where ′ () can be an existed subgraph or
+    a new one.
+
+    - split-subgraph (Figure [9\(](#page-7-2)d)): Split a randomly selected subgraph
+    into two or more subgraphs.
+
+    - merge-subgraph (Figure [9\(](#page-7-2)e)): Merge two randomly selected subgraphs
+    into one subgraph.
+
+    - mutation-DSE (not shown): Modify the memory configuration to a random one within
+    the range. The new values are sampled based on a normal distribution, where the
+    average is the original value, and the variance is a hyper-parameter.
+
+
+    4.4.4 Evaluation. Since GA tries to maximize the fitness of the genomes, we set
+    fitness to be the opposite of the cost (e.g., Formula [1](#page-5-4) and [2\)](#page-6-0).
+    To evaluate the fitness of each genome in the population, we use our simulator
+    (introduced in the next section) to extract the execution costs of subgraphs (e.g.,
+    EMA and energy).
+
+
+    During the evaluation, the simulator decodes the subgraph and hardware configuration
+    of each genome and calculates the fitness by aggregating the cost of each subgraph.
+    Particularly, when a large subgraph exceeds the buffer capacity, we perform the
+    split-subgraph operation to ensure genome validity. This kind of in-situ tuning
+    can increase the number of valid samples during the optimization operations and
+    thus, improve the sample efficiency.
+
+
+    4.4.5 Selection. At the end of each generation, Cocco performs the tournament
+    selection. Specifically, it holds multiple tournaments among a few randomly selected
+    genomes, and the winners (the genome with the best fitness) of these tournaments
+    form the population of a new generation. This operation facilitates superior fitness
+    in the new generation. The number of genomes in each tournament is decided by
+    a hyper-parameter. The new generation subsequently starts from the crossover step
+    again.
+
+
+    ## 5 Experiments
+
+
+    In the evaluations, we first present the superiority of Cocco for the graph partition;
+    and then demonstrate its outstanding stability and sample efficiency of the co-exploration
+    for the hardware optimization, followed by additional discussions about the results
+    under different configurations.
+
+
+    #### 5.1 Methodology
+
+
+    5.1.1 Evaluated Models. In the following evaluations, we consider three types
+    of model structures: plain (VGG16 [\[57\]](#page-14-2)), multi-branch (ResNet50,
+    ResNet152 [\[20\]](#page-13-4), GoogleNet [\[59\]](#page-14-3), Transformer [\[64\]](#page-14-22),
+    and GPT [\[52\]](#page-14-23)), and irregular structure (RandWire-A/B [\[68\]](#page-14-6)
+    and NasNet [\[75\]](#page-15-1)). RandWire-A/B are
+
+
+    generated based on the small and regular regime configurations introduced in the
+    paper [\[68\]](#page-14-6). FC layers are transformed to 1×1 CONV while pooling
+    and element-wise layers are analyzed as depth-wise CONV without weights. The scalar
+    operations (e.g., activation function) are hidden in the pipeline (e.g., the post-process
+    module following PE in Simba [\[56\]](#page-14-20)) and their overhead can be
+    ignored.
+
+
+    5.1.2 Accelerator Platform. As shown at the top of Figure [10,](#page-7-1) we
+    consider a SIMBA-like hierarchical accelerator with a global buffer, a weight
+    buffer, and a 4×4 PE array in each core used in several previous works [\[56,](#page-14-20)
+    [61,](#page-14-9) [71\]](#page-15-6). Each PE contains an 8×8 MAC array to process
+    a sub-tile from the global buffer. In particular, we model the execution flow
+    based on the scheme described in Section [3.](#page-3-1) The parallelism of two
+    dimensions of the PE array can be dynamically configured by the mapper results
+    to ensure high utilization. We schedule subgraphs in topological order and prefetch
+    weights of the next subgraph during the current computing. We also extend our
+    platform to support fundamental multi-core studies by interconnecting cores with
+    a crossbar. They share weights to release the burden of each core.
+
+
+    The arithmetic and memory overhead is extracted in a 12nm library based on the
+    synthesized RTL implementations (SRAM based on the ARM memory compiler) with 1GHz.
+    The DRAM energy is set as 12.5pJ/bit [\[70\]](#page-15-2). The extra footprint
+    of the plug-in design is mainly a 272-Byte register file to store the head and
+    end logical region addresses of maximal 64 nodes, which is negligible. Based on
+    off-the-shelf evaluators Timeloop [\[50\]](#page-14-18) and MAESTRO [\[37\]](#page-13-7)
+    for spatial accelerators, we developed a modified simulator that supports the
+    evaluation of latency and energy. It employs the consumption-centric scheme to
+    determine the tile size of each layer, and the memory access in the model is free
+    from padding data. The latency per subgraph depends on the maximum of the calculation
+    and external communication cycles. We allocate 16GB/s DRAM bandwidth per accelerator
+    core for loading weights and input activations and writing back data for subsequent
+    subgraphs. The off-chip communication consists of weight loading of each layer
+    and the inputs and outputs of each subgraph. As described in Section [3,](#page-3-1)
+    our subgraph execution scheme avoids recomputing of intermediate outputs.
+
+
+    5.1.3 Baselines. Three optimization baselines for graph partition are the greedy
+    algorithm used in Halide [\[47\]](#page-14-21), dynamic programming (DP) used
+    in Irregular-NN [\[73\]](#page-15-3) , and the enumeration-based method as a reference.
+
+
+    For the DSE studies, we compare Cocco with simulated annealing (SA) [\[33\]](#page-13-20)
+    to demonstrate the better stability of GA. These two methods are both the co-optimization
+    scheme that optimizes partition and hardware settings at the same time. In contrast
+    to co-optimization, the two-step scheme is another method for design-space exploration.
+    Specifically, we
+
+
+    <span id="page-9-0"></span>![](_page_9_Figure_2.jpeg)
+
+
+    Figure 11. The evaluation results for graph partition using the EMA-opt configuration
+    (EMA as the optimization metric). The enumeration-based method is deterministic,
+    which figures out the optimal solution as a reference in the first four models.
+    It cannot complete for large-scale models (Transformer, GPT, RandWire-A, and RandWire-B)
+    in a reasonable time because of the exponential search space.
+
+
+    use random search (RS) or grid search (GS) to sample memory capacity candidates
+    and then explore the corresponding partition schemes. During the search, we evaluate
+    5,000 samples for each capacity candidate and keep the best candidate as the output.
+    As for the sampling method, RS randomly samples memory capacity candidates while
+    GS uses a coarser granularity to enumerate the candidates.
+
+
+    #### 5.2 Graph Partition Evaluations
+
+
+    We start by presenting the partition performance on the single-core hardware with
+    a 1MB global buffer and a 1.125MB weight buffer. The number of samples in Cocco
+    is set to be 400,000. We evaluate the external memory access (EMA) and bandwidth
+    requirements of eight models shown in Figure [11,](#page-9-0) where the results
+    are normalized to the Halide baseline. This experiment aims to validate the effectiveness
+    of our Cocco framework in graph partition. For networks with simpler structures,
+    Cocco can find out the optimal solutions same as the enumeration-based results.
+    For large-scale irregular networks (Transformer, GPT, RandWire-A, and RandWire-B),
+    the enumeration-based method cannot complete in a reasonable time, while Cocco
+    provides better solutions than Halide and DP. A better subgraph partition strategy
+    helps to ease the communication burden, thus reducing the EMA cost and bandwidth
+    requirements.
+
+
+    #### 5.3 Hardware-Mapping Co-Exploration
+
+
+    After learning the superiority of Cocco for the graph partition, we further co-explore
+    the memory configuration and graph partition mapping as the core study of this
+    work. Three categories of exploration methods are used, including the fixed hardware
+    scheme, the two-step scheme as baselines, and the proposed co-optimization scheme.
+    We set three fixed memory configurations with Small capacity, Medium capacity,
+    and Large capacity, followed by a partition-only procedure. The two-step scheme
+    is implemented with decoupled steps for capacity search (RS or GS) and partition
+    (GA). The cooptimization methods include the proposed Cocco and an SA-based one
+    as the comparison. All methods sample up to
+
+
+    <span id="page-9-2"></span>Table 1. Hardware-mapping co-exploration for separate
+    buffer. In this table, A refers to the global buffer, and W refers to the weight
+    buffer. We evaluate the cost using Formula [2](#page-6-0) (the lower cost, the
+    better), where the metric is energy. We use RandWire-A as RandWire in the following
+    experiments.
+
+
+    | Optimization |        | ResNet50      |                   |        | GoogleNet
+    |                   |        |  |
+
+    |--------------|--------|---------------|-------------------|--------|-----------|-------------------|--------|--|
+
+    |              |        |               | Size (A) Size (W) | Cost   |           |
+    Size (A) Size (W) | Cost   |  |
+
+    |              | Buf(S) | 512KB         | 576KB             | 1.04E7 | 512KB     |
+    576KB             | 4.07E6 |  |
+
+    | Fixed<br>HW  |        | Buf(M) 1024KB | 1152KB            | 1.07E7 | 1024KB    |
+    1152KB            | 5.06E6 |  |
+
+    |              | Buf(L) | 2048KB        | 2304KB            | 1.24E7 | 2048KB    |
+    2304KB            | 7.18E6 |  |
+
+    |              | RS+GA  | 448KB         | 864KB             | 1.04E7 | 384KB     |
+    432KB             | 3.88E6 |  |
+
+    | Two-Step     | GS+GA  | 128KB         | 864KB             | 1.07E7 | 128KB     |
+    144KB             | 3.80E6 |  |
+
+    |              | SA     | 256KB         | 360KB             | 1.06E7 | 192KB     |
+    144KB             | 3.78E6 |  |
+
+    | Co-Opt       | Cocco  | 704KB         | 864KB             | 1.04E7 | 192KB     |
+    432KB             | 3.75E6 |  |
+
+    |              |        |               |                   |        |           |                   |        |  |
+
+    |              |        |               | RandWire          |        |           |
+    NasNet            |        |  |
+
+    | Optimization |        |               | Size (A) Size (W) | Cost   |           |
+    Size (A) Size (W) | Cost   |  |
+
+    |              | Buf(S) | 512KB         | 576KB             | 3.23E6 | 512KB     |
+    576KB             | 6.14E7 |  |
+
+    | Fixed        |        | Buf(M) 1024KB | 1152KB            | 3.92E6 | 1024KB    |
+    1152KB            | 5.83E7 |  |
+
+    | HW           | Buf(L) | 2048KB        | 2304KB            | 6.00E6 | 2048KB    |
+    2304KB            | 5.66E7 |  |
+
+    |              | RS+GA  | 448KB         | 792KB             | 3.31E6 | 1152KB    |
+    2016KB            | 5.60E7 |  |
+
+    | Two-Step     | GS+GA  | 128KB         | 144KB             | 3.02E6 | 2048KB    |
+    2304KB            | 5.66E7 |  |
+
+    | Co-Opt       | SA     | 192KB         | 144KB             | 3.00E6 | 2048KB    |
+    1872KB            | 5.61E7 |  |
+
+
+    50,000 points. The energy-capacity co-optimization is used in the following evaluations.
+
+
+    5.3.1 DSE analysis using separate and shared buffer. We first perform the hardware-mapping
+    co-exploration to determine the suitable memory configuration (except for the
+    fixed-HW scheme) with = 0.002[4](#page-9-1) and then solely execute the partition-only
+    Cocco to obtain the final cost. In particular, we also compared the results using
+    two memory designs: separate buffer and shared buffer. For the separate buffer
+    design, activations and weights are stored in different buffers while they share
+    the same space in the shared buffer design. The memory capacity candidates for
+    the global buffer
+
+
+    <span id="page-9-1"></span><sup>4</sup>The energy and the capacity units are pJ
+    and Byte, respectively.
+
+
+    Cocco: Hardware-Mapping Co-Exploration towards Memory ... ASPLOS ''24, April 27-May
+    1, 2024, La Jolla, CA, USA
+
+
+    <span id="page-10-0"></span>Table 2. Hardware-mapping co-exploration for shared
+    buffer. We evaluate the cost using Formula [2](#page-6-0) (the lower cost, the
+    better), where the metric is energy.
+
+
+    | Optimization |        |        | ResNet50 | GoogleNet |        |  |
+
+    |--------------|--------|--------|----------|-----------|--------|--|
+
+    |              |        | Size   | Cost     | Size      | Cost   |  |
+
+    | Fixed<br>HW  | Buf(S) | 576KB  | 1.01E7   | 576KB     | 3.66E6 |  |
+
+    |              | Buf(M) | 1152KB | 1.00E7   | 1152KB    | 4.04E6 |  |
+
+    |              | Buf(L) | 2304KB | 1.04E7   | 2304KB    | 5.09E6 |  |
+
+    |              | RS+GA  | 1280KB | 0.98E7   | 640KB     | 3.65E6 |  |
+
+    | Two-Step     | GS+GA  | 1344KB | 0.98E7   | 512KB     | 3.65E6 |  |
+
+    |              | SA     | 896KB  | 1.00E7   | 192KB     | 3.75E6 |  |
+
+    | Co-Opt       | Cocco  | 1344KB | 0.98E7   | 384KB     | 3.60E6 |  |
+
+    |              |        |        |          |           |        |  |
+
+    |              |        |        | RandWire | NasNet    |        |  |
+
+    | Optimization |        | Size   | Cost     | Size      | Cost   |  |
+
+    |              | Buf(S) | 576KB  | 2.83E6   | 576KB     | 6.36E7 |  |
+
+    | Fixed        | Buf(M) | 1152KB | 3.03E6   | 1152KB    | 5.73E7 |  |
+
+    | HW           | Buf(L) | 2304KB | 3.90E6   | 2304KB    | 5.51E7 |  |
+
+    |              | RS+GA  | 320KB  | 2.85E6   | 2560KB    | 5.47E7 |  |
+
+    | Two-Step     | GS+GA  | 832KB  | 2.86E6   | 3072KB    | 5.42E7 |  |
+
+    | Co-Opt       | SA     | 256KB  | 2.92E6   | 1728KB    | 5.56E7 |  |
+
+
+    (for activations) range from 128KB to 2048KB with a 64KB interval, while that
+    for the weight buffer range from 144KB to 2304KB with a 72KB interval. The exploration
+    range of the shared buffer is from 128KB to 3072KB with an interval of 64KB.
+
+
+    The evaluation using separate buffers is shown in Table [1,](#page-9-2) where
+    Cocco achieves better optimization with up to 1.89% (compared to SA in ResNet50)
+    to 50.33% (compared to Fixed-HW(L) in RandWire) lower cost compared to various
+    baselines across four models. The two-step scheme fails to combine the information
+    between different sizes, so it is generally worse than the co-optimization method.
+
+
+    The capacity results also reflect the inherent capacity preference of different
+    models. The data amount in GoogleNet and RandWire is relatively smaller, and thus
+    their capacity requirements are lower. In contrast, the data amount in NasNet
+    is larger, so a high capacity is preferred.
+
+
+    As shown in Table [2,](#page-10-0) the evaluation of the shared buffer setting
+    shows a similar trend. Furthermore, we can observe that most of the cost results
+    of the shared buffer are lower than those using the separate configuration. Although
+    the shared buffer design requires additional control flows, it indeed improves
+    efficiency than the separate buffer design.
+
+
+    5.3.2 Sample efficiency analysis. We next study the sample efficiency of the two-step
+    and the co-optimization scheme in Figure [12.](#page-10-1) We record the cost
+    trends of the first 50,000 samples on ResNet50, GoogleNet, and RandWire during
+    the exploration. Overall, Cocco shows a consistent convergence trend on these
+    three networks. And it converges faster and
+
+
+    <span id="page-10-1"></span>![](_page_10_Figure_9.jpeg)
+
+
+    Figure 12. The convergence curve of Cocco compared with other baselines in the
+    hardware-mapping co-explorations. The optimization method requiring fewer samples
+    in (d) has higher sample efficiency.
+
+
+    <span id="page-10-2"></span>![](_page_10_Figure_11.jpeg)
+
+
+    Figure 13. The visualization of sample points distribution during optimization.
+    The slope of the red dashed line denotes the preference between energy and capacity
+    cost. The point on the line with a lower intercept has a smaller cost.
+
+
+    achieves lower costs compared to other baselines, exhibiting a higher sample efficiency.
+    The two-step methods perform graph-partition separately under different capacities,
+    so they fail to utilize the partition information between capacities. Particularly,
+    the GS method uses a deterministic search direction (search from large to small
+    capacity in this experiment), so the convergence time depends on the optimal capacity.
+    Since GoogleNet and RandWire require relatively small buffers, GS takes a considerable
+    number of samples to converge.
+
+
+    5.3.3 Optimization procedure analysis. We next study how the distribution of sample
+    points changes during the optimization procedure of Cocco. While searching for
+    20 generations with 500 genomes each, we divided them into ten groups with different
+    colors in Figure [13.](#page-10-2) The results show that the distribution moves
+    towards a lower intercept
+
+
+    <span id="page-11-0"></span>![](_page_11_Figure_1.jpeg)
+
+
+    Figure 14. The trade-off between energy and memory capacity. The optimization
+    target is to minimize the cost defined in Formula [2,](#page-6-0) where the metric
+    is energy. Energy results of each model are normalized to the first (= 0.0005)
+    results.
+
+
+    <span id="page-11-1"></span>Table 3. Multi-core and batch evaluation using the
+    energycapacity co-opt configuration. Size denotes the shared buffer size in each
+    core.
+
+
+    | Core# Batch |             |            | ResNet50     |            | GoogleNet           |                 |              |  |
+
+    |-------------|-------------|------------|--------------|------------|---------------------|-----------------|--------------|--|
+
+    |             |             | Energy(mJ) | Lat.(ms)     |            | Size(KB)
+    Energy(mJ) | Lat.(ms)        | Size(KB)     |  |
+
+    | 1           | 1           | 4.21       | 4.59         | 1344       | 1.61                |
+    2.05            | 384          |  |
+
+    |             | 2           | 6.32       | 8.98         | 1728       | 2.18                |
+    3.91            | 896          |  |
+
+    |             | 8           | 11.88      | 35.93        | 2880       | 5.64                |
+    15.53           | 1472         |  |
+
+    |             | 1           | 4.38       | 2.48         | 768        | 1.66                |
+    1.04            | 192          |  |
+
+    | 2           | 2           | 6.46       | 4.78         | 1088       | 2.34                |
+    1.99            | 384          |  |
+
+    |             | 8           | 13.01      | 19.12        | 1664       | 5.84                |
+    7.97            | 960          |  |
+
+    |             | 1           | 4.29       | 1.39         | 448        | 1.34                |
+    0.54            | 192          |  |
+
+    | 4           | 2           | 6.58       | 2.68         | 640        | 2.20                |
+    1.07            | 192          |  |
+
+    |             | 8           | 11.50      | 10.71        | 1664       | 6.24                |
+    4.30            | 448          |  |
+
+    |             |             |            |              |            |                     |                 |              |  |
+
+    |             |             |            | RandWire     |            |                     |
+    NasNet          |              |  |
+
+    |             | Core# Batch | Energy(mJ) | Lat.(ms)     |            | Size(KB)
+    Energy(mJ) | Lat.(ms)        | Size(KB)     |  |
+
+    |             | 1           | 1.26       | 1.47         | 384        | 28.57               |
+    49.92           | 2624         |  |
+
+    | 1           | 2           | 2.25       | 2.74         | 704        | 47.68               |
+    99.87           | 3072         |  |
+
+    |             | 8           | 8.66       | 10.85        | 1664       | 133.03              |
+    396.90          | 3072         |  |
+
+    |             | 1           | 1.41       | 0.95         | 192        | 29.18               |
+    24.93           | 1728         |  |
+
+    | 2           | 2           | 2.37       | 1.80         | 384        | 48.80               |
+    49.73           | 2624         |  |
+
+    |             | 8           | 8.39       | 7.16         | 1280       | 153.25              |
+    227.19          | 3072         |  |
+
+    |             | 1           | 1.39       | 0.71         | 192        | 28.00               |
+    14.56           | 960          |  |
+
+    | 4           | 2           | 2.91       | 1.40<br>5.55 | 192<br>960 | 45.03               |
+    28.58<br>133.38 | 1664<br>2816 |  |
+
+
+    of the -slope line and gets more centralized in the later generations during the
+    optimization process of Cocco.
+
+
+    #### 5.4 Sensitivity Study about Cocco framework
+
+
+    5.4.1 Study of in the cost function. The results shown in Figure [14](#page-11-0)
+    demonstrate the effectiveness of in adjusting the preference between the memory
+    capacity and the given metric (energy is used here). The optimization trades the
+    memory capacity for lower energy cost with the increase of . In addition, a larger
+    memory capacity indeed contributes to lower energy, but the yields show differences
+    because of their various model-inherent graph and layer patterns. For example,
+    NasNet is more memory-intensive and more structure-complex than the other three
+    models, so it requires a larger memory capacity for less energy consumption.
+
+
+    5.4.2 Study of performance v.s. memory capacity. Figure [2](#page-2-0) shows that
+    the increase of capacity is sub-linear with
+
+
+    performance. To study this observation, we scale our model to the multi-core version
+    and share weights of a subgraph across cores. Different cores only buffer a subset
+    of weights and transfer the data between cores, similar to BSD in Tangram [\[18\]](#page-13-11)
+    or data-rotation in NN-Baton [\[61\]](#page-14-9). The overhead of the interconnection
+    crossbar is extracted from the implemented Arteries IP [\[5\]](#page-12-9).
+
+
+    An accelerator with more cores can cover a larger subgraph but bring more core-to-core
+    overhead. As shown in Table [3,](#page-11-1) in most cases, energy increases from
+    the single-core to dual-core configuration because of the communication overhead.
+    Moreover, profiting from the data-sharing mechanism, the required memory of each
+    core drops with the increase of core number.
+
+
+    5.4.3 Batch size study. For the batch size evaluation shown in Table [3,](#page-11-1)
+    the latency with a larger batch size principally presents a sub-linear increase,
+    which benefits from the lower bandwidth requirement of weights via the inter-sample
+    data reuse. In addition, such data reuse amortizes the energy burden per batch
+    processing. And owing to the better weight reuse in multi-batch processing, a
+    larger batch size does not require a proportional capacity.
+
+
+    ## 6 Related Works
+
+
+    #### 6.1 Intra-layer Optimization
+
+
+    Prior works focus on the data reuse for intra-layer assignments, like output-stationary
+    in ShiDianNao [\[14\]](#page-13-22) and Envision [\[46\]](#page-14-24), weight-stationary
+    in NeuFlow [\[15\]](#page-13-23) and Nvdla [\[49\]](#page-14-16), input-stationary
+    in SCNN [\[51\]](#page-14-25), and row-stationary in Eyeriss [\[13\]](#page-12-10).
+    Based on these primitive dataflow patterns, extensive studies explored the optimal
+    tiling and reordering schemes via brute-force, feedback-based, and constraint
+    optimization approaches [\[23,](#page-13-5) [30,](#page-13-18) [50\]](#page-14-18).
+    These works focus on layer-level optimization, missing the graph information at
+    a higher level. The efficiency of tile updates depends on the memory architecture.
+    Simba [\[56,](#page-14-20) [74\]](#page-15-5) and NN-Baton [\[61\]](#page-14-9)
+    view each tile as an independent workload so that the tile size has a prominent
+    impact on memory access due to halo regions. Motivated by traditional vision processors,
+    Ascend [\[40\]](#page-13-10) and DRQ [\[58\]](#page-14-26) employ line buffers
+    to achieve data reuse in the row direction, but the line buffer cannot well support
+    the 2D-tiling reuse in both row and column directions.
+
+
+    #### 6.2 Inter-layer Optimization
+
+
+    Intra-layer scheduling is sub-optimal, which is limited by the data reuse within
+    a layer. Therefore, Fused-CNN [\[4\]](#page-12-2), SR-CNN [\[38\]](#page-13-8),
+    and LCP [\[42\]](#page-14-19) introduce layer fusion method that cache intermediate
+    data on-chip to reduce data transfer overhead using handcrafted or heuristic methods
+    for fusion partition. Although Irregular-NN [\[73\]](#page-15-3) suggests a customized-DP
+    algorithm, the exploration space is constrained because the layers in an assignment
+    need to be successive in a specific
+
+
+    order. A recent work named DNNFuser [\[29\]](#page-13-24) employs an RLbased method,
+    but their formulation towards 1D layer-fusion is hard to handle complex irregular
+    networks. Tangram [\[18\]](#page-13-11) and Atomic [\[72\]](#page-15-4) schedule
+    DNN workloads on a multi-core (scalable) accelerator, but they focus on executing
+    a single layer on each core at a time rather than processing multiple layers with
+    local data reuse. Also, some previous works [\[2,](#page-12-11) [19,](#page-13-25)
+    [62\]](#page-14-27) tackle the workload placement problem for multiple devides
+    without discussing the downstream execution on each device.
+
+
+    Cocco proposes an automatic framework for inter-layer scheduling with a comprehensive
+    memory scheme. It focuses on the fundamental core-level temporal execution that
+    can be potentially scaled up to the multi-core or multi-device scenario with a
+    spatial parallelism mechanism.
+
+
+    #### 6.3 Design-Space Exploration for Memory
+
+
+    Memory design exploration methods lie primarily on two sides: analysis-driven
+    and search-driven. For the analysisdriven method, Chen et al. [\[12\]](#page-12-0)
+    leverage red-blue pebble models to derive the proper memory capacity representations.
+    Subsequently, Cai et al. [\[9\]](#page-12-12) propose Olympus, which generalizes
+    a framework to a batch of successive layers and also fills up with more scheduling
+    and data reuse techniques. However, they are difficult to represent a subgraph
+    with complex inter-layer connections. As for the search-driven method, Xiao et
+    al. [\[67\]](#page-14-11), Kwon et al. [\[37\]](#page-13-7), and Feng et al. [\[16\]](#page-13-26)
+    explore the memory configuration for the layer-level assignment using the brute-force
+    search, while Kao et al. [\[32\]](#page-13-6) employ a genetic algorithm to improve
+    the efficiency. These works principally focus on the layer-level information,
+    while in comparison, Cocco exploits graph-level features for the better optimization.
+
+
+    ## 7 Conclusion
+
+
+    While layer-level scheduling is widely studied to improve memory efficiency, graph-level
+    optimization remains relatively unexplored. This paper proposed a graph-level
+    dataflow with the corresponding memory management scheme that enables flexible
+    graph partitions with high memory utilization. On top of it, we propose Cocco,
+    a framework to provide a recommended memory configuration with graph-level scheduling
+    strategies. Cocco shows outstanding graph partition ability compared to the greedy
+    algorithm and DP employed in previous works and enables efficient graph-level
+    hardware-mapping co-exploration. This paper helps to provide an implementation
+    philosophy for the accelerator memory and better deployment for it.
+
+
+    ## Acknowledgments
+
+
+    This research was partially supported by National Key R&D Program of China (2022YFB2804103),
+    Tsinghua University Dushi Program, and Tsinghua University Talent Program. We
+    would like to appreciate all the anonymous reviewers for their valuable feedback.
+
+
+    ## References
+
+
+    - <span id="page-12-5"></span>[1] Dennis Abts, Jonathan Ross, Jonathan Sparling,
+    Mark Wong-VanHaren, Max Baker, Tom Hawkins, Andrew Bell, John Thompson, Temesghen
+    Kahsai, Garrin Kimmell, Jennifer Hwang, Rebekah Leslie-Hurd, Michael Bye, E. R.
+    Creswick, Matthew Boyd, Mahitha Venigalla, Evan Laforge, Jon Purdy, Purushotham
+    Kamath, Dinesh Maheshwari, Michael Beidler, Geert Rosseel, Omar Ahmad, Gleb Gagarin,
+    Richard Czekalski, Ashay Rane, Sahil Parmar, Jeff Werner, Jim Sproch, Adrian Macias,
+    and Brian Kurtz. 2020. Think Fast: A Tensor Streaming Processor (TSP) for Accelerating
+    Deep Learning Workloads. In Proceedings of the 47th ACM/IEEE Annual International
+    Symposium on Computer Architecture (ISCA). IEEE, Valencia, Spain, 145–158.
+
+    - <span id="page-12-11"></span>[2] Ravichandra Addanki, Shaileshh Bojja Venkatakrishnan,
+    Shreyan Gupta, Hongzi Mao, and Mohammad Alizadeh. 2019. Learning Generalizable
+    Device Placement Algorithms for Distributed Machine Learning. In Advances in Neural
+    Information Processing Systems (NeurIPS), Hanna M. Wallach, Hugo Larochelle, Alina
+    Beygelzimer, Florence d''Alché-Buc, Emily B. Fox, and Roman Garnett (Eds.). OpenReview.net,
+    Vancouver, BC, Canada, 3983–3993.
+
+    - <span id="page-12-1"></span>[3] Byung Hoon Ahn, Jinwon Lee, Jamie Menjay Lin,
+    Hsin-Pai Cheng, Jilei Hou, and Hadi Esmaeilzadeh. 2020. Ordering Chaos: Memory-Aware
+    Scheduling of Irregularly Wired Neural Networks for Edge Devices. In Proceedings
+    of Machine Learning and Systems (MLSys), Inderjit S. Dhillon, Dimitris S. Papailiopoulos,
+    and Vivienne Sze (Eds.). mlsys.org, Austin, TX, USA, 1–14.
+
+    - <span id="page-12-2"></span>[4] Manoj Alwani, Han Chen, Michael Ferdman, and
+    Peter A. Milder. 2016. Fused-layer CNN accelerators. In Proceedings of the 49th
+    IEEE/ACM International Symposium on Microarchitecture (MICRO). IEEE Computer Society,
+    Taipei, Taiwan, 22:1–22:12.
+
+    - <span id="page-12-9"></span>[5] Arteries. 2022. Arteries IP Homepage. <https://www.arteris.com>.
+
+    - <span id="page-12-3"></span>[6] Ljubisa Bajic and Jasmina Vasiljevic. 2020.
+    Compute substrate for Software 2.0. In Proceedings of the IEEE Hot Chips 32 Symposium
+    (HCS). IEEE, Palo Alto, CA, USA, 1–31.
+
+    - <span id="page-12-6"></span>[7] Pete Bannon, Ganesh Venkataramanan, Debjit Das
+    Sarma, and Emil Talpes. 2019. Computer and Redundancy Solution for the Full Self-Driving
+    Computer. In Proceedings of the IEEE Hot Chips 31 Symposium (HCS). IEEE, Cupertino,
+    CA, USA, 1–22.
+
+    - <span id="page-12-7"></span>[8] John Burgess. 2019. RTX ON - The NVIDIA TURING
+    GPU. In Proceedings of the IEEE Hot Chips 31 Symposium (HCS). IEEE, Cupertino,
+    CA, USA, 1–27.
+
+    - <span id="page-12-12"></span>[9] Xuyi Cai, Ying Wang, Kaijie Tu, Chengsi Gao,
+    and Lei Zhang. 2022. Olympus: Reaching Memory-Optimality on DNN Processors. IEEE
+    Transactions on Computers (TC) 71, 8 (2022), 1939–1951.
+
+    - <span id="page-12-8"></span>[10] Prasanth Chatarasi, Hyoukjun Kwon, Angshuman
+    Parashar, Michael Pellauer, Tushar Krishna, and Vivek Sarkar. 2022. Marvel: A
+    Data-Centric Approach for Mapping Deep Learning Operators on Spatial Accelerators.
+    ACM Transactions on Architecture and Code Optimization 19, 1 (2022), 6:1–6:26.
+
+    - <span id="page-12-4"></span>[11] Karam Chatha. 2021. Qualcomm® Cloud Al-100:
+    12TOPS/W Scalable, High Performance and Low Latency Deep Learning Inference Accelerator.
+    In Proceedings of the IEEE Hot Chips 33 Symposium (HCS). IEEE, Palo Alto, CA,
+    USA, 1–19.
+
+    - <span id="page-12-0"></span>[12] Xiaoming Chen, Yinhe Han, and Yu Wang. 2020.
+    Communication Lower Bound in Convolution Accelerators. In Proceedings of the IEEE
+    International Symposium on High Performance Computer Architecture (HPCA). IEEE,
+    San Diego, CA, USA, 529–541.
+
+    - <span id="page-12-10"></span>[13] Yu-Hsin Chen, Joel S. Emer, and Vivienne Sze.
+    2016. Eyeriss: A Spatial Architecture for Energy-Efficient Dataflow for Convolutional
+    Neural Networks. In Proceedings of the ACM/IEEE Annual International Symposium
+    on Computer Architecture (ISCA). IEEE Computer Society, Seoul,
+
+
+    South Korea, 367–379.
+
+
+    - <span id="page-13-22"></span>[14] Zidong Du, Robert Fasthuber, Tianshi Chen,
+    Paolo Ienne, Ling Li, Tao Luo, Xiaobing Feng, Yunji Chen, and Olivier Temam. 2015.
+    ShiDianNao: shifting vision processing closer to the sensor. In Proceedings of
+    the ACM/IEEE Annual International Symposium on Computer Architecture (ISCA). ACM,
+    Portland, OR, USA, 92–104.
+
+    - <span id="page-13-23"></span>[15] Clément Farabet, Berin Martini, B. Corda,
+    Polina Akselrod, Eugenio Culurciello, and Yann LeCun. 2011. NeuFlow: A runtime
+    reconfigurable dataflow processor for vision. In Proceedings of the IEEE Conference
+    on Computer Vision and Pattern Recognition (CVPR) Workshops. IEEE Computer Society,
+    Colorado Springs, CO, USA, 109–116.
+
+    - <span id="page-13-26"></span>[16] Kaijie Feng, Xiaoya Fan, Jianfeng An, Xiping
+    Wang, Kaiyue Di, Jiangfei Li, Minghao Lu, and Chuxi Li. 2021. ERDSE: efficient
+    reinforcement learning based design space exploration method for CNN accelerator
+    on resource limited platform. Graphics and Visual Computing 4 (2021), 1–11.
+
+    - <span id="page-13-0"></span>[17] Ken-ichi Funahashi. 1989. On the approximate
+    realization of continuous mappings by neural networks. Neural Networks 2, 3 (1989),
+    183–192.
+
+    - <span id="page-13-11"></span>[18] Mingyu Gao, Xuan Yang, Jing Pu, Mark Horowitz,
+    and Christos Kozyrakis. 2019. TANGRAM: Optimized Coarse-Grained Dataflow for Scalable
+    NN Accelerators. In Proceedings of the International Conference on Architectural
+    Support for Programming Languages and Operating Systems (ASPLOS). ACM, Providence,
+    RI, USA, 807–820.
+
+    - <span id="page-13-25"></span>[19] Yuanxiang Gao, Li Chen, and Baochun Li. 2018.
+    Spotlight: Optimizing Device Placement for Training Deep Neural Networks. In Proceedings
+    of the 35th International Conference on Machine Learning (ICML) (Proceedings of
+    Machine Learning Research, Vol. 80), Jennifer G. Dy and Andreas Krause (Eds.).
+    PMLR, Stockholm, Sweden, 1662–1670.
+
+    - <span id="page-13-4"></span>[20] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and
+    Sun Jian. 2016. Deep Residual Learning for Image Recognition. In Proceedings of
+    the IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE Computer
+    Society, Las Vegas, NV, USA, 770–778.
+
+    - <span id="page-13-17"></span>[21] Kartik Hegde, Po-An Tsai, Sitao Huang, Vikas
+    Chandra, Angshuman Parashar, and Christopher W. Fletcher. 2021. Mind mappings:
+    enabling efficient algorithm-accelerator mapping space search. In Proceedings
+    of the 26th ACM International Conference on Architectural Support for Programming
+    Languages and Operating Systems (ASPLOS), Tim Sherwood, Emery D. Berger, and Christos
+    Kozyrakis (Eds.). ACM, Virtual Event, USA, 943–958.
+
+    - <span id="page-13-1"></span>[22] Kurt Hornik, Maxwell B. Stinchcombe, and Halbert
+    White. 1989. Multilayer feedforward networks are universal approximators. Neural
+    Networks 2, 5 (1989), 359–366.
+
+    - <span id="page-13-5"></span>[23] Qijing Huang, Aravind Kalaiah, Minwoo Kang,
+    James Demmel, Grace Dinh, John Wawrzynek, Thomas Norell, and Yakun Sophia Shao.
+    2021. CoSA: Scheduling by Constrained Optimization for Spatial Accelerators. In
+    Proceedings of the ACM/IEEE Annual International Symposium on Computer Architecture
+    (ISCA). IEEE, Valencia, Spain, 554–566.
+
+    - <span id="page-13-9"></span>[24] Drago Ignjatovic, Daniel W. Bailey, and Ljubisa
+    Bajic. 2022. The Wormhole AI Training Processor. In Proceedings of the IEEE International
+    Solid-State Circuits Conference (ISSCC). IEEE, San Francisco, CA, USA, 356–358.
+
+    - <span id="page-13-19"></span>[25] Abhinav Jangda and Uday Bondhugula. 2018.
+    An effective fusion and tile size model for optimizing image processing pipelines.
+    In Proceedings of the 23rd ACM SIGPLAN Symposium on Principles and Practice of
+    Parallel Programming (PPoPP), Andreas Krall and Thomas R. Gross (Eds.). ACM, Vienna,
+    Austria, 261–275.
+
+    - <span id="page-13-15"></span>[26] Yang Jiao, Liang Han, Rong Jin, Yi-Jung Su,
+    Chiente Ho, Li Yin, Yun Li, Long Chen, Zhen Chen, Lu Liu, Zhuyu He, Yu Yan, Jun
+    He, Jun Mao, Xiaotao Zai, Xuejun Wu, Yongquan Zhou, Mingqiu Gu, Guocai Zhu, Rong
+    Zhong, Wenyuan Lee, Ping Chen, Yiping Chen, Weiliang Li, Deyu Xiao, Qing Yan,
+    Mingyuan Zhuang, Jiejun Chen, Yun Tian, Yingzi Lin, Wei Wu, Hao Li, and Zesheng
+    Dou. 2020. A 12nm Programmable Convolution-Efficient Neural-Processing-Unit Chip
+
+
+    Achieving 825TOPS. In Proceedings of the IEEE International Solid-State Circuits
+    Conference (ISSCC). IEEE, San Francisco, CA, USA, 136–140.
+
+
+    - [27] Yang Jiao, Liang Han, and Xin Long. 2020. Hanguang 800 NPU The Ultimate
+    AI Inference Solution for Data Centers. In Proceedings of the IEEE Hot Chips 32
+    Symposium (HCS). IEEE, Palo Alto, CA, USA, 1–29.
+
+    - <span id="page-13-16"></span>[28] Norman P. Jouppi, Doe Hyun Yoon, Matthew Ashcraft,
+    Mark Gottscho, Thomas B. Jablin, George Kurian, James Laudon, Sheng Li, Peter
+    C. Ma, Xiaoyu Ma, Thomas Norrie, Nishant Patil, Sushma Prasad, Cliff Young, Zongwei
+    Zhou, and David A. Patterson. 2021. Ten Lessons From Three Generations Shaped
+    Google''s TPUv4i : Industrial Product. In Proceedings of the 48th ACM/IEEE Annual
+    International Symposium on Computer Architecture (ISCA). IEEE, Valencia, Spain,
+    1–14.
+
+    - <span id="page-13-24"></span>[29] Sheng-Chun Kao, Xiaoyu Huang, and Tushar Krishna.
+    2022. DNNFuser: Generative Pre-Trained Transformer as a Generalized Mapper for
+    Layer Fusion in DNN Accelerators. arXiv preprint arXiv:2201.11218 abs/2201.11218
+    (2022), 1–8.
+
+    - <span id="page-13-18"></span>[30] Sheng-Chun Kao and Tushar Krishna. 2020. GAMMA:
+    Automating the HW Mapping of DNN Models on Accelerators via Genetic Algorithm.
+    In Proceedings of the IEEE/ACM International Conference On Computer Aided Design
+    (ICCAD). IEEE, San Diego, CA, USA, 44:1–44:9.
+
+    - <span id="page-13-21"></span>[31] Sheng-Chun Kao and Tushar Krishna. 2022. MAGMA:
+    An Optimization Framework for Mapping Multiple DNNs on Multiple Accelerator Cores.
+    In IEEE International Symposium on High-Performance Computer Architecture, (HPCA).
+    IEEE, Seoul, South Korea, 814–830.
+
+    - <span id="page-13-6"></span>[32] Sheng-Chun Kao, Michael Pellauer, Angshuman
+    Parashar, and Tushar Krishna. 2022. DiGamma: Domain-aware Genetic Algorithm for
+    HW-Mapping Co-optimization for DNN Accelerators. In Proceedings of the Design,
+    Automation & Test in Europe Conference & Exhibition (DATE), Cristiana Bolchini,
+    Ingrid Verbauwhede, and Ioana Vatajelu (Eds.). IEEE, Antwerp, Belgium, 232–237.
+
+    - <span id="page-13-20"></span>[33] Scott Kirkpatrick, D. Gelatt Jr., and Mario
+    P. Vecchi. 1983. Optimization by Simmulated Annealing. Sci. 220, 4598 (1983),
+    671–680.
+
+    - <span id="page-13-12"></span>[34] Simon Knowles. 2017. Scalable Silicon Compute.
+    In Workshop on Deep Learning At Supercomputer Scale, NIPS. OpenReview.net, Long
+    Beach, CA, USA, 1–22.
+
+    - <span id="page-13-13"></span>[35] Simon Knowles. 2021. Graphcore. In Proceedings
+    of the IEEE Hot Chips 33 Symposium (HCS). IEEE, Palo Alto, CA, USA, 1–25.
+
+    - <span id="page-13-3"></span>[36] Alex Krizhevsky, Ilya Sutskever, and Geoffrey
+    E. Hinton. 2012. ImageNet Classification with Deep Convolutional Neural Networks.
+    In Proceedings of the 26th Annual Conference on Neural Information Processing
+    Systems (NIPS). Curran Associates, Inc., Lake Tahoe, Nevada, United States, 1106–1114.
+
+    - <span id="page-13-7"></span>[37] Hyoukjun Kwon, Prasanth Chatarasi, Michael
+    Pellauer, Angshuman Parashar, Vivek Sarkar, and Tushar Krishna. 2019. Understanding
+    Reuse, Performance, and Hardware Cost of DNN Dataflow: A Data-Centric Approach.
+    In Proceedings of the IEEE/ACM International Symposium on Microarchitecture (MICRO).
+    ACM, Columbus, OH, USA, 754–768.
+
+    - <span id="page-13-8"></span>[38] Juhyoung Lee, Dongjoo Shin, Jinsu Lee, Jinmook
+    Lee, Sanghoon Kang, and Hoi-Jun Yoo. 2019. A Full HD 60 fps CNN Super Resolution
+    Processor with Selective Caching based Layer Fusion for Mobile Devices. In Proceedings
+    of the Symposium on VLSI Circuits. IEEE, Kyoto, Japan, 302–303.
+
+    - <span id="page-13-2"></span>[39] Grzegorz Lewicki and Giuseppe Marino. 2004.
+    Approximation of functions of finite variation by superpositions of a Sigmoidal
+    function. Appl. Math. Lett. 17, 10 (2004), 1147–1152.
+
+    - <span id="page-13-10"></span>[40] Heng Liao, Jiajin Tu, Jing Xia, Hu Liu, Xiping
+    Zhou, Honghui Yuan, and Yuxing Hu. 2021. Ascend: a Scalable and Unified Architecture
+    for Ubiquitous Deep Neural Network Computing : Industry Track Paper. In Proceedings
+    of the IEEE International Symposium on High-Performance Computer Architecture,
+    HPCA. IEEE, Seoul, South Korea, 789–801.
+
+    - <span id="page-13-14"></span>[41] Heng Liao, Jiajin Tu, Jing Xia, and Xiping
+    Zhou. 2019. DaVinci: A Scalable Architecture for Neural Network Computing. In
+    Proceedings
+
+
+    Cocco: Hardware-Mapping Co-Exploration towards Memory ... ASPLOS ''24, April 27-May
+    1, 2024, La Jolla, CA, USA
+
+
+    of the IEEE Hot Chips 31 Symposium (HCS). IEEE, Cupertino, CA, USA, 1–44.
+
+
+    - <span id="page-14-19"></span>[42] Xinhan Lin, Shouyi Yin, Fengbin Tu, Leibo
+    Liu, Xiangyu Li, and Shaojun Wei. 2018. LCP: a layer clusters paralleling mapping
+    method for accelerating inception and residual networks on FPGA. In Proceedings
+    of the 55th Annual Design Automation Conference (DAC). ACM, San Francisco, CA,
+    USA, 16:1–16:6.
+
+    - <span id="page-14-7"></span>[43] Wenyan Lu, Guihai Yan, Jiajun Li, Shijun Gong,
+    Yinhe Han, and Xiaowei Li. 2017. FlexFlow: A Flexible Dataflow Accelerator Architecture
+    for Convolutional Neural Networks. In Proceedings of the IEEE International Symposium
+    on High Performance Computer Architecture (HPCA). IEEE Computer Society, Austin,
+    TX, USA, 553–564.
+
+    - <span id="page-14-8"></span>[44] Yufei Ma, Yu Cao, Sarma B. K. Vrudhula, and
+    Jae-sun Seo. 2017. Optimizing Loop Operation and Dataflow in FPGA Acceleration
+    of Deep Convolutional Neural Networks. In Proceedings of the ACM/SIGDA International
+    Symposium on Field-Programmable Gate Arrays (FPGA). ACM, Monterey, CA, USA, 45–54.
+
+    - <span id="page-14-0"></span>[45] Marvin Minsky and Seymour Papert. 1987. Perceptrons
+    - an introduction to computational geometry. MIT Press, .
+
+    - <span id="page-14-24"></span>[46] Bert Moons, Roel Uytterhoeven, Wim Dehaene,
+    and Marian Verhelst. 2017. Envision: A 0.26-to-10TOPS/W subword-parallel dynamicvoltage-accuracy-frequency-scalable
+    Convolutional Neural Network processor in 28nm FDSOI. In Proceedings of the IEEE
+    International Solid-State Circuits Conference (ISSCC). IEEE, San Francisco, CA,
+    USA, 246–247.
+
+    - <span id="page-14-21"></span>[47] Ravi Teja Mullapudi, Andrew Adams, Dillon
+    Sharlet, Jonathan Ragan-Kelley, and Kayvon Fatahalian. 2016. Automatically scheduling
+    halide image processing pipelines. ACM Trans. Graph. 35, 4 (2016), 83:1– 83:11.
+
+    - <span id="page-14-12"></span>[48] Thomas Norrie, Nishant Patil, Doe Hyun Yoon,
+    George Kurian, Sheng Li, James Laudon, Cliff Young, Norman P. Jouppi, and David
+    A. Patterson. 2020. Google''s Training Chips Revealed: TPUv2 and TPUv3. In Proceedings
+    of the IEEE Hot Chips 32 Symposium (HCS). IEEE, Palo Alto, CA, USA, 1–70.
+
+    - <span id="page-14-16"></span>[49] NVIDIA. 2018. THE NVIDIA DEEP LEARNING ACCELERATOR.
+    In Proceedings of the IEEE Hot Chips 30 Symposium (HCS). IEEE, Cupertino, CA,
+    USA, 1–18.
+
+    - <span id="page-14-18"></span>[50] Angshuman Parashar, Priyanka Raina, Yakun
+    Sophia Shao, Yu-Hsin Chen, Victor A. Ying, Anurag Mukkara, Rangharajan Venkatesan,
+    Brucek Khailany, Stephen W. Keckler, and Joel S. Emer. 2019. Timeloop: A Systematic
+    Approach to DNN Accelerator Evaluation. In Proceedings of the IEEE International
+    Symposium on Performance Analysis of Systems and Software (ISPASS). IEEE, Madison,
+    WI, USA, 304–315.
+
+    - <span id="page-14-25"></span>[51] Angshuman Parashar, Minsoo Rhu, Anurag Mukkara,
+    Antonio Puglielli, Rangharajan Venkatesan, Brucek Khailany, Joel S. Emer, Stephen
+    W. Keckler, and William J. Dally. 2017. SCNN: An Accelerator for Compressed-sparse
+    Convolutional Neural Networks. In Proceedings of the 44th Annual International
+    Symposium on Computer Architecture (ISCA). ACM, Toronto, ON, Canada, 27–40.
+
+    - <span id="page-14-23"></span>[52] Alec Radford and Karthik Narasimhan. 2018.
+    Improving Language Understanding by Generative Pre-Training. In Preprint. OpenAI,
+    , 1– 12.
+
+    - <span id="page-14-5"></span>[53] Esteban Real, Alok Aggarwal, Yanping Huang,
+    and Quoc V. Le. 2019. Regularized Evolution for Image Classifier Architecture
+    Search. In Proceedings of the 33rd Conference on Artificial Intelligence (AAAI).
+    AAAI Press, Honolulu, Hawaii, USA, 4780–4789.
+
+    - <span id="page-14-1"></span>[54] Frank Rosenblatt. 1957. The perceptron, a perceiving
+    and recognizing automaton Project Para. Cornell Aeronautical Laboratory, .
+
+    - <span id="page-14-4"></span>[55] Mark Sandler, Andrew G. Howard, Menglong Zhu,
+    Andrey Zhmoginov, and Liang-Chieh Chen. 2018. MobileNetV2: Inverted Residuals
+    and Linear Bottlenecks. In Proceedings of the IEEE Conference on Computer Vision
+    and Pattern Recognition (CVPR). Computer Vision Foundation / IEEE Computer Society,
+    Salt Lake City, UT, USA, 4510–4520.
+
+    - <span id="page-14-20"></span>[56] Yakun Sophia Shao, Jason Clemons, Rangharajan
+    Venkatesan, Brian Zimmer, Matthew Fojtik, Nan Jiang, Ben Keller, Alicia Klinefelter,
+    Nathaniel Pinckney, Priyanka Raina, Stephen G. Tell, Yanqing Zhang, William J.
+    Dally, Joel Emer, C. Thomas Gray, Brucek Khailany, and Stephen W. Keckler. 2019.
+    Simba: Scaling Deep-Learning Inference with Multi-Chip-Module-Based Architecture.
+    In Proceedings of the IEEE/ACM International Symposium on Microarchitecture (MICRO).
+    ACM, Columbus, OH, USA, 14–27.
+
+    - <span id="page-14-2"></span>[57] Karen Simonyan and Andrew Zisserman. 2015.
+    Very Deep Convolutional Networks for Large-Scale Image Recognition. In Proceedings
+    of the International Conference on Learning Representations (ICLR). Computational
+    and Biological Learning Society, San Diego, CA, USA, 1–14.
+
+    - <span id="page-14-26"></span>[58] Zhuoran Song, Bangqi Fu, Feiyang Wu, Zhaoming
+    Jiang, Li Jiang, Naifeng Jing, and Xiaoyao Liang. 2020. DRQ: Dynamic Region-based
+    Quantization for Deep Neural Network Acceleration. In Proceedings of the 47th
+    ACM/IEEE Annual International Symposium on Computer Architecture (ISCA). IEEE,
+    Valencia, Spain, 1010–1021.
+
+    - <span id="page-14-3"></span>[59] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre
+    Sermanet, Scott E. Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke,
+    and Andrew Rabinovich. 2015. Going deeper with convolutions. In Proceedings of
+    the IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE Computer
+    Society, Boston, MA, USA, 1–9.
+
+    - <span id="page-14-13"></span>[60] Emil Talpes, Douglas Williams, and Debjit
+    Das Sarma. 2022. DOJO: The Microarchitecture of Tesla''s Exa-Scale Computer. In
+    Proceedings of the IEEE Hot Chips 34 Symposium (HCS). IEEE, Cupertino, CA, USA,
+    1–28.
+
+    - <span id="page-14-9"></span>[61] Zhanhong Tan, Hongyu Cai, Runpei Dong, and
+    Kaisheng Ma. 2021. NN-Baton: DNN Workload Orchestration and Chiplet Granularity
+    Exploration for Multichip Accelerators. In Proceedings of the IEEE Annual International
+    Symposium on Computer Architecture (ISCA). IEEE, Valencia, Spain, 1013–1026.
+
+    - <span id="page-14-27"></span>[62] Jakub Tarnawski, Amar Phanishayee, Nikhil
+    R. Devanur, Divya Mahajan, and Fanny Nina Paravecino. 2020. Efficient Algorithms
+    for Device Placement of DNN Graph Operators. In Advances in Neural Information
+    Processing Systems (NeurIPS), Hugo Larochelle, Marc''Aurelio Ranzato, Raia Hadsell,
+    Maria-Florina Balcan, and Hsuan-Tien Lin (Eds.). Open-Review.net, Virtual, 1–13.
+
+    - <span id="page-14-14"></span>[63] Tenstorrent. 2021. Grayskull. <https://tenstorrent.com/grayskull/>.
+
+    - <span id="page-14-22"></span>[64] Ashish Vaswani, Noam Shazeer, Niki Parmar,
+    Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+    2017. Attention is All you Need. In Advances in Neural Information Processing
+    Systems (NIPS), Isabelle Guyon, Ulrike von Luxburg, Samy Bengio, Hanna M. Wallach,
+    Rob Fergus, S. V. N. Vishwanathan, and Roman Garnett (Eds.). OpenReview.net, Long
+    Beach, CA, USA, 5998–6008.
+
+    - <span id="page-14-17"></span>[65] Ofri Wechsler, Michael Behar, and Bharat Daga.
+    2019. Spring Hill (NNP-I 1000) Intel''s Data Center Inference Chip. In Proceedings
+    of the IEEE Hot Chips 31 Symposium (HCS). IEEE, Cupertino, CA, USA, 1–12.
+
+    - <span id="page-14-10"></span>[66] Jian Weng, Sihao Liu, Vidushi Dadu, Zhengrong
+    Wang, Preyas Shah, and Tony Nowatzki. 2020. DSAGEN: Synthesizing Programmable
+    Spatial Accelerators. In Proceedings of the 47th ACM/IEEE Annual International
+    Symposium on Computer Architecture (ISCA). IEEE, Valencia, Spain, 268–281.
+
+    - <span id="page-14-11"></span>[67] Qingcheng Xiao, Size Zheng, Bingzhe Wu, Pengcheng
+    Xu, Xuehai Qian, and Yun Liang. 2021. HASCO: Towards Agile HArdware and Software
+    CO-design for Tensor Computation. In Proceedings of the 48th ACM/IEEE Annual International
+    Symposium on Computer Architecture (ISCA). IEEE, Valencia, Spain, 1055–1068.
+
+    - <span id="page-14-6"></span>[68] Saining Xie, Alexander Kirillov, Ross B. Girshick,
+    and Kaiming He. 2019. Exploring Randomly Wired Neural Networks for Image Recognition.
+    In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV).
+    IEEE, Seoul, South Korea, 1284–1293.
+
+    - <span id="page-14-15"></span>[69] Andrew Yang. 2019. Deep Learning Training
+    At Scale Spring Crest Deep Learning Accelerator (Intel® Nervana™ NNP-T). In Proceedings
+    of the IEEE Hot Chips 31 Symposium (HCS). IEEE, Cupertino, CA, USA,
+
+
+    <span id="page-15-0"></span>1–20.
+
+
+    - <span id="page-15-2"></span>[70] Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter,
+    Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos
+    Kozyrakis, and Mark Horowitz. 2020. Interstellar: Using Halide''s Scheduling Language
+    to Analyze DNN Accelerators. In Proceedings of the International Conference on
+    Architectural Support for Programming Languages and Operating Systems (ASPLOS).
+    ACM, Lausanne, Switzerland, 369–383.
+
+    - <span id="page-15-6"></span>[71] Size Zheng, Renze Chen, Anjiang Wei, Yicheng
+    Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, and Yun Liang.
+    2022. AMOS: enabling automatic mapping for tensor computations on spatial accelerators
+    with hardware abstraction. In Proceedings of the 49th Annual International Symposium
+    on Computer Architecture (ISCA). ACM, New York, New York, USA, 874–887.
+
+    - <span id="page-15-4"></span>[72] Shixuan Zheng, Xianjue Zhang, Leibo Liu, Shaojun
+    Wei, and Shouyi Yin. 2022. Atomic Dataflow based Graph-Level Workload Orchestration
+    for Scalable DNN Accelerators. In Proceedings of the IEEE International Symposium
+    on High-Performance Computer Architecture (HPCA). IEEE, Seoul, South Korea, 475–489.
+
+    - <span id="page-15-3"></span>[73] Shixuan Zheng, Xianjue Zhang, Daoli Ou, Shibin
+    Tang, Leibo Liu, Shaojun Wei, and Shouyi Yin. 2020. Efficient Scheduling of Irregular
+    Network Structures on CNN Accelerators. IEEE Transactions on Computer-Aided Design
+    of Integrated Circuits and Systems (TCAD) 39, 11 (2020), 3408–3419.
+
+    - <span id="page-15-5"></span>[74] Brian Zimmer, Rangharajan Venkatesan, Yakun
+    Sophia Shao, Jason Clemons, Matthew Fojtik, Nan Jiang, Ben Keller, Alicia Klinefelter,
+    Nathaniel Ross Pinckney, Priyanka Raina, Stephen G. Tell, Yanqing Zhang, William
+    J. Dally, Joel S. Emer, C. Thomas Gray, Stephen W. Keckler, and Brucek Khailany.
+    2019. A 0.11 pJ/Op, 0.32-128 TOPS, Scalable Multi-Chip-Module-based Deep Neural
+    Network Accelerator with Ground-Reference Signaling in 16nm. In Proceedings of
+    the IEEE Symposium on VLSI Circuits (VLSI). IEEE, Kyoto, Japan, 300.
+
+    - <span id="page-15-1"></span>[75] Barret Zoph, Vijay Vasudevan, Jonathon Shlens,
+    and Quoc V. Le. 2018. Learning Transferable Architectures for Scalable Image Recognition.
+    In IEEE Conference on Computer Vision and Pattern Recognition, (CVPR). Computer
+    Vision Foundation / IEEE Computer Society, Salt Lake City, UT, USA, 8697–8710.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper contains multiple references
+      to empirical evaluation, including sections discussing experiments, results,
+      and comparisons with other methods. It mentions experiments demonstrating the
+      performance of the proposed framework, Cocco, and provides quantitative results
+      such as cost reductions and memory usage. Additionally, there are figures and
+      tables presenting evaluation data, such as Figure 3 and Table 1, which further
+      support the presence of empirical evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its content, including a detailed discussion of related
+      works, comparisons to previous methods, and numerous academic citations that
+      provide context and support for the proposed methods.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces Cocco, a novel hardware-mapping
+      co-exploration framework that leverages graph-level features of networks to
+      optimize memory capacity and communication. It proposes a new subgraph execution
+      scheme, an efficient dataflow and memory management method, and a genetic-based
+      algorithm for co-exploration, which are claimed to be novel contributions in
+      the context of optimizing DNN accelerators. The paper makes clear claims of
+      contribution and demonstrates novelty in its approach to memory and communication
+      optimization.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new framework
+      called Cocco for hardware-mapping co-exploration, which optimizes memory capacity
+      and communication in DNN accelerators. It presents novel contributions, including
+      a graph-level execution scheme, a genetic-based optimization framework, and
+      experimental results demonstrating the effectiveness of the proposed methods.
+      The paper does not primarily summarize existing work but instead focuses on
+      new contributions and methodologies.'
+  topics:
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses memory capacity, data movement, and
+      energy consumption in the context of hardware design for DNN accelerators, which
+      are critical components of computer architecture.
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper is centered around deep neural networks (DNNs),
+      which are a significant aspect of machine learning, indicating that the topic
+      is also relevant to this area.
+    main_topic_sub: Memory Hierarchy
+    secondary_topic_sub: Deep Learning

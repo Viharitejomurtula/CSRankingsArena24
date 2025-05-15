@@ -1,0 +1,1451 @@
+papers:
+- title: "Energy-adaptive Buffering for Efficient, Responsive, and Persistent\n  Batteryless\
+    \ Systems"
+  abstract: "Batteryless energy harvesting systems enable a wide array of new sensing,\n\
+    computation, and communication platforms untethered by power delivery or\nbattery\
+    \ maintenance demands. Energy harvesters charge a buffer capacitor from\nan unreliable\
+    \ environmental source until enough energy is stored to guarantee a\nburst of\
+    \ operation despite changes in power input. Current platforms use a\nfixed-size\
+    \ buffer chosen at design time to meet constraints on charge time or\napplication\
+    \ longevity, but static energy buffers are a poor fit for the highly\nvolatile\
+    \ power sources found in real-world deployments: fixed buffers waste\nenergy both\
+    \ as heat when they reach capacity during a power surplus and as\nleakage when\
+    \ they fail to charge the system during a power deficit.\n  To maximize batteryless\
+    \ system performance in the face of highly dynamic\ninput power, we propose REACT:\
+    \ a responsive buffering circuit which varies\ntotal capacitance according to\
+    \ net input power. REACT uses a variable capacitor\nbank to expand capacitance\
+    \ to capture incoming energy during a power surplus\nand reconfigures internal\
+    \ capacitors to reclaim additional energy from each\ncapacitor as power input\
+    \ falls. Compared to fixed-capacity systems, REACT\ncaptures more energy, maximizes\
+    \ usable energy, and efficiently decouples system\nvoltage from stored charge\
+    \ -- enabling low-power and high-performance designs\npreviously limited by ambient\
+    \ power. Our evaluation on real-world platforms\nshows that REACT eliminates the\
+    \ tradeoff between responsiveness, efficiency,\nand longevity, increasing the\
+    \ energy available for useful work by an average\n25.6% over static buffers optimized\
+    \ for reactivity and capacity, improving\nevent responsiveness by an average 7.7x\
+    \ without sacrificing capacity, and\nenabling programmer directed longevity guarantees."
+  url: http://arxiv.org/abs/2401.08806v1
+  keywords: ''
+  document: '# Energy-adaptive Buffering for Efficient, Responsive, and Persistent
+    Batteryless Systems
+
+
+    Harrison Williams Virginia Tech hrwill@vt.edu
+
+
+    Matthew Hicks Virginia Tech mdhicks2@vt.edu
+
+
+    ## Abstract
+
+
+    Batteryless energy harvesting systems enable a wide array of new sensing, computation,
+    and communication platforms untethered by power delivery or battery maintenance
+    demands. Energy harvesters charge a buffer capacitor from an unreliable environmental
+    source until enough energy is stored to guarantee a burst of operation despite
+    changes in power input. Current platforms use a fixed-size buffer chosen at design
+    time to meet constraints on charge time or application longevity, but static energy
+    buffers are a poor fit for the highly volatile power sources found in real-world
+    deployments: fixed buffers waste energy both as heat when they reach capacity
+    during a power surplus and as leakage when they fail to charge the system during
+    a power deficit.
+
+
+    To maximize batteryless system performance in the face of highly dynamic input
+    power, we propose REACT: a responsive buffering circuit which varies total capacitance
+    according to net input power. REACT uses a variable capacitor bank to expand capacitance
+    to capture incoming energy during a power surplus and reconfigures internal capacitors
+    to reclaim additional energy from each capacitor as power input falls. Compared
+    to fixed-capacity systems, REACT captures more energy, maximizes usable energy,
+    and efficiently decouples system voltage from stored charge—enabling low-power
+    and high-performance designs previously limited by ambient power. Our evaluation
+    on real-world platforms shows that REACT eliminates the tradeoff between responsiveness,
+    efficiency, and longevity, increasing the energy available for useful work by
+    an average 25.6% over static buffers optimized for reactivity and capacity, improving
+    event responsiveness by an average 7.7 without sacrificing capacity, and enabling
+    programmer directed longevity guarantees.
+
+
+    ## <span id="page-0-0"></span>1 Introduction
+
+
+    Ever-shrinking computing and sensing hardware has pushed mobile Internet-of-Things
+    (IoT) type devices beyond the limits of the batteries powering them. A typical
+    low cost/power microcontroller [\[19\]](#page-11-0) drains a 1 <sup>3</sup> battery
+    nearly 14x its size in just over 8 weeks of active operation [\[36\]](#page-12-0),
+    rendering the system useless without a potentially costly replacement effort.
+    Cost, maintenance, and safety concerns make batteries further incompatible with
+    massive-scale (one million devices per square kilometer [\[5\]](#page-11-1)) and
+    deeply-deployed (infrastructure [\[2\]](#page-11-2), healthcare [\[34\]](#page-12-1))
+    applications. IoT engineers are turning to batteryless energy harvesting platforms
+
+
+    to power low-cost, perpetual systems capable of driving a ubiquitous computing
+    revolution. Increasingly efficient energy harvesting circuits enable batteryless
+    systems across a range of IoT use cases including feature-rich batteryless temperature
+    sensors 500x smaller than a grain of rice [\[47\]](#page-12-2) and batteryless
+    flow-meters [\[13\]](#page-11-3) supporting deep-sea drilling or geothermal plants
+    for decades without maintenance.
+
+
+    The energy harvesting design model both enables new deployments previously limited
+    by batteries and places new demands on system developers. Harvested energy is
+    highly unreliable: sensitive environmental factors such as shadows over a photovoltaic
+    cell or shifts in the orientation of a rectenna produce rapid, outsized changes
+    in the energy scavenged by the harvester. Energy harvesters mitigate this unreliability
+    by charging an energy buffer to a given enable voltage, which the system periodically
+    discharges to supply a useful quantum of work despite potential power loss.
+
+
+    Buffer capacity is a key design element of any batteryless system. Past work [\[7\]](#page-11-4)
+    explores the tradeoff between buffer sizes: small buffers are highly reactive—charging
+    rapidly and quickly enabling the system to address time-sensitive events—but sacrifice
+    longevity because they rapidly discharge during operation, guaranteeing only a
+    short burst of uninterrupted operation. Large buffers store more energy at a given
+    voltage, improving longevity by supporting a longer or more energy-intensive burst
+    of operation at the cost of reactivity because they require more energy to enable
+    the system at all. Matching buffer size to projected energy demand is critical
+    to ensuring the system is both reactive enough to address incoming events/deadlines
+    (e.g., periodic sensor readings) and long-lived enough to support uninterruptible
+    operations (e.g., radio transmissions). Designers choose the minimum size necessary
+    to power all atomic operations on the device, maximizing reactivity given a required
+    level of longevity.
+
+
+    In this work, we explore static energy buffer efficiency as a third metric for
+    buffer performance and find that it varies dramatically with net energy input
+    rather than simple energy demand. Small buffers reach capacity quickly if power
+    input exceeds instantaneous demand—burning off hard-won energy as heat to prevent
+    overvoltage. Large buffers capture all incoming power, but enable slowly and lose
+    more harvested energy to leakage below the minimum system voltage. The volatile
+    nature of harvested power means that fixed-size buffers experience both problems
+    over the course of their
+
+
+    deployment, discharging energy during a power surplus and losing large portions
+    of energy to leakage during a deficit.
+
+
+    To make the most of incoming energy in all circumstances, we propose REACT[1](#page-1-0)
+    : a dynamic energy buffering system that varies its capacitance following changes
+    in net power. REACT maximizes system responsiveness and efficiency using a small
+    static buffer capacitor, quickly enabling the system to monitor events or do other
+    low-power work under even low input power. If input power rises beyond the current
+    system demand and the static buffer approaches capacity, REACT connects additional
+    capacitor banks to absorb the surplus, yielding the capacity benefits of large
+    buffers without the responsiveness penalty. When net power is negative, these
+    capacitors hold the system voltage up and extend operation beyond what is possible
+    using the small static capacitor.
+
+
+    While expanding buffer size to follow net power input ensures the system can capture
+    all incoming energy, increasing capacitance also increases the amount of unusable
+    charge stored on the capacitor banks—charge which could power useful work if it
+    were on a smaller capacitor and therefore available at a higher voltage. As supply
+    voltage falls and approaches a minimum threshold, REACT reclaims this otherwise-unavailable
+    energy by reconfiguring capacitor banks into series, shifting the same amount
+    of charge onto a smaller equivalent capacitance in order to boost the voltage
+    at the buffer output and ensure the system continues operating for as long as
+    possible. REACT effectively eliminates the design tradeoff between reactivity
+    and capacity by tuning buffer size within an arbitrarily large capacitance range,
+    only adding capacity when the buffer is already near full. REACT''s charge reclamation
+    techniques maximize efficiency by moving charge out of large capacitor banks onto
+    smaller ones when net input power is negative, ensuring all energy is available
+    for useful work.
+
+
+    We integrate a hardware prototype of REACT into a full energy harvesting platform
+    to evaluate it against previous work, operating under different input power conditions
+    and with different power consumption profiles. Our results indicate that REACT
+    provides the "best of both worlds" of both smalland large-buffer systems, rapidly
+    reaching the operational voltage under any power conditions while also expanding
+    as necessary to capture all available energy and provide software longevity guarantees
+    as needed. Maximizing buffer capacity and reclaiming charge using REACT''s reconfigurable
+    capacitor banks eliminates the efficiency penalties associated with both small
+    and large static capacitor buffers, increasing the portion of harvested energy
+    used for application code by an average 39% over an equally-reactive static buffer
+    and 19% over an equal-capacity one. Compared to prior work exploring dynamic capacitance
+    for batteryless systems [\[49\]](#page-12-3), REACT improves performance by an
+    average 26% owing to
+
+
+    its efficient charge management structure. This paper makes the following technical
+    contributions:
+
+
+    - We evaluate the power dynamics of common batteryless systems in real deployments
+    and explore how common-case volatility introduces significant energy waste in
+    static or demand-driven buffers (§ [2\)](#page-1-1).
+
+    - We design REACT, a dynamic buffer system which varies its capacitance according
+    to system needs driven by net input power (§ [3\)](#page-3-0). REACT''s configurable
+    arrays combine the responsiveness of small buffers with the longevity and capacity
+    of large ones, enables energy reclamation to make the most of harvested power,
+    and avoids the pitfalls of energy waste inherent in other dynamic capacitance
+    designs (§ [3.3\)](#page-4-0).
+
+    - We integrate REACT into a batteryless system and evaluate its effect on reactivity,
+    longevity, and efficiency under a variety of power conditions and workloads (§
+    [5\)](#page-8-0). Our evaluation indicates that REACT eliminates the responsiveness-longevity
+    tradeoff inherent in static buffer design while increasing overall system efficiency
+    compared to any static system.
+
+
+    ## <span id="page-1-1"></span>2 Background and Related Work
+
+
+    Scaling sensing, computation, and communication down to smart dust [\[23\]](#page-11-5)
+    dimensions requires harvesting power ondemand rather than packaging energy with
+    each device using a battery. Many batteryless systems use photovoltaic [\[9,](#page-11-6)
+    [47\]](#page-12-2) or RF power [\[40\]](#page-12-4), while other use-cases are
+    better suited for sources such as vibration [\[41\]](#page-12-5), fluid flow [\[13\]](#page-11-3),
+    or heat gradients [\[27\]](#page-11-7). Commonalities between ambient power sources
+    have inspired researchers to develop general-purpose batteryless systems, regardless
+    of the actual power source: ambient power is unpredictable, dynamic, and often
+    scarce relative to the active power consumption of the system.
+
+
+    Batteryless systems isolate sensing and actuation components from volatile power
+    using a buffer capacitor. The harvester charges the capacitor to a pre-defined
+    enable voltage, after which the system turns on and begins consuming power. Because
+    many environmental sources cannot consistently power continuous execution, systems
+    operate intermittently—draining the capacitor in short bursts of operation punctuated
+    by long recharge periods. This generalpurpose intermittent operation model has
+    enabled researchers to abstract away the behavior of incoming power and focus
+    on developing correct and efficient techniques for working under intermittent
+    power [\[17,](#page-11-8) [26,](#page-11-9) [28,](#page-11-10) [29,](#page-11-11)
+    [44,](#page-12-6) [46\]](#page-12-7).
+
+
+    ## 2.1 Choosing Buffer Capacity
+
+
+    Buffer size determines system behavior in several important ways. Supercapacitors
+    provide inexpensive and small-formfactor bulk capacitance [\[24\]](#page-11-12),
+    enabling designers to choose a capacitor according to performance rather than
+    cost or size concerns. Two metrics motivate past work: reactivity refers
+
+
+    <span id="page-1-0"></span><sup>1</sup>Reconfigurable, Energy-Adaptive CapaciTors
+
+
+    <span id="page-2-0"></span>![](_page_2_Figure_0.jpeg)
+
+
+    Figure 1. Static buffer operation on a simulated solar harvester. Highlighted
+    blocks indicate the system is running.
+
+
+    to the system''s ability to rapidly charge to its enable voltage and begin operation.
+    High reactivity ensures a system is online to execute periodic tasks or address
+    unpredictable input events. Longevity refers to the energy available for an uninterrupted
+    period of work with no additional power input; long-lived systems support high-power
+    and long-running uninterruptible operations and reduce the overhead incurred with
+    state recovery after a power loss.
+
+
+    2.1.1 Reactivity and Longevity: A batteryless system''s reactivity and longevity
+    depend primarily on the charge and discharge rate of the buffer capacitor. We
+    illustrate the tradeoff using a simulated solar harvester with a 22% efficient,
+    5 cm<sup>2</sup> panel, based on a pedestrian trace from the EnHANTs solar dataset
+    [\[12\]](#page-11-13). The system runs from 3.6V down to 1.8V and draws 1.5 mA
+    in active mode, representative of a typical deployment [\[25\]](#page-11-14).
+    Figure [1](#page-2-0) illustrates the reactivity-longevity tradeoff inherent in
+    static buffer systems at two design extremes, using a 1 mF and 300 mF capacitor.
+    The 1 mF system charges rapidly and is therefore highly reactive, reaching the
+    enable voltage over 8 sooner than the 300 mF version. However, the smaller capacitor
+    also discharges quickly—the mean length of an uninterrupted power cycle using
+    the 1 mF capacitor is 10 seconds versus 880 seconds for the 300 mF capacitor,
+    indicating the 300 mF system is far longer-lived once charged. The relative importance
+    of reactivity and longevity depends on the use case, but often changes over time
+    for a complex system—complicating design further.
+
+
+    2.1.2 Power Volatility and Energy Efficiency: Buffer capacity is also a major
+    driver of end-to-end energy efficiency: using the 300 mF capacitor our system
+    is operational for 49% of the overall power trace, compared to only 27% for the
+    1 mF platform. This stems from the high volatility of incoming power—82% of the
+    total energy input is collected during
+
+
+    short-duration power spikes when harvested power rises above 10 mW, despite the
+    system spending 77% of its time at input powers below 3 mW. A large buffer captures
+    this excess energy to use later while the smaller buffer quickly reaches capacity
+    and discharges energy as heat to avoid overvoltage.
+
+
+    Large buffers, however, are not always more efficient: the energy used to charge
+    the capacitor to the operational voltage cannot power useful work, and is eventually
+    lost to leakage while the system is off. When power input is low, this "cold-start"
+    energy represents a significant portion of total harvested energy. For the system
+    described above powered by a solar panel at night [\[12\]](#page-11-13), the 1
+    mF buffer enables a duty cycle of 5.7% versus only 3.3% using a 10 mF buffer.
+    This low power environment highlights another risk of oversized buffers: the system
+    using the 300 mF capacitor never reaches the enable voltage and so never begins
+    operation.
+
+
+    Improvements in harvester efficiency and low-power chip design are closing the
+    gap between harvester output and chip power consumption. Power is increasingly
+    limited by volatile environmental factors rather than scarcity induced by low
+    efficiency; the result is that energy harvesters experience periods of both energy
+    scarcity and surplus. Rapidly changing power conditions place opposing demands
+    on batteryless systems, which must remain responsive with low input power, provide
+    longevity for long-running operations, and maximize efficiency by avoiding energy
+    waste.
+
+
+    ## 2.2 Power-Responsive Performance Scaling
+
+
+    One solution to volatile energy input is modulating throughput according to incoming
+    power, increasing execution rate when power is plentiful and decreasing it to
+    maintain availability when power is scarce. Limiting net input power to the buffer
+    by matching power consumption with input enables systems to use small buffer capacitors
+    without reaching the buffer capacity, ensuring no power is wasted with an over-full
+    buffer. Past work realizes power-responsive scaling using heterogeneous architectures
+    [\[10\]](#page-11-15) or by adapting the rate and accuracy of software execution
+    [\[1,](#page-11-16) [4,](#page-11-17) [30,](#page-12-8) [48\]](#page-12-9).
+
+
+    Unfortunately, we find the assumptions underlying powerperformance scaling often
+    do not apply to batteryless systems. Increasing energy consumption by accelerating
+    execution only improves systems which have useful work to do exactly when input
+    power is high, but many batteryless systems focus on periodic sensing and actuation
+    deadlines which do not correlate with ambient power supply. Further, resource-constrained
+    platforms may have few on-chip operations which can be delayed until power is
+    plentiful; when these operations do exist, they are often not amenable to scaling
+    (e.g., transmitting data to a base station may be delayed but always requires
+    a fixed-cost radio operation). Flexible batteryless systems must capture energy
+    and use it on demand rather than fit operation to unreliable power input.
+
+
+    ## 2.3 Multiplexed Energy Storage
+
+
+    Rather than match power consumption to incoming supply, systems may charge multiple
+    static buffers according to projected demand. Capybara [\[7\]](#page-11-4) switches
+    capacitance using an array of heterogeneous buffers: programmers set capacitance
+    modes throughout the program, using a smaller capacitor to maximize responsiveness
+    for low-power or interruptible tasks and switching to a larger capacitor for high-power
+    atomic operations. UFoP and Flicker [\[15,](#page-11-18) [16\]](#page-11-19) assign
+    each peripheral on the system a separate buffer and charging priority, enabling
+    responsive low-power operation while waiting to collect sufficient energy for
+    high-power tasks. These systems increase overall energy capacity by directing
+    excess power to capacitors not currently in use.
+
+
+    Static arrays increase capacity without reducing responsiveness, but waste energy
+    when charge is stored on unused buffers. Reserving energy in secondary capacitors
+    1) requires error-prone [\[30\]](#page-12-8) speculation about future energy supply
+    and demand to decide charging priorities, which can change between when energy
+    is harvested and when it needs to be used; and 2), wastes energy as leakage when
+    secondary buffers are only partially charged, failing to enable associated systems
+    and keeping energy from higher-priority work. To minimize programmer speculation,
+    decouple tasks which compete for buffered energy, and minimize leakage, energy
+    must be fungible: the buffer must be capable of directing all harvested energy
+    to any part of the system on demand.
+
+
+    ## 2.4 Unified Dynamic Buffering
+
+
+    Past work has also explored varying the behavior of a single unified buffer to
+    capture the fungibility requirement described above. Dewdrop [\[6\]](#page-11-20)
+    varies the enable voltage to draw from a single capacitor according to projected
+    needs (e.g., begin operation at 2.2V instead of 3.6V)—providing complete energy
+    fungibility—but still suffers from the reactivitylongevity tradeoff of capacitor
+    size. Morphy [\[49\]](#page-12-3) replaces static buffers using a set of capacitors
+    in a unified switching network; software can connect and disconnect arbitrary
+    sets of capacitors in series or parallel to produce different equivalent capacitances.
+    Morphy addresses two challenges facing batteryless systems: fast charging from
+    low-voltage sources by operating the capacitor network as a charge pump, and charge
+    isolation to allocate set amounts of energy to tasks and prevent buggy code from
+    discharging the entire buffer by isolating parts of the capacitor array.
+
+
+    We evaluate REACT alongside Morphy because the Morphy architecture can also be
+    used to target the reactivity and longevity challenges discussed in § [1.](#page-0-0)
+    By starting with a small equivalent capacitance, the system rapidly reaches an
+    operational voltage. If the buffer as configured reaches capacity, software can
+    gradually reconfigure the capacitor network to increase capacitance. Charge flows
+    between the capacitors to equalize the voltage on the capacitor array and reduce
+
+
+    <span id="page-3-1"></span>![](_page_3_Figure_6.jpeg)
+
+
+    Figure 2. REACT diagram and signal flow between components.
+
+
+    the output voltage of the network, enabling the bank to harvest more energy without
+    reaching capacity. However, this current flow between capacitors to equalize voltage
+    during reconfiguration dissipates a significant amount of the energy stored in
+    the network (we explore these energy dynamics in detail in § [3.3.1\)](#page-4-1).
+    Our evaluation in § [5](#page-8-0) shows that this internal power dissipation
+    reduces common-case end-to-end performance to below that of systems using appropriatelysized
+    static capacitors, making this approach impractical for energy-constrained devices.
+    An energy-focused approach prioritizing minimal power dissipation is key to developing
+    intermittent systems that can simultaneously maximize reactivity, longevity, and
+    overall efficiency.
+
+
+    ## <span id="page-3-0"></span>3 Design
+
+
+    An intelligent energy buffering strategy is key to effective and efficient batteryless
+    systems. Three performance objectives, informed by the advantages and limitations
+    of prior approaches, drive REACT''s design:
+
+
+    - Minimize charge time: Rapidly reaching the operational voltage, even when buffered
+    energy cannot support complex operation, maximizes reactivity and enables systems
+    to reason about power or sensor events from within low-power sleep modes.
+
+    - Maximize capacity: System-wide longevity and efficiency require buffering large
+    amounts of incoming energy when power supply exceeds demand, either to power long-running
+    uninterruptible operations or support future power demand when supply is low.
+
+    - Maximize energy fungibility: Unpredictable power demand patterns mean that energy
+    cannot be preprovisioned to specific operations at harvest-time; systems need
+    the ability to draw all harvested energy from the buffer and direct it as needed.
+
+
+    ## 3.1 REACT Overview
+
+
+    REACT buffers energy using a fabric of reconfigurable capacitor banks that software
+    adjusts as needed. Figure [2](#page-3-1) shows a
+
+
+    high-level overview of REACT''s hardware design. We design REACT''s hardware component
+    as a drop-in replacement for a typical buffer between the harvester and the rest
+    of the system, while the buffer management software requires no code modification
+    or programmer input. The only system prerequisite is a set of digital I/O pins
+    to configure capacitor banks and receive voltage monitoring information.
+
+
+    ## 3.2 Cold-start Operation and the Last-level Buffer
+
+
+    From a cold start (() = 0), REACT minimizes overall capacitance in order to rapidly
+    charge to the operational voltage and enable the system with minimum energy input
+    (high reactivity). The minimum capacitance is set by the smallest quantum of useful
+    work available on the system (minimum required longevity), such as a short-lived
+    software operation or an initialization routine that puts the system into a lowpower
+    responsive sleep mode. REACT provides this rapid charge time using a small static
+    buffer referred to hereafter as the last-level buffer. Additional capacitor banks
+    are connected using normally-open switches and only contribute to overall capacitance
+    when configured to do so in software, after the system is able to reason about
+    buffered energy.
+
+
+    The last-level buffer sets the minimum capacitance at power-on when all other
+    banks are disconnected. This enables simple tuning of the energy input required
+    to enable the system (reactivity) and the guaranteed energy level when the system
+    does begin work (minimum longevity). It also smooths voltage fluctuations induced
+    by capacitor bank switching (§ [3.3.4\)](#page-6-0). Finally, the last-level buffer
+    serves as the combination point between the different capacitor banks and the
+    rest of the system. Although energy may be stored in multiple banks of varying
+    capacity at different voltages, combining it at the last-level buffer simplifies
+    system design by presenting harvested power as a unified pool of energy which
+    the system taps as needed (i.e., harvested energy is fungible).
+
+
+    3.2.1 Monitoring Buffered Energy. Despite mutual isolation, bank voltages tends
+    to equalize: the last-level buffer pulls energy from the highest-voltage bank
+    first, and current flows from the harvester to the lowest-voltage bank first.
+    This enables REACT to measure only the voltage on the lastlevel buffer as a surrogate
+    for remaining energy capacity. If voltage rises beyond an upper threshold—the
+    buffer is near capacity—REACT''s voltage instrumentation hardware signals the
+    software component running on the microcontroller to increase capacitance using
+    the configurable banks. Voltage falling below a lower threshold indicates the
+    buffer is running out of energy and that REACT should reconfigure banks to extract
+    additional energy and extend operation. RE-ACT''s instrumentation only needs to
+    signal three discrete states—near capacity, near undervoltage, and OK—so two low-power
+    comparators is sufficient for energy estimation.
+
+
+    <span id="page-4-3"></span>![](_page_4_Figure_5.jpeg)
+
+
+    Figure 3. REACT capacitor banks in different bank sizes and configurations. Arrows
+    indicate charging current path.
+
+
+    <span id="page-4-2"></span>![](_page_4_Figure_7.jpeg)
+
+
+    Figure 4. Structure of the unified approach presented by Yang et al. [\[49\]](#page-12-3).
+    Arrows indicate charging current path.
+
+
+    ## <span id="page-4-0"></span>3.3 Dynamic Capacitor Banks
+
+
+    The last-level buffer on its own enables high reactivity and minimizes cold-start
+    energy below the operational minimum, maximizing efficiency during power starvation.
+    However, when net power into the buffer is positive—such as during a period of
+    high input power or low workload—the small last-level buffer rapidly reaches capacity.
+    REACT provides the energy capacity required to both maximize efficiency and support
+    long-running operation by connecting configurable capacitor banks when the last-level
+    buffer reaches capacity, as shown in Figure [2.](#page-3-1)
+
+
+    <span id="page-4-1"></span>3.3.1 Capacitor Organization. Careful management of
+    the connections between each capacitor is key to maximizing energy efficiency
+    while also presenting a valid operational voltage for the computational backend.
+    Morphy [\[49\]](#page-12-3) presents one approach: by connecting a set of equally-sized
+    capacitors through switches similar to a charge pump, overall buffer capacitance
+    can be varied across a wide range of capacitance
+
+
+    <span id="page-5-0"></span>![](_page_5_Figure_0.jpeg)
+
+
+    Figure 5. Dissipative current flow in a fully-unified buffer during reconfiguration.
+    Energy is dissipated by current spikes after capacitors at different voltages
+    are placed in parallel.
+
+
+    values. Different switch configurations produce intermediate buffer sizes between
+    the extremes shown in Figure [4;](#page-4-2) gradually stepping through these
+    configurations smoothly varies capacitance through software control.
+
+
+    A fully interconnected array enables a wide range of equivalent, but introduces
+    significant waste through dissipative heating when the charged capacitor array
+    is reconfigured. Figure [5](#page-5-0) illustrates how energy is lost when charged
+    capacitors are connected in a new configuration. Before reconfiguration, the energy
+    contained in the system is = 1 2 (/4) 2 ; when a capacitor is taken out of series
+    and placed in parallel with the remaining capacitors to increase equivalent capacitance
+    to 4/3, current flows to the lowervoltage newly-parallel capacitor to equalize
+    output voltage. The final output voltage is 3 /8, and the remaining energy is
+    = 1 2 (4/3) (3 /8) 2 . The portion of energy conserved is / = 0.75—i.e., 25% of
+    buffered energy is dissipated by current in the switches during reconfiguration.
+    Larger arrays are increasingly inefficient: the same scenario with an 8-capacitor
+    array wastes 56.25% of its buffered energy transitioning from an 8-parallel to
+    a 7-series-1-parallel configuration. Similar waste occurs when reducing equivalent
+    capacitance by placing capacitors in series.[2](#page-5-1) Our evaluation in §
+    [5.5](#page-10-0) indicates that the energy loss caused by switching often outweighs
+    any advantage from dynamic behavior, causing the fully-connected approach to underperform
+    even static buffers.
+
+
+    3.3.2 Bank Isolation. The switching loss discussed above stems from charge flowing
+    between capacitors within the power network as they switch into different configurations.
+    REACT eliminates unnecessary current flow by organizing capacitors into independent,
+    mutually isolated banks as shown in Figure [2.](#page-3-1) Figure [3](#page-4-3)
+    illustrates in detail two example capacitor banks in each possible configuration:
+    capacitors within a bank can only be arranged in either full-series (low
+
+
+    capacitance) or full-parallel (high capacitance) so that no current flows between
+    capacitors within a bank. Isolation diodes on the input and output of each bank
+    prevent current between banks: when a charged parallel-configured bank is reconfigured
+    into series (reducing its capacitance and boosting its output voltage), isolation
+    diodes prevent it from charging other banks in the array. Similarly, banks re-configured
+    into parallel cannot draw current from anywhere except the energy harvester. Isolation
+    reduces the number of potential capacitor configurations compared to a fully-connected
+    network, but dramatically increases energy efficiency.
+
+
+    REACT''s isolation diodes direct the flow of current: intermediate capacitor arrays
+    are only charged directly from the energy harvester and only discharge to the
+    last-level buffer. This also means that all current from the harvester flows through
+    two diodes before reaching the system, so minimizing power dissipation in the
+    diodes is essential to maintaining overall system efficiency. To maximize charging
+    efficiency, we design REACT using ideal diode circuits incorporating a comparator
+    and pass transistor, rather than typical PN or Schottky diodes. Active ideal diodes
+    are far more efficient at typical currents for batteryless systems: the circuit
+    we use [\[21\]](#page-11-21) dissipates 0.02% of the power dissipated in a typical
+    Schottky diode [\[42\]](#page-12-10) at a supply current of 1 mA.
+
+
+    3.3.3 Bank Reconfiguration. The range of buffer sizes depends on the number of
+    capacitor banks and the number of capacitors in each bank. REACT''s capacitor
+    banks are effectively connected in parallel, so the overall capacitance is the
+    sum of each bank''s contribution. Each REACT bank containing identical capacitors
+    of capacitance may be configured to contribute no capacitance (disconnected),
+    series capacitance /, or parallel capacitance .
+
+
+    REACT must increment buffer capacitance in small steps in order to keep voltage
+    within the operational range while capturing all incoming power. A large increase
+    in capacitance pulls output voltage down and introduces cold-start energy loss
+    if net power input is low; for extreme cases, the system may run out of energy
+    and cease execution while the new capacitance charges even if incoming power would
+    be sufficient to power operation. REACT first connects banks in the series configuration
+    to contribute a small capacitance and avoid large jumps in overall buffer size.
+    If the buffer continues to charge and reaches the upper voltage limit ℎℎ, REACT
+    further expands capacitance by toggling double-pole-doublethrow bank switches
+    to configure the capacitors in parallel. Expanding the buffer by reconfiguring
+    charged capacitors rather than adding new ones reduces the time the system is
+    cut off from input power while current flows exclusively to the new capacitance,
+    because it is already charged toℎℎ/. Because no current flows between capacitors
+    or banks, bank reconfiguration changes capacitance seen on the common rail without
+    dissipative loss. REACT uses break-before-make switches to ensure no short-circuit
+    current flows during
+
+
+    <span id="page-5-1"></span><sup>2</sup>Charge pumps avoid this waste by never
+    connecting capacitors at different potentials in parallel; in this use case, however,
+    parallel capacitance is always necessary to smooth voltage fluctuations during
+    switching and keep the output voltage within the computational backend''s acceptable
+    range.
+
+
+    switching; incoming current flows directly to the last-level buffer during the
+    momentary open-circuit in the bank.
+
+
+    <span id="page-6-0"></span>3.3.4 Charge Reclamation. Reconfiguring a bank from
+    series to parallel allows REACT to efficiently increase capacitance without dropping
+    output voltage. When voltage on the last-level buffer appraches the threshold
+    value , indicating net power is leaving the buffer, REACT needs to reduce equivalent
+    capacitance to boost voltage and keep the backend running. REACT accomplishes
+    this by transitioning charged -capacitor banks from the parallel to the series
+    configuration, reducing equivalent capacitance from to / and boosting output voltage
+    from to . This boosts voltage on the last-level buffer and extracts more energy
+    from the capacitor bank than would otherwise be available once voltage falls below
+    .
+
+
+    The remaining energy unavailable after the parallel→series transition depends
+    on the number of -size capacitors in the bank. Before switching, the cold-start
+    energy stored on the parallel-mode bank is = 1 2 2 . Switching to the series configuration
+    conserves stored energy: = 1 2 ( /) () <sup>2</sup> = , but boosts voltage to
+    enable the digital system to continue extracting energy. If net power remains
+    negative, the system eventually drains the series-configuration bank down to .
+    This is energetically equivalent to draining the parallel-configuration bank to
+    /, leaving = 1 2 (/) <sup>2</sup> = 1 2 2 / unusable; the overall result is that
+    REACT reduces energy loss by a factor of <sup>2</sup> when reducing system capacitance
+    compared to simply disconnecting the capacitor.
+
+
+    3.3.5 Bank Size Constraints. Increasing the number of capacitors in a bank improves
+    efficiency by reclaiming more energy when switching a bank from parallel to series.
+    However, it also introduces voltage spikes when the bank output voltage is temporarily
+    multiplied by , increasing dissipative loss as current flows from the bank to
+    the lastlevel buffer. Because REACT measures overall energy at the last-level
+    buffer, the software component may interpret this voltage spike as a buffer-full
+    signal and incorrectly add capacitance despite low buffered energy. In extreme
+    cases, the voltage spike may exceed component absolute limits.
+
+
+    The size of the last-level buffer constrains the number and size of each capacitor
+    in a bank in order to keep voltage below REACT''s buffer-full threshold during
+    a parallel→series transition. A larger contains more energy and thus pulls voltage
+    higher when switched from parallel to series. Equation [1](#page-6-1) gives the
+    last-level buffer voltage after switching a bank to series at a trigger voltage
+    :
+
+
+    <span id="page-6-1"></span>
+
+    $$V\_{\text{new}} = \frac{(NV\_{low})(C\_{unit}/N)}{C\_{last} + C\_{unit}/N} +
+    \frac{V\_{low} \* C\_{last}}{C\_{last} + C\_{unit}/N} \tag{1}$$
+
+
+    Constraining < ℎℎ and solving for yields the absolute limit for (Equation [2\)](#page-6-2).
+    Note that is only constrained if the parallel→series transition at produces
+
+
+    <span id="page-6-3"></span>
+
+
+    | Bank                    | 0   | 1   | 2   | 3   | 4   | 5    |
+
+    |-------------------------|-----|-----|-----|-----|-----|------|
+
+    | Capacitor Size (𝜇𝐹<br>) | 770 | 220 | 440 | 880 | 880 | 5000 |
+
+    | Capacitor Count         | 1   | 3   | 3   | 3   | 3   | 2    |
+
+
+    Table 1. Bank size and configurations for our REACT test implementation. Bank
+    0 is the last-level buffer.
+
+
+    a voltage above ℎℎ:
+
+
+    <span id="page-6-2"></span>
+
+    $$C\_{unit} < \frac{NC\_{last}(V\_{high} - V\_{low})}{NV\_{low} - V\_{high}} \tag{2}$$
+
+
+    ## 3.4 REACT Software Interface
+
+
+    REACT''s standalone hardware design means that the software component running
+    on the target microcontroller is minimal. The software subsystem monitors for
+    incoming over- or under-voltage signals from REACT''s voltage instrumentation
+    and maintains a state machine for each capacitor bank. Each capacitor bank is
+    disconnected at startup; on an overvoltage signal from REACT''s hardware, the
+    software directs REACT to connect a new capacitor bank in the series configuration.
+    A second overvoltage signal[3](#page-7-0) causes REACT to reconfigure the newly-connected
+    bank to parallel; on the next overvoltage signal, REACT connects a second capacitor
+    bank, and so on. REACT similarly steps capacitor banks in the opposite direction
+    when an undervoltage signal arrives.
+
+
+    <span id="page-6-4"></span>3.4.1 Software-Directed Longevity. REACT''s software
+    component requires no active programmer intervention or code changes aside from
+    setting voltage thresholds, initializing each bank state machine, and setting
+    the order to connect and disconnect banks. Software does not need to know the
+    details (, ) of each bank, although this information with the state of each bank
+    gives a coarse idea of the current buffered energy. Because REACT only changes
+    capacitance when the bank is near-full or near-empty, capacitance level is an
+    effective surrogate for stored energy. Application code can use this feedback
+    to set longevity guarantees through RE-ACT''s software interface. In preparation
+    for a long-running or high-energy atomic operation, software sets a minimum capacitance
+    level corresponding to the amount of energy required and then enters a deep-sleep
+    mode keeping REACT''s capacitor polling time active. As the system charges, REACT
+    eventually accumulates enough energy to reach the minimum capacitance level—indicating
+    that enough energy is stored to complete the planned operation, and pulling the
+    system out of its deep-sleep with enough energy to complete execution regardless
+    of future power conditions.
+
+
+    ## 4 Implementation
+
+
+    We explore REACT''s impact on overall efficiency, reactivity, and longevity using
+    a hardware prototype integrated into a real batteryless platform. All files for
+    REACT, the baseline systems, and the energy harvesting emulator will be open-sourced
+    upon publication. Our testbed is based on the MSP430FR5994 [\[22\]](#page-11-22),
+    a popular microcontroller for energy harvesters [\[28,](#page-11-10) [44,](#page-12-6)
+    [45\]](#page-12-11). For each buffer configuration we evaluate, an intermediate
+    circuit power gates the MSP430 to begin operation once the buffer is charged to
+    3.3V and disconnects it when the buffer voltage reaches 1.8V.
+
+
+    Our REACT implementation has a range of 770 -18.03 using a set of 5 dynamic banks,
+    in addition to the lastlevel buffer, detailed in Table [1.](#page-6-3) We implement
+    the capacitors in banks 0-4 using combinations of 220 capacitors with max leakage
+    current of 28 at their rated voltage of 6.3V [\[32\]](#page-12-12). Bank 5 uses
+    supercapacitors with approximately 0.15 leakage current at 5.5V [\[33\]](#page-12-13).
+
+
+    ## 4.1 Baseline Systems
+
+
+    We evaluate REACT against three fixed-size buffers spanning our implementation''s
+    capacitance range—770 F, 10 mF, and 18 mF—to ensure the realized improvement is
+    a result of energy-adaptive behavior rather than simply different buffer capacity.
+    To compare REACT''s capacitor architecture to prior work on dynamic energy buffers,
+    we also implement and evaluate Morphy [\[49\]](#page-12-3) for a similar capacitance
+    range. Our Morphy implementation uses eight 2 capacitors with leakage current
+    of approximately 25.2 at 6.3V [\[35\]](#page-12-14) (i.e., slightly lower leakage
+    than the capacitors in REACT).
+
+
+    Morphy uses a secondary microcontroller powered by a battery or backup capacitor
+    to control the capacitor array; we use a second MSP430FR5994 powered through USB,
+    corresponding to Morphy''s battery-powered design. Accordingly, we expect our
+    results to slightly overestimate Morphy''s performance in the fully-batteryless
+    case as the system does not have to power the Morphy controller or charge a backup
+    capacitor in our implementation. Seven of the eight capacitors in the array are
+    available to reconfigure, with one task capacitor kept in parallel to smooth voltage
+    fluctuations from switching. We evaluate the same subset of eleven possible configurations
+    for the remaining seven capacitors as is done in the original Morphy work, resulting
+    in a capacitance range for our Morphy implementation of 250 -16 .
+
+
+    ## 4.2 Computational Backend
+
+
+    To explore how REACT affects performance across a range of system demands—focusing
+    on diverse reactivity and longevity requirements—we implement four software benchmarks:
+
+
+    - Sense and Compute (SC): Exit a deep-sleep mode once every five seconds second
+    to sample and digitally filter readings from a low-power microphone [\[11\]](#page-11-23).
+    This benchmark represents systems which value high reactivity and can accept low
+    persistence; individual atomic measurements are low-energy, but the system must
+    be online to take the measurements.
+
+    - Radio Transmission (RT): Send buffered data over radio [\[18,](#page-11-24)
+    [31\]](#page-12-15) to a base station. Data transmission is an example of an application
+    with high persistence requirements (radio transmissions are atomic and energyintensive)
+    and low reactivity requirements (transmitting data may be delayed until energy
+    is available).
+
+    - Packet Forwarding (PF): Listen for and retransmit unpredictable incoming data
+    over the radio. Timely packet forwarding demands both high persistence and reactivity
+    to successfully receive and retransmit data.
+
+
+    We emulate the power consumption of the necessary peripherals for each benchmark
+    by toggling a resistor connected to a digital output on the MSP430, with values
+    for each benchmark chosen to match the relevant peripheral. The reactivity-focused
+    benchmarks (SC and PF) have deadlines that may arrive while the system is off;
+    we use a secondary MSP430 to deliver these events. A deployed system may use remanence-based
+    timekeepers [\[8\]](#page-11-25) to track internal deadlines despite power failures
+    for the SC benchmark, while incoming packets as in the PF benchmark would arrive
+    from other systems. Although we evaluate each benchmark in isolation, full systems
+    are likely to exercise combinations of each requirement—one platform should support
+    all reactivity, persistence, and efficiency requirements.
+
+
+    ## <span id="page-7-1"></span>4.3 Energy Harvesting Frontend
+
+
+    Energy harvesting volatility makes repeatable experimentation with batteryless
+    devices difficult; uncontrollable environmental changes often have an outsized
+    effect on energy input and obfuscate differences in actual system performance.
+    We make our experiments repeatable and consistent using a programmable power frontend
+    inspired by the Ekho [\[14\]](#page-11-26) record-and-replay platform. The power
+    controller supplies the energy buffer using a high-drive Digital-to-Analog Converter
+    (DAC), measures the load voltage and input current using a sense resistor, and
+    tunes the DAC to supply a programmed power level. We evaluate REACT emulating
+    both solar (5 <sup>2</sup> , 22% efficient cell [\[43\]](#page-12-16)) and RF
+    energy (915 MHz dipole antenna [\[39\]](#page-12-17)). We also emulate the load-dependent
+    performance of a commercial RF-to-DC converter [\[37\]](#page-12-18) and solar
+    panel management chip [\[20\]](#page-11-27).
+
+
+    <span id="page-7-0"></span><sup>3</sup>REACT polls the over/undervoltage signals
+    using an internal timer rather than edge-sensitive interrupts to handle cases
+    such as a high enough power input that the capacitance step does not pull supply
+    voltage below .
+
+
+    ## <span id="page-8-0"></span>5 Evaluation
+
+
+    We evaluate REACT alongside the baseline buffers running each benchmark under
+    three RF and two solar traces from publicly available repositories [\[3,](#page-11-28)
+    [12\]](#page-11-13), representative of power dynamics for small energy harvesting
+    systems. We record the RF traces in an active office environment using a commercial
+    harvester and transmitter [\[37,](#page-12-18) [38\]](#page-12-19) and use solar
+    irradiance traces from the Enhants mobile irradiance dataset [\[12\]](#page-11-13);
+    Table [3](#page-9-0) gives a short summary of each trace. These traces show the
+    power variability common for IoT-scale harvesters: environmental changes (e.g.,
+    ambient RF levels, time of day) affect average input power, while short-term changes
+    such as orientation cause instantaneous variation even if the environment is unchanged.
+    We apply each trace using the power replay system described in § [4.3;](#page-7-1)
+    once the trace is complete, we let the system run until it drains the buffer capacitor.
+
+
+    ## 5.1 Characterization and Overhead
+
+
+    Figure [6](#page-9-1) illustrates REACT''s behavior through the last-level buffer
+    voltage when varying capacitance; the inset focuses on REACT''s voltage output
+    as it expands to capture energy (also shown is the voltage of the comparable Morphy
+    array). From a cold start REACT only charges the last-level buffer—rapidly reaching
+    the enable voltage and then the upper voltage threshold (3.5V). REACT then adds
+    a seriesconfigured capacitor bank to capture excess incoming energy. Voltage drops
+    as the system temporarily operates exclusively from the last-level buffer while
+    harvested energy goes towards charging the new capacitance. As power input falls,
+    REACT''s output voltage falls below the upper threshold voltage—indicating REACT
+    is operating at an efficient capacitance point. At ≈ 450 the last-level buffer
+    is discharged to the lower threshold and REACT begins switching banks into series
+    mode to boost their output voltage and charge the last-level buffer, visible in
+    Figure [6](#page-9-1) as five voltage spikes corresponding to each capacitor bank—sustaining
+    operation until no more energy is available at ≈ 500.
+
+
+    We characterize REACT''s software overhead by running the DE benchmark on continuous
+    power for 5 minutes with and without REACT''s software component, which periodically
+    interrupts execution to measure the capacitor bank. At a sample rate of 10 Hz,
+    REACT adds a 1.8% penalty to software-heavy applications. We measure REACT''s
+    power overhead by comparing the execution time of systems running the DE benchmark
+    using REACT and the 770 buffer after charging each to their enable voltage. Based
+    on this approach we estimate that our implementation of REACT introduces a 68
+    power draw, or <sup>∼</sup>14 per bank.
+
+
+    ## 5.2 REACT Minimizes System Latency
+
+
+    Table [4](#page-9-2) details the time it takes each system to begin operation,
+    across power traces and energy buffers (charge time
+
+
+    is software-invariant and constant across benchmarks). Latency is driven by both
+    capacitor size and environment—the 10 buffer is <sup>∼</sup>13 larger than the
+    770 buffer and takes on average 7 longer to activate the system across our traces.
+    High-capacity static buffers incur a larger latency penalty even if mean power
+    input is high if much of that power is contained in a short-term spike later in
+    the trace (e.g., for the Solar Campus trace), but these dynamics are generally
+    impossible to predict at design time. By exclusively charging the last-level buffer
+    while the rest of the system is off, REACT matches the latency of the smallest
+    static buffer—an average of 7.7 faster than the equivalent-capacity 17 mF buffer,
+    which risks failing to start at all. Morphy further reduces system latency because
+    its smallest configuration is smaller than REACT''s last-level buffer (250 vs
+    770 ), although the limited reduction in average latency compared to the reduction
+    in capacitance (Morphy realizes an average 20% reduction in latency over REACT
+    using a 68% smaller capacitance) suggests that further reducing capacitance yields
+    diminishing latency returns in realistic energy environments.
+
+
+    Minimizing latency improves reactivity-bound applications such as the SC and PF
+    benchmarks; this effect is visible in Table [2](#page-9-3) as the 770 buffer outperforms
+    larger static versions in the SC benchmark for relatively low-power traces (RF
+    Mobile/Obstructed). REACT inherits the latency advantage due to the small last-level
+    buffer, similarly improving performance on each power trace. Morphy realizes a
+    similar performance improvement over the static systems, but ultimately underperforms
+    REACT as a result of inefficient capacitor switching (§ [5.5\)](#page-10-0). Small
+    static buffers enable lowlatency operation, but at the cost of energy capacity.
+    As power input increases, the latency penalty of large buffers fades and their
+    increased capacity enables them to operate for longer—resulting in higher performance
+    for larger static buffers under high-power traces (RF Cart, Solar Campus). Smaller
+    buffers, in turn, become less efficient as they must burn more incoming energy
+    off as waste heat.
+
+
+    ## 5.3 REACT Maximizes Energy Capacity
+
+
+    Figure [6](#page-9-1) illustrates the system-level effects of the capacitylatency
+    tradeoff, and how REACT avoids this tradeoff through energy-adaptive buffering.
+    The small 770 buffer charges rapidly, but reaches capacity and discharges energy
+    when it does not have work to match incoming power (illustrated by clipping at
+    3.6V on the 770 F line). The 10 mF buffer sacrifices latency for capacity—starting
+    operation 21x later than the smaller buffer, but avoiding overvoltage. Morphy
+    begins execution early with a small capacitance, but its lossy switching mechanism
+    means it does not overall outperform the 770 buffer. In contrast, REACT achieves
+    low latency, high efficiency, and high capacity by efficiently expanding capacitance
+    as necessary after enabling the system.
+
+
+    Tables [2](#page-9-3) and [5](#page-9-4) show that high capacity is valuable when
+    average input power exceeds output power (e.g., DE and SC
+
+
+    <span id="page-9-3"></span>
+
+
+    |            | Data Encrypt |      |      |        | Sense and Compute |      |     |     |        |
+    Radio Transmit |      |      |      |        |       |
+
+    |------------|--------------|------|------|--------|-------------------|------|-----|-----|--------|----------------|------|------|------|--------|-------|
+
+    | Buffer     | 770𝜇         | 10m  | 17m  | Morphy | REACT             | 770𝜇
+    | 10m | 17m | Morphy | REACT          | 770𝜇 | 10m  | 17m  | Morphy | REACT |
+
+    | RF Cart    | 1275         | 1574 | 1831 | 1745   | 1711              | 50   |
+    81  | 104 | 77     | 83             | 22   | 53   | 56   | 38     | 48    |
+
+    | RF Obs.    | 666          | 472  | 0    | 357    | 576               | 44   |
+    28  | 0   | 39     | 49             | 4    | 6    | 0    | 0      | 3     |
+
+    | RF Mob.    | 810          | 1004 | 645  | 801    | 1038              | 52   |
+    50  | 40  | 53     | 84             | 4    | 13   | 12   | 4      | 15    |
+
+    | Sol. Camp. | 6666         | 7290 | 7936 | 8194   | 9756              | 330  |
+    353 | 367 | 398    | 439            | 1376 | 1457 | 1542 | 1059   | 1426  |
+
+    | Sol. Comm. | 2168         | 2186 | 2554 | 2399   | 2232              | 88   |
+    110 | 130 | 133    | 154            | 8    | 40   | 48   | 31     | 34    |
+
+    | Mean       | 2317         | 2505 | 2593 | 2699   | 3063              | 113  |
+    124 | 128 | 140    | 162            | 283  | 314  | 332  | 226    | 313   |
+
+
+    Table 2. Performance on the DE, SC, and RT benchmarks, across traces and energy
+    buffers.
+
+
+    <span id="page-9-0"></span>
+
+
+    |                                                                       | Trace          |
+    Time (s) | Avg. Pow. (mW) | Power CV* |  |  |  |  |
+
+    |-----------------------------------------------------------------------|----------------|----------|----------------|-----------|--|--|--|--|
+
+    |                                                                       | RF Cart        |
+    313      | 2.12           | 103%      |  |  |  |  |
+
+    |                                                                       | RF Obstruction
+    | 313      | 0.227          | 61%       |  |  |  |  |
+
+    |                                                                       | RF Mobile      |
+    318      | 0.5            | 166%      |  |  |  |  |
+
+    |                                                                       | Solar
+    Campus   | 3609     | 5.18           | 207%      |  |  |  |  |
+
+    |                                                                       | Solar
+    Commute  | 6030     | 0.148          | 333%      |  |  |  |  |
+
+    | Table 3. Details of each power trace. *CV = Coefficient of Variation. |                |          |                |           |  |  |  |  |
+
+
+    <span id="page-9-2"></span>
+
+
+    | Buffer     | 770 𝜇𝐹 | 10 mF  | 17 mF  | Morphy | REACT |
+
+    |------------|--------|--------|--------|--------|-------|
+
+    | RF Cart    | 6.65   | 17.73  | 31.27  | 5.51   | 6.65  |
+
+    | RF Obs.    | 14.58  | 223.07 | -      | 6.50   | 16    |
+
+    | RF Mob.    | 6.90   | 148.10 | 239.88 | 5.65   | 6.38  |
+
+    | Sol. Camp. | 42.11  | 737.39 | 741.42 | 35.59  | 41.26 |
+
+    | Sol. Comm. | 119.60 | 196.30 | 213.00 | 108.10 | 130.6 |
+
+    | Mean       | 37.97  | 264.92 | 306.39 | 32.27  | 40.18 |
+
+
+    Table 4. System latency (seconds) across traces and energy buffers. - indicates
+    system never begins operation.
+
+
+    <span id="page-9-1"></span>![](_page_9_Figure_6.jpeg)
+
+
+    Figure 6. Buffer voltage and on-time for the SC benchmark under RF Mobile power.
+    Solid bars indicate when the system is operating.
+
+
+    benchmarks executed under the RF Cart trace), or when peak power demand is uncontrollable
+    and uncorrelated with input (e.g., the PF benchmark executed on Solar Campus,
+    where both power supply and demand are concentrated in short bursts). In both
+    cases, high-capacity systems store excess
+
+
+    <span id="page-9-4"></span>
+
+
+    | Buffer     | 770 uF |     |     | 10 mF | 17 mF |     | Morphy |     | REACT
+    |     |
+
+    |------------|--------|-----|-----|-------|-------|-----|--------|-----|-------|-----|
+
+    | Packets    | Rx     | Tx  | Rx  | Tx    | Rx    | Tx  | Rx     | Tx  | Rx    |
+    Tx  |
+
+    | RF Cart    | 22     | 10  | 49  | 49    | 48    | 48  | 55     | 22  | 53    |
+    52  |
+
+    | RF Obs.    | 4      | 4   | 4   | 4     | 0     | 0   | 2      | 0   | 3     |
+    0   |
+
+    | RF Mob.    | 11     | 4   | 14  | 13    | 9     | 9   | 19     | 0   | 38    |
+    5   |
+
+    | Sol. Camp. | 163    | 163 | 240 | 240   | 196   | 196 | 206    | 204 | 284   |
+    277 |
+
+    | Sol. Comm. | 72     | 8   | 35  | 35    | 33    | 33  | 85     | 14  | 84    |
+    63  |
+
+    | Mean       | 54     | 38  | 68  | 68    | 57    | 57  | 73     | 48  | 92    |
+    80  |
+
+
+    Table 5. Packets successfully received and retransmitted during the Packet Forwarding
+    benchmark.
+
+
+    energy to continue operation even if future power input falls or demand rises.
+    REACT efficiently expands to capture all incoming energy during periods of high
+    net input power, matching or beating the performance of the 10 mF and 17 mF systems
+    when they outperform the small 770 buffer.
+
+
+    ## 5.4 REACT Provides Flexible, Efficient Longevity
+
+
+    We evaluate REACT''s software-directed longevity guarantees (§ [3.4.1\)](#page-6-4)
+    on the longevity-bound RT and PF benchmarks. We compare REACT to the 770 buffer,
+    which cannot sustain a full transmission without additional input power. Running
+    the RT benchmark under the RF Cart trace isolates this limitation as the 770 static
+    buffer significantly underperforms the other buffers despite never reaching capacity:
+    instead, it wastes power on doomed-to-fail transmissions when incoming power cannot
+    make up for the deficit. We augment the RT benchmark code for our REACT implementation
+    to include a minimum capacitance level for REACT, below which the system waits
+    to gather more energy in a lowpower sleep mode. Leveraging REACT''s variable capacitance
+    allows software to buffer energy to guarantee completion, more than doubling the
+    number of successful transmissions and ultimately outperforming even the larger
+    buffers.
+
+
+    We use the same approach to execute the RT benchmark on our Morphy implementation.
+    Similar to REACT, Morphy varies capacitance to keep supply voltage within an acceptable
+    level for the application microcontroller while also waiting to gather enough
+    energy to power a full transmission. Morphy''s underperformance compared to both
+    REACT and the static buffers is a result of Morphy''s capacitor network design—as
+    Morphy reconfigures the capacitor array to increase capacitance, stored energy
+    is dissipated as current
+
+
+    flows between capacitors in the network. This energy dissipation dramatically
+    reduces Morphy''s end-to-end performance, particularly in systems where Morphy
+    must switch capacitance to ensure success (i.e., the RT and PF benchmarks). REACT''s
+    isolated capacitor banks eliminate this problem by restricting current flow during
+    switching; the energy savings are reflected in the end-to-end performance, where
+    REACT completes on average 38% more transmissions than Morphy.
+
+
+    5.4.1 Fungible Energy Storage. A unified buffer means that energy is fungible,
+    and REACT is flexible: software can re-define or ignore previous longevity requirements
+    if conditions change or a higher-priority task arrives. The PF benchmark (Table
+    [5\)](#page-9-4) shows the value of energy fungibility using two tasks with distinct
+    reactivity and longevity requirements. Receiving an incoming packet requires a
+    moderate level of longevity, but is uncontrollable and has a strict reactivity
+    requirement (the system can only receive a packet exactly when it arrives). Re-transmission
+    requires more energy and thus more longevity, but has no deadline. Software must
+    effectively split energy between a controllable high-power task and an uncontrollable
+    lower-power task.
+
+
+    As in the RT benchmark we use the minimum-capacitance approach to set separate
+    longevity levels for each task, using a similar approach for our Morphy implementation.
+    When the system has no packets to transmit, it waits in a deep-sleep until receiving
+    an incoming packet. If REACT contains sufficient energy when the packet arrives,
+    it receives and buffers the packet to later send. REACT then begins charging for
+    the transmit task, forwarding the buffered packet once enough energy is available.
+    If another packet is received while RE-ACT is charging for the transmit task,
+    however, software disregards the transmit-associated longevity requirement to
+    execute the receive task if sufficient energy is available.
+
+
+    Table [5](#page-9-4) shows that REACT outperforms all static buffer designs on
+    the PF benchmark by efficiently addressing the requirements of both tasks, resulting
+    in a mean performance improvement of 54%. REACT''s maximal reactivity enables
+    it to turn on earlier and begin receiving and buffering packets to send during
+    later periods of high power, while its high capacity enables it to make the most
+    of incoming energy during those high periods. Software-level longevity guarantees
+    both ensure the system only begins receive/transmit operations when enough energy
+    is available to complete them, and that software can effectively allocate energy
+    to incoming events as needed. Although Morphy enables the same software-level
+    control of energy allocation, the energy dissipated when switching capacitors
+    in the interconnected array means that Morphy''s overall performance on the PF
+    benchmark is below that of the best performing static buffer.
+
+
+    ## <span id="page-10-0"></span>5.5 REACT Improves End-to-End System Efficiency
+
+
+    Optimizing buffer behavior maximizes the amount of harvested energy available
+    to the end system for useful work.
+
+
+    <span id="page-10-1"></span>![](_page_10_Figure_6.jpeg)
+
+
+    Figure 7. Average buffer performance quantified by figures of merit across power
+    traces for each benchmark, normalized to REACT.
+
+
+    Figure [7](#page-10-1) illustrates the aggregate performance of REACT compared
+    to the baseline systems across the benchmarks and power traces we evaluate; we
+    find that REACT improves performance over the equally-reactive 770 buffer by an
+    average of 39.1%, over the equal-capacity 17 mF buffer by 19.3%, and over the
+    next-best-efficient 10 mF buffer by 18.8%. Compared to Morphy, REACT improves
+    aggregate performance by 26.2%—demonstrating the necessity of REACT''s bank isolation
+    approach and boosting performance where prior dynamic capacitance systems underperform
+    static approaches. Extreme cases where the system is always operating in an energy
+    surplus or deficit—such as the low-power SC benchmark under the high-power RF
+    Cart trace—the extra power consumption from REACT''s hardware causes it to underperform
+    suitable static buffers because REACT''s flexibility is unnecessary. In the common
+    case, however, volatile power conditions expose the latency, longevity, and efficiency-related
+    shortcomings of static buffer designs and expose the value of REACT''s efficient
+    variable-capacitance approach.
+
+
+    ## 6 Conclusion
+
+
+    Energy harvesting systems operate on unreliable and volatile power, but use fixed-size
+    buffers which waste energy and functionally limit systems when allocated capacity
+    is a poor fit for short-term power dynamics. REACT stores incoming energy in a
+    fabric of reconfigurable capacitor banks, varying equivalent capacitance according
+    to current energy supply and demand dynamics—adding capacitance to capture surplus
+    power and reclaiming energy from excess capacitance. REACT''s energy-adaptive
+    approach maximizes reactivity and capacity to ensure all incoming energy is captured
+    and efficiently delivered to sensing, computing, and communication devices. Our
+    hardware evaluation on real-world power
+
+
+    traces shows that REACT reduces system latency by an average of 7.7x compared
+    to an equivalent-sized static buffer and improves throughput by an average of
+    25.6% over any static buffer system, while incorporating software direction allows
+    REACT to provide flexible and fungible task longevity guarantees. Compared to
+    state-of-the-art switched capacitor systems, REACT''s efficient switching architecture
+    improves performance by an average of 26.2%.
+
+
+    REACT''s runtime-configurable buffering technique eliminates the tradeoff between
+    system latency and longevity, and affords designers greater control over how batteryless
+    devices respond to incoming power. Our results indicate that energy-responsive
+    reconfiguration of hardware is an effective approach to both maximizing energy
+    efficiency and system functionality, opening the door for future work leveraging
+    energy-adaptive hardware and reconfiguration.
+
+
+    ## References
+
+
+    - <span id="page-11-16"></span>[1] Saad Ahmed, Qurat ul Ain, Junaid Haroon Siddiqui,
+    Luca Mottola, and Muhammad Hamad Alizai. Intermittent computing with dynamic voltage
+    and frequency scaling. In Proceedings of the 2020 International Conference on
+    Embedded Wireless Systems and Networks, EWSN ''20, page 97–107, USA, 2020. Junction
+    Publishing.
+
+    - <span id="page-11-2"></span>[2] Miran Alhaideri, Michael Rushanan, Denis Foo
+    Kune, and Kevin Fu. The moo and cement shoes: Future directions of a practical
+    sensecontrol-actuate application, September 2013. Presented at First International
+    Workshop on the Swarm at the Edge of the Cloud (SEC''13 @ ESWeek), Montreal.
+
+    - <span id="page-11-28"></span>[3] Anon. Rf traces, October 2022. [https://anonymous.4open.science/r/](https://anonymous.4open.science/r/rf_traces-4B3E/README.md)
+    [rf\\_traces-4B3E/README.md](https://anonymous.4open.science/r/rf_traces-4B3E/README.md).
+
+    - <span id="page-11-17"></span>[4] Abu Bakar, Alexander G. Ross, Kasim Sinan Yildirim,
+    and Josiah Hester. Rehash: A flexible, developer focused, heuristic adaptation
+    platform for intermittently powered computing. Proc. ACM Interact. Mob. Wearable
+    Ubiquitous Technol., 5(3), sep 2021.
+
+    - <span id="page-11-1"></span>[5] James Blackman. What is mmtc in 5g nr, and how
+    does it impact nb-iot and lte-m, October 2019. https://enterpriseiotinsights.com/20191016/channels/fundamentals/whatis-mmtc-in-5g-nr-and-how-does-it-impact-nb-iot-and-lte-m.
+
+    - <span id="page-11-20"></span>[6] Michael Buettner, Ben Greenstein, and David
+    Wetherall. Dewdrop: An energy-aware runtime for computational rfid. In Proceedings
+    of the 8th USENIX Conference on Networked Systems Design and Implementation, NSDI''11,
+    page 197–210, USA, 2011. USENIX Association.
+
+    - <span id="page-11-4"></span>[7] Alexei Colin, Emily Ruppel, and Brandon Lucia.
+    A reconfigurable energy storage architecture for energy-harvesting devices. In
+    Proceedings of the Twenty-Third International Conference on Architectural Support
+    for Programming Languages and Operating Systems, ASPLOS ''18, page 767–781, New
+    York, NY, USA, 2018. Association for Computing Machinery.
+
+    - <span id="page-11-25"></span>[8] Jasper de Winkel, Carlo Delle Donne, Kasim
+    Sinan Yildirim, Przemysław Pawełczak, and Josiah Hester. Reliable timekeeping
+    for intermittent computing. In Proceedings of the Twenty-Fifth International Conference
+    on Architectural Support for Programming Languages and Operating Systems, ASPLOS
+    ''20, page 53–67, New York, NY, USA, 2020. Association for Computing Machinery.
+
+    - <span id="page-11-6"></span>[9] Jasper de Winkel, Vito Kortbeek, Josiah Hester,
+    and Przemysław Pawełczak. Battery-free game boy. Proc. ACM Interact. Mob. Wearable
+    Ubiquitous Technol., 4(3), sep 2020.
+
+    - <span id="page-11-15"></span>[10] H. Desai and B. Lucia. A power-aware heterogeneous
+    architecture scaling model for energy-harvesting computers. IEEE Computer Architecture
+    Letters, 19(1):68–71, 2020.
+
+    - <span id="page-11-23"></span>[11] Knowles Electronics. SPU0414HR5H-SB, December
+    2012. [https://www.mouser.com/datasheet/2/218/knowles\\_01232019\\_](https://www.mouser.com/datasheet/2/218/knowles_01232019_SPU0414HR5H_SB-1891952.pdf)
+    [SPU0414HR5H\\_SB-1891952.pdf](https://www.mouser.com/datasheet/2/218/knowles_01232019_SPU0414HR5H_SB-1891952.pdf).
+
+    - <span id="page-11-13"></span>[12] M. Gorlatova, A. Wallwater, and G. Zussman.
+    Networking low-power energy harvesting devices: Measurements and algorithms. In
+    2011 Proceedings IEEE INFOCOM, pages 1602–1610, 2011.
+
+    - <span id="page-11-3"></span>[13] Wang Song Hao and Ronald Garcia. Development
+    of a digital and battery-free smart flowmeter. Energies, 7(6):3695–3709, 2014.
+
+    - <span id="page-11-26"></span>[14] Josiah Hester, Timothy Scott, and Jacob Sorber.
+    Ekho: Realistic and repeatable experimentation for tiny energy-harvesting sensors.
+    In Proceedings of the 12th ACM Conference on Embedded Network Sensor Systems,
+    SenSys ''14, page 330–331, New York, NY, USA, 2014. Association for Computing
+    Machinery.
+
+    - <span id="page-11-18"></span>[15] Josiah Hester, Lanny Sitanayah, and Jacob
+    Sorber. Tragedy of the coulombs: Federating energy storage for tiny, intermittently-powered
+    sensors. In ACM Conference on Embedded Networked Sensor Systems, SenSys, pages
+    5–16, 2015.
+
+    - <span id="page-11-19"></span>[16] Josiah Hester and Jacob Sorber. Flicker: Rapid
+    prototyping for the batteryless internet-of-things. In Proceedings of the 15th
+    ACM Conference on Embedded Network Sensor Systems, SenSys ''17, New York, NY,
+    USA, 2017. Association for Computing Machinery.
+
+    - <span id="page-11-8"></span>[17] Matthew Hicks. Clank: Architectural support
+    for intermittent computation. In International Symposium on Computer Architecture,
+    ISCA, pages 228–240, 2017.
+
+    - <span id="page-11-24"></span>[18] Fraunhofer IIS. RFicient Basic, Ultra-Low-Power
+    WakeUp Receiver, January 2019. [https://www.iis.fraunhofer.de/content/dam/iis/en/doc/](https://www.iis.fraunhofer.de/content/dam/iis/en/doc/il/ics/ic-design/Datenblaetter/Factsheet_WakeUp_v4.pdf)
+    [il/ics/ic-design/Datenblaetter/Factsheet\\_WakeUp\\_v4.pdf](https://www.iis.fraunhofer.de/content/dam/iis/en/doc/il/ics/ic-design/Datenblaetter/Factsheet_WakeUp_v4.pdf).
+
+    - <span id="page-11-0"></span>[19] Texas Instruments. Msp430g2x52, msp430g2x12
+    mixed signal microcontroller datasheet (rev. g), May 2013. [https://www.ti.com/lit/ds/](https://www.ti.com/lit/ds/symlink/msp430g2252.pdf)
+    [symlink/msp430g2252.pdf](https://www.ti.com/lit/ds/symlink/msp430g2252.pdf).
+
+    - <span id="page-11-27"></span>[20] Texas Instruments. bq25570 nano power boost
+    charger and buck converter for energy harvester powered applications, March 2019.
+    <https://www.ti.com/lit/ds/symlink/bq25570.pdf>.
+
+    - <span id="page-11-21"></span>[21] Texas Instruments. Lm66100 5.5-v, 1.5-a 79-milliohm,
+    low iq ideal diode with input polarity protection, June 2019. [https://www.ti.com/](https://www.ti.com/lit/ds/symlink/lm66100.pdf)
+    [lit/ds/symlink/lm66100.pdf](https://www.ti.com/lit/ds/symlink/lm66100.pdf).
+
+    - <span id="page-11-22"></span>[22] Texas Instruments. MSP430FR599x, MSP430FR596x
+    Mixed-Signal Microcontrollers, January 2021. [https://www.ti.com/lit/ds/symlink/](https://www.ti.com/lit/ds/symlink/msp430fr5994.pdf)
+    [msp430fr5994.pdf](https://www.ti.com/lit/ds/symlink/msp430fr5994.pdf).
+
+    - <span id="page-11-5"></span>[23] Joseph Kahn, Randy Katz, and Kristofer Pister.
+    Next Century Challenges: Mobile Networking for "Smart Dust". In Conference on
+    Mobile Computing and Networking (MobiCom), 1999.
+
+    - <span id="page-11-12"></span>[24] Kemet. Supercapacitors fm series, July 2020.
+    [https://www.mouser.](https://www.mouser.com/datasheet/2/212/1/KEM_S6012_FM-1103835.pdf)
+    [com/datasheet/2/212/1/KEM\\_S6012\\_FM-1103835.pdf](https://www.mouser.com/datasheet/2/212/1/KEM_S6012_FM-1103835.pdf).
+
+    - <span id="page-11-14"></span>[25] Silicon Labs. EFM32 Gecko Family EFM32WG Data
+    Sheet, December 2021. [https://www.silabs.com/documents/public/data-sheets/](https://www.silabs.com/documents/public/data-sheets/efm32wg-datasheet.pdf)
+    [efm32wg-datasheet.pdf](https://www.silabs.com/documents/public/data-sheets/efm32wg-datasheet.pdf).
+
+    - <span id="page-11-9"></span>[26] Brandon Lucia and Benjamin Ransford. A simpler,
+    safer programming and execution model for intermittent systems. In Conference
+    on Programming Language Design and Implementation, PLDI, pages 575–585, 2015.
+
+    - <span id="page-11-7"></span>[27] K. Ma, Y. Zheng, S. Li, K. Swaminathan, X.
+    Li, Y. Liu, J. Sampson, Y. Xie, and V. Narayanan. Architecture exploration for
+    ambient energy harvesting nonvolatile processors. In IEEE International Symposium
+    on High Performance Computer Architecture, HPCA, pages 526–537, Feb 2015.
+
+    - <span id="page-11-10"></span>[28] Kiwan Maeng, Alexei Colin, and Brandon Lucia.
+    Alpaca: Intermittent execution without checkpoints. In International Conference
+    on Object-Oriented Programming, Systems, Languages, and Applications, OOPSLA,
+    pages 96:1–96:30, October 2017.
+
+    - <span id="page-11-11"></span>[29] Kiwan Maeng and Brandon Lucia. Adaptive dynamic
+    checkpointing for safe efficient intermittent computing. In USENIX Conference
+    on Operating Systems Design and Implementation, OSDI, pages 129–144, November
+    2018.
+
+    - <span id="page-12-8"></span>[30] Kiwan Maeng and Brandon Lucia. Adaptive low-overhead
+    scheduling for periodic and reactive intermittent execution. In Proceedings of
+    the 41st ACM SIGPLAN Conference on Programming Language Design and Implementation,
+    PLDI 2020, page 1005–1021, New York, NY, USA, 2020. Association for Computing
+    Machinery.
+
+    - <span id="page-12-15"></span>[31] Microsemi. ZL70251 Ultra-Low-Power Sub-GHz
+    RF Transceiver, March 2018. [https://www.microsemi.com/document-portal/doc\\_view/](https://www.microsemi.com/document-portal/doc_view/132900-zl70251-datasheet)
+    [132900-zl70251-datasheet](https://www.microsemi.com/document-portal/doc_view/132900-zl70251-datasheet).
+
+    - <span id="page-12-12"></span>[32] Murata. GRM31CR60J227ME11L Chip Monolithic
+    Ceramic Capacitor for General. [https://search.murata.co.jp/Ceramy/image/img/A01X/](https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CR60J227ME11-01.pdf)
+    [G101/ENG/GRM31CR60J227ME11-01.pdf](https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CR60J227ME11-01.pdf).
+
+    - <span id="page-12-13"></span>[33] Murata. Supercapacitors FM Series, July 2020.
+    [https://www.mouser.](https://www.mouser.com/datasheet/2/212/1/KEM_S6012_FM-1103835.pdf)
+    [com/datasheet/2/212/1/KEM\\_S6012\\_FM-1103835.pdf](https://www.mouser.com/datasheet/2/212/1/KEM_S6012_FM-1103835.pdf).
+
+    - <span id="page-12-1"></span>[34] Phillip Nadeua, Dina El-Damaj, Deal Glettig,
+    Yong Lin Kong, Stacy Mo, Cody Cleveland, Lucas Booth, Niclas Roxhed, Robert Langer,
+    Anantha P. Chandrakasan, and Giovanni Traverso. Prolonged energy harvesting for
+    ingestible devices. Nature Biomedical Engineering, 1(0022), Feb 2017.
+
+    - <span id="page-12-14"></span>[35] Nichicon. ALUMINUM ELECTROLYTIC CAPACITORS.
+    [https://www.](https://www.nichicon.co.jp/english/products/pdfs/e-kl.pdf) [nichicon.co.jp/english/products/pdfs/e-kl.pdf](https://www.nichicon.co.jp/english/products/pdfs/e-kl.pdf).
+
+    - <span id="page-12-0"></span>[36] Panasonic. Panasonic coin type lithium batteries,
+    August 2005. [https://](https://datasheet.octopart.com/CR1616-Panasonic-datasheet-9751741.pdf)
+    [datasheet.octopart.com/CR1616-Panasonic-datasheet-9751741.pdf](https://datasheet.octopart.com/CR1616-Panasonic-datasheet-9751741.pdf).
+
+    - <span id="page-12-18"></span>[37] Powercast. P2110B 915 MHz RF Powerharvester
+    Receiver, December 2016. [https://www.powercastco.com/wp-content/uploads/2016/12/](https://www.powercastco.com/wp-content/uploads/2016/12/P2110B-Datasheet-Rev-3.pdf)
+    [P2110B-Datasheet-Rev-3.pdf](https://www.powercastco.com/wp-content/uploads/2016/12/P2110B-Datasheet-Rev-3.pdf).
+
+    - <span id="page-12-19"></span>[38] Powercast. TX91501B – 915 MHz Powercaster
+    Transmitter, October 2019. [https://www.powercastco.com/wp-content/uploads/2019/10/](https://www.powercastco.com/wp-content/uploads/2019/10/User-Manual-TX-915-01B-Rev-A-1.pdf)
+    [User-Manual-TX-915-01B-Rev-A-1.pdf](https://www.powercastco.com/wp-content/uploads/2019/10/User-Manual-TX-915-01B-Rev-A-1.pdf).
+
+    - <span id="page-12-17"></span>[39] Powercast. 915 mhz dipole antenna datasheet,
+    November 2020. [https://www.powercastco.com/wp-content/uploads/2020/11/](https://www.powercastco.com/wp-content/uploads/2020/11/DA-915-01-Antenna-Datasheet_new_web.pdf)
+    [DA-915-01-Antenna-Datasheet\\_new\\_web.pdf](https://www.powercastco.com/wp-content/uploads/2020/11/DA-915-01-Antenna-Datasheet_new_web.pdf).
+
+    - <span id="page-12-4"></span>[40] Benjamin Ransford, Jacob Sorber, and Kevin
+    Fu. Mementos: System Support for Long-Running Computation on RFID-Scale Devices.
+    In Architectural Support for Programming Languages and Operating Systems (ASPLOS),
+    2011.
+
+    - <span id="page-12-5"></span>[41] Henry Sodano, Gyuhae Park, and Daniel Inman.
+    Estimation of Electric Charge Output for Piezoelectric Energy Harvesting. In Strain,
+    Volume 40, 2004.
+
+    - <span id="page-12-10"></span>[42] ST. Small signal schottky diode, October 2001.
+    [https://www.st.](https://www.st.com/content/ccc/resource/technical/document/datasheet/group1/11/76/e4/a3/df/07/49/14/CD00000767/files/CD00000767.pdf/jcr:content/translations/en.CD00000767.pdf)
+    [com/content/ccc/resource/technical/document/datasheet/group1/](https://www.st.com/content/ccc/resource/technical/document/datasheet/group1/11/76/e4/a3/df/07/49/14/CD00000767/files/CD00000767.pdf/jcr:content/translations/en.CD00000767.pdf)
+    [11/76/e4/a3/df/07/49/14/CD00000767/files/CD00000767.pdf/jcr:](https://www.st.com/content/ccc/resource/technical/document/datasheet/group1/11/76/e4/a3/df/07/49/14/CD00000767/files/CD00000767.pdf/jcr:content/translations/en.CD00000767.pdf)
+    [content/translations/en.CD00000767.pdf](https://www.st.com/content/ccc/resource/technical/document/datasheet/group1/11/76/e4/a3/df/07/49/14/CD00000767/files/CD00000767.pdf/jcr:content/translations/en.CD00000767.pdf).
+
+    - <span id="page-12-16"></span>[43] Voltaic. Voltaic systems p121 r1g, April 2020.
+    [https://voltaicsystems.](https://voltaicsystems.com/content/Voltaic Systems P121
+    R1G.pdf) [com/content/VoltaicSystemsP121R1G.pdf](https://voltaicsystems.com/content/Voltaic
+    Systems P121 R1G.pdf).
+
+    - <span id="page-12-6"></span>[44] Harrison Williams, Xun Jian, and Matthew Hicks.
+    Forget failure: Exploiting sram data remanence for low-overhead intermittent computation.
+    In Proceedings of the Twenty-Fifth International Conference on Architectural Support
+    for Programming Languages and Operating Systems, ASPLOS ''20, page 69–84, New
+    York, NY, USA, 2020. Association for Computing Machinery.
+
+    - <span id="page-12-11"></span>[45] Harrison Williams, Michael Moukarzel, and
+    Matthew Hicks. Failure sentinels: Ubiquitous just-in-time intermittent computation
+    via low-cost hardware support for voltage monitoring. In International Symposium
+    on Computer Architecture, ISCA, pages 665–678, 2021.
+
+    - <span id="page-12-7"></span>[46] Joel Van Der Woude and Matthew Hicks. Intermittent
+    computation without hardware support or programmer intervention. In USENIX Symposium
+    on Operating Systems Design and Implementation, OSDI, pages 17–32, November 2016.
+
+    - <span id="page-12-2"></span>[47] X. Wu, I. Lee, Q. Dong, K. Yang, D. Kim, J.
+    Wang, Y. Peng, Y. Zhang, M. Saliganc, M. Yasuda, K. Kumeno, F. Ohno, S. Miyoshi,
+    M. Kawaminami, D. Sylvester, and D. Blaauw. A 0.04mm316nw wireless and batteryless
+    sensor system with integrated cortex-m0+ processor and optical communication for
+    cellular temperature measurement. In 2018 IEEE Symposium on VLSI Circuits, pages
+    191–192, 2018.
+
+    - <span id="page-12-9"></span>[48] Fan Yang, Ashok Samraj Thangarajan, Wouter
+    Joosen, Christophe Huygens, Danny Hughes, Gowri Sankar Ramachandran, and Bhaskar
+    Krishnamachari. Astar: Sustainable battery free energy harvesting for heterogeneous
+    platforms and dynamic environments. In Proceedings of the 2019 International Conference
+    on Embedded Wireless Systems and Networks, EWSN ''19, page 71–82, USA, 2019. Junction
+    Publishing.
+
+    - <span id="page-12-3"></span>[49] Fan Yang, Ashok Samraj Thangarajan, Sam Michiels,
+    Wouter Joosen, and Danny Hughes. Morphy: Software defined charge storage for the
+    iot. In Proceedings of the 19th ACM Conference on Embedded Networked Sensor Systems,
+    SenSys ''21, page 248–260, New York, NY, USA, 2021. Association for Computing
+    Machinery.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an evaluation section
+      that discusses the performance of the proposed REACT system on real-world platforms.
+      It provides evidence of empirical evaluation through performance metrics, comparisons
+      with baseline systems, and results from experiments conducted under various
+      power conditions. The paper also includes performance tables and figures that
+      illustrate the results of these evaluations.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its text. It includes a "Background and Related Work"
+      section that discusses previous work on energy harvesting systems, buffer capacity,
+      power-responsive performance scaling, multiplexed energy storage, and unified
+      dynamic buffering. The paper also compares its proposed method, REACT, to existing
+      solutions like Morphy, and cites numerous academic sources to provide context
+      and support for its claims.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel method called REACT,
+      which is a responsive buffering circuit that dynamically varies capacitance
+      to optimize energy capture and usage in batteryless systems. It claims to improve
+      upon existing static and dynamic buffering systems by eliminating the tradeoff
+      between responsiveness and capacity, and it provides empirical evidence of its
+      performance benefits over previous approaches. The paper clearly states its
+      contributions, including the design and evaluation of REACT, making it a novel
+      contribution to the field.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new contribution,
+      REACT, a dynamic energy buffering system for batteryless systems, and evaluates
+      its performance against existing systems, rather than primarily summarizing
+      existing work.'
+  topics:
+    main_topic: Embedded & Real-time Systems
+    main_topic_reasoning: The paper focuses on energy-adaptive buffering solutions
+      for batteryless energy harvesting systems, which are crucial in embedded and
+      real-time applications where efficient energy management is key.
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: While not the primary focus, the energy adaptability
+      and performance improvements discussed can be beneficial in networked environments
+      where such systems are deployed.
+    main_topic_sub: Other
+    secondary_topic_sub: Other

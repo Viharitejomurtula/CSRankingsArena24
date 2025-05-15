@@ -1,0 +1,1960 @@
+papers:
+- title: "Accelerating Boolean Constraint Propagation for Efficient SAT-Solving on\n\
+    \  FPGAs"
+  abstract: 'We present a hardware-accelerated SAT solver targeting processor/Field
+
+    Programmable Gate Arrays (FPGA) SoCs. Our solution accelerates the most
+
+    expensive subroutine of the Davis-Putnam-Logemann-Loveland (DPLL) algorithm,
+
+    Boolean Constraint Propagation (BCP) through fine-grained FPGA parallelism.
+
+    Unlike prior state-of-the-art solutions, our solver eliminates costly clause
+
+    look-up operations by assigning clauses directly to clause processors on the
+
+    FPGA and dividing large formulas into smaller partitions manageable by FPGA.
+
+    Partitions are hot-swapped during runtime as required and the supported formula
+
+    size is limited only by available external memory, not on-chip FPGA memory. We
+
+    evaluate our solver on a Xilinx Zynq platform with results showing quicker
+
+    execution time across various formula sizes, subject to formula partitioning
+
+    strategy. Compared to prior state-of-the-art, we achieve 1.7x and 1.1x speed up
+
+    on BCP for 2 representative benchmarks and up to 6x total speedup over
+
+    software-only implementation.'
+  url: http://arxiv.org/abs/2401.07429v2
+  keywords: ''
+  document: '# Accelerating Boolean Constraint Propagation for Efficient SAT-Solving
+    on FPGAs
+
+
+    Hari Govindasamy Carleton University Ottawa, Canada hari@sce.carleton.ca
+
+
+    Babak Esfandiari Carleton University Ottawa, Canada babak@sce.carleton.ca
+
+
+    Paulo Garcia Chulalongkorn University Bangkok, Thailand paulo.g@chula.ac.th
+
+
+    #### ABSTRACT
+
+
+    We present a hardware-accelerated SAT solver targeting processor/Field Programmable
+    Gate Arrays (FPGA) SoCs. Our solution accelerates the most expensive subroutine
+    of the Davis-Putnam-Logemann-Loveland (DPLL) algorithm, Boolean Constraint Propagation
+    (BCP) through fine-grained FPGA parallelism. Unlike prior state-of-the-art solutions,
+    our solver eliminates costly clause lookup operations by assigning clauses directly
+    to clause processors on the FPGA and dividing large formulas into smaller partitions
+    manageable by FPGA. Partitions are hot-swapped during runtime as required and
+    the supported formula size is limited only by available external memory, not on-chip
+    FPGA memory.
+
+
+    We evaluate our solver on a Xilinx Zynq platform with results showing quicker
+    execution time across various formula sizes, subject to formula partitioning strategy.
+    Compared to prior state-of-theart, we achieve 1.7x and 1.1x speed up on BCP for
+    2 representative benchmarks and up to 6x total speedup over software-only implementation.
+
+
+    ## CCS CONCEPTS
+
+
+    • Computer systems organization → Robotic autonomy; • Networks → Cyber-physical
+    networks; • Applied computing → Industry and manufacturing; • Hardware → Hardware
+    accelerators; Application specific processors; • Theory of computation → Equational
+    logic and rewriting.
+
+
+    ### KEYWORDS
+
+
+    FPGA, SAT, acceleration, embedded, boolean, satisfiability
+
+
+    #### ACM Reference Format:
+
+
+    Hari Govindasamy, Babak Esfandiari, and Paulo Garcia. 2024. Accelerating Boolean
+    Constraint Propagation for Efficient SAT-Solving on FPGAs. In Great Lakes Symposium
+    on VLSI 2024 (GLSVLSI ''24), June 12–14, 2024, Clearwater, FL, USA. ACM, New York,
+    NY, USA, [5](#page-4-0) pages. [https://doi.org/10.1145/](https://doi.org/10.1145/3649476.3658808)
+    [3649476.3658808](https://doi.org/10.1145/3649476.3658808)
+
+
+    #### 1 INTRODUCTION
+
+
+    The Boolean Satisfiability problem (SAT) is a fundamental problem in computer
+    science, the first NP-Complete problem [\[7\]](#page-4-1). SAT solvers have become
+    the backbone of several engineering domains, as any
+
+
+    GLSVLSI ''24, June 12–14, 2024, Clearwater, FL, USA
+
+
+    © 2024 Copyright held by the owner/author(s).
+
+
+    ACM ISBN 979-8-4007-0605-9/24/06.
+
+
+    <https://doi.org/10.1145/3649476.3658808>
+
+
+    NP-Complete problem can be encoded as instance of SAT [\[2,](#page-4-2) [7\]](#page-4-1).
+    SAT solvers determine whether a given boolean formula is satisfiable by identifying
+    an assignment to the formulas'' free variables that evaluate the formula to true.
+    The formula is unsatisfiable otherwise. Most SAT solvers target CNF-SAT, a subset
+    of SAT that determines the satisfiability of formulas encoded in Conjunctive Normal
+    Form (CNF) . Formulas in CNF are conjunctions of clauses, where each clause is
+    a disjunction of one or more literals (a variable or its negation).
+
+
+    With the advent of modern Systems-on-Chip (SoC) comprised of both hard embedded
+    processors and configurable FPGA fabric offering myriad implementation opportunities
+    [\[17\]](#page-4-3), deployed from the embedded to the high performance computing
+    domain [\[1\]](#page-4-4), accelerating SAT-solving through hardware is an attractive
+    approach. We present a novel architecture for hardware-accelerated SAT-solving
+    that outperforms state of the art solutions, released in open-source form for
+    the Xilinx Zynq platform. Specifically, this article offers the following contributions:
+
+
+    - We describe a methodology to map and runtime-manage clauses across a processor
+    and connected FPGA, making efficient use of FPGA resources and avoiding recurring
+    performance pitfalls.
+
+    - We describe the implementation of an open-source prototype system, deployed
+    on a Xilinx Zynq chip, identifying how the hardware architecture effects the aforementioned
+    strategy.
+
+    - We evaluate our design against the state of the art using two representative
+    benchmarks, showing speed-ups of 1.7x and 1.1x, respective, and overall a 6x improvement
+    over vanilla software execution.
+
+
+    Section [2](#page-0-0) describes necessary background knowledge on a particular
+    SAT-solving algorithm required to understand the remainder of this paper. Section
+    [3](#page-1-0) presents an overview of historical solutions and state of the art,
+    directly compared against in this paper. Section [4](#page-2-0) presents our contribution,
+    evaluated in Section [5,](#page-3-0) with concluding remarks and suggestions for
+    future work described in Section [6.](#page-4-5)
+
+
+    ### <span id="page-0-0"></span>2 BACKGROUND: DPLL AND BCP
+
+
+    SAT solvers are categorized into complete and incomplete solvers[\[15\]](#page-4-6).
+    Complete solvers evaluate every possible variable assignment, ending on the first
+    satisfying assignment or after exhausting the search space. A formula is unsatisfiable
+    if the complete solver concludes without finding a satisfying assignment. Most
+    incomplete solvers use Stochastic Local Search (SLS) to greedily search for a
+    satisfying assignment in the formula''s variable assignment search space[\[16\]](#page-4-7).
+    While typically quicker than complete solvers, incomplete solvers do not guarantee
+    results as they tend to get stuck in local maxima or skip satisfying assignments.
+    Since they don''t explore the solution
+
+
+    Permission to make digital or hard copies of part or all of this work for personal
+    or classroom use is granted without fee provided that copies are not made or distributed
+    for profit or commercial advantage and that copies bear this notice and the full
+    citation on the first page. Copyrights for third-party components of this work
+    must be honored. For all other uses, contact the owner/author(s).
+
+
+    GLSVLSI ''24, June 12–14, 2024, Clearwater, FL, USA Govindasamy, Esfandiari, and
+    Garcia
+
+
+    <span id="page-1-1"></span>![](_page_1_Figure_2.jpeg)
+
+
+    Figure 1: Interface between processor and FPGA-based BCP Coprocessor. DPLL''s
+    BCP is accelerated through fine-grained parallelization across Clause Processors.
+
+
+    space exhaustively they can never conclude that a formula is unsatisfiable. Davis-Putnam-Logemann-Loveland
+    (DPLL) and DPLL-based algorithms are the most predominant complete solvers [\[16\]](#page-4-7).
+    DPLL performs two primary operations: 1) decision and 2) Boolean Constraint Propagation
+    (BCP). DPLL-based algorithms follow DPLL''s core structure, and propose improved
+    decision heuristics, learning and BCP mechanisms. During decision, DPLL heuristically
+    picks and assigns truth values to free variables. BCP subsequently propagates
+    the effect of the decision using the unit implication rule[\[5\]](#page-4-8).
+    The unit implication rule identifies unit clauses where all but one of its literals
+    are false. Unit clauses can only be satisfied by assigning the variable to true
+    if the literal is positive or to false on negative literals. The resulting assignment
+    is known as an implication. BCP repeatedly applies this rule until all clauses
+    are satisfied (formula is therefore satisfiable) or at least one clause evaluates
+    false (conflict). On conflicts, DPLL backtracks by retracting and/or inverting
+    assignments from earlier decisions. BCP is expensive, accounting for 80-90% of
+    DPLL''s CPU time, rendering it a prime candidate for hardware acceleration [\[5,](#page-4-8)
+    [18\]](#page-4-9). BCP coprocessors accelerate DPLL by implementing specialized
+    BCP processing engines on FPGA. These run alongside a General Purpose Processor
+    (GPP) that performs the remaining DPLL operations: decision heuristics and backtracking.
+    Using this architecture, the BCP coprocessor is first configured with the clauses,
+    and then waits to evaluate decisions from the GPP. Any DPLL-based software solver
+    can integrate with a BCP-coprocessor by replacing software BCP with the hardware
+    accelerated BCP-coprocessor [\[18,](#page-4-9) [19\]](#page-4-10). FPGA-based
+    BCP coprocessors are either instance-specific or application-specific. Instancespecific
+    solver are built to solve a single SAT instance and designed by translating an
+    input formula into its equivalent logical circuit. However, to solve new instances,
+    the FPGA requires a complete rebuild (synthesis and FPGA programming may take
+    up to several hours). Although these solvers can be significantly quicker than
+    their software counterparts, their performance becomes notably slower when build
+    times are included. For instance, Ivan et al''s best result against the hole7
+    benchmark achieves a 6.66x speedup against MiniSAT[\[11,](#page-4-11) [12\]](#page-4-12);
+    however, when build times are included, compilation alone takes 50 seconds, whereas
+    MiniSAT finishes in under 0.064 seconds [\[10\]](#page-4-13). Application-specific
+    solvers eliminate the need to rebuild the FPGA by instantiating general-purpose
+    processing units capable of tackling any SAT instance (given that it fits in hardware).
+    The BCP coprocessor is configured with the target problem by simply overwriting
+    FPGA memory.
+
+
+    #### <span id="page-1-0"></span>3 STATE OF THE ART
+
+
+    Algorithmic techniques for efficient SAT solving have been extensively researched,
+    and the literature contains several surveys that describe the history and state
+    of the art of the problem ([\[8\]](#page-4-14), [\[13\]](#page-4-15)). Techniques
+    aimed at accelerating the execution of a particular SAT solving algorithm include
+    software parallelization [\[9\]](#page-4-16), deployment on specialized GPUs [\[14\]](#page-4-17),
+    and even acceleration through machinelearning approaches [\[20\]](#page-4-18).
+
+
+    Our approach sits within FPGA-based acceleration, which began roughly 3 decades
+    ago [\[6\]](#page-4-19), with a few prominent results at the turn of the century
+    ([\[21\]](#page-4-20), [\[3\]](#page-4-21)). However, it was not until significant
+    advances in FPGA performance occurred in the last decade, and the rise of SoC
+    platforms combining FPGA fabric with hard processors, that FPGA-based SAT acceleration
+    matured. The most notable architectures were proposed by Davis et al [\[5\]](#page-4-8)
+    and Thong et al [\[18,](#page-4-9) [19\]](#page-4-10): both exploring the use
+    of FPGA to implement BCP coprocessors, keeping the remainder of DPLL in software.
+
+
+    Davis et al calculate implications in parallel by using several inference engines
+    (IE), each assigned a list of clauses (partitions) [\[5\]](#page-4-8). For every
+    decision/implication, the clause containing the assignment variable is first retrieved
+    before calculating implications. Implications are forwarded to a conflict detector
+    that ensures that two or more IEs have not implied opposing values for the same
+    variable. Implications are then sent to the processor and queued up for propagation.
+
+
+    To keep clause retrieval time low, a variable only occurs once in each IEs partition
+    (i.e clauses within the same IE share no common variables). This limits the number
+    of clauses affected by a decision to one, thereby also limiting implications per
+    IE to one, constraining the effected performance. While some strategies to increase
+    this limit have been proposed [\[4\]](#page-4-22), they remain unexplored.
+
+
+    Thong et al. propose a concurrent BCP coprocessor comprising multiple sequential
+    processing engines (PE) [\[19\]](#page-4-10). Identifying that Davis et al.''s
+    clause lookup is slower than direct access [\[18\]](#page-4-9), they develop a
+    clause storage and encoding scheme that efficiently links clauses with shared
+    variables. The processor sends decisions to the FPGA and starts BCP execution
+    at a single PE. Using the linked list, the PE traverses every clause containing
+    the decision variable and calculates implications, which are then added to a local
+    queue and propagated. The running PE triggers BCP execution in another PE when
+    it arrives at a link to a clause that is located elsewhere. The coprocessor supports
+    multithreaded software execution, hiding communication and software latency by
+    keeping the coprocessor busy while software threads make decisions when possible.
+
+
+    Davis et al. and Thong et al. have laid a strong foundation in developing application-specific
+    FPGA-based BCP coprocessors; we extend their work and propose a solution that
+    processes clauses in parallel without the need for clause lookup.
+
+
+    Accelerating Boolean Constraint Propagation for Efficient SAT-Solving on FPGAs
+    GLSVLSI ''24, June 12–14, 2024, Clearwater, FL, USA
+
+
+    #### <span id="page-2-0"></span>4 THE SAT SOLVER ARCHITECTURE
+
+
+    We present a BCP coprocessor that works alongside vanilla DPLL (and should, in
+    theory, work seamlessly with any DPLL-based solver). Like Thong et al., we forgo
+    clause lookup and allow clauses to share variables within the same partition.
+    However, we still achieve Davis et al.''s high degree of parallelism by placing
+    clauses directly in clause processors (explained in Section [4.1\)](#page-2-1).
+
+
+    SAT instances larger than the available number of Clause Processors (CPs) are
+    partitioned, stored in external memory (i.e., software) and hot-swapped into the
+    BCP coprocessors as required during runtime. Solvable instance size is limited
+    only by the GPP''s RAM, not on-chip FPGA memory. We deploy our solution on the
+    Zynq chip, and available here[1](#page-2-2) for use. To our knowledge, this is
+    the first open-source hardware-accelerated SAT solver.
+
+
+    #### <span id="page-2-1"></span>4.1 The BCP accelerator architecture
+
+
+    Figure [1](#page-1-1) illustrates our approach, comprising a GPP and an FPGA accelerated
+    BCP coprocessor. The GPP executes DPLL''s remaining elements (decisions, backtrack,
+    etc.), partitions large SAT instances (explained in Section [4.2\)](#page-2-3)
+    and swaps partitions into hardware as required. Its default state is idle, awaiting
+    instructions to execute. Once a decision is received, the systems loops until
+    all unit clauses are exhausted. The BCP coprocessor, depicted in Figure [1,](#page-1-1)
+    comprises a control unit (1), an array of clause processors (2) and an implication
+    selector (3). The central control unit communicates directly with the GPP and
+    each CP. Based on the received GPP command, it loads clauses into CPs, broadcasts
+    decisions, or clears assignments during backtrack. At its core, the BCP coprocessor
+    consists of an array of CPs that calculate decision and implication results in
+    parallel. CPs store clauses as an array of literals maintain a local copy of each
+    literal''s respective variable assignment. Partitions are hot-swapped into FPGA
+    by overwriting a CPs array of literals with the literals of the new clause. Variable
+    assignments are updated during decisions and BCP, and cleared during backtrack.
+    Finally, the implication selector chooses a single implication to propagate when
+    multiple implications arise as a result of BCP. Rather than using an explicit
+    implication conflict detector, as done by Davis et al [\[5\]](#page-4-8), we propagate
+    the chosen implication, and identify conflicts during evaluation.
+
+
+    #### <span id="page-2-3"></span>4.2 Formulae partitioning
+
+
+    SAT instances contain an arbitrary number of variables and clauses. The problem
+    size solvable on FPGA is limited by its available Configurable Logic Block (CLB)
+    and memory, and requires large problems be partitioned into smaller manageable
+    sizes. Partitions are stored in the GPP, and swapped into FPGA during run time
+    by overwriting CPs clauses. BCP is performed individually on each partition, and
+    implications are relayed back to the GPP. Implications are subsequently propagated
+    to other partitions. We aim to make partitions as large as possible, limited by
+    the coprocessor''s clause and variable threshold. Consider Equation [1,](#page-2-4)
+    composed of four clauses, and an instance of our coprocessor that supports two
+    clauses and three variables. Equation [2](#page-2-5) and [3](#page-2-6) outline
+    the two possible ways to partition Equation [1.](#page-2-4) Equation [2](#page-2-5)
+    describes a scenario where the partitions
+
+
+    <span id="page-2-7"></span>![](_page_2_Figure_10.jpeg)
+
+
+    Figure 2: (a) Davis et al. store the formula directly on FPGA. Clauses within
+    partitions contain no shared variables, and partitions are mapped directly to
+    Implication Engines. (b) Thong et al. store formula directly on FPGA. Clauses
+    are linked to other clauses with shared variables and are processed sequentially.
+    (c) Formula stored in external memory ("software" view). Clauses in partitions
+    mapped directly to Clause Processors, and hot-swapped as required.
+
+
+    reach the clause limit, while the Equation [3](#page-2-6) reaches the variable
+    limit.
+
+
+    <span id="page-2-4"></span>
+
+    $$f = (\neg a \lor b \lor \neg c) \land (a \lor \neg b \lor \neg c) \land (\neg
+    d \lor e \lor f) \land (d \lor e \lor f) \tag{1}$$
+
+
+    <span id="page-2-5"></span>
+
+    $$\begin{aligned} \{ \begin{aligned} \{ \begin{aligned} \{ \begin{array}{l} (\neg
+    a \lor b \lor \neg c) \land (a \lor \neg b \lor \neg c) \end{array} \} \end{aligned}
+    \} \end{aligned} \} $$
+
+
+    <span id="page-2-6"></span>
+
+    $$
+
+    \begin{aligned}
+
+    \{\neg variation\\_2 &= \{\{ (\neg a \lor b \lor \neg c) \}, \{ (a \lor \neg b
+    \lor \neg c) \} \}, \\
+
+    \{ (\neg d \lor e \lor f) \}, &\{ (d \lor e \lor f) \} \end{aligned}
+
+    \begin{aligned}
+
+    \{ \neg variation\\_2 \}, \end{aligned}
+
+    $$
+
+
+    Results (refer to Section [5\)](#page-3-0) indicate that partitioning is a bottleneck
+    in our approach. Performance improvement is dictated by the amount of required
+    partition swapping and the number of unused CPs (occurs when the number of clauses
+    in a partition is less than the available number of CPs). Thus, performance improvement
+    is observed with certain partition assignments, while others lead to performance
+    degradation. System performance can be improved by developing a more effective
+    partitioning algorithm, but beyond the scope of this paper and reserved for future
+    work.
+
+
+    #### 4.3 Execution
+
+
+    Each clause processor is only associated with a single clause; thus, no clause
+    look-up or traversal is required to retrieve the affected clause for processing.
+    All clauses on the FPGA are processed in parallel as soon as a decision is received.
+    Consider Equation [1''](#page-2-4)s
+
+
+    <span id="page-2-2"></span><sup>1</sup>[https://github.com/harigovind1998/FPGA\\_BCP\\_acceleration](https://github.com/harigovind1998/FPGA_BCP_acceleration)
+
+
+    GLSVLSI ''24, June 12–14, 2024, Clearwater, FL, USA Govindasamy, Esfandiari, and
+    Garcia
+
+
+    <span id="page-3-1"></span>
+
+
+    | Step                 |      | 0    | 1                              | 2                       |
+    3                   | 4    |
+
+    |----------------------|------|------|--------------------------------|-------------------------|---------------------|------|
+
+    | Our<br>Approach      | CP   | Rx   | Process<br>Decision  Clause 1  | Done                    |                     |      |
+
+    |                      | CP 2 | Rx   | Process<br>Decision  Clause 2  | Done                    |                     |      |
+
+    | Davis et<br>al.      | IE 1 | Rx   | Retrieve<br>Decision Clause 1  | Process<br>Clause
+    1     | Done                |      |
+
+    |                      | IE 2 | Rx   | Retrieve<br>Decision  Clause 2 | Process<br>Clause
+    2     | Done                |      |
+
+    | Thong et PE 1<br>al. |      | Rx   | Process<br>Decision  Clause 1  | Traverse
+    to<br>Clause 2 | Process<br>Clause 2 | Done |
+
+    |                      | PE 2 | ldle | ldle                           | ldle                    |
+    ldle                | ldle |
+
+
+    Figure 3: Execution steps of each described approach.
+
+
+    mapping of partitions to hardware as presented in Figure [2.](#page-2-7) Figure
+    [3](#page-3-1) summarizes the execution stages for Davis et al.''s, Thong et al.''s
+    and our approach for the theoretical execution for a decision of variable . In
+    our approach, clauses 1 and 2 are processed by Clause Processor 1 and 2 in parallel
+    once the decision is received. Since clauses 3 and 4 do not contain variable ,
+    Partition 2 remains in external memory and is not processed. Though Davis et al.
+    also process clause 1 and 2 in parallel, each Implication Engine first performs
+    a clause look-up to retrieve the affected clause. Results of the decision on the
+    affected clause are then calculated. Thong et al.''s approach starts BCP on Processing
+    Engine 1. After clause 1 is processed Processing Engine 1 traverses to clause
+    2. In the manner, clauses in a partition are processed sequentially. Execution
+    concludes after computing Partitions 1''s final element, clause 2. Processing
+    Engine 2 remains idle for the entire duration as clauses in partition 2 do not
+    contain variable .
+
+
+    #### 4.4 Processor-FPGA interface
+
+
+    The BCP coprocessor implements the Advanced eXtensible Interface 4-Lite (AXI-Lite)
+    IP interface, acting as a subordinate to a processor (AXI master). Using AXI,
+    the processor writes directly to the coprocessor''s registers to send instructions
+    and data, and continues polling for status updates and new implication until the
+    coprocessor completes.
+
+
+    Status changes dictate DPLL''s flow, either allowing the search to continue assigning
+    additional variables, or triggers backtracking on conflicts. A copy of all the
+    implications are saved on the processor to avoid re-assigning implied variables,
+    and further propagated to the remaining partitions.
+
+
+    #### <span id="page-3-0"></span>5 EXPERIMENTS AND RESULTS
+
+
+    On a Xilinx Zynq chip with total capacity of 14400 LUTs and 28800 FF, our solution
+    supports 224 parallel Clause Processors and 63 variables. We achieve a clock frequency
+    of 106.66 MHz, utilizing 647 LUTRAM of on-chip memory, 13151 LUTs, and 11059 FFs.
+
+
+    Related work calculates throughput (in BPCs performed per second), assuming full
+    data availability: i.e., not taking into account software execution and communication/data
+    transfer latency. Whilst this is a useful metric to assess hardware performance
+    in isolation (and we report equivalent results in Table [1\)](#page-3-2), it does
+    not accurately depict system performance; to do so, we break down
+
+
+    <span id="page-3-2"></span>
+
+
+    |               | Millions of BCP/s |                     |            |  |  |
+
+    |---------------|-------------------|---------------------|------------|--|--|
+
+    | SAT Instance  | Davis et al [5]   | Thong et al<br>[19] | Our Design |  |  |
+
+    | bmc-galileo-8 | 40                | 102                 | 175        |  |  |
+
+    | bmc-ibm-12    | 33                | 150                 | 169        |  |  |
+
+
+    Table 1: Comparison of BCP engine throughput (BCPs/s) with related work. Results
+    reflect maximum theoretical throughput, achieved only data is fully available
+    to BCP engines.
+
+
+    <span id="page-3-3"></span>![](_page_3_Figure_13.jpeg)
+
+
+    Figure 4: Breakdown of the total execution time across constituent components.
+
+
+    <span id="page-3-4"></span>
+
+
+    |         |       | Variables  |           |           |           |  |  |  |
+
+    |---------|-------|------------|-----------|-----------|-----------|--|--|--|
+
+    |         |       | 63         | 126       | 252       | 630       |  |  |  |
+
+    | Clauses | 224   | 362M BCP/s | 17K BCP/s |           | NA        |  |  |  |
+
+    |         |       | 2.2x       | 0.17x     | NA        |           |  |  |  |
+
+    |         | 448   | 702K BCP/s | 21K BCP/s | 13K BCP/s | NA        |  |  |  |
+
+    |         |       | 1.6x       | 0.21x     | 0.08x     |           |  |  |  |
+
+    |         | 2240  | 441K BCP/s | 22K BCP/s | 16K BCP/s | 12K BCP/s |  |  |  |
+
+    |         |       | 1.91x      | 1.26x     | 0.61x     | 0.10x     |  |  |  |
+
+    |         | 22400 | 313K BCP/s | 20K BCP/s | 16K BCP/s | 14K BCP/s |  |  |  |
+
+    |         |       | 6.32x      | 5.04x     | 4.86x     | 3.31x     |  |  |  |
+
+
+    Table 2: Varied clause/variable sizes and their impact on the relative speedup
+    of hardware/software and the effective throughput of BCP engines.
+
+
+    the full execution in Figure [4](#page-3-3) and evaluate speedup over vanilla
+    software implementation, evaluating combinations of clause and variable sizes,
+    with speedup depicted in Table [2](#page-3-4) for meaningful combinations. For
+    each combination, we also depict real throughput, in the form of BCPs/s averaged
+    over total execution time (63 variables and 224 clauses is the theoretical upper
+    bound, without the need for hot swapping). To evaluate the different effects of
+    clause/variable sizes on execution, we fix one and vary the other, measuring total
+    execution time: results are depicted in Figures [5](#page-4-23) and [6.](#page-4-24)
+
+
+    <span id="page-4-0"></span>Accelerating Boolean Constraint Propagation for Efficient
+    SAT-Solving on FPGAs GLSVLSI ''24, June 12–14, 2024, Clearwater, FL, USA
+
+
+    <span id="page-4-23"></span>![](_page_4_Figure_1.jpeg)
+
+
+    ![](_page_4_Figure_2.jpeg)
+
+
+    <span id="page-4-24"></span>![](_page_4_Figure_3.jpeg)
+
+
+    Figure 6: Effect of increasing variables size on total execution time, for 22400
+    clauses.
+
+
+    #### <span id="page-4-5"></span>6 CONCLUSIONS
+
+
+    We described a SAT-solver hardware-accelerated architecture that outperforms state
+    of the art by hot-swapping clause assignment at runtime, making efficient use
+    of FPGA resources. Our solution prototype, on a Xilinx Zynq chip, is available
+    in open-source. Practitioners may use the presented solution in their designs,
+    whenever a problem is encoded in SAT form and performance is critical.
+
+
+    An important open question remains: our performance is constrained by how clauses
+    are partitioned. A partitioning scheme that minimizes the distribution of variables
+    among clauses will minimize runtime swapping, resulting in improved execution.
+    However, how to best partition a formula to achieve this is not yet known. Future
+    work must formulate this challenge as an optimization problem, and methods for
+    its efficient solution must be devised. Once that is achieved, they can be applied
+    (offline) prior to deployment on our architecture.
+
+
+    #### ACKNOWLEDGMENTS
+
+
+    We acknowledge the support of the Natural Sciences and Engineering Research Council
+    of Canada (NSERC).
+
+
+    #### REFERENCES
+
+
+    - <span id="page-4-4"></span>[1] Rabie Ben Atitallah and Karim MA Ali. 2017. FPGA-Centric
+    High Performance Embedded Computing: Challenges and Trends. In 2017 Euromicro
+    Conference on Digital System Design (DSD). IEEE, 390–395.
+
+    - <span id="page-4-2"></span>[2] Stephen A Cook. 2023. The complexity of theorem-proving
+    procedures. In Logic, Automata, and Computational Complexity: The Works of Stephen
+    A. Cook. 143–152.
+
+    - <span id="page-4-21"></span>[3] Andreas Dandalis and Viktor K Prasanna. 2002.
+    Run-time performance optimization of an FPGA-based deduction engine for SAT solvers.
+    ACM Transactions on Design Automation of Electronic Systems (TODAES) 7, 4 (2002),
+    547–562.
+
+    - <span id="page-4-22"></span>[4] John D Davis, Zhangxi Tan, Fang Yu, and Lintao
+    Zhang. 2008. Designing an efficient hardware implication accelerator for SAT solving.
+    In International Conference on Theory and Applications of Satisfiability Testing.
+    Springer, 48–62.
+
+    - <span id="page-4-8"></span>[5] John D. Davis, Zhangxi Tan, Fang Yu, and Lintao
+    Zhang. 2008. A practical reconfigurable hardware accelerator for boolean satisfiability
+    solvers. In 2008 45th ACM/IEEE Design Automation Conference. 780–785. [https://doi.org/10.1145/](https://doi.org/10.1145/1391469.1391669)
+    [1391469.1391669](https://doi.org/10.1145/1391469.1391669)
+
+    - <span id="page-4-19"></span>[6] Amir H Farrahi and Majid Sarrafzadeh. 1994.
+    FPGA technology mapping for power minimization. In International Workshop on Field
+    Programmable Logic and Applications. Springer, 66–77.
+
+    - <span id="page-4-1"></span>[7] Michael R. Garey and David S. Johnson. 1990.
+    Computers and Intractability; A Guide to the Theory of NP-Completeness. W. H.
+    Freeman & Co., USA.
+
+    - <span id="page-4-14"></span>[8] Weiwei Gong and Xu Zhou. 2017. A survey of SAT
+    solver. In AIP Conference Proceedings, Vol. 1836. AIP Publishing.
+
+    - <span id="page-4-16"></span>[9] Youssef Hamadi, Said Jabbour, and Lakhdar Sais.
+    2010. ManySAT: a parallel SAT solver. Journal on Satisfiability, Boolean Modeling
+    and Computation 6, 4 (2010), 245–262.
+
+    - <span id="page-4-13"></span>[10] Anping He, Lvying Yu, Haitao Zhang, Lian Li,
+    and Jinzhao Wu. 2018. A FPGA Based SAT Solver with High Random and Concurrent
+    Strategies. In 2018 IEEE International Conference on Software Quality, Reliability
+    and Security Companion (QRS-C). 221–228.<https://doi.org/10.1109/QRS-C.2018.00049>
+
+    - <span id="page-4-11"></span>[11] Teodor Ivan and El Mostapha Aboulhamid. 2013.
+    An Efficient Hardware Implementation of a SAT Problem Solver on FPGA. In 2013
+    Euromicro Conference on Digital System Design. 209–216.<https://doi.org/10.1109/DSD.2013.31>
+
+    - <span id="page-4-12"></span>[12] Teodor Ivan and El Mostapha Aboulhamid. 2013.
+    Exploring limits of parallelism in FPGA-based Boolean satisfiability. In 2013
+    2nd Mediterranean Conference on Embedded Computing (MECO). 62–65.<https://doi.org/10.1109/MECO.2013.6601319>
+
+    - <span id="page-4-15"></span>[13] Ruben Martins, Vasco Manquinho, and Inês Lynce.
+    2012. An overview of parallel SAT solving. Constraints 17 (2012), 304–347.
+
+    - <span id="page-4-17"></span>[14] Muhammad Osama, Anton Wijs, and Armin Biere.
+    2021. SAT solving with GPU accelerated inprocessing. In International Conference
+    on Tools and Algorithms for the Construction and Analysis of Systems. Springer,
+    133–151.
+
+    - <span id="page-4-6"></span>[15] I. Skliarova and A.B. Ferrari. 2004. A software/reconfigurable
+    hardware SAT solver. IEEE Transactions on Very Large Scale Integration (VLSI)
+    Systems 12, 4 (2004), 408–419.<https://doi.org/10.1109/TVLSI.2004.825859>
+
+    - <span id="page-4-7"></span>[16] Ali Asgar Sohanghpurwala, Mohamed W. Hassan,
+    and Peter Athanas. 2017. Hardware accelerated SAT solvers: A survey. J. Parallel
+    and Distrib. Comput. 106 (2017), 170–184.<https://doi.org/10.1016/j.jpdc.2016.12.014>
+
+    - <span id="page-4-3"></span>[17] Robert Stewart, Bernard Berthomieu, Paulo Garcia,
+    Idris Ibrahim, Greg Michaelson, and Andrew Wallace. 2019. Verifying parallel dataflow
+    transformations with model checking and its application to FPGAs. Journal of Systems
+    Architecture 101 (2019), 101657.
+
+    - <span id="page-4-9"></span>[18] Jason Thong and Nicola Nicolici. 2013. FPGA
+    acceleration of enhanced boolean constraint propagation for SAT solvers. In 2013
+    IEEE/ACM International Conference on Computer-Aided Design (ICCAD). 234–241. [https://doi.org/10.1109/](https://doi.org/10.1109/ICCAD.2013.6691124)
+    [ICCAD.2013.6691124](https://doi.org/10.1109/ICCAD.2013.6691124)
+
+    - <span id="page-4-10"></span>[19] Jason Thong and Nicola Nicolici. 2015. SAT
+    solving using FPGA-based heterogeneous computing. In 2015 IEEE/ACM International
+    Conference on Computer-Aided Design (ICCAD). 232–239.<https://doi.org/10.1109/ICCAD.2015.7372575>
+
+    - <span id="page-4-18"></span>[20] Haoze Wu. 2017. Improving SAT-solving with
+    machine learning. In Proceedings of the 2017 ACM SIGCSE Technical Symposium on
+    Computer Science Education. 787–788.
+
+    - <span id="page-4-20"></span>[21] Peixin Zhong, Margaret Martonosi, and Pranav
+    Ashar. 2000. FPGA-based SAT solver architecture with near-zero synthesis and layout
+    overhead. IEE Proceedings-Computers and Digital Techniques 147, 3 (2000), 135–141.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper includes an "Experiments and
+      Results" section where the authors evaluate their SAT solver on a Xilinx Zynq
+      platform. They provide quantitative results, including speedup comparisons with
+      prior state-of-the-art solutions and throughput measurements. Additionally,
+      performance tables and figures are presented to support their evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper meaningfully engages with prior
+      research throughout its content. It includes a "State of the Art" section that
+      discusses historical solutions and compares them to the proposed method. The
+      paper also references numerous prior works in its background and implementation
+      sections, providing context and comparison to existing solutions.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel architecture for
+      hardware-accelerated SAT-solving on FPGAs, which eliminates costly clause lookup
+      operations and introduces a method for hot-swapping partitions during runtime.
+      It claims to outperform state-of-the-art solutions and is presented as the first
+      open-source hardware-accelerated SAT solver for the Xilinx Zynq platform. These
+      elements demonstrate novelty in both method and application.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel hardware-accelerated
+      SAT solver architecture for FPGAs, presenting new contributions such as a methodology
+      for mapping and runtime management of clauses, an open-source prototype system,
+      and performance evaluations against state-of-the-art solutions. It does not
+      primarily summarize existing work but rather builds upon it to propose and evaluate
+      new advancements.'
+  topics:
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on hardware-accelerated SAT solving using
+      Field Programmable Gate Arrays (FPGAs), which involves designing and optimizing
+      computer hardware architectures to improve the performance of computation processes.
+    secondary_topic: Logic & Verification
+    secondary_topic_reasoning: The paper addresses Boolean Constraint Propagation,
+      which is a fundamental aspect of the DPLL algorithm used in SAT solving, a critical
+      area in logic and verification methods.
+    main_topic_sub: Accelerator-based, application-specific, and reconfigurable architectures
+    secondary_topic_sub: Other
+- title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions\n\
+    \  from Design Specifications via Multi-LLMs"
+  abstract: 'Assertion-based verification (ABV) is a critical method for ensuring
+    design
+
+    circuits comply with their architectural specifications, which are typically
+
+    described in natural language. This process often requires human interpretation
+
+    by verification engineers to convert these specifications into functional
+
+    verification assertions. Existing methods for generating assertions from
+
+    natural language specifications are limited to sentences extracted by
+
+    engineers, discouraging its practical application. In this work, we present
+
+    AssertLLM, an automatic assertion generation framework that processes complete
+
+    specification files. AssertLLM breaks down the complex task into three phases,
+
+    incorporating three customized Large Language Models (LLMs) for extracting
+
+    structural specifications, mapping signal definitions, and generating
+
+    assertions. Our evaluation of AssertLLM on a full design, encompassing 23 I/O
+
+    signals, demonstrates that 89\% of the generated assertions are both
+
+    syntactically and functionally accurate.'
+  url: http://arxiv.org/abs/2402.00386v3
+  keywords: ''
+  document: '## I. INTRODUCTION
+
+
+    <span id="page-0-2"></span>Hardware functional verification is critical in the
+    VLSI design flow, primarily addressing whether an implementation adheres to its
+    specification. For instance, the register-transfer level (RTL) design of a processor
+    must comply with the given instruction set architecture (ISA) specification. Typically,
+    the architects first develop the specifications in a natural language document.
+    Subsequently, RTL designers translate these specifications into RTL code, while
+    the verification engineers are responsible for checking the functional correctness
+    of the RTL designs according to the specifications.
+
+
+    During the verification process, assertion-based verification (ABV) [\[1\]](#page-8-0)
+    is a widely adopted technique, which utilizes assertions crafted from specifications
+    to verify the functional behavior of RTL designs. ABV can be conducted either
+    through simulation with testbenches or using formal property verification (FPV)
+    techniques. Temporal logic, particularly SystemVerilog Assertions (SVA), is commonly
+    employed for specifying these properties. However, a significant challenge in
+    ABV is the generation of sufficient, high-quality assertions. Currently, designing
+    SVAs manually is a time-consuming and error-prone task, demanding unignorable
+    human effort.
+
+
+    To address this challenge, research has focused on generating SVAs automatically.
+    The automatic approaches can be categorized into two types: dynamic mining from
+    simulation traces and static analysis of specifications. Dynamic methods [\[2\]](#page-8-1)–[\[4\]](#page-8-2)
+    generate assertions by combining simulating test traces and static analysis of
+    design constraints. However, a critical limitation of dynamic methods is that
+    both the generation and evaluation of assertions are on the same RTL
+
+
+    <span id="page-0-0"></span>![](_page_0_Figure_11.jpeg)
+
+
+    Fig. 1: AssertLLM in VLSI design and verification flow. AssertLLM automatically
+    generates SVAs from natural language specifications, facilitating functional verification
+    for both bug avoidance and bug hunting.
+
+
+    design without referring to a golden reference model. This could lead to the generation
+    of incorrect SVAs due to flaws in the RTL design, which these methods might not
+    detect. On the other hand, existing static methods depend either on the pre-defined
+    templates [\[5\]](#page-8-3), [\[6\]](#page-8-4) or on machine learning (ML) technologies
+    [\[7\]](#page-8-5)–[\[17\]](#page-8-6). The template-based methods also require
+    a deep understanding of the design function to fill in the templates. As for the
+    ML-based methods, they explore both traditional natural language processing (NLP)
+    and emerging Generative AI techniques like Large Language Models (LLMs). We further
+    categorize the existing static ML-based methods based on their application in
+    different design phases: the RTL and pre-RTL stages.
+
+
+    Table [I](#page-1-0) details these ML-based SVA generation methods in both the
+    RTL stage and the pre-RTL stage. During the RTL stage, the process typically involves
+    using LLMs to process both human-written specification sentences and the RTL design
+    to generate SVAs describing security or functional properties [\[7\]](#page-8-5)–[\[9\]](#page-8-7).
+    However, similar to the dynamic methods, inaccuracies in RTL implementations could
+    result in flawed SVAs.
+
+
+    When it comes to the pre-RTL stage, with the natural language specification document
+    finalized, RTL designers proceed to implement behavior satisfying this golden
+    specification. Numerous studies [\[10\]](#page-8-8)–[\[17\]](#page-8-6) have employed
+    NLP techniques to generate SVAs from sentences extracted by humans. These works
+    focused on processing sentences identified from a comprehensive document of specification.
+    However, specification extraction requires tremendous human efforts, and the NLP-based
+    generation process faces challenges in
+
+
+    <span id="page-1-0"></span>
+
+
+    | Stage   | Works     | Generation<br>Method | NL Specification |                  |
+    Evaluation  |                             |                          |  |
+
+    |---------|-----------|----------------------|------------------|------------------|-------------|-----------------------------|--------------------------|--|
+
+    |         |           |                      | Auto Extract.    | Source           |
+    Full Design | Target                      | Open-Source<br>Benchmark |  |
+
+    | RTL     | [7]       | LLM-based            | %                | Sentences        |
+    %           | Security                    | %                        |  |
+
+    |         | [8], [9]  |                      |                  | from Engineers   |             |
+    Function                    | ⋆                        |  |
+
+    | Pre-RTL | [10]–[17] | NLP-based            | %                | Sentences        |             |
+    Function (specialized       | %                        |  |
+
+    |         |           |                      |                  | from SPEC file   |             |
+    checkers/ artificial cases) |                          |  |
+
+    |         | Ours      | LLM-based            |                  | Entire SPEC
+    file |             | Function                    |                          |  |
+
+    |         |           |                      |                  |                  |             |
+    (general benchmark)         |                          |  |
+
+
+    <sup>⋆</sup> Work [\[8\]](#page-8-9) only open-source the result on a FIFO, while
+    work [\[9\]](#page-8-7) only demonstrate based on tiny designs such as FSM and
+    DFF.
+
+
+    TABLE I: Existing works on generating SVAs from natural language specifications.
+    AssertLLM is the first work that can handle full-size specification files and
+    generate comprehensive types of SVAs for each architectural signal. We also propose
+    the first open-source benchmark for assertion generation and evaluation from natural
+    language specifications.
+
+
+    generalizing across diverse grammatical variations. Additionally, the evaluation
+    of SVAs generated through these methods typically depends on design-specific checkers,
+    such as protocol and processor checkers, and is therefore difficult to extend
+    to other design types.
+
+
+    Here we summarize three key challenges that currently hinder the practical application
+    of SVA generation from natural language specifications:
+
+
+    - 1) Natural language VLSI specifications are inherently unstructured and are
+    hard to be directly used for assertion generation.
+
+    - 2) Even with structured specifications, translating natural language into assertions
+    remains a highly complex task, requiring both a deep understanding of the design
+    functionality and specialized expertise in SVA.
+
+    - 3) Currently, there is a lack of a universal evaluation method and benchmarks
+    capable of addressing the diverse types of VLSI designs.
+
+
+    To tackle the identified challenges in SVA generation, in our work, we propose
+    AssertLLM, a novel automatic assertion generation framework incorporating multiple
+    specialized LLMs to deal with the decomposed tasks separately. This framework
+    is designed to process complete natural language specification files, automatically
+    producing SVAs for each architectural signal. This approach significantly benefits
+    both design-time bug prevention and verification-time bug detection. The role
+    of AssertLLM within the standard VLSI design and verification flow is illustrated
+    in Fig. [1.](#page-0-0) AssertLLM effectively addresses the outlined challenges
+    by combining three customized LLMs, each focused on a specific task: extracting
+    relevant information from specifications, mapping signal definitions, and translating
+    natural language specifications into SVAs. The resulting SVAs contain various
+    types, including bit-width, connectivity, and functional assertions.
+
+
+    Additionally, our work provides an open-source benchmark, designed to evaluate
+    the quality of the generated SVAs. This benchmark, coupled with a general evaluation
+    method, is adaptable to various design types.
+
+
+    To the best of our knowledge, AssertLLM is the first automatic assertion generation
+    method that can handle fullsize specification files and generate various types
+    of SVAs for each architectural signal. It also provides the first open-source
+    benchmark for assertion generation and evaluation from design specifications,
+    which can deal with different design types. Our contributions in this work are
+    summarized below:
+
+
+    - To the best of our knowledge, AssertLLM is the first automatic assertion generation
+    method that can handle the complete specification files and generate comprehensive
+    types of SVAs for each architectural signal.
+
+    - We incorporate three customized LLMs, each enhanced with specific techniques
+    for the decomposed tasks: extracting structural information from specifications,
+    mapping signal declarations, and translating specifications into various SVA types.
+    These SVAs support checks for bit-width, connectivity, and function.
+
+    - We provide the first open-source benchmarks[1](#page-0-1) for assertion generation
+    and evaluation, which include both golden specification documents and golden RTL
+    designs. The generated SVAs are evaluated on the golden RTL implementations using
+    model checking tools. Our evaluation method is designed to be applicable across
+    a variety of design types.
+
+    - To demonstrate the effectiveness of AssertLLM, we conducted a comprehensive
+    evaluation on a complete design. This resulted in the generation of 56 SVAs for
+    23 signals, with 23 for bit-width, 16 for interface, and 17 for function. Impressively,
+    89% of these generated SVAs are evaluated to be correct both syntactically and
+    functionally.
+
+
+    II. PRELIMINARIES AND PROBLEM FORMULATION
+
+
+    # <span id="page-1-1"></span>*A. Natural Language Specification*
+
+
+    A well-defined natural language specification mainly contains the following six
+    parts: (1) introduction: introduces the concepts and the features of the target
+    design. (2) IO ports: provides detailed information on the prime input and prime
+    output ports essential for interfacing. (3) registers: describe all the architecture-level
+    registers in the design. (4) operation: explains the operational procedures for
+    dataflow and control. (5) architecture: the high-level workflow and dataflow of
+    the design. (6) usage examples: offers basic usage scenarios and corresponding
+    waveform illustrations for the design.
+
+
+    Specifically for the signals, the specification only defines the necessary architecture-level
+    IO ports and registers, while leaving the definition of the internal signals used
+    in the detailed RTL implementations for the RTL designers.
+
+
+    <sup>1</sup> It will be open-sourced in https://github.com/hkust-zhiyao/AssertLLM
+
+
+    ## *B. LLM for EDA*
+
+
+    Recent advancements in LLMs like ChatGPT [\[18\]](#page-8-10) have not only demonstrated
+    remarkable capability in content generation but also evolved to assist humans
+    in various roles as agents. The application of LLMs in the field of electronic
+    design automation (EDA) is an emerging area of exploration. Besides employing
+    LLMs for assertion generation [\[7\]](#page-8-5)–[\[9\]](#page-8-7), recent studies
+    have employed LLMs for tasks such as RTL code generation [\[19\]](#page-8-11)–[\[26\]](#page-8-12)
+    and syntax correction [\[27\]](#page-8-13). Additionally, LLM-based solutions
+    have been developed to facilitate the interaction with EDA tools [\[26\]](#page-8-12),
+    [\[28\]](#page-8-14), design architecture for AI accelerators [\[29\]](#page-8-15),
+    [\[30\]](#page-8-16), fix security bugs [\[31\]](#page-8-17), generate and review
+    specification documents [\[32\]](#page-8-18), etc. These diverse applications
+    and research efforts indicate a highly promising future for LLMs in enhancing
+    and revolutionizing chip design processes.
+
+
+    ## *C. Problem Fromulation*
+
+
+    We denote a well-defined specification file as S, where each architectural signal
+    detailed in the specification is denoted as sg<sup>i</sup> . Note that the architectural
+    signal contains both the input and output ports and the architecture-level registers,
+    but excludes the internal signals further implemented in the RTL design. Our generation
+    process, denoted as Gen, is designed to analyze the specification file S and generate
+    a comprehensive set of assertions A for each signal sg<sup>i</sup> . The assertion
+    generation can be expressed as follows:
+
+
+    Problem 1 (Assertion Generation from Specification).
+
+
+    $$\forall s g\_i \in \mathcal{S}, Gen(S, s g\_i) \to \mathcal{A}(s g\_i) \tag{1}$$
+
+
+    Following the generation of assertions, it is crucial to evaluate their quality.
+    We denote this evaluation process as Eval. To assess the correctness of the generated
+    assertions, we utilize the golden RTL implementations, symbolized as R. The correctness
+    of the assertions is denoted as Correct. The evaluation can be formulated below:
+
+
+    Problem 2 (Generated Assertion Evaluation).
+
+
+    $$\forall sg\_i \in \mathcal{S}, Eval(\mathcal{R}, \mathcal{A}(sg\_i)) \to \ correct(\mathcal{A}(sg\_i))
+    \quad (2)$$
+
+
+    ## III. METHODOLOGY
+
+
+    ## *A. Workflow Overview*
+
+
+    Fig. [2](#page-3-0) illustrates the SVA generation and evaluation flow for AssertLLM.
+    Our approach to generating hardware verification assertions from natural language
+    specifications, particularly from comprehensive specification documents, involves
+    the integration of three customized LLMs. These LLMs are designed to break down
+    this complex task into manageable components, thereby facilitating a comprehensive
+    generation workflow. Additionally, we contribute an open-source benchmark and
+    establish evaluation methodologies to assess the quality of the generated SVAs.
+
+
+    The assertion generation process is decomposed into three primary steps: (1) Extraction
+    of relevant information from the original specification necessary for SVA generation.
+    (2) Alignment of signal names between the natural language specifications and
+    their corresponding declarations in HDL code. (3) Generation of high-quality SVAs
+    based on the extracted natural language specifications.
+
+
+    In the subsequent subsections, we will detail the functionalities of each customized
+    LLM of the comprehensive assertion generation flow. Following this, our SVA evaluation
+    methodology will be presented.
+
+
+    ## *B. Specification Information Extraction*
+
+
+    The first step of our AssertLLM framework is to extract structured information
+    from natural language specification documents to enable SVA generation. As we
+    discussed in Section [I,](#page-0-2) the first key challenge of SVA generation
+    lies in the inherent unstructured nature of the original specifications, which
+    contain background information, functional descriptions, microarchitecture designs,
+    and various diagrams, including dataflow and waveform, etc. Meanwhile, the existence
+    of assertion-relevant information across different sections further complicates
+    the direct utilization of the original specifications for SVA generation.
+
+
+    Facing this challenge, existing methods can only deal with sentence-level specifications.
+    Some works [\[14\]](#page-8-19), [\[16\]](#page-8-20) utilize ML methods to assess
+    the relevance of manually extracted specification sentences to the intended assertions.
+    Other studies [\[10\]](#page-8-8)–[\[12\]](#page-8-21), [\[15\]](#page-8-22),
+    [\[17\]](#page-8-6) directly use the human-identified or human-written assertion-related
+    sentences. This reliance on sentence-level analysis limits the ability of the
+    above NLPbased methods to fully automate SVA generation for practical applications
+
+
+    To address the challenge of processing original, unstructured, full-size specification
+    documents, we propose a customized LLM, tailored to extract structural and relevant
+    information for each defined signal, thereby further facilitating the SVA generation
+    process.
+
+
+    Specifically, in our LLM 1 SPEC Analyzer, we first utilize system instructions
+    to customize the LLM, shown as Fig. [3.](#page-3-1) The model takes the full-size
+    specification file as the input, and the multi-modal function is employed to analyze
+    the file containing text, table, figures, etc. Then for each signal, the LLM is
+    required to extract all the related information of the signal. Here, we design
+    a structured template to guide the LLM in extracting all essential signal-related
+    information. This template contains three key components: the signal''s name,
+    its description, and the interconnection signals. We demonstrate the details of
+    each part as follows:
+
+
+    - Name: The identifier of the signal in the specification, ensuring clear and
+    unambiguous reference.
+
+    - Description: To facilitate SVA generation, we divide the descriptions into four
+    categories, including (1) definitions such as bit-width and signal type. (2) functionality
+    which contains all the function-related information of the target signal in the
+    entire specification file. (3) interconnection relationship with all other signals.
+    (4) additional information that is not included in the above three types.
+
+    - Interconnection Signals: A list of signals that interact or are associated with
+    the target signal, which are essential for the assertion generation, and will
+    be processed in the next LLM.
+
+
+    <span id="page-3-0"></span>![](_page_3_Figure_0.jpeg)
+
+
+    Fig. 2: AssertLLM generation and evaluation workflow. AssertLLM incorporates three
+    customized LLMs, each enhanced with specific techniques for the decomposed tasks:
+    extracting structural information from specifications, mapping signal definitions,
+    and translating specifications into various SVA types. To evaluate the performance
+    of the generation methods, the generated SVAs are further assessed based on the
+    golden RTL implementations using model checking tools.
+
+
+    Note that the extracted information is summarized across different sections of
+    the original specification, which contains all the information needed for assertion
+    generation.
+
+
+    <span id="page-3-1"></span>**[Custom Instructions for SPEC Analyzer]**
+
+
+    - Please act as a professional VLSI specification analyzer.
+
+    - Firstly, I''ll upload the the **design specification file** (in PDF format).
+
+    - Each time I ask a question, please read and analyze the specification PDF file
+    carefully, and answer the question **only based on the uploaded files**, don''t
+    use any content outside the file.
+
+    - When I ask for information on a **[xxx] signal**, please **extract all the information
+    related to this signal** in the spec file, note that the extracted information
+    should be **suitable for the SystemVerilog Assertions (SVAs) generation**, and
+    output all the information in the following format:
+
+
+    | [Signal name]: name in SPEC                                         |
+
+    |---------------------------------------------------------------------|
+
+    | [Description]: including but not limited to                         |
+
+    | [Definition]: such as bit-width, signal type (in/out/register), etc |
+
+    | [Functionality]: all the function information illustrated in SPEC   |
+
+    | [Interconnection]: the relationship with all other signals          |
+
+    | [Additional information]: all other related information             |
+
+    | [Related Signals]: names of all other signals mentioned in the      |
+
+    | Description part                                                    |
+
+    |                                                                     |
+
+
+    Fig. 3: Custom Instructions for LLM 1 SPEC Analyzer
+
+
+    ## *C. Signal Definition Mapping*
+
+
+    After extracting the structural specification information, we also face another
+    problem: the target assertion contains internal signals that are not clearly defined
+    in the specification file. As we illustrated in Subsection [II-A,](#page-1-1)
+    the specification document typically details only the input/output ports and architecturelevel
+    registers, while leaving the internal signals used to implement the detailed functions
+    in RTL code (e.g., internal wires and registers) undefined.
+
+
+    To solve this problem, we introduce the second customized LLM 2 Signal Mapper
+    to analyze the signal definitions in the initialized HDL code and align these
+    signal declarations with the natural language signal names found in the specification
+    document.
+
+
+    Specifically, we also use the custom instructions to guide LLM to specialize in
+    the mapping task, shown in Fig. [5.](#page-3-2) The model processes both the original
+    specification file and the signal definition HDL code as inputs. It employs a
+    code interpreter to carefully examine both the declarations and the comments within
+    the HDL code snippet. Subsequently, the LLM analyzes the contents of the two files
+    to establish a **[Prompt for SPEC Analyzer]**
+
+
+    - [Upload the original SPEC file] Here is the design specification file, please
+    analyze it carefully.
+
+    - [For each signal] Please extract all the information related to the signal control
+    register (CTR) from the spec file.
+
+
+    #### **[Response from SPEC Analyzer]**
+
+
+    The Control Register (CTR) in the I2C-Master Core specification has the following
+    characteristics:
+
+
+    1. [Signal Name]: In Spec - Control Register (CTR). 2. [Description]: 2.1. [Definition]:
+    - Bit-width: 8 bits - Signal Type: Register (Access Type: RW - Read/Write) 2.2.
+    [Functionality]: - Bit 7: I2C core enable bit. When set to ''1'', the core is
+    enabled, and when set to ''0'', the core is disabled. - Bit 6: I2C core interrupt
+    enable bit. When set to ''1'', interrupts are enabled, and when set to ''0'',
+    interrupts are disabled. - Bits 5:0: Reserved. These bits are read/write but are
+    reserved for future use. 2.3. [Interconnection]: This register directly controls
+    the operation of the I2C core, enabling or disabling it and controlling interrupt
+    behavior. 2.4. [Additional Information]: - Reset Value for the Control Register
+    is 0x00 3. [Related Signals]: - EN: Controls the enable state of the I2C core.
+    - IEN: Controls the interrupt enable state of the I2C core.
+
+
+    Fig. 4: Prompt and Response Example of LLM 1 SPEC Analyzer
+
+
+    mapping relationship between the specification and the HDL code.
+
+
+    <span id="page-3-2"></span>
+
+
+    | [Custom Instruction for Signal Mapper]                                      |  |  |  |  |  |
+
+    |-----------------------------------------------------------------------------|--|--|--|--|--|
+
+    | Please act as a signal name mapping tool to link the specification file     |  |  |  |  |  |
+
+    |                                                                             |  |  |  |  |  |
+
+    | Firstly, I''ll upload the the design specification file (in PDF format), and
+    |  |  |  |  |  |
+
+    | a Verilog file containing all the signal definitions (*.v format).          |  |  |  |  |  |
+
+    | Please analyze the specification file and use the code interpreter to       |  |  |  |  |  |
+
+    | analyze the Verilog file (both the signal declarations and comments).       |  |  |  |  |  |
+
+    | Then map every signal (including IO ports, wires, and registers) defined    |  |  |  |  |  |
+
+    | in Verilog with the description in the specification. Finally, please       |  |  |  |  |  |
+
+    | output each signal in the following format:                                 |  |  |  |  |  |
+
+    | [Signal name in Verilog]: Signal definition in Specification file           |  |  |  |  |  |
+
+    |                                                                             |  |  |  |  |  |
+
+
+    Fig. 5: Custom Instructions for LLM 2 Signal Mapper
+
+
+    ## *D. Automatic Assertion Generation*
+
+
+    While previous research has delved into SVA generation using either traditional
+    NLP techniques at the pre-RTL stage
+
+
+    #### **[Prompt for Signal Mapper]**
+
+
+    - [Upload the original SPEC file and the Verilog signal definition file] Here
+    are the files for the design specification and the signal definitions, please
+    analyze the two files carefully.
+
+    - Please output each signal with the mapping relationship
+
+
+    **[Response from Signal Mapper]** Based on the analysis of both the design specification
+    and the Verilog file, here is the mapping of signals, wires, and regs in the Verilog
+    file to their respective descriptions in the specification:
+
+
+    | (IO port)                                                  |
+
+    |------------------------------------------------------------|
+
+    | wb_clk_i: Master clock                                     |
+
+    | wb_we_i: Write enable input                                |
+
+    | ……                                                         |
+
+    | (Register)                                                 |
+
+    | ctr: Control register                                      |
+
+    | sr: Status register                                        |
+
+    | ……                                                         |
+
+    | (Wire)                                                     |
+
+    | en: Enable state of the I2C core.                          |
+
+    | ien: Interrupt enable state of the I2C core                |
+
+    | ……                                                         |
+
+    | (Unmapped)                                                 |
+
+    | The additional elements such as wires and regs like        |
+
+    | ''wb_wacc'', ''sta'' have been identified in the Verilog file. |
+
+    | However, their specific descriptions are not directly      |
+
+    | found in the provided section of the specification.        |
+
+
+    Fig. 6: Prompt and Response Example of LLM 2 Signal Mapper
+
+
+    or LLM-based approaches for RTL designs, these methods have their limitations.
+    NLP-based techniques demand careful analysis of the syntax and semantics of assertion-related
+    sentences, which limit their adaptability to variations in sentence structures.
+    LLM-based methods, typically focused on the RTL stage, rely on HDL code and accompanying
+    human-written comments or properties, but their dependence on the unverified RTL
+    code poses a risk of generating inaccurate SVAs that could mislead the verification
+    process.
+
+
+    To address these challenges, our work introduces the LLM 3 SVA Generator, dedicated
+    to generating assertions for each signal utilizing the previously extracted structural
+    specifications and the established signal relationships.
+
+
+    Considering the precise syntax and writing rules inherent to SVAs and the potential
+    for the original LLM failing to generate syntactically correct SVAs, as discussed
+    in [\[8\]](#page-8-9), we incorporate the Retrieval Augmented Generation (RAG)
+    technique to enhance the LLM''s capability for SVA generation. This approach is
+    enriched by a knowledge database comprising tutorials and textbooks on SVA and
+    formal property verification [\[33\]](#page-8-23)–[\[35\]](#page-8-24), providing
+    a robust foundation for the LLM to access and retrieve relevant SVA knowledge
+    based on the input query, thereby enhancing the quality of the generated SVAs.
+
+
+    Besides the RAG technique, we also provide custom instructions for SVA Generator,
+    shown in Fig. [7.](#page-4-0) After uploading the overall architecture diagram
+    of the design, for each signal, the extracted structural specifications and the
+    mapped signal relationship from the above two LLMs are provided. Then the LLM
+    is required to generate SVAs strictly according to the specification, and as much
+    and high coverage as possible. To guide the LLM to generate high-quality SVAs,
+    we define five SVA categories as follows:
+
+
+    In addition to the RAG technique, we improve the SVA Generator with custom instructions,
+    as illustrated in Fig. [7.](#page-4-0) Upon inputting the overall architecture
+    diagram of the design, the LLM is provided with the structured specifications
+    and mapped signal relationships from the previous LLMs for each signal. Then the
+    LLM is required to generate SVAs that adhere strictly to the specifications, aiming
+    for maximal quantity and quality. To facilitate the generation of high-quality
+    SVAs, we categorize SVAs into three distinct groups, guiding the LLM toward producing
+    comprehensive and accurate assertions for effective verification.
+
+
+    - Width: Check if the signal bit width is satisfied with the specification.
+
+    - Connectivity: Check if the signal can be correctly exercised and also the value
+    propagation among all connected signals.
+
+    - Function: Check if the function defined in the specification is implemented
+    as expected.
+
+
+    Based on these well-designed SVA types, the customized LLM can generate numerous
+    SVAs for each signal. Fig. [8](#page-5-0) demonstrates an example of generating
+    SVAs for a signal.
+
+
+    <span id="page-4-0"></span>**[Custom Instructions for SVA Generator]** • Please
+    act as a professional VLSI verification engineer. You can refer to the uploaded
+    **knowledge base** about the SystemVerilog assertion (SVA) and formal verification
+    techniques. • Firstly, I''ll upload an workflow **diagram** of the design architecture.
+    • Then every time I provide the **specification of a signal** of the design, please
+    write **all the corresponding SVAs** based on the defined Verilog signals that
+    benefit both the RTL design and verification processes. Please note that don''t
+    generate signals that do not exist in the signal declaration Verilog file. • Please
+    make sure that the generated SVAs have **no syntax error**, and strictly **follow
+    the function** of the given specification/description. • The generated SVAs should
+    include but not be limited to the following **types**: [*width*]: Check the signal
+    width using \$bits operator [*connectivity*]: Check if the signal can be correctly
+    exercised and also the value propagation among all connected signals. [*function*]:
+    Check if the function defined in the specification is implemented as expected.
+
+
+    Fig. 7: Custom Instructions for LLM 3 SVA Generator
+
+
+    ## *E. Generated Assertion Evaluation*
+
+
+    After the SVAs are generated, evaluating their effectiveness is crucial. While
+    some previous studies such as [\[12\]](#page-8-21), [\[14\]](#page-8-19) suggest
+    using specific property checkers for this purpose, such an approach is limited
+    to particular design types like protocols and processors and lacks generalizability
+    to all VLSI designs. Other methods like [\[8\]](#page-8-9) involve manual verification
+    by engineers using EDA tools, which is vulnerable to human error.
+
+
+    In our approach, we propose leveraging the golden RTL implementations to assess
+    the quality of the generated SVAs. Our generation method is solely based on the
+    specification file, and the bug-free golden RTL designs serve as a robust benchmark
+    to evaluate our generation technique''s efficacy.
+
+
+    For evaluation, we utilize the formal property verification (FPV) method. The
+    generated SVAs and the golden RTL
+
+
+    #### <span id="page-5-0"></span>**[Prompt for SVA Generator]**
+
+
+    • [Upload the architecture diagram] Here is the overall diagram workflow of the
+    design architecture.
+
+
+    ![](_page_5_Figure_2.jpeg)
+
+
+    • [For each signal, upload the extracted specification and signal mapping] Please
+    generate SVAs for the signal control register (CTR).
+
+
+    #### **[Response from SVA Generator]**
+
+
+    Based on the provided specification for the control register (CTR), we can write
+    SVAs to validate its behavior. Let''s break down the SVAs according to the types
+    you specified:
+
+
+    ![](_page_5_Figure_6.jpeg)
+
+
+    Fig. 8: Prompt and Response Example of LLM 3 SVA Generator
+
+
+    designs are inputted into a model checker tool. After executing FPV, we employ
+    the following two metrics to evaluate the quality of SVAs for each target signal:
+
+
+    - Syntax: Check if the generated SVAs have syntax errors.
+
+    - FPV Pass/Fail: Given the RTL designs are bug-free, an SVA that passes the FPV
+    check is considered correct, and conversely, a failure indicates an incorrect
+    SVA.
+
+
+    ## *F. Proposed Benchmark*
+
+
+    Recognizing the absence of open-source benchmarks for evaluating LLMs in the generation
+    of SVAs from natural language specifications, we introduce a comprehensive benchmark
+    suite tailored for this purpose. Our benchmark consists of 20 open-source designs,
+    covering a diverse array of applications including microprocessors, system-on-chip
+    architectures, communication protocols, arithmetic units, and cryptographic modules.
+    For each design within the benchmark, the benchmark provides the following components
+    across three distinct files:
+
+
+    - Specification: This file contains the complete natural language specification
+    for the design, offering a detailed description of the system''s intended architecture
+    and functionality.
+
+    - Signal Definition: Presented in HDL code format, this file outlines the signal
+    declarations essential for the generation of SVAs. It includes definitions for
+    both input/output ports and internal signals, providing the foundation for assertion
+    generation.
+
+    - Golden RTL Implementation: This file comprises the RTL design implementations
+    that are strictly implemented according to the specification. The designs are
+    verified to ensure it is free from bugs, serving as a reliable standard for evaluating
+    the accuracy and effectiveness of generated SVAs.
+
+
+    ## IV. EXPERIMENTAL RESULTS
+
+
+    ## *A. Experimental Setup*
+
+
+    In our study, the original specification documents are provided in PDF format,
+    including a variety of multi-modal content including text, tables, and figures.
+    The signal definition files and the golden RTL designs are formatted in Verilog.
+    To assess the quality of the generated SVAs, we utilize Cadence JasperGold®, one
+    of the leading commercial model checking tools. This evaluation leverages the
+    FPV app in JasperGold to ensure a thorough analysis.
+
+
+    Our experimental setup involves the evaluation of three types of LLMs using our
+    developed generation and evaluation methodology:
+
+
+    - 1) GPT-3.5: This model is the freely available commercial version, GPT-3.5 Turbo,
+    which supports a context window of up to 16K tokens.
+
+    - 2) GPT-4: The state-of-the-art commercial solution, GPT-4 Turbo, offers a 128K
+    token context window and multimodal capabilities, making it adept at handling
+    the diverse content found in specification documents.
+
+    - 3) AssertLLM: Cutomized GPT-4 Turbo by incorporating specialized techniques
+    such as RAG and custom instructions, tailoring the models specialized to the SVA
+    generation task.
+
+
+    In our experimental evaluation, we focus on the quality of the SVAs generated
+    for each signal across the designs. Note that all SVAs are produced from a single
+    query to the LLMs without any subsequent iterative modifications. The SVA containing
+    unmapped signals is considered an unsuccessful attempt at SVA generation. These
+    SVAs are identified and excluded by human engineers prior to the evaluation process.
+
+
+    ## *B. Evaluation Metrics*
+
+
+    To conduct a thorough evaluation of the generated SystemVerilog SVAs, we propose
+    a set of metrics that align with our evaluation methodology. This approach ensures
+    a detailed assessment of the SVAs'' quality on both a per-signal and perdesign
+    basis.
+
+
+    For each assertion type of an individual signal, our evaluation includes the following
+    metrics: (1) number of generated
+
+
+    <span id="page-6-0"></span>
+
+
+    |              |         |            |                                                                   |                         |
+    AssertLLM    |          | GPT-4   | GPT-3.5                                                |
+
+    |--------------|---------|------------|-------------------------------------------------------------------|-------------------------|--------------|----------|---------|--------------------------------------------------------|
+
+    |              | Signal  |            | Assertion Evaluation (#. Generated/#.
+    Syntax Correct/#. FPV Pass) |                         |              |          |         |                                                        |
+
+    | Name<br>Type |         | Width      | Connect.                                                          |
+    Function                | Signal Total | Function |         |                                                        |
+
+    |              | Clock   | wb clk i   | 1/1/1                                                             |                         |
+    /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              | Reset   | wb rst i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   | Can not handle<br>the original<br>specification files. |
+
+    |              |         | arst i     | 1/1/1                                                             |                         |
+    /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              | Control | wb stb i   | 1/1/1                                                             |
+    2/2/1<br>1/1/0<br>1/1/0 | /            | 3/3/2    | 3/1/0   |                                                        |
+
+    |              |         | wb ack o   | 1/1/1                                                             |                         |              |
+    2/2/1    | 3/1/0   |                                                        |
+
+    |              |         | wb inta o  | 1/1/1                                                             |                         |              |
+    2/2/1    | 3/1/0   |                                                        |
+
+    |              | Data    | wb adr i   | 1/1/1                                                             |
+    /                       | /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb dat i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    | IO Port      |         | wb cyc i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb dat o   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb we i    | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad i  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad o  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad i  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad o  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad oe | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad oe | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              | Control | ctr        | 1/1/1                                                             |
+    4/4/4                   | 5/5/5        | 10/10/10 | 3/1/1   |                                                        |
+
+    | Register     |         | sr         | 1/1/1                                                             |
+    6/6/5                   | 8/8/8        | 15/15/14 | 3/1/1   |                                                        |
+
+    |              | Data    | prer       | 1/1/1                                                             |
+    /                       | 3/3/1        | 4/4/2    | 4/1/1   |                                                        |
+
+    |              |         | txr        | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 3/1/1   |                                                        |
+
+    |              |         | rxr        | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 3/1/1   |                                                        |
+
+    |              |         | cr         | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 4/1/1   |                                                        |
+
+    | Design Total |         |            | 23/23/23                                                          |
+    16/16/12                | 17/17/15     | 56/56/50 | 71/23/6 |                                                        |
+
+    |              |         |            | 100%/100%                                                         |
+    100%/75%                | 100%/88%     | 100%/89% | 32%/8%  |                                                        |
+
+
+    TABLE II: Evaluation of the generated SVAs for design "I2C". AssertLLM generates
+    56 properties for a total of 23 signals, with 23 for bit-width, 16 for connectivity,
+    and 17 for function. 89% of these generated SVAs are evaluated to be correct both
+    syntactically and functionally.
+
+
+    SVAs. (2) number of syntax-correct SVAs. (3) number of FPVpassed SVAs.
+
+
+    Once the evaluation for each signal is complete, we aggregate the statistics of
+    the generated SVAs for each design and then calculate the proportion of these
+    SVAs that are syntactically correct and passed the FPV checks, respectively.
+
+
+    # *C. Assertion Generation Quality*
+
+
+    To illustrate the efficacy of AssertLLM, we apply it to a comprehensive design
+    case: the "I2C" protocol. The I2C specification describes the architecture of
+    a serial communication bus that provides a simple and efficient method of data
+    exchange between devices. The complete specification document for the "I2C" design
+    is structured into six main sections, similar to those illustrated in Subsection
+    [II-A.](#page-1-1) Note that for each signal, the specification is unstructured
+    and mainly across the IO ports, registers, and operation sections.
+
+
+    Additionally, we provide the signal definition file containing not only the IO
+    ports and architectural registers but also all the internal wires and registers
+    defined for detailed RTL implementation.
+
+
+    To facilitate the generation of SVAs, the AssertLLM framework processes specification
+    and signal definition files using two specialized LLMs: SPEC Analyzer for extracting
+    structured specifications for each signal and Signal Mapper for mapping signal
+    relationships. Then the SVA Generator is utilized to automatically generate three
+    types of SVAs based on the processed information from the first two LLMs.
+
+
+    The specification for the "I2C" design defines 23 signals, comprising 17 IO ports
+    and 6 architecture-level registers. For the IO ports, we categorize them into
+    4 functional types: clock, reset, control signal, and data signal. The architecture-level
+    registers are similarly categorized, based on their functionality, into control
+    and data types.
+
+
+    The evaluation of SVAs generated by our AsserLLM is demonstrated in Table [II.](#page-6-0)
+    For each signal, we first verify each type of the generated SVAs separately. Then
+    we summarize all the SVAs to provide a design-level inspection. We have multiple
+    interesting observations in Table [II](#page-6-0) as follows:
+
+
+    - AssertLLM demonstrates excellent proficiency in generating SVAs for bit-width
+    checking. Although bit-width checking is relatively straightforward, it is crucial
+    for early design stages to avoid potential bugs that cannot be checked through
+    a syntax checker.
+
+    - For the connectivity SVAs, since clear guidelines are provided only for control
+    signals within the architecture-level specification documents, AssertLLM can only
+    generate connectivity SVAs for them. The connectivity of data signals often depend
+    on specific internal signals defined in the RTL implementation, which are not
+    detailed in the
+
+
+    specification document.
+
+
+    - For the function SVAs, the specification provides explicit details only for
+    registers. The descriptions of IO ports primarily focus on data transformation
+    functions, without extensive functional details, which results in the lack of
+    related SVAs.
+
+    - For the quantity of generated SVAs, AssertLLM produced a total of 56 SVAs, with
+    23 dedicated to width checking, 16 to connectivity checking, and 17 to function
+    checking.
+
+    - Regarding the quality of generated SVAs, all SVAs related to bit-width checking
+    performed correctly. However, a minor portion of connectivity and function SVAs
+    contained errors, attributed mainly to misinterpretations of the specification
+    or LLM-generated hallucinations. Overall, AssertLLM achieved a correct accuracy
+    rate of 89% for the entire I2C design.
+
+
+    ## *D. Ablation Study*
+
+
+    In addition to assessing AssertLLM''s performance, we conducted an ablation study
+    to compare the SVA generation capabilities of the original GPT-4 and GPT-3.5 models
+    without the additional techniques. This study provides insights into the effectiveness
+    of enhancements incorporated in AssertLLM.
+
+
+    The evaluation results for the two commercial solutions are demonstrated in Table
+    [II.](#page-6-0) For GPT-3.5, since the lack of multimodal processing capabilities,
+    it is unable to directly generate SVAs from the original, multi-modal specification
+    files.
+
+
+    When utilizing the original GPT-4, the unstructured specification file and signal
+    definitions are provided, with prompts designed to guide SVA generation to the
+    best of the model''s ability. The generation results indicate that the absence
+    of a mechanism to extract structured specifications for each signal significantly
+    hampers GPT-4''s ability to compile all useful information for SVA generation,
+    resulting in a maximum of only 4 SVAs generated per signal. Additionally, without
+    specific assertion type guidance, GPT-4 only generates functional assertions.
+
+
+    For the SVA quality of commercial solutions, the original GPT-4 model tends to
+    produce SVAs with syntax errors, similar to observations made in the previous
+    study [\[8\]](#page-8-9). This issue is addressed in AssertLLM through the application
+    of RAG techniques, which enrich the model with specific knowledge on SVA and Formal
+    Property Verification (FPV). In the evaluation results, GPT-4 failed to generate
+    any correct SVAs for IO ports and only succeeded in creating accurate reset check
+    assertions for registers, leading to an overall correct proportion of only 8%.
+
+
+    ## V. DISCUSSION
+
+
+    ## *A. Coverage in SVA Evaluation*
+
+
+    Some works [\[8\]](#page-8-9) propose to leverage the coverage metric, especially
+    the cone-of-influence (COI) coverage to evaluate the quality of generated SVAs.
+    COI coverage relies on analyzing the signals exercised during simulation or formal
+    verification, which significantly involves internal signals within the design.
+
+
+    Given that our SVA generation process is based solely on the information available
+    in the specification documents, which typically detail external interfaces like
+    IO ports and architectural-level registers rather than internal signals, COI coverage
+    does not align well with our evaluation criteria. This coverage metric assumes
+    a level of design implementation detail that goes beyond the scope of natural
+    language specifications, making it less applicable for assessing the completeness
+    or effectiveness of SVAs generated at this pre-RTL stage.
+
+
+    ## *B. Evaluating and Enhancing Specification Quality with AssertLLM*
+
+
+    The generation of high-quality SVAs from natural language specifications relies
+    not only on the capabilities of LLMs but also on the intrinsic quality of the
+    specification documents themselves. A specification that provides only the basic
+    information of signals, such as their names and simple descriptions, without delving
+    into detailed functionalities or connectivities, inherently limits the potential
+    for generating meaningful SVAs, regardless of the power of the LLMs employed.
+    Conversely, specifications that offer comprehensive details, including clear definitions
+    of signal functionalities and connectivities, can facilitate the generation of
+    SVAs even with relatively simple LLMs.
+
+
+    Here we identify a novel application for AssertLLM beyond its primary role in
+    verification: utilizing AssertLLM as a tool for assessing the quality of natural
+    language specifications. This application leverages AssertLLM''s ability to process
+    and interpret specification documents to determine their *verification-friendliness*.
+    Specifications that enable AssertLLM to generate a broad and accurate range of
+    SVAs can be considered high-quality and well-suited for verification purposes.
+    This approach to evaluating specification quality offers several benefits:
+
+
+    - Identifying Gaps between Specifications and Verification: AssertLLM can highlight
+    contents within a specification that lack sufficient detail for SVA generation,
+    guiding architects to provide more comprehensive information.
+
+    - Enhancing Verification: Ensuring specifications are verification-friendly can
+    potentially reduce the time and effort required for verification.
+
+    - Standardizing Specification Writing: The feedback from AssertLLM can help establish
+    best practices for writing specifications to facilitate the automated verification,
+    and promote consistency across design stages.
+
+
+    ## VI. CONCLUSION
+
+
+    In this study, we introduce AssertLLM, an automated framework designed for generating
+    assertions from entire specification documents. AssertLLM breaks down the intricate
+    task into three sequential phases, leveraging specialized LLMs for structural
+    specification extraction, signal definition mapping, and assertion creation. We
+    also offer an open-source benchmark to evaluate the efficacy of assertion generation.
+    Evaluating AssertLLM on a comprehensive design with 23 signals revealed that 89%
+    of the assertions generated were accurate both syntactically and functionally.
+    We also discuss the potential of using AssertLLM to evaluate and enhance the quality
+    of specifications.
+
+
+    ## REFERENCES
+
+
+    - <span id="page-8-0"></span>[1] H. Witharana, Y. Lyu, S. Charles, and P. Mishra,
+    "A survey on assertionbased hardware verification," *ACM Computing Surveys (CSUR)*,
+    vol. 54, no. 11s, pp. 1–33, 2022.
+
+    - <span id="page-8-1"></span>[2] S. Germiniani and G. Pravadelli, "Harm: a hint-based
+    assertion miner," *IEEE Transactions on Computer-Aided Design of Integrated Circuits
+    and Systems*, vol. 41, no. 11, pp. 4277–4288, 2022.
+
+    - [3] A. Danese, N. D. Riva, and G. Pravadelli, "A-team: Automatic templatebased
+    assertion miner," in *Proceedings of the 54th Annual Design Automation Conference
+    2017*, 2017, pp. 1–6.
+
+    - <span id="page-8-2"></span>[4] S. Vasudevan, D. Sheridan, S. Patel, D. Tcheng,
+    B. Tuohy, and D. Johnson, "Goldmine: Automatic assertion generation using data
+    mining and static analysis," in *2010 Design, Automation & Test in Europe Conference
+    & Exhibition (DATE 2010)*. IEEE, 2010, pp. 626–629.
+
+    - <span id="page-8-3"></span>[5] M. Orenes-Vera, A. Manocha, D. Wentzlaff, and
+    M. Martonosi, "Autosva: Democratizing formal verification of rtl module interactions,"
+    in *2021 58th ACM/IEEE Design Automation Conference (DAC)*. IEEE, 2021, pp. 535–540.
+
+    - <span id="page-8-4"></span>[6] W. Fang, G. Hu, and H. Zhang, "r-map: Relating
+    implementation and specification in hardware refinement checking," *IEEE Transactions
+    on Computer-Aided Design of Integrated Circuits and Systems*, 2023.
+
+    - <span id="page-8-5"></span>[7] R. Kande, H. Pearce, B. Tan, B. Dolan-Gavitt,
+    S. Thakur, R. Karri, and J. Rajendran, "Llm-assisted generation of hardware assertions,"
+    *arXiv preprint arXiv:2306.14027*, 2023.
+
+    - <span id="page-8-9"></span>[8] M. Orenes-Vera, M. Martonosi, and D. Wentzlaff,
+    "Using llms to facilitate formal verification of rtl," *arXiv e-prints*, pp. arXiv–2309,
+    2023.
+
+    - <span id="page-8-7"></span>[9] C. Sun, C. Hahn, and C. Trippel, "Towards improving
+    verification productivity with circuit-aware translation of natural language to
+    systemverilog assertions," in *First International Workshop on Deep Learning-aided
+    Verification (DAV)*, 2023.
+
+    - <span id="page-8-8"></span>[10] C. B. Harris and I. G. Harris, "Glast: Learning
+    formal grammars to translate natural language specifications into hardware assertions,"
+    in *2016 Design, Automation & Test in Europe Conference & Exhibition (DATE)*.
+    IEEE, 2016, pp. 966–971.
+
+    - [11] R. Krishnamurthy and M. S. Hsiao, "Controlled natural language framework
+    for generating assertions from hardware specifications," in *2019 IEEE 13th International
+    Conference on Semantic Computing (ICSC)*. IEEE, 2019, pp. 367–370.
+
+    - <span id="page-8-21"></span>[12] J. Zhao and I. G. Harris, "Automatic assertion
+    generation from natural language specifications using subtree analysis," in *2019
+    Design, Automation & Test in Europe Conference & Exhibition (DATE)*. IEEE, 2019,
+    pp. 598–601.
+
+    - [13] R. Krishnamurthy and M. S. Hsiao, "Ease: Enabling hardware assertion synthesis
+    from english," in *Rules and Reasoning: Third International Joint Conference,
+    RuleML+ RR 2019, Bolzano, Italy, September 16–19, 2019, Proceedings 3*. Springer,
+    2019, pp. 82–96.
+
+    - <span id="page-8-19"></span>[14] S. J. Frederiksen, J. Aromando, and M. S. Hsiao,
+    "Automated assertion generation from natural language specifications," in *2020
+    IEEE International Test Conference (ITC)*. IEEE, 2020, pp. 1–5.
+
+    - <span id="page-8-22"></span>[15] O. Keszocze and I. G. Harris, "Chatbot-based
+    assertion generation from natural language specifications," in *2019 Forum for
+    Specification and Design Languages (FDL)*. IEEE, 2019, pp. 1–6.
+
+    - <span id="page-8-20"></span>[16] G. Parthasarathy, S. Nanda, P. Choudhary, and
+    P. Patil, "Spectosva: Circuit specification document to systemverilog assertion
+    translation," in *2021 Second Document Intelligence Workshop at KDD*.
+
+    - <span id="page-8-6"></span>[17] F. Aditi and M. S. Hsiao, "Hybrid rule-based
+    and machine learning system for assertion generation from natural language specifications,"
+    in *2022 IEEE 31st Asian Test Symposium (ATS)*. IEEE, 2022, pp. 126–131.
+
+    - <span id="page-8-10"></span>[18] J. Achiam, S. Adler, S. Agarwal, L. Ahmad,
+    I. Akkaya, F. L. Aleman, D. Almeida, J. Altenschmidt, S. Altman, S. Anadkat *et
+    al.*, "Gpt-4 technical report," *arXiv preprint arXiv:2303.08774*, 2023.
+
+    - <span id="page-8-11"></span>[19] S. Liu, W. Fang, Y. Lu, Q. Zhang, H. Zhang,
+    and Z. Xie, "Rtlcoder: Outperforming gpt-3.5 in design rtl generation with our
+    open-source dataset and lightweight solution," *arXiv preprint arXiv:2312.08617*,
+    2023.
+
+    - [20] J. Blocklove, S. Garg, R. Karri, and H. Pearce, "Chip-chat: Challenges
+    and opportunities in conversational hardware design," *arXiv preprint arXiv:2305.13243*,
+    2023.
+
+    - [21] Y. Lu, S. Liu, Q. Zhang, and Z. Xie, "Rtllm: An open-source benchmark for
+    design rtl generation with large language model," *arXiv preprint arXiv:2308.05345*,
+    2023.
+
+    - [22] M. Liu, N. Pinckney, B. Khailany, and H. Ren, "Verilogeval: Evaluating
+    large language models for verilog code generation," *arXiv preprint arXiv:2309.07544*,
+    2023.
+
+    - [23] S. Thakur, B. Ahmad, Z. Fan, H. Pearce, B. Tan, R. Karri, B. Dolan-Gavitt,
+    and S. Garg, "Benchmarking large language models for automated verilog rtl code
+    generation," in *DATE*, 2023.
+
+    - [24] S. Thakur, J. Blocklove, H. Pearce, B. Tan, S. Garg, and R. Karri, "Autochip:
+    Automating hdl generation using llm feedback," *arXiv preprint arXiv:2311.04887*,
+    2023.
+
+    - [25] M. Nair, R. Sadhukhan, and D. Mukhopadhyay, "Generating secure hardware
+    using chatgpt resistant to cwes," *Cryptology ePrint Archive*, 2023.
+
+    - <span id="page-8-12"></span>[26] M. Liu, T.-D. Ene, R. Kirby, C. Cheng, N. Pinckney,
+    R. Liang, J. Alben, H. Anand, S. Banerjee, I. Bayraktaroglu *et al.*, "Chipnemo:
+    Domainadapted llms for chip design," *arXiv preprint arXiv:2311.00176*, 2023.
+
+    - <span id="page-8-13"></span>[27] Y. Tsai, M. Liu, and H. Ren, "Rtlfixer: Automatically
+    fixing rtl syntax errors with large language models," *arXiv preprint arXiv:2311.16543*,
+    2023.
+
+    - <span id="page-8-14"></span>[28] Z. He, H. Wu, X. Zhang, X. Yao, S. Zheng, H.
+    Zheng, and B. Yu, "Chateda: A large language model powered autonomous agent for
+    eda," in *MLCAD Workshop*, 2023.
+
+    - <span id="page-8-15"></span>[29] Y. Fu, Y. Zhang, Z. Yu, S. Li, Z. Ye, C. Li,
+    C. Wan, and Y. Lin, "Gpt4aigchip: Towards next-generation ai accelerator design
+    automation via large language models," *arXiv preprint arXiv:2309.10730*, 2023.
+
+    - <span id="page-8-16"></span>[30] Z. Yan, Y. Qin, X. S. Hu, and Y. Shi, "On the
+    viability of using llms for sw/hw co-design: An example in designing cim dnn accelerators,"
+    *arXiv preprint arXiv:2306.06923*, 2023.
+
+    - <span id="page-8-17"></span>[31] B. Ahmad, S. Thakur, B. Tan, R. Karri, and
+    H. Pearce, "Fixing hardware security bugs with large language models," *arXiv
+    preprint arXiv:2302.01215*, 2023.
+
+    - <span id="page-8-18"></span>[32] M. Li, W. Fang, Q. Zhang, and Z. Xie, "Specllm:
+    Exploring generation and review of vlsi design specification with large language
+    model," *arXiv preprint arXiv:2401.13266*, 2024.
+
+    - <span id="page-8-23"></span>[33] E. Seligman, T. Schubert, and M. A. K. Kumar,
+    *Formal verification: an essential toolkit for modern VLSI design*. Elsevier,
+    2023.
+
+    - [34] A. B. Mehta, *SystemVerilog Assertions and Functional Coverage*. Springer,
+    2020.
+
+    - <span id="page-8-24"></span>[35] S. Vijayaraghavan and M. Ramanathan, *A practical
+    guide for SystemVerilog assertions*. Springer Science & Business Media, 2005.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes multiple sections
+      discussing evaluation, such as the "Experimental Results" and "Evaluation Metrics"
+      sections. It mentions the use of Cadence JasperGold® for evaluating the quality
+      of generated SVAs, provides performance metrics, and includes tables summarizing
+      the evaluation results.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its sections, including the Introduction, Methodology,
+      and Discussion. It cites numerous academic sources, discusses existing methods,
+      and compares its proposed method to previous work, demonstrating a comprehensive
+      engagement with the relevant academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes AssertLLM, a novel automatic
+      assertion generation framework that incorporates multiple specialized LLMs to
+      address challenges in generating SystemVerilog Assertions (SVAs) from natural
+      language specifications. It claims to be the first method capable of handling
+      full-size specification files and generating various types of SVAs for each
+      architectural signal. Additionally, it introduces the first open-source benchmark
+      for assertion generation and evaluation, demonstrating novelty in both methodology
+      and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel framework,
+      AssertLLM, for automatic assertion generation from natural language specifications,
+      addressing specific challenges in the field and providing new contributions
+      such as an open-source benchmark and specialized techniques for assertion generation.'
+  topics:
+    main_topic: Design Automation
+    main_topic_reasoning: The paper discusses an automatic framework that generates
+      assertions for hardware verification, which is a core component of design automation
+      in the context of electronic design and circuit verification.
+    secondary_topic: Logic & Verification
+    secondary_topic_reasoning: The paper also relates to the field of logic and verification,
+      as it focuses on developing assertions that ensure design compliance with specifications,
+      which is vital for verification processes in hardware design.
+    main_topic_sub: Design Verification and Validation
+    secondary_topic_sub: Other

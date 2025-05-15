@@ -1,0 +1,1245 @@
+papers:
+- title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions\n\
+    \  from Design Specifications via Multi-LLMs"
+  abstract: 'Assertion-based verification (ABV) is a critical method for ensuring
+    design
+
+    circuits comply with their architectural specifications, which are typically
+
+    described in natural language. This process often requires human interpretation
+
+    by verification engineers to convert these specifications into functional
+
+    verification assertions. Existing methods for generating assertions from
+
+    natural language specifications are limited to sentences extracted by
+
+    engineers, discouraging its practical application. In this work, we present
+
+    AssertLLM, an automatic assertion generation framework that processes complete
+
+    specification files. AssertLLM breaks down the complex task into three phases,
+
+    incorporating three customized Large Language Models (LLMs) for extracting
+
+    structural specifications, mapping signal definitions, and generating
+
+    assertions. Our evaluation of AssertLLM on a full design, encompassing 23 I/O
+
+    signals, demonstrates that 89\% of the generated assertions are both
+
+    syntactically and functionally accurate.'
+  url: http://arxiv.org/abs/2402.00386v3
+  keywords: ''
+  document: '## I. INTRODUCTION
+
+
+    <span id="page-0-2"></span>Hardware functional verification is critical in the
+    VLSI design flow, primarily addressing whether an implementation adheres to its
+    specification. For instance, the register-transfer level (RTL) design of a processor
+    must comply with the given instruction set architecture (ISA) specification. Typically,
+    the architects first develop the specifications in a natural language document.
+    Subsequently, RTL designers translate these specifications into RTL code, while
+    the verification engineers are responsible for checking the functional correctness
+    of the RTL designs according to the specifications.
+
+
+    During the verification process, assertion-based verification (ABV) [\[1\]](#page-8-0)
+    is a widely adopted technique, which utilizes assertions crafted from specifications
+    to verify the functional behavior of RTL designs. ABV can be conducted either
+    through simulation with testbenches or using formal property verification (FPV)
+    techniques. Temporal logic, particularly SystemVerilog Assertions (SVA), is commonly
+    employed for specifying these properties. However, a significant challenge in
+    ABV is the generation of sufficient, high-quality assertions. Currently, designing
+    SVAs manually is a time-consuming and error-prone task, demanding unignorable
+    human effort.
+
+
+    To address this challenge, research has focused on generating SVAs automatically.
+    The automatic approaches can be categorized into two types: dynamic mining from
+    simulation traces and static analysis of specifications. Dynamic methods [\[2\]](#page-8-1)–[\[4\]](#page-8-2)
+    generate assertions by combining simulating test traces and static analysis of
+    design constraints. However, a critical limitation of dynamic methods is that
+    both the generation and evaluation of assertions are on the same RTL
+
+
+    <span id="page-0-0"></span>![](_page_0_Figure_11.jpeg)
+
+
+    Fig. 1: AssertLLM in VLSI design and verification flow. AssertLLM automatically
+    generates SVAs from natural language specifications, facilitating functional verification
+    for both bug avoidance and bug hunting.
+
+
+    design without referring to a golden reference model. This could lead to the generation
+    of incorrect SVAs due to flaws in the RTL design, which these methods might not
+    detect. On the other hand, existing static methods depend either on the pre-defined
+    templates [\[5\]](#page-8-3), [\[6\]](#page-8-4) or on machine learning (ML) technologies
+    [\[7\]](#page-8-5)–[\[17\]](#page-8-6). The template-based methods also require
+    a deep understanding of the design function to fill in the templates. As for the
+    ML-based methods, they explore both traditional natural language processing (NLP)
+    and emerging Generative AI techniques like Large Language Models (LLMs). We further
+    categorize the existing static ML-based methods based on their application in
+    different design phases: the RTL and pre-RTL stages.
+
+
+    Table [I](#page-1-0) details these ML-based SVA generation methods in both the
+    RTL stage and the pre-RTL stage. During the RTL stage, the process typically involves
+    using LLMs to process both human-written specification sentences and the RTL design
+    to generate SVAs describing security or functional properties [\[7\]](#page-8-5)–[\[9\]](#page-8-7).
+    However, similar to the dynamic methods, inaccuracies in RTL implementations could
+    result in flawed SVAs.
+
+
+    When it comes to the pre-RTL stage, with the natural language specification document
+    finalized, RTL designers proceed to implement behavior satisfying this golden
+    specification. Numerous studies [\[10\]](#page-8-8)–[\[17\]](#page-8-6) have employed
+    NLP techniques to generate SVAs from sentences extracted by humans. These works
+    focused on processing sentences identified from a comprehensive document of specification.
+    However, specification extraction requires tremendous human efforts, and the NLP-based
+    generation process faces challenges in
+
+
+    <span id="page-1-0"></span>
+
+
+    | Stage   | Works     | Generation<br>Method | NL Specification |                  |
+    Evaluation  |                             |                          |  |
+
+    |---------|-----------|----------------------|------------------|------------------|-------------|-----------------------------|--------------------------|--|
+
+    |         |           |                      | Auto Extract.    | Source           |
+    Full Design | Target                      | Open-Source<br>Benchmark |  |
+
+    | RTL     | [7]       | LLM-based            | %                | Sentences        |
+    %           | Security                    | %                        |  |
+
+    |         | [8], [9]  |                      |                  | from Engineers   |             |
+    Function                    | ⋆                        |  |
+
+    | Pre-RTL | [10]–[17] | NLP-based            | %                | Sentences        |             |
+    Function (specialized       | %                        |  |
+
+    |         |           |                      |                  | from SPEC file   |             |
+    checkers/ artificial cases) |                          |  |
+
+    |         | Ours      | LLM-based            |                  | Entire SPEC
+    file |             | Function                    |                          |  |
+
+    |         |           |                      |                  |                  |             |
+    (general benchmark)         |                          |  |
+
+
+    <sup>⋆</sup> Work [\[8\]](#page-8-9) only open-source the result on a FIFO, while
+    work [\[9\]](#page-8-7) only demonstrate based on tiny designs such as FSM and
+    DFF.
+
+
+    TABLE I: Existing works on generating SVAs from natural language specifications.
+    AssertLLM is the first work that can handle full-size specification files and
+    generate comprehensive types of SVAs for each architectural signal. We also propose
+    the first open-source benchmark for assertion generation and evaluation from natural
+    language specifications.
+
+
+    generalizing across diverse grammatical variations. Additionally, the evaluation
+    of SVAs generated through these methods typically depends on design-specific checkers,
+    such as protocol and processor checkers, and is therefore difficult to extend
+    to other design types.
+
+
+    Here we summarize three key challenges that currently hinder the practical application
+    of SVA generation from natural language specifications:
+
+
+    - 1) Natural language VLSI specifications are inherently unstructured and are
+    hard to be directly used for assertion generation.
+
+    - 2) Even with structured specifications, translating natural language into assertions
+    remains a highly complex task, requiring both a deep understanding of the design
+    functionality and specialized expertise in SVA.
+
+    - 3) Currently, there is a lack of a universal evaluation method and benchmarks
+    capable of addressing the diverse types of VLSI designs.
+
+
+    To tackle the identified challenges in SVA generation, in our work, we propose
+    AssertLLM, a novel automatic assertion generation framework incorporating multiple
+    specialized LLMs to deal with the decomposed tasks separately. This framework
+    is designed to process complete natural language specification files, automatically
+    producing SVAs for each architectural signal. This approach significantly benefits
+    both design-time bug prevention and verification-time bug detection. The role
+    of AssertLLM within the standard VLSI design and verification flow is illustrated
+    in Fig. [1.](#page-0-0) AssertLLM effectively addresses the outlined challenges
+    by combining three customized LLMs, each focused on a specific task: extracting
+    relevant information from specifications, mapping signal definitions, and translating
+    natural language specifications into SVAs. The resulting SVAs contain various
+    types, including bit-width, connectivity, and functional assertions.
+
+
+    Additionally, our work provides an open-source benchmark, designed to evaluate
+    the quality of the generated SVAs. This benchmark, coupled with a general evaluation
+    method, is adaptable to various design types.
+
+
+    To the best of our knowledge, AssertLLM is the first automatic assertion generation
+    method that can handle fullsize specification files and generate various types
+    of SVAs for each architectural signal. It also provides the first open-source
+    benchmark for assertion generation and evaluation from design specifications,
+    which can deal with different design types. Our contributions in this work are
+    summarized below:
+
+
+    - To the best of our knowledge, AssertLLM is the first automatic assertion generation
+    method that can handle the complete specification files and generate comprehensive
+    types of SVAs for each architectural signal.
+
+    - We incorporate three customized LLMs, each enhanced with specific techniques
+    for the decomposed tasks: extracting structural information from specifications,
+    mapping signal declarations, and translating specifications into various SVA types.
+    These SVAs support checks for bit-width, connectivity, and function.
+
+    - We provide the first open-source benchmarks[1](#page-0-1) for assertion generation
+    and evaluation, which include both golden specification documents and golden RTL
+    designs. The generated SVAs are evaluated on the golden RTL implementations using
+    model checking tools. Our evaluation method is designed to be applicable across
+    a variety of design types.
+
+    - To demonstrate the effectiveness of AssertLLM, we conducted a comprehensive
+    evaluation on a complete design. This resulted in the generation of 56 SVAs for
+    23 signals, with 23 for bit-width, 16 for interface, and 17 for function. Impressively,
+    89% of these generated SVAs are evaluated to be correct both syntactically and
+    functionally.
+
+
+    II. PRELIMINARIES AND PROBLEM FORMULATION
+
+
+    # <span id="page-1-1"></span>*A. Natural Language Specification*
+
+
+    A well-defined natural language specification mainly contains the following six
+    parts: (1) introduction: introduces the concepts and the features of the target
+    design. (2) IO ports: provides detailed information on the prime input and prime
+    output ports essential for interfacing. (3) registers: describe all the architecture-level
+    registers in the design. (4) operation: explains the operational procedures for
+    dataflow and control. (5) architecture: the high-level workflow and dataflow of
+    the design. (6) usage examples: offers basic usage scenarios and corresponding
+    waveform illustrations for the design.
+
+
+    Specifically for the signals, the specification only defines the necessary architecture-level
+    IO ports and registers, while leaving the definition of the internal signals used
+    in the detailed RTL implementations for the RTL designers.
+
+
+    <sup>1</sup> It will be open-sourced in https://github.com/hkust-zhiyao/AssertLLM
+
+
+    ## *B. LLM for EDA*
+
+
+    Recent advancements in LLMs like ChatGPT [\[18\]](#page-8-10) have not only demonstrated
+    remarkable capability in content generation but also evolved to assist humans
+    in various roles as agents. The application of LLMs in the field of electronic
+    design automation (EDA) is an emerging area of exploration. Besides employing
+    LLMs for assertion generation [\[7\]](#page-8-5)–[\[9\]](#page-8-7), recent studies
+    have employed LLMs for tasks such as RTL code generation [\[19\]](#page-8-11)–[\[26\]](#page-8-12)
+    and syntax correction [\[27\]](#page-8-13). Additionally, LLM-based solutions
+    have been developed to facilitate the interaction with EDA tools [\[26\]](#page-8-12),
+    [\[28\]](#page-8-14), design architecture for AI accelerators [\[29\]](#page-8-15),
+    [\[30\]](#page-8-16), fix security bugs [\[31\]](#page-8-17), generate and review
+    specification documents [\[32\]](#page-8-18), etc. These diverse applications
+    and research efforts indicate a highly promising future for LLMs in enhancing
+    and revolutionizing chip design processes.
+
+
+    ## *C. Problem Fromulation*
+
+
+    We denote a well-defined specification file as S, where each architectural signal
+    detailed in the specification is denoted as sg<sup>i</sup> . Note that the architectural
+    signal contains both the input and output ports and the architecture-level registers,
+    but excludes the internal signals further implemented in the RTL design. Our generation
+    process, denoted as Gen, is designed to analyze the specification file S and generate
+    a comprehensive set of assertions A for each signal sg<sup>i</sup> . The assertion
+    generation can be expressed as follows:
+
+
+    Problem 1 (Assertion Generation from Specification).
+
+
+    $$\forall s g\_i \in \mathcal{S}, Gen(S, s g\_i) \to \mathcal{A}(s g\_i) \tag{1}$$
+
+
+    Following the generation of assertions, it is crucial to evaluate their quality.
+    We denote this evaluation process as Eval. To assess the correctness of the generated
+    assertions, we utilize the golden RTL implementations, symbolized as R. The correctness
+    of the assertions is denoted as Correct. The evaluation can be formulated below:
+
+
+    Problem 2 (Generated Assertion Evaluation).
+
+
+    $$\forall sg\_i \in \mathcal{S}, Eval(\mathcal{R}, \mathcal{A}(sg\_i)) \to \ correct(\mathcal{A}(sg\_i))
+    \quad (2)$$
+
+
+    ## III. METHODOLOGY
+
+
+    ## *A. Workflow Overview*
+
+
+    Fig. [2](#page-3-0) illustrates the SVA generation and evaluation flow for AssertLLM.
+    Our approach to generating hardware verification assertions from natural language
+    specifications, particularly from comprehensive specification documents, involves
+    the integration of three customized LLMs. These LLMs are designed to break down
+    this complex task into manageable components, thereby facilitating a comprehensive
+    generation workflow. Additionally, we contribute an open-source benchmark and
+    establish evaluation methodologies to assess the quality of the generated SVAs.
+
+
+    The assertion generation process is decomposed into three primary steps: (1) Extraction
+    of relevant information from the original specification necessary for SVA generation.
+    (2) Alignment of signal names between the natural language specifications and
+    their corresponding declarations in HDL code. (3) Generation of high-quality SVAs
+    based on the extracted natural language specifications.
+
+
+    In the subsequent subsections, we will detail the functionalities of each customized
+    LLM of the comprehensive assertion generation flow. Following this, our SVA evaluation
+    methodology will be presented.
+
+
+    ## *B. Specification Information Extraction*
+
+
+    The first step of our AssertLLM framework is to extract structured information
+    from natural language specification documents to enable SVA generation. As we
+    discussed in Section [I,](#page-0-2) the first key challenge of SVA generation
+    lies in the inherent unstructured nature of the original specifications, which
+    contain background information, functional descriptions, microarchitecture designs,
+    and various diagrams, including dataflow and waveform, etc. Meanwhile, the existence
+    of assertion-relevant information across different sections further complicates
+    the direct utilization of the original specifications for SVA generation.
+
+
+    Facing this challenge, existing methods can only deal with sentence-level specifications.
+    Some works [\[14\]](#page-8-19), [\[16\]](#page-8-20) utilize ML methods to assess
+    the relevance of manually extracted specification sentences to the intended assertions.
+    Other studies [\[10\]](#page-8-8)–[\[12\]](#page-8-21), [\[15\]](#page-8-22),
+    [\[17\]](#page-8-6) directly use the human-identified or human-written assertion-related
+    sentences. This reliance on sentence-level analysis limits the ability of the
+    above NLPbased methods to fully automate SVA generation for practical applications
+
+
+    To address the challenge of processing original, unstructured, full-size specification
+    documents, we propose a customized LLM, tailored to extract structural and relevant
+    information for each defined signal, thereby further facilitating the SVA generation
+    process.
+
+
+    Specifically, in our LLM 1 SPEC Analyzer, we first utilize system instructions
+    to customize the LLM, shown as Fig. [3.](#page-3-1) The model takes the full-size
+    specification file as the input, and the multi-modal function is employed to analyze
+    the file containing text, table, figures, etc. Then for each signal, the LLM is
+    required to extract all the related information of the signal. Here, we design
+    a structured template to guide the LLM in extracting all essential signal-related
+    information. This template contains three key components: the signal''s name,
+    its description, and the interconnection signals. We demonstrate the details of
+    each part as follows:
+
+
+    - Name: The identifier of the signal in the specification, ensuring clear and
+    unambiguous reference.
+
+    - Description: To facilitate SVA generation, we divide the descriptions into four
+    categories, including (1) definitions such as bit-width and signal type. (2) functionality
+    which contains all the function-related information of the target signal in the
+    entire specification file. (3) interconnection relationship with all other signals.
+    (4) additional information that is not included in the above three types.
+
+    - Interconnection Signals: A list of signals that interact or are associated with
+    the target signal, which are essential for the assertion generation, and will
+    be processed in the next LLM.
+
+
+    <span id="page-3-0"></span>![](_page_3_Figure_0.jpeg)
+
+
+    Fig. 2: AssertLLM generation and evaluation workflow. AssertLLM incorporates three
+    customized LLMs, each enhanced with specific techniques for the decomposed tasks:
+    extracting structural information from specifications, mapping signal definitions,
+    and translating specifications into various SVA types. To evaluate the performance
+    of the generation methods, the generated SVAs are further assessed based on the
+    golden RTL implementations using model checking tools.
+
+
+    Note that the extracted information is summarized across different sections of
+    the original specification, which contains all the information needed for assertion
+    generation.
+
+
+    <span id="page-3-1"></span>**[Custom Instructions for SPEC Analyzer]**
+
+
+    - Please act as a professional VLSI specification analyzer.
+
+    - Firstly, I''ll upload the the **design specification file** (in PDF format).
+
+    - Each time I ask a question, please read and analyze the specification PDF file
+    carefully, and answer the question **only based on the uploaded files**, don''t
+    use any content outside the file.
+
+    - When I ask for information on a **[xxx] signal**, please **extract all the information
+    related to this signal** in the spec file, note that the extracted information
+    should be **suitable for the SystemVerilog Assertions (SVAs) generation**, and
+    output all the information in the following format:
+
+
+    | [Signal name]: name in SPEC                                         |
+
+    |---------------------------------------------------------------------|
+
+    | [Description]: including but not limited to                         |
+
+    | [Definition]: such as bit-width, signal type (in/out/register), etc |
+
+    | [Functionality]: all the function information illustrated in SPEC   |
+
+    | [Interconnection]: the relationship with all other signals          |
+
+    | [Additional information]: all other related information             |
+
+    | [Related Signals]: names of all other signals mentioned in the      |
+
+    | Description part                                                    |
+
+    |                                                                     |
+
+
+    Fig. 3: Custom Instructions for LLM 1 SPEC Analyzer
+
+
+    ## *C. Signal Definition Mapping*
+
+
+    After extracting the structural specification information, we also face another
+    problem: the target assertion contains internal signals that are not clearly defined
+    in the specification file. As we illustrated in Subsection [II-A,](#page-1-1)
+    the specification document typically details only the input/output ports and architecturelevel
+    registers, while leaving the internal signals used to implement the detailed functions
+    in RTL code (e.g., internal wires and registers) undefined.
+
+
+    To solve this problem, we introduce the second customized LLM 2 Signal Mapper
+    to analyze the signal definitions in the initialized HDL code and align these
+    signal declarations with the natural language signal names found in the specification
+    document.
+
+
+    Specifically, we also use the custom instructions to guide LLM to specialize in
+    the mapping task, shown in Fig. [5.](#page-3-2) The model processes both the original
+    specification file and the signal definition HDL code as inputs. It employs a
+    code interpreter to carefully examine both the declarations and the comments within
+    the HDL code snippet. Subsequently, the LLM analyzes the contents of the two files
+    to establish a **[Prompt for SPEC Analyzer]**
+
+
+    - [Upload the original SPEC file] Here is the design specification file, please
+    analyze it carefully.
+
+    - [For each signal] Please extract all the information related to the signal control
+    register (CTR) from the spec file.
+
+
+    #### **[Response from SPEC Analyzer]**
+
+
+    The Control Register (CTR) in the I2C-Master Core specification has the following
+    characteristics:
+
+
+    1. [Signal Name]: In Spec - Control Register (CTR). 2. [Description]: 2.1. [Definition]:
+    - Bit-width: 8 bits - Signal Type: Register (Access Type: RW - Read/Write) 2.2.
+    [Functionality]: - Bit 7: I2C core enable bit. When set to ''1'', the core is
+    enabled, and when set to ''0'', the core is disabled. - Bit 6: I2C core interrupt
+    enable bit. When set to ''1'', interrupts are enabled, and when set to ''0'',
+    interrupts are disabled. - Bits 5:0: Reserved. These bits are read/write but are
+    reserved for future use. 2.3. [Interconnection]: This register directly controls
+    the operation of the I2C core, enabling or disabling it and controlling interrupt
+    behavior. 2.4. [Additional Information]: - Reset Value for the Control Register
+    is 0x00 3. [Related Signals]: - EN: Controls the enable state of the I2C core.
+    - IEN: Controls the interrupt enable state of the I2C core.
+
+
+    Fig. 4: Prompt and Response Example of LLM 1 SPEC Analyzer
+
+
+    mapping relationship between the specification and the HDL code.
+
+
+    <span id="page-3-2"></span>
+
+
+    | [Custom Instruction for Signal Mapper]                                      |  |  |  |  |  |
+
+    |-----------------------------------------------------------------------------|--|--|--|--|--|
+
+    | Please act as a signal name mapping tool to link the specification file     |  |  |  |  |  |
+
+    |                                                                             |  |  |  |  |  |
+
+    | Firstly, I''ll upload the the design specification file (in PDF format), and
+    |  |  |  |  |  |
+
+    | a Verilog file containing all the signal definitions (*.v format).          |  |  |  |  |  |
+
+    | Please analyze the specification file and use the code interpreter to       |  |  |  |  |  |
+
+    | analyze the Verilog file (both the signal declarations and comments).       |  |  |  |  |  |
+
+    | Then map every signal (including IO ports, wires, and registers) defined    |  |  |  |  |  |
+
+    | in Verilog with the description in the specification. Finally, please       |  |  |  |  |  |
+
+    | output each signal in the following format:                                 |  |  |  |  |  |
+
+    | [Signal name in Verilog]: Signal definition in Specification file           |  |  |  |  |  |
+
+    |                                                                             |  |  |  |  |  |
+
+
+    Fig. 5: Custom Instructions for LLM 2 Signal Mapper
+
+
+    ## *D. Automatic Assertion Generation*
+
+
+    While previous research has delved into SVA generation using either traditional
+    NLP techniques at the pre-RTL stage
+
+
+    #### **[Prompt for Signal Mapper]**
+
+
+    - [Upload the original SPEC file and the Verilog signal definition file] Here
+    are the files for the design specification and the signal definitions, please
+    analyze the two files carefully.
+
+    - Please output each signal with the mapping relationship
+
+
+    **[Response from Signal Mapper]** Based on the analysis of both the design specification
+    and the Verilog file, here is the mapping of signals, wires, and regs in the Verilog
+    file to their respective descriptions in the specification:
+
+
+    | (IO port)                                                  |
+
+    |------------------------------------------------------------|
+
+    | wb_clk_i: Master clock                                     |
+
+    | wb_we_i: Write enable input                                |
+
+    | ……                                                         |
+
+    | (Register)                                                 |
+
+    | ctr: Control register                                      |
+
+    | sr: Status register                                        |
+
+    | ……                                                         |
+
+    | (Wire)                                                     |
+
+    | en: Enable state of the I2C core.                          |
+
+    | ien: Interrupt enable state of the I2C core                |
+
+    | ……                                                         |
+
+    | (Unmapped)                                                 |
+
+    | The additional elements such as wires and regs like        |
+
+    | ''wb_wacc'', ''sta'' have been identified in the Verilog file. |
+
+    | However, their specific descriptions are not directly      |
+
+    | found in the provided section of the specification.        |
+
+
+    Fig. 6: Prompt and Response Example of LLM 2 Signal Mapper
+
+
+    or LLM-based approaches for RTL designs, these methods have their limitations.
+    NLP-based techniques demand careful analysis of the syntax and semantics of assertion-related
+    sentences, which limit their adaptability to variations in sentence structures.
+    LLM-based methods, typically focused on the RTL stage, rely on HDL code and accompanying
+    human-written comments or properties, but their dependence on the unverified RTL
+    code poses a risk of generating inaccurate SVAs that could mislead the verification
+    process.
+
+
+    To address these challenges, our work introduces the LLM 3 SVA Generator, dedicated
+    to generating assertions for each signal utilizing the previously extracted structural
+    specifications and the established signal relationships.
+
+
+    Considering the precise syntax and writing rules inherent to SVAs and the potential
+    for the original LLM failing to generate syntactically correct SVAs, as discussed
+    in [\[8\]](#page-8-9), we incorporate the Retrieval Augmented Generation (RAG)
+    technique to enhance the LLM''s capability for SVA generation. This approach is
+    enriched by a knowledge database comprising tutorials and textbooks on SVA and
+    formal property verification [\[33\]](#page-8-23)–[\[35\]](#page-8-24), providing
+    a robust foundation for the LLM to access and retrieve relevant SVA knowledge
+    based on the input query, thereby enhancing the quality of the generated SVAs.
+
+
+    Besides the RAG technique, we also provide custom instructions for SVA Generator,
+    shown in Fig. [7.](#page-4-0) After uploading the overall architecture diagram
+    of the design, for each signal, the extracted structural specifications and the
+    mapped signal relationship from the above two LLMs are provided. Then the LLM
+    is required to generate SVAs strictly according to the specification, and as much
+    and high coverage as possible. To guide the LLM to generate high-quality SVAs,
+    we define five SVA categories as follows:
+
+
+    In addition to the RAG technique, we improve the SVA Generator with custom instructions,
+    as illustrated in Fig. [7.](#page-4-0) Upon inputting the overall architecture
+    diagram of the design, the LLM is provided with the structured specifications
+    and mapped signal relationships from the previous LLMs for each signal. Then the
+    LLM is required to generate SVAs that adhere strictly to the specifications, aiming
+    for maximal quantity and quality. To facilitate the generation of high-quality
+    SVAs, we categorize SVAs into three distinct groups, guiding the LLM toward producing
+    comprehensive and accurate assertions for effective verification.
+
+
+    - Width: Check if the signal bit width is satisfied with the specification.
+
+    - Connectivity: Check if the signal can be correctly exercised and also the value
+    propagation among all connected signals.
+
+    - Function: Check if the function defined in the specification is implemented
+    as expected.
+
+
+    Based on these well-designed SVA types, the customized LLM can generate numerous
+    SVAs for each signal. Fig. [8](#page-5-0) demonstrates an example of generating
+    SVAs for a signal.
+
+
+    <span id="page-4-0"></span>**[Custom Instructions for SVA Generator]** • Please
+    act as a professional VLSI verification engineer. You can refer to the uploaded
+    **knowledge base** about the SystemVerilog assertion (SVA) and formal verification
+    techniques. • Firstly, I''ll upload an workflow **diagram** of the design architecture.
+    • Then every time I provide the **specification of a signal** of the design, please
+    write **all the corresponding SVAs** based on the defined Verilog signals that
+    benefit both the RTL design and verification processes. Please note that don''t
+    generate signals that do not exist in the signal declaration Verilog file. • Please
+    make sure that the generated SVAs have **no syntax error**, and strictly **follow
+    the function** of the given specification/description. • The generated SVAs should
+    include but not be limited to the following **types**: [*width*]: Check the signal
+    width using \$bits operator [*connectivity*]: Check if the signal can be correctly
+    exercised and also the value propagation among all connected signals. [*function*]:
+    Check if the function defined in the specification is implemented as expected.
+
+
+    Fig. 7: Custom Instructions for LLM 3 SVA Generator
+
+
+    ## *E. Generated Assertion Evaluation*
+
+
+    After the SVAs are generated, evaluating their effectiveness is crucial. While
+    some previous studies such as [\[12\]](#page-8-21), [\[14\]](#page-8-19) suggest
+    using specific property checkers for this purpose, such an approach is limited
+    to particular design types like protocols and processors and lacks generalizability
+    to all VLSI designs. Other methods like [\[8\]](#page-8-9) involve manual verification
+    by engineers using EDA tools, which is vulnerable to human error.
+
+
+    In our approach, we propose leveraging the golden RTL implementations to assess
+    the quality of the generated SVAs. Our generation method is solely based on the
+    specification file, and the bug-free golden RTL designs serve as a robust benchmark
+    to evaluate our generation technique''s efficacy.
+
+
+    For evaluation, we utilize the formal property verification (FPV) method. The
+    generated SVAs and the golden RTL
+
+
+    #### <span id="page-5-0"></span>**[Prompt for SVA Generator]**
+
+
+    • [Upload the architecture diagram] Here is the overall diagram workflow of the
+    design architecture.
+
+
+    ![](_page_5_Figure_2.jpeg)
+
+
+    • [For each signal, upload the extracted specification and signal mapping] Please
+    generate SVAs for the signal control register (CTR).
+
+
+    #### **[Response from SVA Generator]**
+
+
+    Based on the provided specification for the control register (CTR), we can write
+    SVAs to validate its behavior. Let''s break down the SVAs according to the types
+    you specified:
+
+
+    ![](_page_5_Figure_6.jpeg)
+
+
+    Fig. 8: Prompt and Response Example of LLM 3 SVA Generator
+
+
+    designs are inputted into a model checker tool. After executing FPV, we employ
+    the following two metrics to evaluate the quality of SVAs for each target signal:
+
+
+    - Syntax: Check if the generated SVAs have syntax errors.
+
+    - FPV Pass/Fail: Given the RTL designs are bug-free, an SVA that passes the FPV
+    check is considered correct, and conversely, a failure indicates an incorrect
+    SVA.
+
+
+    ## *F. Proposed Benchmark*
+
+
+    Recognizing the absence of open-source benchmarks for evaluating LLMs in the generation
+    of SVAs from natural language specifications, we introduce a comprehensive benchmark
+    suite tailored for this purpose. Our benchmark consists of 20 open-source designs,
+    covering a diverse array of applications including microprocessors, system-on-chip
+    architectures, communication protocols, arithmetic units, and cryptographic modules.
+    For each design within the benchmark, the benchmark provides the following components
+    across three distinct files:
+
+
+    - Specification: This file contains the complete natural language specification
+    for the design, offering a detailed description of the system''s intended architecture
+    and functionality.
+
+    - Signal Definition: Presented in HDL code format, this file outlines the signal
+    declarations essential for the generation of SVAs. It includes definitions for
+    both input/output ports and internal signals, providing the foundation for assertion
+    generation.
+
+    - Golden RTL Implementation: This file comprises the RTL design implementations
+    that are strictly implemented according to the specification. The designs are
+    verified to ensure it is free from bugs, serving as a reliable standard for evaluating
+    the accuracy and effectiveness of generated SVAs.
+
+
+    ## IV. EXPERIMENTAL RESULTS
+
+
+    ## *A. Experimental Setup*
+
+
+    In our study, the original specification documents are provided in PDF format,
+    including a variety of multi-modal content including text, tables, and figures.
+    The signal definition files and the golden RTL designs are formatted in Verilog.
+    To assess the quality of the generated SVAs, we utilize Cadence JasperGold®, one
+    of the leading commercial model checking tools. This evaluation leverages the
+    FPV app in JasperGold to ensure a thorough analysis.
+
+
+    Our experimental setup involves the evaluation of three types of LLMs using our
+    developed generation and evaluation methodology:
+
+
+    - 1) GPT-3.5: This model is the freely available commercial version, GPT-3.5 Turbo,
+    which supports a context window of up to 16K tokens.
+
+    - 2) GPT-4: The state-of-the-art commercial solution, GPT-4 Turbo, offers a 128K
+    token context window and multimodal capabilities, making it adept at handling
+    the diverse content found in specification documents.
+
+    - 3) AssertLLM: Cutomized GPT-4 Turbo by incorporating specialized techniques
+    such as RAG and custom instructions, tailoring the models specialized to the SVA
+    generation task.
+
+
+    In our experimental evaluation, we focus on the quality of the SVAs generated
+    for each signal across the designs. Note that all SVAs are produced from a single
+    query to the LLMs without any subsequent iterative modifications. The SVA containing
+    unmapped signals is considered an unsuccessful attempt at SVA generation. These
+    SVAs are identified and excluded by human engineers prior to the evaluation process.
+
+
+    ## *B. Evaluation Metrics*
+
+
+    To conduct a thorough evaluation of the generated SystemVerilog SVAs, we propose
+    a set of metrics that align with our evaluation methodology. This approach ensures
+    a detailed assessment of the SVAs'' quality on both a per-signal and perdesign
+    basis.
+
+
+    For each assertion type of an individual signal, our evaluation includes the following
+    metrics: (1) number of generated
+
+
+    <span id="page-6-0"></span>
+
+
+    |              |         |            |                                                                   |                         |
+    AssertLLM    |          | GPT-4   | GPT-3.5                                                |
+
+    |--------------|---------|------------|-------------------------------------------------------------------|-------------------------|--------------|----------|---------|--------------------------------------------------------|
+
+    |              | Signal  |            | Assertion Evaluation (#. Generated/#.
+    Syntax Correct/#. FPV Pass) |                         |              |          |         |                                                        |
+
+    | Name<br>Type |         | Width      | Connect.                                                          |
+    Function                | Signal Total | Function |         |                                                        |
+
+    |              | Clock   | wb clk i   | 1/1/1                                                             |                         |
+    /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              | Reset   | wb rst i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   | Can not handle<br>the original<br>specification files. |
+
+    |              |         | arst i     | 1/1/1                                                             |                         |
+    /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              | Control | wb stb i   | 1/1/1                                                             |
+    2/2/1<br>1/1/0<br>1/1/0 | /            | 3/3/2    | 3/1/0   |                                                        |
+
+    |              |         | wb ack o   | 1/1/1                                                             |                         |              |
+    2/2/1    | 3/1/0   |                                                        |
+
+    |              |         | wb inta o  | 1/1/1                                                             |                         |              |
+    2/2/1    | 3/1/0   |                                                        |
+
+    |              | Data    | wb adr i   | 1/1/1                                                             |
+    /                       | /            | 1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb dat i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    | IO Port      |         | wb cyc i   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb dat o   | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | wb we i    | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad i  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad o  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad i  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad o  | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | scl pad oe | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              |         | sda pad oe | 1/1/1                                                             |                         |              |
+    1/1/1    | 3/1/0   |                                                        |
+
+    |              | Control | ctr        | 1/1/1                                                             |
+    4/4/4                   | 5/5/5        | 10/10/10 | 3/1/1   |                                                        |
+
+    | Register     |         | sr         | 1/1/1                                                             |
+    6/6/5                   | 8/8/8        | 15/15/14 | 3/1/1   |                                                        |
+
+    |              | Data    | prer       | 1/1/1                                                             |
+    /                       | 3/3/1        | 4/4/2    | 4/1/1   |                                                        |
+
+    |              |         | txr        | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 3/1/1   |                                                        |
+
+    |              |         | rxr        | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 3/1/1   |                                                        |
+
+    |              |         | cr         | 1/1/1                                                             |
+    /                       | 1/1/1        | 2/2/2    | 4/1/1   |                                                        |
+
+    | Design Total |         |            | 23/23/23                                                          |
+    16/16/12                | 17/17/15     | 56/56/50 | 71/23/6 |                                                        |
+
+    |              |         |            | 100%/100%                                                         |
+    100%/75%                | 100%/88%     | 100%/89% | 32%/8%  |                                                        |
+
+
+    TABLE II: Evaluation of the generated SVAs for design "I2C". AssertLLM generates
+    56 properties for a total of 23 signals, with 23 for bit-width, 16 for connectivity,
+    and 17 for function. 89% of these generated SVAs are evaluated to be correct both
+    syntactically and functionally.
+
+
+    SVAs. (2) number of syntax-correct SVAs. (3) number of FPVpassed SVAs.
+
+
+    Once the evaluation for each signal is complete, we aggregate the statistics of
+    the generated SVAs for each design and then calculate the proportion of these
+    SVAs that are syntactically correct and passed the FPV checks, respectively.
+
+
+    # *C. Assertion Generation Quality*
+
+
+    To illustrate the efficacy of AssertLLM, we apply it to a comprehensive design
+    case: the "I2C" protocol. The I2C specification describes the architecture of
+    a serial communication bus that provides a simple and efficient method of data
+    exchange between devices. The complete specification document for the "I2C" design
+    is structured into six main sections, similar to those illustrated in Subsection
+    [II-A.](#page-1-1) Note that for each signal, the specification is unstructured
+    and mainly across the IO ports, registers, and operation sections.
+
+
+    Additionally, we provide the signal definition file containing not only the IO
+    ports and architectural registers but also all the internal wires and registers
+    defined for detailed RTL implementation.
+
+
+    To facilitate the generation of SVAs, the AssertLLM framework processes specification
+    and signal definition files using two specialized LLMs: SPEC Analyzer for extracting
+    structured specifications for each signal and Signal Mapper for mapping signal
+    relationships. Then the SVA Generator is utilized to automatically generate three
+    types of SVAs based on the processed information from the first two LLMs.
+
+
+    The specification for the "I2C" design defines 23 signals, comprising 17 IO ports
+    and 6 architecture-level registers. For the IO ports, we categorize them into
+    4 functional types: clock, reset, control signal, and data signal. The architecture-level
+    registers are similarly categorized, based on their functionality, into control
+    and data types.
+
+
+    The evaluation of SVAs generated by our AsserLLM is demonstrated in Table [II.](#page-6-0)
+    For each signal, we first verify each type of the generated SVAs separately. Then
+    we summarize all the SVAs to provide a design-level inspection. We have multiple
+    interesting observations in Table [II](#page-6-0) as follows:
+
+
+    - AssertLLM demonstrates excellent proficiency in generating SVAs for bit-width
+    checking. Although bit-width checking is relatively straightforward, it is crucial
+    for early design stages to avoid potential bugs that cannot be checked through
+    a syntax checker.
+
+    - For the connectivity SVAs, since clear guidelines are provided only for control
+    signals within the architecture-level specification documents, AssertLLM can only
+    generate connectivity SVAs for them. The connectivity of data signals often depend
+    on specific internal signals defined in the RTL implementation, which are not
+    detailed in the
+
+
+    specification document.
+
+
+    - For the function SVAs, the specification provides explicit details only for
+    registers. The descriptions of IO ports primarily focus on data transformation
+    functions, without extensive functional details, which results in the lack of
+    related SVAs.
+
+    - For the quantity of generated SVAs, AssertLLM produced a total of 56 SVAs, with
+    23 dedicated to width checking, 16 to connectivity checking, and 17 to function
+    checking.
+
+    - Regarding the quality of generated SVAs, all SVAs related to bit-width checking
+    performed correctly. However, a minor portion of connectivity and function SVAs
+    contained errors, attributed mainly to misinterpretations of the specification
+    or LLM-generated hallucinations. Overall, AssertLLM achieved a correct accuracy
+    rate of 89% for the entire I2C design.
+
+
+    ## *D. Ablation Study*
+
+
+    In addition to assessing AssertLLM''s performance, we conducted an ablation study
+    to compare the SVA generation capabilities of the original GPT-4 and GPT-3.5 models
+    without the additional techniques. This study provides insights into the effectiveness
+    of enhancements incorporated in AssertLLM.
+
+
+    The evaluation results for the two commercial solutions are demonstrated in Table
+    [II.](#page-6-0) For GPT-3.5, since the lack of multimodal processing capabilities,
+    it is unable to directly generate SVAs from the original, multi-modal specification
+    files.
+
+
+    When utilizing the original GPT-4, the unstructured specification file and signal
+    definitions are provided, with prompts designed to guide SVA generation to the
+    best of the model''s ability. The generation results indicate that the absence
+    of a mechanism to extract structured specifications for each signal significantly
+    hampers GPT-4''s ability to compile all useful information for SVA generation,
+    resulting in a maximum of only 4 SVAs generated per signal. Additionally, without
+    specific assertion type guidance, GPT-4 only generates functional assertions.
+
+
+    For the SVA quality of commercial solutions, the original GPT-4 model tends to
+    produce SVAs with syntax errors, similar to observations made in the previous
+    study [\[8\]](#page-8-9). This issue is addressed in AssertLLM through the application
+    of RAG techniques, which enrich the model with specific knowledge on SVA and Formal
+    Property Verification (FPV). In the evaluation results, GPT-4 failed to generate
+    any correct SVAs for IO ports and only succeeded in creating accurate reset check
+    assertions for registers, leading to an overall correct proportion of only 8%.
+
+
+    ## V. DISCUSSION
+
+
+    ## *A. Coverage in SVA Evaluation*
+
+
+    Some works [\[8\]](#page-8-9) propose to leverage the coverage metric, especially
+    the cone-of-influence (COI) coverage to evaluate the quality of generated SVAs.
+    COI coverage relies on analyzing the signals exercised during simulation or formal
+    verification, which significantly involves internal signals within the design.
+
+
+    Given that our SVA generation process is based solely on the information available
+    in the specification documents, which typically detail external interfaces like
+    IO ports and architectural-level registers rather than internal signals, COI coverage
+    does not align well with our evaluation criteria. This coverage metric assumes
+    a level of design implementation detail that goes beyond the scope of natural
+    language specifications, making it less applicable for assessing the completeness
+    or effectiveness of SVAs generated at this pre-RTL stage.
+
+
+    ## *B. Evaluating and Enhancing Specification Quality with AssertLLM*
+
+
+    The generation of high-quality SVAs from natural language specifications relies
+    not only on the capabilities of LLMs but also on the intrinsic quality of the
+    specification documents themselves. A specification that provides only the basic
+    information of signals, such as their names and simple descriptions, without delving
+    into detailed functionalities or connectivities, inherently limits the potential
+    for generating meaningful SVAs, regardless of the power of the LLMs employed.
+    Conversely, specifications that offer comprehensive details, including clear definitions
+    of signal functionalities and connectivities, can facilitate the generation of
+    SVAs even with relatively simple LLMs.
+
+
+    Here we identify a novel application for AssertLLM beyond its primary role in
+    verification: utilizing AssertLLM as a tool for assessing the quality of natural
+    language specifications. This application leverages AssertLLM''s ability to process
+    and interpret specification documents to determine their *verification-friendliness*.
+    Specifications that enable AssertLLM to generate a broad and accurate range of
+    SVAs can be considered high-quality and well-suited for verification purposes.
+    This approach to evaluating specification quality offers several benefits:
+
+
+    - Identifying Gaps between Specifications and Verification: AssertLLM can highlight
+    contents within a specification that lack sufficient detail for SVA generation,
+    guiding architects to provide more comprehensive information.
+
+    - Enhancing Verification: Ensuring specifications are verification-friendly can
+    potentially reduce the time and effort required for verification.
+
+    - Standardizing Specification Writing: The feedback from AssertLLM can help establish
+    best practices for writing specifications to facilitate the automated verification,
+    and promote consistency across design stages.
+
+
+    ## VI. CONCLUSION
+
+
+    In this study, we introduce AssertLLM, an automated framework designed for generating
+    assertions from entire specification documents. AssertLLM breaks down the intricate
+    task into three sequential phases, leveraging specialized LLMs for structural
+    specification extraction, signal definition mapping, and assertion creation. We
+    also offer an open-source benchmark to evaluate the efficacy of assertion generation.
+    Evaluating AssertLLM on a comprehensive design with 23 signals revealed that 89%
+    of the assertions generated were accurate both syntactically and functionally.
+    We also discuss the potential of using AssertLLM to evaluate and enhance the quality
+    of specifications.
+
+
+    ## REFERENCES
+
+
+    - <span id="page-8-0"></span>[1] H. Witharana, Y. Lyu, S. Charles, and P. Mishra,
+    "A survey on assertionbased hardware verification," *ACM Computing Surveys (CSUR)*,
+    vol. 54, no. 11s, pp. 1–33, 2022.
+
+    - <span id="page-8-1"></span>[2] S. Germiniani and G. Pravadelli, "Harm: a hint-based
+    assertion miner," *IEEE Transactions on Computer-Aided Design of Integrated Circuits
+    and Systems*, vol. 41, no. 11, pp. 4277–4288, 2022.
+
+    - [3] A. Danese, N. D. Riva, and G. Pravadelli, "A-team: Automatic templatebased
+    assertion miner," in *Proceedings of the 54th Annual Design Automation Conference
+    2017*, 2017, pp. 1–6.
+
+    - <span id="page-8-2"></span>[4] S. Vasudevan, D. Sheridan, S. Patel, D. Tcheng,
+    B. Tuohy, and D. Johnson, "Goldmine: Automatic assertion generation using data
+    mining and static analysis," in *2010 Design, Automation & Test in Europe Conference
+    & Exhibition (DATE 2010)*. IEEE, 2010, pp. 626–629.
+
+    - <span id="page-8-3"></span>[5] M. Orenes-Vera, A. Manocha, D. Wentzlaff, and
+    M. Martonosi, "Autosva: Democratizing formal verification of rtl module interactions,"
+    in *2021 58th ACM/IEEE Design Automation Conference (DAC)*. IEEE, 2021, pp. 535–540.
+
+    - <span id="page-8-4"></span>[6] W. Fang, G. Hu, and H. Zhang, "r-map: Relating
+    implementation and specification in hardware refinement checking," *IEEE Transactions
+    on Computer-Aided Design of Integrated Circuits and Systems*, 2023.
+
+    - <span id="page-8-5"></span>[7] R. Kande, H. Pearce, B. Tan, B. Dolan-Gavitt,
+    S. Thakur, R. Karri, and J. Rajendran, "Llm-assisted generation of hardware assertions,"
+    *arXiv preprint arXiv:2306.14027*, 2023.
+
+    - <span id="page-8-9"></span>[8] M. Orenes-Vera, M. Martonosi, and D. Wentzlaff,
+    "Using llms to facilitate formal verification of rtl," *arXiv e-prints*, pp. arXiv–2309,
+    2023.
+
+    - <span id="page-8-7"></span>[9] C. Sun, C. Hahn, and C. Trippel, "Towards improving
+    verification productivity with circuit-aware translation of natural language to
+    systemverilog assertions," in *First International Workshop on Deep Learning-aided
+    Verification (DAV)*, 2023.
+
+    - <span id="page-8-8"></span>[10] C. B. Harris and I. G. Harris, "Glast: Learning
+    formal grammars to translate natural language specifications into hardware assertions,"
+    in *2016 Design, Automation & Test in Europe Conference & Exhibition (DATE)*.
+    IEEE, 2016, pp. 966–971.
+
+    - [11] R. Krishnamurthy and M. S. Hsiao, "Controlled natural language framework
+    for generating assertions from hardware specifications," in *2019 IEEE 13th International
+    Conference on Semantic Computing (ICSC)*. IEEE, 2019, pp. 367–370.
+
+    - <span id="page-8-21"></span>[12] J. Zhao and I. G. Harris, "Automatic assertion
+    generation from natural language specifications using subtree analysis," in *2019
+    Design, Automation & Test in Europe Conference & Exhibition (DATE)*. IEEE, 2019,
+    pp. 598–601.
+
+    - [13] R. Krishnamurthy and M. S. Hsiao, "Ease: Enabling hardware assertion synthesis
+    from english," in *Rules and Reasoning: Third International Joint Conference,
+    RuleML+ RR 2019, Bolzano, Italy, September 16–19, 2019, Proceedings 3*. Springer,
+    2019, pp. 82–96.
+
+    - <span id="page-8-19"></span>[14] S. J. Frederiksen, J. Aromando, and M. S. Hsiao,
+    "Automated assertion generation from natural language specifications," in *2020
+    IEEE International Test Conference (ITC)*. IEEE, 2020, pp. 1–5.
+
+    - <span id="page-8-22"></span>[15] O. Keszocze and I. G. Harris, "Chatbot-based
+    assertion generation from natural language specifications," in *2019 Forum for
+    Specification and Design Languages (FDL)*. IEEE, 2019, pp. 1–6.
+
+    - <span id="page-8-20"></span>[16] G. Parthasarathy, S. Nanda, P. Choudhary, and
+    P. Patil, "Spectosva: Circuit specification document to systemverilog assertion
+    translation," in *2021 Second Document Intelligence Workshop at KDD*.
+
+    - <span id="page-8-6"></span>[17] F. Aditi and M. S. Hsiao, "Hybrid rule-based
+    and machine learning system for assertion generation from natural language specifications,"
+    in *2022 IEEE 31st Asian Test Symposium (ATS)*. IEEE, 2022, pp. 126–131.
+
+    - <span id="page-8-10"></span>[18] J. Achiam, S. Adler, S. Agarwal, L. Ahmad,
+    I. Akkaya, F. L. Aleman, D. Almeida, J. Altenschmidt, S. Altman, S. Anadkat *et
+    al.*, "Gpt-4 technical report," *arXiv preprint arXiv:2303.08774*, 2023.
+
+    - <span id="page-8-11"></span>[19] S. Liu, W. Fang, Y. Lu, Q. Zhang, H. Zhang,
+    and Z. Xie, "Rtlcoder: Outperforming gpt-3.5 in design rtl generation with our
+    open-source dataset and lightweight solution," *arXiv preprint arXiv:2312.08617*,
+    2023.
+
+    - [20] J. Blocklove, S. Garg, R. Karri, and H. Pearce, "Chip-chat: Challenges
+    and opportunities in conversational hardware design," *arXiv preprint arXiv:2305.13243*,
+    2023.
+
+    - [21] Y. Lu, S. Liu, Q. Zhang, and Z. Xie, "Rtllm: An open-source benchmark for
+    design rtl generation with large language model," *arXiv preprint arXiv:2308.05345*,
+    2023.
+
+    - [22] M. Liu, N. Pinckney, B. Khailany, and H. Ren, "Verilogeval: Evaluating
+    large language models for verilog code generation," *arXiv preprint arXiv:2309.07544*,
+    2023.
+
+    - [23] S. Thakur, B. Ahmad, Z. Fan, H. Pearce, B. Tan, R. Karri, B. Dolan-Gavitt,
+    and S. Garg, "Benchmarking large language models for automated verilog rtl code
+    generation," in *DATE*, 2023.
+
+    - [24] S. Thakur, J. Blocklove, H. Pearce, B. Tan, S. Garg, and R. Karri, "Autochip:
+    Automating hdl generation using llm feedback," *arXiv preprint arXiv:2311.04887*,
+    2023.
+
+    - [25] M. Nair, R. Sadhukhan, and D. Mukhopadhyay, "Generating secure hardware
+    using chatgpt resistant to cwes," *Cryptology ePrint Archive*, 2023.
+
+    - <span id="page-8-12"></span>[26] M. Liu, T.-D. Ene, R. Kirby, C. Cheng, N. Pinckney,
+    R. Liang, J. Alben, H. Anand, S. Banerjee, I. Bayraktaroglu *et al.*, "Chipnemo:
+    Domainadapted llms for chip design," *arXiv preprint arXiv:2311.00176*, 2023.
+
+    - <span id="page-8-13"></span>[27] Y. Tsai, M. Liu, and H. Ren, "Rtlfixer: Automatically
+    fixing rtl syntax errors with large language models," *arXiv preprint arXiv:2311.16543*,
+    2023.
+
+    - <span id="page-8-14"></span>[28] Z. He, H. Wu, X. Zhang, X. Yao, S. Zheng, H.
+    Zheng, and B. Yu, "Chateda: A large language model powered autonomous agent for
+    eda," in *MLCAD Workshop*, 2023.
+
+    - <span id="page-8-15"></span>[29] Y. Fu, Y. Zhang, Z. Yu, S. Li, Z. Ye, C. Li,
+    C. Wan, and Y. Lin, "Gpt4aigchip: Towards next-generation ai accelerator design
+    automation via large language models," *arXiv preprint arXiv:2309.10730*, 2023.
+
+    - <span id="page-8-16"></span>[30] Z. Yan, Y. Qin, X. S. Hu, and Y. Shi, "On the
+    viability of using llms for sw/hw co-design: An example in designing cim dnn accelerators,"
+    *arXiv preprint arXiv:2306.06923*, 2023.
+
+    - <span id="page-8-17"></span>[31] B. Ahmad, S. Thakur, B. Tan, R. Karri, and
+    H. Pearce, "Fixing hardware security bugs with large language models," *arXiv
+    preprint arXiv:2302.01215*, 2023.
+
+    - <span id="page-8-18"></span>[32] M. Li, W. Fang, Q. Zhang, and Z. Xie, "Specllm:
+    Exploring generation and review of vlsi design specification with large language
+    model," *arXiv preprint arXiv:2401.13266*, 2024.
+
+    - <span id="page-8-23"></span>[33] E. Seligman, T. Schubert, and M. A. K. Kumar,
+    *Formal verification: an essential toolkit for modern VLSI design*. Elsevier,
+    2023.
+
+    - [34] A. B. Mehta, *SystemVerilog Assertions and Functional Coverage*. Springer,
+    2020.
+
+    - <span id="page-8-24"></span>[35] S. Vijayaraghavan and M. Ramanathan, *A practical
+    guide for SystemVerilog assertions*. Springer Science & Business Media, 2005.'
+  decisions:
+    evaluation_prompt: '- Qualified. Reason: The paper includes multiple sections
+      discussing evaluation, such as the "Experimental Results" and "Evaluation Metrics"
+      sections. It mentions the use of Cadence JasperGold® for evaluating the quality
+      of generated SVAs, provides performance metrics, and includes tables summarizing
+      the evaluation results.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research throughout its sections, including the Introduction, Methodology,
+      and Discussion. It cites numerous academic sources, discusses existing methods,
+      and compares its proposed method to previous work, demonstrating a comprehensive
+      engagement with the relevant academic literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes AssertLLM, a novel automatic
+      assertion generation framework that incorporates multiple specialized LLMs to
+      address challenges in generating SystemVerilog Assertions (SVAs) from natural
+      language specifications. It claims to be the first method capable of handling
+      full-size specification files and generating various types of SVAs for each
+      architectural signal. Additionally, it introduces the first open-source benchmark
+      for assertion generation and evaluation, demonstrating novelty in both methodology
+      and application.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a novel framework,
+      AssertLLM, for automatic assertion generation from natural language specifications,
+      addressing specific challenges in the field and providing new contributions
+      such as an open-source benchmark and specialized techniques for assertion generation.'
+  topics:
+    main_topic: Design Automation
+    main_topic_reasoning: The paper discusses an automatic framework that generates
+      assertions for hardware verification, which is a core component of design automation
+      in the context of electronic design and circuit verification.
+    secondary_topic: Logic & Verification
+    secondary_topic_reasoning: The paper also relates to the field of logic and verification,
+      as it focuses on developing assertions that ensure design compliance with specifications,
+      which is vital for verification processes in hardware design.
+    main_topic_sub: Design Verification and Validation
+    secondary_topic_sub: Other

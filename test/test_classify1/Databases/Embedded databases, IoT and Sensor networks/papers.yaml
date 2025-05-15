@@ -1,0 +1,1545 @@
+papers:
+- title: "A RISC-V SOC for Terahertz IoT Devices: Implementation and design\n  challenges"
+  abstract: 'Terahertz (THz) communication is considered a viable approach to augmenting
+
+    the communication capacity of prospective Internet-of-Things (IoT) resulting in
+
+    enhanced spectral efficiency. This study first provides an outline of the
+
+    design challenges encountered in developing THz transceivers. This paper
+
+    introduces advanced approaches and a unique methodology known as Modified
+
+    Pulse-width Modulation (MPWM) to address the issues in the THz domain. In this
+
+    situation involving a transceiver that handles complex modulation schemes, the
+
+    presence of a mixed signal through a high-resolution digital-to-analog
+
+    converter (DAC) in the transmitter greatly contributes to the limitation in
+
+    maintaining linearity at high frequencies. The utilization of Pulse-width
+
+    Modulation-based Digital-to-Analog Converters (PWM-DACs) has garnered
+
+    significant attention among scholars due to its efficiency and affordability.
+
+    However, the converters'' performance is restricted by insufficient conversion
+
+    speed and precision, especially in the context of high-resolution, high-order
+
+    modulation schemes for THz wireless communications. The MPWM framework offers
+    a
+
+    multitude of adjustable options, rendering the final MPWM-DAC highly adaptable
+
+    for a diverse array of application scenarios. Comparative performance
+
+    assessments indicate that MPWM-DACs have enhanced conversion speed compared to
+
+    standard PWM-DACs, and they also provide greater accuracy in comparison to
+
+    Pulse-count Modulation DACs (PCM-DACs). The study presents a comprehensive
+
+    examination of the core principles, spectrum characteristics, and evaluation
+
+    metrics, as well as the development and experimental validation of the MPWM
+
+    method. Furthermore, we present a RISC-V System-on-Chip (SoC) that incorporates
+
+    an MPWM-DAC, offering a highly favorable resolution for THz IoT communications.'
+  url: http://arxiv.org/abs/2401.14620v1
+  keywords: ''
+  document: '## I. INTRODUCTION
+
+
+    The exponential growth in the quantity of Internet of Things (IoT) devices will
+    inevitably lead to a substantial surge in wireless network congestion. In [\[1\]](#page-14-0),
+    the reason for this is that the next wireless systems must offer increased system
+    capacity along with exceptionally dependable and low-latency communication. Additionally,
+    they must possess more flexible connectivity features to accommodate the evolving
+    requirements of the IoT network. RISC-V is an emerging technology that is increasingly
+    being used in low-power IoT applications. The architectural expansions of RISC-V
+    and the commercialization of Systemon-Chips (SOCs) employing this architecture
+    have contributed to the stability of these extensions. Additionally, the lowered
+    manufacturing costs and cheaper prices for end-consumers have facilitated the
+    commencement of commercialization. A wide range of additional RISC-V cores [\[2\]](#page-14-1)
+    have been produced using this instruction set architecture, and devices based
+    on RISC-V are now being developed for specialized applications like the IoT, wearables,
+    and embedded systems. The embedded IoT platform''s application processor carries
+    out the many functions of the IoT application, such as reading, storing, processing,
+    and deciding when to send sensor data. The widespread use of IoT applications
+    and their often strict power efficiency needs have led to the development of a
+    wide range of application processors. It is conceivable to encounter IoT processors
+    with power consumption in the nanowatt range that are specifically engineered
+    for battery-less applications. Furthermore, cores that target power consumption
+    in the milliwatt and microwatt ranges are also accessible. A method in [\[3\]](#page-16-0)
+    for developing ultra-low power software-defined radios and an instruction-set
+    extension for the open-source RISC-V ISA have been developed by the authors. With
+    this extension, challenging arithmetic operations utilized in the physical-layer
+    protocols of IoT communication systems are intended to be accelerated.
+
+
+    Mobile networks in the future are anticipated to integrate nomadic, dispersed
+    base stations that employ unmanned aerial vehicles (UAVs). These networks will
+    function as a supplementary element of wireless networks, linking a significant
+    number of individuals globally as well as a multitude of stationary and portable
+    cyber equipment situated in diverse areas. Simultaneously, the data transmission
+    speed that mobile devices can handle is continuously rising due to the implementation
+    of advanced networks like 5G and enhancements made to current infrastructures.
+    In [\[4\]](#page-16-1), there will be a significant increase in the volume of
+    data being transmitted daily. This will lead to congestion in the communication
+    between base stations and the main network through traditional backhaul connections.
+    It is anticipated that the sub-6 Gigahertz (GHz) and millimeter-wave (mmWave)
+    frequencies may not have the capacity to facilitate communication for these consumers.
+    Therefore, Terahertz (THz) communication (0.1–10 THz) [\[5\]](#page-16-2) has
+    been considered a promising method to address the aforementioned issue because
+    of its exceptionally large bandwidth. When building THz transceivers, it is crucial
+    to take into account three primary performance aspects in [\[6\]](#page-16-3).
+    Operating in the THz frequency range offers a wide and untapped spectrum of frequency
+    bandwidth. However, increasing the amount of bandwidth assigned to each user poses
+    several architectural challenges.
+
+
+    - 1) The bandwidth rises when there is a significant difference between the two
+    resonance frequencies. The assumption of a linear or uniform phase response is
+    no longer genuine, resulting in phase distortion and the introduction of noise
+    within the required frequency range. Utilizing high-order bandpass matching circuits
+    is advisable when the fractional bandwidth exceeds 20%.
+
+    - 2) The adoption of THz carrier frequencies and the presence of inter-user interference
+    (IUI) resulting from the implementation of IoT users would pose significant challenges
+    owing to the high path loss characteristics. By leveraging multiplexing benefits
+    from the propagation of distinct signal streams across several unique paths in
+    different spatial and polarization domains, high diversity or rank order in THz
+    channels can be used to boost channel capacity or multi-user service.
+
+    - 3) Transceivers operating at the THz frequency perform modulation and demodulation
+    using digital signal processing techniques. Consequently, the digital realm may
+    restrict the capacity of the analog baseband, mixed-signal, and RF chain to process
+    modulated signals with a wide range of values and a high ratio of peak power to
+    average power (PAPR). In addition, the effective application of higher-order modulation
+    necessitates the use of data converters with better resolution, long dynamic range
+    RF chains, and local oscillators with reduced phase noise, all while taking high
+    sensitivity and linearity into account.
+
+
+    The ongoing challenge discussed in [\[6\]](#page-16-3) is to provide energy-efficient
+    resolutions for the DAC/ADC and DSP elements of integrated transmitter and receiver
+    chipsets, which need to handle data speeds beyond 50 Gbps. The back-end and mixedsignal
+    processing use a costly commercial Arbitrary Waveform Generator (AWG) and a real-time
+    oscilloscope. Their objective is to produce potent sub-channelized modulated signals
+    externally. Subsequently, these signals are used to provide power to the transmitting
+    side, adjust for any discrepancies, convert the modulated radio frequency signal
+    into its original form, and retrieve the unprocessed data stream on the receiving
+    side. From a practical standpoint, integrating an external AWG and a real-time
+    oscilloscope into a front-end is not a power-efficient approach. Expanding a transceiver
+    from a single element to a multi-antenna configuration for ultra-high data-rate
+    applications in the same region would greatly exacerbate the situation. To be
+    more precise, transceivers that use higher-order modulations have a lower RF bandwidth
+    for a given data rate. However, they need a much better resolution and a higher
+    sampling rate for the DAC and ADC relative to the signal baud rate. Also, in practice,
+    the sampling rate of a Nyquist-rate data converter is varied by five to six times
+    the baud rate for a better bit error rate. In addition, as the modulation intricacy
+    rises, the necessary resolution of the data converter also increases, which becomes
+    progressively more difficult to achieve as the data rate increases. The ADC at
+    the receiving end and the DAC at the transmit end are the main parts that determine
+    the mixed signal. This signal has to meet strict requirements while high-speed,
+    high-order modulation is being generated and processed. The contributions of this
+    study are summarised as follows:
+
+
+    - 1) We present a comprehensive overview that covers the prior methodologies and
+    obstacles associated with the design of THz IoT devices, including the design
+    of multi-antenna arrays and transceivers.
+
+    - 2) By implementing a novel modulation technique called Modified PWM (MPWM),
+    DACs are capable of displaying pulse density and edge count that can be adjusted.
+    An MPWM module that incorporates an n-bit counter possesses the capacity to accommodate
+    (n-1) distinct edge count and pulse density configurations.
+
+    - 3) For the purpose of attaining exceptional outcomes, this approach provides
+    DAC designers with enhanced versatility to modify their designs to suit specific
+    applications.
+
+    - 4) We present the design of an MPWM-DAC and RISC-V SoC specifically tailored
+    for implementation in THz IoT applications.
+
+
+    Section II presents a comprehensive examination of the design of high-performance
+    THz antennas, both on-chip and off-chip, as well as multi-antenna arrays. In Section
+    III, we tackle the task of developing multi-antenna transceivers for THz frequencies.
+    Section IV provides a detailed explanation and comparison of the concept and spectrum
+    of MPWM with other modulation techniques. The performance of MPWM-DAC encompasses
+    static error, integral nonlinearity, differential nonlinearity, and dynamic features.
+    Section V presents the design and FPGA testing of MPWM-DACs, as well as the design
+    of an MPWM-DAC and a RISC-V SoC for THz IoT applications.
+
+
+    # II. HIGH-THROUGHPUT THZ MULTI-ANTENNA ARRAY DESIGN
+
+
+    Antennas play a crucial role in connecting the communication system to the surrounding
+    environment. On-chip antennas [\[7\]](#page-16-4) offer a prospective option that
+    is more advantageous than off-chip antennas for THz communication. An on-chip
+    antenna can greatly simplify the matching network needed to connect the antenna
+    to the RF circuitry. Simplifying the matching network can significantly enhance
+    the system''s performance by decreasing the loss and noise figure of the front
+    end. In order to achieve optimal radiation or prolong the battery life of the
+    systems, it is crucial to maximize the effectiveness of the antenna. In addition,
+    the size of the on-chip antenna is the primary influence in defining the chip
+    area. Therefore, it is imperative to minimize its dimensions to reduce manufacturing
+    costs. Antenna downsizing can be achieved by utilizing compact arrangements and
+    incorporating materials with high permittivity.
+
+
+    TABLE I: Summary of the state-of-the-art THz antennas on chip.
+
+
+    | Paper | Technology         | Frequency (GHz) | Efficiency (%) | Directivity
+    (dBi) | Gain (dBi) |
+
+    |-------|--------------------|-----------------|----------------|-------------------|------------|
+
+    | [8]   | 0.13 µm SiGe       | 370             | 40             | 8                 |
+    4          |
+
+    | [9]   | 50 µm              | 300             | 65             | NA                |
+    4.5        |
+
+    | [10]  | 65-nm CMOS         | 260-280         | 15             | 7                 |
+    22         |
+
+    | [11]  | 65-nm CMOS         | 438–479         | 32             | 21.4              |
+    12.4       |
+
+    | [12]  | 0.18 µm SiGe       | 340             | 74             | NA                |
+    7.9        |
+
+    | [13]  | 0.13 µm SiGe       | 235-255         | 75             | NA                |
+    7          |
+
+    | [14]  | 130 nm SiGe BiCMOS | 165-175         | 45             | NA                |
+    5          |
+
+    | [15]  | 0.13 µm SiGe       | 120             | 50             | NA                |
+    6          |
+
+
+    ## *A. On-chip antennas*
+
+
+    The rectangle, dipole, bow-tie, and slot antennas are commonly used topologies
+    in on-chip design at frequencies above 300 GHz, with a gain above 2 dBi [\[16\]](#page-16-13).
+    The patch antenna in [\[8\]](#page-16-5), created using 0.13 µm SiGe technology,
+    operates at a frequency of 370 GHz. It achieves a gain of 4 dBi, an efficiency
+    of 40%, and a directivity of 8 dBi. The gain enhancement can be due to the increased
+    electrical thickness of the dielectric as the frequency increases. Within the
+    high gain zone, the return loss has an elevated value. Measuring the antenna above
+    100 GHz using on-probe methods gets difficult because the metallic elements of
+    the probe station reflect the incoming radiated waves. This leads to a certain
+    degree of discrepancy in the measured gain outcomes. In addition, the use of highly
+    delicate probe tips during the measurements restricts the capacity to freely alter
+    any components installed on the probe station that are essential for facilitating
+    the measurement procedure, such as the mobility of the receiving reference antenna.
+
+
+    The antenna outlined in [\[9\]](#page-16-6) consists of a square patch antenna
+    positioned on a silicon substrate, accompanied by a ground plane. The substrate-integrated
+    waveguide (SIW) is created by a patch that incorporates two T-shaped slots and
+    short-circuited edges using metal vias. This method increases the size of the
+    aperture region and reduces losses caused by surface waves and substrate. As a
+    result, there is an enhancement in impedance matching, bandwidth, isolation, gain,
+    and radiation efficiency. This arrangement minimizes the losses resulting from
+    surface waves and the silicon dielectric substrate. The structure may be activated
+    by employing two coaxial ports that are linked to the patch from the lower side
+    of the silicon substrate. The enhanced aperture area significantly enhances both
+    the impedance bandwidth and radiation characteristics within the frequency range
+    of 0.28 THz to 0.3 THz. The antenna has a mean gain and efficiency of 4.5 dBi
+    and 65%, respectively. Furthermore, it possesses a self-contained configuration
+    that exhibits exceptional isolation, surpassing 30 dB between the two ports. The
+    on-chip antenna is 800 × 800 × 60 µm<sup>3</sup> in size. In addition, the antenna
+    in [\[17\]](#page-16-14) was constructed on a GaAs substrate that had a thickness
+    of 0.5µm. The transceiver consists of a Voltage-Controlled Oscillator (VCO), buffer
+    amplifier, modulator stage, power amplifier, frequency-tripler, and an on-chip
+    antenna. The on-chip antenna utilizes substrate-integrated waveguide (SIW) technology
+    and has a 4×4 configuration of slots in both the longitudinal and transverse orientations,
+    making use of metamaterial technology. The SIW antenna utilizes a high-pass filter
+    to efficiently eliminate undesired harmonics and transmit the desired signal.
+    The on-chip antenna has dimensions of 2 × 1 × 0.0006 mm<sup>3</sup> and demonstrates
+    a minimum gain of 0.25 decibels isotropic (dBi), an average gain of 1.0 dBi, a
+    minimum efficiency of 46.12%, and an estimated efficiency of around 55%. The transceiver
+    emits an average output power of -15 dBm within the frequency range of 0.3-0.31
+    THz, which makes it highly suitable for near-field imaging applications.
+
+
+    The antenna presented in [\[10\]](#page-16-7) describes an antenna design that
+    integrates an SIW cavity with a wideband dual-slot antenna on a chip. This design
+    was specifically created for the use of frequency-modulated continuous-wave (FMCW)
+    radars. Specifically, the existence of dual slots induces two resonance modes,
+    while the SIW cavity induces supplementary modes that aid in achieving a broad
+    bandwidth. The strength of this antenna varies from -1 dB to 0 dB across the frequency
+    range of 260-280 GHz. It has an efficiency of 15% for impedance matching, which
+    corresponds to a fractional bandwidth. However, due to the substrate''s thinness,
+    electric fields are mostly limited to the area between the patch and the ground.
+    As a result, both the gain and bandwidth are reduced.
+
+
+    To create the radiation front end, one can utilize conventional antenna designs,
+    such as rectangular patches and dipoles [\[18\]](#page-16-15). Given that the
+    substrate thickness usually falls within the range of 250-300 µm, it is possible
+    to position the ground layer beneath the substrate to augment the total thickness
+    between the antenna and the ground layer. The lens-integrated on-chip antennas
+    [\[11\]](#page-16-8), which have been recently described, exhibit superior gain
+    and bandwidth performance. The lens is responsible for improving the impedance
+    matching with the air and also for collimating the output beam. However, these
+    methods necessitate the attachment of a large lens on their rear side. Antennas
+    employing dielectric resonators (DR) [\[12\]](#page-16-9) have a bandwidth reduction
+    of less than 15%, but make up for it with a higher gain of almost 6 dBi. By employing
+    a dielectric material that is a minimum of 400 µm in thickness above the antenna,
+    these on-chip DR antennas increase their surface area.
+
+
+    According to the reference [\[13\]](#page-16-10), using the localized backside
+    etching (LBE) method on a group of folded dipole antennas made using 0.13 µm SiGe
+    technology results in a gain of more than 7 dBi and an efficiency of over 75%
+    within the frequency range of 235-255 GHz. Applying the LBE approach described
+    in [\[14\]](#page-16-11) to eliminate the lossy silicon substrate around an on-chip
+    antenna patch leads to a notable enhancement in performance. Nevertheless, the
+    LBE method requires supplementary protocols and a designated area for etching,
+    which must encompass the patch. According to [\[19\]](#page-16-16), the substrate
+    surrounding the patch is vulnerable to data loss. In order to address this concern,
+    a Lossless Back End (LBE) method is implemented to eradicate the substrate responsible
+    for data loss. On the other hand, this approach necessitates supplementary processing
+    procedures and an extensive etching area. This technique offers various methods
+    for integrating lens antennas onto chips by achieving a sufficient balance in
+    bandwidth through the inclusion of a sizable lens. Positioning the ground layer
+    beneath the substrate enhances the electrical thickness of the dielectric. A considerable
+    improvement in the amplification is observed. The use of a folded dipole antenna
+    allows for achieving a maximum gain of 5 dBi, together with a radiation efficiency
+    of 45%, over the frequency range of 165-175 GHz.
+
+
+    An improvement in radiation efficiency and a reduction in the space-wave quality
+    factor occurs when the depth of the superstate is a multiple of a quarter-wavelength
+    and an odd number. Thus, placing a high-dielectric superstrate over the antenna,
+    as explained in [\[20\]](#page-16-17), is an alternate approach to enhance radiation
+    efficiency. An elliptical slot antenna is manufactured using 0.13 µm CMOS technology.
+    This antenna is placed on the top metal layer, while a ground layer is located
+    at the LY metal layer, which is positioned 11 µm below the top metal layer. The
+    antenna is attached to a 400 µm thick quartz superstrate. At 90 GHz, the antenna
+    has a measured bandwidth of 3.9%, a peak gain of 0.7 dBi, and a peak radiation
+    efficiency of 30%. However, the research carried out by [\[15\]](#page-16-12)
+    shows that by adding a quartz superstrate and a parasitic patch to a shorted patch
+    antenna on a 0.13 µm SiGe substrate, a notable improvement of 6 dB may be achieved.
+    The system operates at a frequency of 120 GHz and achieves an efficiency of around
+    50%. Additionally, the system has a gain bandwidth of 9 GHz, with a 1-dB increase
+    within this bandwidth. Enhancing the antenna''s performance is achieved by utilizing
+    a small superstrate, which increases the complexity of the manufacturing process.
+
+
+    The unit cell of the artificial magnetic conductor (AMC) layer is constructed
+    by enclosing pairs of walls, each composed of a perfect electric conductor and
+    a perfect magnetic conductor. Through a waveport positioned above the unit cell,
+    a planar wave strikes perpendicularly to the unit cell. It is possible to get
+    an AMC layer surface reflection phase of zero close to the center frequency by
+    carefully changing the sizes of the unit cell elements. Furthermore, to mitigate
+    loss in the AMC layer, it is necessary to decrease the magnitude of the reflection
+    coefficient. The bandwidth of a unit cell is defined as the range of the reflection
+    phase, which varies between -90 and 90 degrees. Therefore, the design of a double-rhomboid
+    bow-tie (DRBT) slot antenna with a back-to-back E-shaped slot and an anisotropic
+    magnetic conductor (AMC) layer is implemented using a 0.13 µm BiCMOS technology
+    as presented in [\[21\]](#page-16-18). The antenna operates in the W-band frequency
+    range of 75-110 GHz. The maximum gain observed is -0.58 dBi and the bandwidth
+    is 6 GHz.
+
+
+    ## *B. off-chip antennas*
+
+
+    Integrating chipsets with off-chip antennas using normal interface techniques
+    is limited by strict frequency limitations. Offchip antennas are frequently used
+    on Printed Circuit Boards (PCBs) when larger dielectric layers are necessary.
+    The reduced manufacturing expenses associated with off-chip antennas enable the
+    development of extensive off-chip antenna arrays, resulting in significantly amplified
+    levels of radiated power. These antennas offer superior efficiency, gain, and
+    bandwidth compared to on-chip antennas. While sacrificing bandwidth, the antenna
+    described in [\[22\]](#page-16-19) utilizes numerous parallel leaky-wave structures
+    to enhance the gain. The antenna off-chip featured in [\[23\]](#page-16-20) achieves
+    a high level of amplification and a broad range of frequencies by combining a
+    multi-layered board technology with an L-probe feedline.
+
+
+    It is crucial to have broadband antenna designs that can be accommodated within
+    a limited number of metal layers and thin dielectric layers in order to manufacture
+    antennas using commonly accessible rigid or flexible PCBs. The antenna presented
+    in [\[18\]](#page-16-15) reveals a stacked patch antenna that is connected to
+    an external cavity backplane and operates in the frequency range of 91.5-134 GHz.
+    The fractional bandwidth of the object is around 38% and it has a peak gain of
+    8.1 dBi. This antenna demonstrates the greatest fractional bandwidth compared
+    to off-chip antennas operating over 100 GHz. In addition, the ground and patch
+    layers both utilize copper cladding with a thickness of 12 µm. The dielectric
+    substrates have a relative permittivity (ϵr) of 2.6 and a loss tangent of 0.003.
+    In light of the aforementioned methodologies, the viewpoint about off-chip design
+    problems can be succinctly summarized as follows:
+
+
+    - 1) In order to provide broad frequency compatibility between the input G-S-G
+    port and the slot, the feedline is constructed as a transmission line consisting
+    of two sections. The 50 Ω impedance part is connected to the 50 Ω G-S-G port,
+    while a larger low-impedance piece is connected to the impedance of the slot aperture.
+    Undesirable parallel plate modes, characterized by resonance at different frequencies,
+    arise when conductor layers are situated both above and below the feedline.
+
+    - 2) In order to enhance the performance of wideband systems, the use of FPC technology
+    permits a maximum thickness of 50 µm for the substrate layers Sub1, Sub3, and
+    Sub4. Sub2, with a reduced thickness of 25 µm, produces substantial coupling between
+    the feedline and slot aperture. The G-S-G probe port is situated within the Gnd2
+    layer and is linked to the feedline. The feedline is a grounded co-planar waveguide
+    designed to be compatible with the G-S-G probe port.
+
+    - 3) The process of cavity generation entails the utilization of via arrays to
+    construct a conductor enclosure surrounding patches. The manufacturing process
+    can cause surface waves to pass through even the tiniest gaps between vias. Developing
+    a broadband antenna is a significant challenge in this matter. At higher frequencies
+    in a wideband antenna, the wavelength becomes shorter, necessitating a greater
+    proximity between vias compared to lower frequencies.
+
+
+    The primary issue associated with off-chip antennas is effectively guiding signals
+    from the semiconductor to the antenna structure. The interface, equipped with
+    pads on both ends, creates a network that exhibits self-inductance as well as
+    capacitance and resistance. Ideally, this combination should operate as a direct
+    path for electric current. The capacitors and inductors in this network resonate
+    together at high frequencies, establishing a frequency limit called the self-resonance
+    frequency (SRF). Regarded as the prevailing method for packaging in [\[24\]](#page-16-21)
+    and [\[25\]](#page-16-22), aluminum or gold wirebonds can also be employed to
+    provide a connection between the chipset and antennas on the PCB. Standard wires
+    typically have a diameter ranging from 10 to 75 µm. In high-power applications,
+    many wirebonds may be used in tandem. In the usual wirebonding procedure, the
+    wire is aligned at an almost right angle to the pads at one end. The wire becomes
+    longer than required, leading to substantial self-inductance. The wirebonds exhibit
+    a range of self-inductance values, which can span from a few hundred picohenries
+    to a few nanohenries. Consequently, the wirebonds exhibit considerable reactance
+    at higher frequencies, leading to a large reduction in their insertion loss and
+    insufficient impedance matching.
+
+
+    ## *C. On-chip and off-chip antenna array*
+
+
+    As the frequency rises, the dielectric thickness increases as a percentage of
+    the wavelength, while each antenna element''s area decreases, increasing the gain
+    bandwidth of the on-chip antennas. Following this logical sequence, this section
+    explores off-chip and on-chip antenna arrays for multi-antenna systems in cases
+    where employing a single-element radiator is impractical. In the THz frequency
+    band, a chip with a single antenna element generates maximum power that covers
+    a limited distance. Antenna arrays are utilized to enhance the coverage area of
+    a communication system by greatly amplifying the total radiated power and enhancing
+    the beam''s directionality. The antenna components are spaced at a distance equivalent
+    to half the wavelength, enabling a coherent combination of radiated waves and
+    limiting interference.
+
+
+    Using an on-chip antenna array simplifies routing and matching between transceiver
+    circuitry and antenna components. As previously indicated, on-chip antenna performance
+    improves with higher frequencies, with most arrays operating beyond 150 GHz. The
+    authors in [\[26\]](#page-17-0) implement an 8-element slot array with a 10 mm
+    Si lens at the bottom in a 65 nm CMOS process. Simulated directivity is 16.6 dB,
+    the overall radiation efficiency is 42%, and the impedance bandwidth exceeds 60
+    GHz in the 260 GHz range. The eight-element on-chip antenna array in [\[27\]](#page-17-1)
+    features a λ/4 thick Quartz superstrate on top. The Quartz superstrate boosts
+    gain by 3.1 dB and efficiency from 22% to 45% for each antenna element. This leads
+    to an array gain of 11-12 dBi and a 10 GHz bandwidth at 385 GHz frequency. At
+    412-416 GHz, a 4 × 4 patch antenna in an oscillator network obtains a peak effective
+    isotropic radiated power (EIRP) of 14 dBm in [\[28\]](#page-17-2).
+
+
+    Enhanced gain and bandwidth performance can be achieved by scaling antenna size
+    and accessing thicker substrates in off-chip technologies. The allocation of space
+    for an antenna on a PCB board is not a major issue, in contrast to an on-chip
+    antenna, where it occupies a substantial portion of the chip. This enables the
+    use of larger off-chip antenna arrays, hence improving antenna gain performance
+    and transceiver chip EIRP. The diminished amplification and frequency range capabilities
+    shown in the following investigations can likely be attributed to the reduced
+    thickness of the interposer layer and the scattered connection between the chipset
+    and the interposer. The designs in [\[29\]](#page-17-3) are pioneering examples
+    of off-chip antenna arrays operating at frequencies above 100 GHz. This work constructs
+    two patch arrays on a RO3003 substrate with a dielectric constant (ϵr) of 3. One
+    array is fed in series, while the other is supplied corporately. The serial-fed
+    antenna has a maximum gain of 6 dBi and a frequency range of 5 GHz centered at
+    122 GHz. On the other hand, the corporate-fed antenna has a gain of 5 dBi and
+    a bandwidth of 7 GHz.
+
+
+    To showcase long-distance communication capabilities, the authors in [\[30\]](#page-17-4)
+    proposed the use of a 384-element array operating at a frequency of 90 GHz. This
+    array would consist of 11 layers of metal stacks on a PCB, and would be linked
+    to the chipset by flip-chip interconnects. The array achieved an impressive EIRP
+    of 60 dBm within a conservative 20 GHz bandwidth. The authors in [\[31\]](#page-17-5)
+    constructed 16 patch antennas on an interposer board positioned between the chipset
+    and PCB to facilitate large-scale MIMO applications. This study employed an interposer
+    board to establish a connection between narrow signal lines on the chipset and
+    wider lines on the board. The bandwidth for return loss was measured to be between
+    71 and 84 GHz, while the peak gain was about 5 dBi.
+
+
+    The on-chip antenna array in [\[32\]](#page-17-6) operates within the frequency
+    range of 0.450-0.475 THz. It utilizes two vertically oriented DRs on a silicon
+    substrate, employing standard CMOS technology. To reduce energy dissipation, one
+    can create a winding pathway in the silicon substrate and enclose it with a metallic
+    barrier, thereby reducing substrate loss and surface wave effects. The integration
+    of slots and vias results in the antenna adopting a metamaterial structure that
+    occupies a very small area. The dimensions of the antenna are 400 x 400 × 135
+    µm<sup>3</sup> . The antenna achieves a peak gain of 4.5 decibels relative to
+    an isotropic radiator and has a radiation efficiency of 45.7% at a frequency of
+    0.4625 THz. A series-fed double-DR on-chip antenna array is a promising candidate
+    for THz integrated circuits. By employing CMOS 20µm silicon technology, the authors
+    in [\[33\]](#page-17-7) develop an innovative on-chip antenna array designed for
+    operation at frequencies ranging from 0.6 to 0.65 THz. This array configuration
+    has three vertically aligned layers of Silicon-metal-Silicon. The intermediate
+    metal layer functions as a ground plane sandwiched between two silicon layers.
+    The uppermost layer consists of a pair of antennas, each equipped with three interconnected
+    radiating elements. Radiation elements exhibit the behavior of linked dual rings,
+    like a metamaterial. This arrangement increases the effective aperture area of
+    the array. The inclusion of metallic via-holes between radiation elements in three
+    layers mitigates the effects of surface waves and substrate losses. The antenna
+    is operated via microstrip wires that are open-circuited on the rear of the structure.
+    The ground-plane layer incorporates slots that facilitate the transmission of
+    electromagnetic energy from the lower layer to the radiating components located
+    on the upper layer. The dimensions of the antenna array are 0.4× 0.4 × 0.06 mm<sup>3</sup>
+    . The on-chip antenna array in [\[33\]](#page-17-7) attains an average radiation
+    gain, efficiency, and isolation of 7.62 dBi, 32.67 %, and negative 30 dB, respectively.
+    The results confirm the effectiveness of the antenna array for THz-integrated
+    circuits.
+
+
+    In essence, on-chip antennas that operate at frequencies over 150 GHz adhere to
+    radiation laws, enabling the creation of a fully integrated communication system.
+    On-chip antennas are frequently used at lower THz frequencies due to their ability
+    to provide a broad gain bandwidth while minimizing substrate elevation. Although
+    there have been improvements in radiation quality, the linkage between the chipset
+    and off-chip antenna remains a major obstacle to attaining optimal off-chip radiation
+    frequencies. Wirebonds have traditionally been employed to establish connections
+    with frequencies above 100 GHz. Furthermore, flip-chip technologies [\[34\]](#page-17-8),
+    namely copper-pillar and solder bump, offer an impressive SRF of around 200 GHz.
+    This makes them highly suitable for the development of future THz communication
+    systems.
+
+
+    ## III. THZ MULTI-ANTENNA TRANSCEIVERS DESIGN
+
+
+    The majority of studies in multi-antenna transceiver design have focused on beamforming
+    using phased-array solutions. Following the first showcases of single, four, and
+    eight-element arrays on a single microchip, the phased-arrays rapidly progressed
+    to 16 and 32-element configurations on a single microchip. In the transmit mode
+    of a phased array with Nelements presented by the following principle in [\[35\]](#page-17-9),
+    the effective isotropic radiated power (EIRP) is defined as the product of the
+    total transmit power P<sup>t</sup> and the transmit antenna gains Gt. P<sup>t</sup>
+    represents the power emitted per element, while Gt is directly proportional to
+    N. The EIRP, on the other hand, is directly proportional to N<sup>2</sup> . When
+    operating in receive mode, the gain of the phased array antenna is directly proportional
+    to the number of elements, denoted as N. Hence, the link budget, which is directly
+    proportional to the product of Pt, Gt, and receiver antenna gain Gr, exhibits
+    a cubic dependency on the number of N<sup>3</sup> . This section will discuss
+    two designs: high-performance multi-antenna systems and low-complexity MIMO precoding
+    designs. These architectures address the obstacles and concerns related to increasing
+    bandwidth, modulation order, and transmit power in THz technology.
+
+
+    ## *A. High-performance multi-antenna systems*
+
+
+    Due to the reduced dimensions of passive components in the THz frequency range,
+    it becomes feasible to consider the implementation of interconnected multi-antenna
+    transceiver arrays. All-digital beamforming enables the transmission of several
+    beams simultaneously, providing maximum flexibility and data transfer rate. The
+    digital beamforming (DBF) technique has three main benefits. By employing digital
+    precoding, it becomes possible to get precise resolution in both magnitude and
+    phase. Moreover, a DBF array possesses the potential to increase its capacity
+    by superimposing several beams to handle various data streams. In addition, the
+    complete DBF architecture enables independent beamforming precoding on each subcarrier
+    or resource block for multicarrier transmissions. This results in exceptional
+    performance across a broad spectrum of frequencies. As the authors presented in
+    [\[36\]](#page-17-10), DBF-based millimeter-wave MIMO systems enable multi-user
+    access and exhibit exceptional spectrum utilization. The principal constraints
+    associated with the development of a DBF-based millimeter-wave MIMO transceiver
+    are hardware complexity, financial investment, and power consumption. In order
+    to facilitate the further development of millimeter-wave MIMO systems utilizing
+    DBF, cost reduction in digital baseband processing will be the primary objective.
+    Novel semiconductor manufacturing processes and improved integration techniques
+    are assisting in the resolution of these constraints.
+
+
+    Lately, there has been a concentration on a hybrid beamforming approach that merges
+    analog beamforming and digital MIMO coding. This technology offers a significant
+    advantage by minimizing the complexity of the digital baseband through the utilization
+    of a reduced number of up/down conversion chains in systems that have a high number
+    of antennas. Consequently, it has emerged as a feasible choice for both outdoor
+    and interior millimeter-wave/terahertz communication. By combining multibeam digital
+    baseband processing with analog beamforming, it is possible to simultaneously
+    improve both multiplexing and beamforming gain. RF phase shifters are primarily
+    used to alter the direction of the main lobe. RF variable gain attenuators and/or
+    amplifiers (VGAs) provide interference spatial filtering by aligning the zero
+    locations of each beamforming line with the incident angle of interference. The
+    number of parallel data streams K determines the minimum required number of RF
+    chains NRF in a hybrid design. On the other hand, the beamforming gain is achieved
+    by using NRF complex weighting factors that appear at each antenna. In the context
+    of sub-array systems, hybrid beamforming have the capability to either receive
+    or transmit an entire set of data streams from N antennas when N = NRF or only
+    a subset of data streams when partially interconnect RF circuits supply subarrays,
+    i.e., NRF < N, per antenna. A comprehensive array fulfills the function of an
+    exclusively DBF, upon closer inspection. NRF × N denotes the quantity of signal
+    processing paths for the subarray, specifically from the digital baseband to the
+    antenna front-end. N<sup>2</sup> signifies the total number of signal processing
+    paths for the array. On the contrary, the beamforming gain of the sub-array is
+    equivalent to the full array''s NRF /N. Consequently, in hybrid beamforming, the
+    objectives of beamforming gain and signal processing complexity are in direct
+    opposition. As the authors presented in [\[37\]](#page-17-11), it allows for the
+    receiving of two streams by utilizing the Cartesian combining principle. The execution
+    of this design for a two-stream reception necessitates the use of eight splitters,
+    twenty combiners, and twelve mixers. The presence of several signal routes leads
+    to electromagnetic cross-talk, which arises from the frequent cross-overs that
+    take place between these paths.
+
+
+    Phased arrays provide a range of capabilities found in a multi-antenna system,
+    such as enhancing capacity and diversity. As the authors presented in [\[38\]](#page-17-12),
+    the initial integration of the phased-array system in silicon involved the incorporation
+    of local oscillator (LO) phase shifting. The SiGe transceiver has four components
+    for both transmitting and receiving signals, as well as circuitry for generating
+    and distributing LO frequencies. Additionally, it features a local design that
+    allows for phase-shifting in the LO path, enabling beam steering. The main benefit
+    of this architecture is that the phase-shifters are positioned at a distance from
+    the RF route. Consequently, the implementation of the LO-path phase-shifting scheme
+    at a local level allows for the creation of a reliable distribution network that
+    can effectively handle THz frequencies and/or a larger number of components. The
+    presence of large array sizes can present a notable design obstacle for the LO
+    distribution network. Nevertheless, this worry can be mitigated by employing a
+    phased-array transceiver that incorporates RF phase shifting. In [\[39\]](#page-17-13),
+    the described approach involves circuitry that allows for accurate manipulation
+    of beam direction, phase, and amplitude at each individual front end. Additionally,
+    independent control of tapering and beam steering is achieved at the array level.
+    The integrated circuit is designed using 130-nm SiGe BiCMOS technology. It consists
+    of 32 transceiver components and supports simultaneous independent beams in two
+    polarizations for both transmission and reception operations.
+
+
+    ## *B. Low-complexity MIMO precoding Designs*
+
+
+    Without investigating innovative architectural approaches, it may be unfeasible
+    to include a unified ultra-high data-rate wireless transceiver that surpasses
+    50 Gbps. This is attributed to the substantial power consumption of the baseband
+    units and data converter, which may reach a maximum of 10 watts. Utilizing a multi-antenna
+    arrangement, rather than a single-element system will result in an increase in
+    the power consumption of the transceiver beyond the frequency of 100 GHz. Streamlining
+    the complexity of data converters and back-end digital signal processing (DSP)
+    is essential, as it allows for the creation of energyefficient and cost-effective
+    high-speed wireless connections that can be accessed by a large number of customers.
+    Conventional MIMO systems are solely operational within the baseband domain. However,
+    full-digital precoders are impracticable due to the substantial energy consumption
+    of high-frequency mixed-signal components and the attendant manufacturing costs.
+    The primary reason for this is the considerable number of RF chains that are necessary
+    for THz MIMO systems, which frequently comprise several tens to hundreds of antennas.
+    An array of signals is processed using a hybrid cascaded RF precoder and baseband
+    precoder. The RF precoder employs analog phase shifters to precisely manipulate
+    the phase of signals entering and departing the antenna components. This enables
+    the creation of multiple beams that align with the dominant THz channel paths.
+    The baseband precoder exhibits more adaptability compared to the constant-gain/phase-only
+    functionalities of the RF precoder. The substantial size of the antenna in the
+    hybrid precoder architecture poses challenges in obtaining an optimum full-digital
+    precoder. To develop a hybrid precoder, an optimal full-digital precoder must
+    be employed. The complete digital precoder is often derived from the dominant
+    singular vectors of a channel matrix in the explicit spatial domain. The computation
+    of the singular value decomposition (SVD) for the explicit channel matrix is complex
+    because of the abundance of antennas. In addition, receiver implementation of
+    hybrid precoder designs is commonplace to reduce the quantity of feedback demanded.
+    The execution of SVD ensues as a result. Determining the optimal full-digital
+    precoder is the initial step in formulating the hybrid precoder design as a sparse
+    optimization problem. One potential solution for the hybrid precoder design is
+    to employ simultaneous orthogonal matching pursuit (SOMP) [\[40\]](#page-17-14),
+    in which the approach aims to select a suitable combination of analog beamforming
+    vectors from a pre-determined set of options. Implementing this approach results
+    in near-optimal performance. However, the hybrid precoder using the SOMP technique
+    necessitates matrix inversion, resulting in a significant increase in complexity.
+    It then computes the matching baseband precoding matrix in order to minimize the
+    Euclidean distance between the current outcome and the ideal precoding matrix.
+    The authors of [\[41\]](#page-17-15) proposed an alternating minimization (Alt-Min)
+    approach to separate the hybrid precoder design into two distinct sub-problems.
+    Initially, a temporary digital precoder is derived using the least square solution,
+    while the initial analog beamformer is generated with random phases. Following
+    this, the associated analog beamformer is modified via the phase extraction approach.
+    The process of alternate iterations persists until the criterion stated by the
+    user is met. The SOMP-based hybrid precoding can be interpreted as a method for
+    sparse reconstruction, whilst the Alt-Min algorithm can be seen as a strategy
+    for manifold optimization.
+
+
+    Although there have been several suggestions for adopting hybrid precoding techniques,
+    the VLSI implementation of precoding algorithms has not received substantial attention.
+    The authors of the study described in [\[42\]](#page-17-16) established a technique
+    known as parallel-index-selection matrix-inverse-bypass simultaneous orthogonal
+    matching pursuit (PIS-MIB-SOMP). This approach seeks to avoid the necessity of
+    performing a complete matrix inversion in the traditional SOMP algorithm. The
+    researchers in [\[43\]](#page-17-17) developed a modified version of the SOMP
+    technique called orthogonality-based matching pursuit (OBMP) [\[44\]](#page-17-18).
+    OBMP employs a discrete Fourier transform (DFT) codebook to replace the original
+    candidate array solutions, hence reducing computing expenses. The authors of [\[45\]](#page-17-19)
+    introduced an improved iteration of the orthogonal matching pursuit (OMP) method
+    in their paper. The enhanced OMP algorithm integrated a revolutionary least-squares
+    approach that employed QR decomposition. The authors also investigated the possible
+    advantages of utilizing the Coordinate Rotation Digital Computer (CORDIC) method
+    for implementing this algorithm within the framework of Very Large Scale Integration
+    (VLSI). However, for these designs to serve as a reference design, an ideal precoding
+    matrix is required. This matrix can only be constructed by using the SVD of the
+    explicit channel matrix. However, this process significantly increases the complexity
+    of the transceivers, making it impractically high.
+
+
+    Inspired by the approach in [\[46\]](#page-17-20) to providing extensive bandwidths,
+    short wavelengths at mm-wave or THz generate a spatial signal space with a high
+    number of dimensions. This presents an opportunity to leverage high-dimensional
+    MIMO techniques in order to achieve substantial capacity increases. Through the
+    integration of a hybrid analog-digital transceiver and the beamspace MIMO communication
+    concept, continuous aperture-phased MIMO attains performance that is nearly optimal
+    while significantly reducing complexity. The researchers demonstrated in [\[47\]](#page-17-21)
+    that beamspace singular value decomposition (SVD) is the most efficient approach
+    for obtaining a full-digital precoder with minimal effort. It efficiently reduces
+    power consumption for both the base station and user equipment. The authors utilize
+    compressed sensing (CS)-based channel estimators to get reduced-dimension beamspace
+    channel state information (CSI). This algorithm performs SVD implicitly on the
+    reduceddimensional beamspace channel instead of explicitly on the large-dimensional
+    spatial domain channel. The total complexity is proportional to the number of
+    antennas in the MIMO system, which is considerably higher than the channel sparsity.
+    The CS-BHP technique described in [\[47\]](#page-17-21) achieves a considerable
+    reduction in complexity compared to the state-of-the-art approach by 99.6% by
+    utilizing low-dimensional beamspace CSI. This eliminates the need for matrix inversion
+    calculations and matching pursuit rounds, making it more efficient than an ideal
+    full-digital precoder. Furthermore, it has a performance decrease of less than
+    5%. The suggested design in [\[48\]](#page-17-22) utilizes a two-stage precoding
+    approach. The first stage involves using a sparse matrix for precoding in the
+    beamspace domain, followed by converting the outcome to the antenna domain using
+    an inverse fast Fourier transform. This move is performed to simplify the complexity
+    of multi-user (MU) precoding in all-digital base station systems. This approach
+    uses OMP to calculate sparse precoding matrices in the beamspace domain. As a
+    result, this technique reduces the complexity of precoding compared to standard
+    linear antenna-domain precoders that involve dense matrix-vector multiplication.
+    The output is preprocessed and then transformed into the antenna domain using
+    an inverse fast Fourier transform (IFFT). The authors demonstrate that their methods
+    provide a bit error-rate (BER) performance that is similar to that of traditional
+    antenna-domain Wiener filter (WF) precoding, but with almost double the complexity.
+
+
+    ## IV. HIGH-SPEED HIGH-RESOLUTION DAC FOR HIGH ORDER MODULATION
+
+
+    As described in prior research, a Pulse-width Modulation-based Digital-to-Analog
+    Converter (PWM-DAC) consists primarily of a filter and a PWM generator [\[49\]](#page-17-23)
+    [\[50\]](#page-17-24). Integrated modules for Microcontroller Units (MCUs) or
+    Digital Signal Processors (DSPs) constitute the PWM generator, which is principally
+    digital. Frequently, the filter is a simple first-order RC filter. The primary
+    benefits of PWM-DACs are their low cost and straightforward implementation, which
+    are outcomes of their straightforward architecture. These characteristics have
+    attracted significant interest in both academic and industrial spheres. A considerable
+    number of semiconductor firms that specialize in DSPs and/or MCUs have published
+    technical documents detailing the construction of PWM-DACs [\[51\]](#page-17-25)–[\[53\]](#page-17-26).
+
+
+    DAC performance is contingent on filter design and modulation technique. The bit
+    breadth of the counter within the modulator and the efficacy of the low pass filter
+    impose constraints on their resolution. In order to implement a DAC with a resolution
+    of n bits, the bit width of the counter must be greater than n. In addition, beyond
+    the pass band, the filter must have a low cutoff frequency and/or high attenuation,
+    which restricts the speed and precision of these DACs.
+
+
+    Second-order low-pass Butterworth filters are the most economically viable option
+    when it comes to PWM-DAC, PCM-DAC, and FONS-DAC. The normalized cutoff frequency
+    of the PWM filter, expressed in the least significant bits (LSB), is approximate
+    [\[54\]](#page-17-27) for the worst ripple of R<sup>W</sup> C in this instance.
+
+
+    $$f\_c T = 0.9^2 \sqrt{R\_{WC}/2^n} \,\text{.}\tag{1}$$
+
+
+    where f<sup>c</sup> is the cutoff frequency and T = 2<sup>n</sup>/fclk is the
+    PWM period (n is the bit width of the counter inside the PWM and PCM circuit,
+    and fclk is the working clock). The cutoff frequency of the second-order low-pass
+    Butterworth filter for a 12-bit PWM-DAC with a 100 MHz clock rate is 250 Hz, and
+    the DAC''s settling time is 0.76 ms; therefore, the conversion rate is less than
+    1 kHz, given that the settling time can only represent a negligible portion of
+    the conversion period. Moreover, as the resolution (n) of the DAC increased, there
+    was a significant decrease in fcT; consequently, achieving a high-resolution PWM-DAC
+    operating at a reasonable speed will be more difficult.
+
+
+    In order to increase the speed, PCM-DAC and first-order noise shaping DAC (FONS-DAC)
+    reduce the stringent requirement for fcT through the application of extremely
+    frequent pulses. Nevertheless, PCM periods contain a large number of ascending
+    and descending edges, which leads to significant static error as a consequence
+    of the edges'' nonideal properties.
+
+
+    The edge induces a maximum error of 2 <sup>11</sup> × ∆W × fclk for a 12-bit PCM-DAC,
+    where ∆W represents the pulse width deviation resulting from the delay differential
+    between the rising and falling edges. Consequently, a 2048-fold increase in the
+    pulse width deviation can significantly compromise the accuracy of the DAC. Additionally,
+    PCM-DAC and FONS-DAC exhibit the worst error performance as pulse density increases.
+
+
+    ## <span id="page-8-0"></span>*A. Principle and spectrum of MPWM*
+
+
+    ![](_page_8_Figure_1.jpeg)
+
+
+    Fig. 1: The waveform of unfiltered MPWM digital output.
+
+
+    <span id="page-8-1"></span>The period of the MPWM signal for an n-bit counter
+    may be calculated using the formula T = 2n/fclk, where fclk represents the clock
+    frequency. We define two terms: the splitting factor (SF) and the splitting number
+    (SN). These terms are related by SN = 2SF . MPWM is divided into SN sub-regions.
+    The waveform of MPWM for n = 5 and SF = 1, 2, 4 is displayed in Fig. [1](#page-8-0)
+    for a duration of 32 clock periods. The matching spectrum can be seen in Fig.
+    [2.](#page-8-1)
+
+
+    ![](_page_8_Figure_4.jpeg)
+
+
+    Fig. 2: The spectrum of unfiltered MPWM digital output.
+
+
+    <span id="page-8-2"></span>![](_page_8_Figure_6.jpeg)
+
+
+    Fig. 3: The MPWM generation using a 5-bit counter with 2 address bits.
+
+
+    <span id="page-9-0"></span>Fig. [3](#page-8-2) illustrates the principle of generating
+    the MPWM wave. The lower significant bits (SF) of the counter correspond to the
+    address, which represents the sub-region inside an MPWM period T. The upper bits,
+    namely (5 − SF) bits, indicate the specific "wave" that should be placed in the
+    sub-region. The counter''s address bits are sent to an Address Decoder, which
+    produces an output of SN bits. When the output of the address decoder is a signal
+    of length SN with a binary value of 1 at location SNpos+1. This signal represents
+    the location of the "wave" inside the full MPWM signal. The higher (5 − SF) bits
+    of the counter are connected to the "WAV decoder", whose output WAV is a signal
+    with a length of 2 <sup>5</sup>−SF . Fig. [4](#page-9-0) displays
+
+
+    | SN pos | Waveform | WAV | Waveform                      |
+
+    |--------|----------|-----|-------------------------------|
+
+    |        | 1 0 0 0  | 000 | 1   0  0  0  0  0  0  0  0  0 |
+
+    | o      |          | 001 | 1 1                           |
+
+    |        | 0 0 1 0  | 010 | 1 1 1                         |
+
+    | 1      |          | 011 | 1 1 1<br>ਜ                    |
+
+    |        | 0 1 0 0  | 100 | । 1<br>1 1 1 1                |
+
+    | 2      |          | 101 | 1 1 1 1 1 1 1                 |
+
+    |        | 0 0 0 1  | 110 | 1 1 1 1 1 1 1                 |
+
+    | ന      |          | 111 | 1 1 1 1 1 1 1 1               |
+
+
+    Fig. 4: The waveform of the output of Address Decoder and Data Decoder.
+
+
+    <span id="page-9-1"></span>the waveform that corresponds to the WAV format. The
+    operation of the WAV Decoder is governed by the Duty input. During an MPWM period,
+    the MPWM creates a waveform as shown in Figure [5](#page-9-1) for a specified
+    number of clock cycles called the "Duty". After that, it outputs a bit with a
+    value of 0 until the next MPWM period starts. In order to examine the spectrum
+    of
+
+
+    $$\begin{array}{c} \mathsf{SN}\_{\mathsf{P}\mathsf{A}\mathsf{T}} \stackrel{\mathsf{0}\
+    \mathsf{0}\ \mathsf{T}}{\mathsf{T}} \stackrel{\mathsf{0}\ \mathsf{0}\ \mathsf{T}}{\longleftarrow}
+    \begin{array}{c} \mathsf{WAV} : \mathsf{T} \stackrel{\mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\
+    \mathsf{0}\ \mathsf{0}\ \mathsf{0}\ \mathsf{0}\end{array}$$
+
+
+    Fig. 5: MPWM waveform in the case of Duty = 19, SNpos = 2, and Data = 4.
+
+
+    MPWM, we will configure the counter to have a bit width of 5 and establish a unit
+    signal as follows:
+
+
+    $$x\_{unit} = \begin{cases} \\ 0, \end{cases} \quad \text{or} \quad T/32 \le t
+    \le (m+1)T/32 \\ \tag{2}$$
+
+
+    which represents the signal at t = mT /32, the duration is T /32, and the period
+    is T. By changing the value of m, xunit(t) can be used to form various MPWM waveforms.
+    According to the Fourier series formula of the periodic signal as follows:
+
+
+    $$x(t) = \sum\_{k=-\infty}^{\infty} a\_k e^{-jk\frac{2\pi}{T}t} dt. \tag{3}$$
+
+
+    $$a\_k = \frac{1}{T} \int\_T x(t)e^{-jk\frac{2\pi}{T}t}dt. \tag{4}$$
+
+
+    the Fourier series of xunit(t) is calculated as
+
+
+    $$a\_k = \begin{cases} 1/32, & k = 0\\ e^{-jk(\pi/32 + m\pi/16)} \sin(k\pi/32)/k\pi,
+    & k = 1, \ldots, 31. \end{cases} \tag{5}$$
+
+
+    By adding xunit(t) with different values of m, we can get MPWM with the splitting
+    number SN = 2, 4, and 8, respectively. According to the linear properties of the
+    Fourier series, it is easy to calculate the Fourier series of these MPWMs. The
+    frequency spectrum of PWM, PCM, FONS, and MPWM are shown in Fig. [6.](#page-10-0)
+    The harmonic energy of the MPWM is mainly at SN/T. Fig. [8](#page-10-1) and Fig.
+    [7](#page-10-2) illustrate the distinctions among PWM, PCM, FONS, and harmonic
+    components. In comparison to typical PWM, MPWM utilizes a low-pass filter with
+    a greater cut-off frequency, hence reducing the demands for filter design in DAC
+    applications. MPWM exhibits a lower number of edges in the time domain when compared
+    to PCM and FONS. This characteristic can effectively decrease the integral nonlinearity
+    of the DAC, as discussed in Section III.
+
+
+    <span id="page-10-0"></span>![](_page_10_Figure_0.jpeg)
+
+
+    <span id="page-10-2"></span>Fig. 6: The Spectrum comparison of the unfiltered
+    digital output.
+
+
+    ![](_page_10_Figure_2.jpeg)
+
+
+    <span id="page-10-1"></span>Fig. 7: The waveform comparison of the unfiltered
+    digital output.
+
+
+    |      |      |                | Maximum of Amplitude |              |  |
+
+    |------|------|----------------|----------------------|--------------|--|
+
+    |      |      | Number of Edge | f, Amp,              | f2,Amp2      |  |
+
+    | PWM  |      | 17, 0.575<br>2 |                      | 2/7,0.430    |  |
+
+    | PCM  |      | 25 = 32        | 16/p , 0.602         | 8/7 , 0.891  |  |
+
+    | FONS |      | 25 = 32        | 16/p , 0.602         | 12/p , 0.640 |  |
+
+    | MPWM | SF=1 | 2×2 = 4        | 2,426                | 4/7 , 0.619  |  |
+
+    |      | SF=2 | 2×22 = 8       | 4/7, 0.617           | 8/7, 0.619   |  |
+
+    |      | SF=3 | 2×23 =16       | 8/7, 0.614           | 16/7,0.607   |  |
+
+
+    Fig. 8: Differences among four waveforms: f<sup>1</sup> and f<sup>2</sup> are
+    the frequencies with the maximum and the second largest amplitude. Amplitudes
+    have been normalized to their DC value.
+
+
+    ## *B. Performance of MPWM-DACs*
+
+
+    *1) Static error:* The DC component of the output of an MPWM-DAC can be expressed
+    as in Eq[.6,](#page-11-0) where u<sup>d</sup> is the digital output of MPWM and
+    D is the nominal duty (the actual duty is D/2 <sup>n</sup>, where n is the bit
+    width of the counter).
+
+
+    <span id="page-11-0"></span>
+
+    $$u\_d(D) = \frac{1}{T} \int\_{t\_1}^{t\_1 + T} u\_d(t, D) dt. \tag{6}$$
+
+
+    The static error of an MPWM-DAC is defined as in Eq[.7,](#page-11-1) where u<sup>D</sup>
+    is the ideal DC voltage value corresponding to the duty D. ULSB is the voltage
+    corresponding to the DAC''s LSB.
+
+
+    <span id="page-11-1"></span>
+
+    $$e\_s(D) = \frac{\bar{u\_d}(D) - u\_D}{U\_{LSB}} \tag{7}$$
+
+
+    The primary cause of static error in an MPWM-DAC is the combination of power supply
+    error and error resulting from edges. Given that the maximum value of the output
+    voltage ud(D) is equal to the power supply voltage Us, the direct current component
+    of the MPWM-DAC''s output can have the same level of inaccuracy as the power supply.
+    MPWM-DAC shares the same characteristics as PWM-DAC, PCM-DAC, and FONS-DAC in
+    this regard.
+
+
+    As for errors caused by edges, since the rising and falling edges of the MPWM
+    output are nonideal, errors can be brought. The nonideal characteristics of edges
+    can be modeled using Trapezoid model [\[55\]](#page-17-28) as follows:
+
+
+    <span id="page-11-2"></span>
+
+    $$e\_{edge} = E(D)(t\_{dr} - t\_{df})f\_{clk} \tag{8}$$
+
+
+    where E(D) is the number of positive (or negative) edges for duty D, tdr is the
+    delay from the half amplitude of the clock signal to that of the MPWM digital
+    output for the rising edge, and tdf is the delay for the falling edge.
+
+
+    For MPWM, the number of edges is
+
+
+    <span id="page-11-3"></span>
+
+    $$E\_{MPWM} = \begin{cases} D, & D \leqslant SN \\ SN, & SN < D \leqslant (2^n
+    - SN) \\ 2^n - D, & D > (2^n - SN) . \end{cases} \tag{9}$$
+
+
+    For PWM, the maximum number of positive edges is 1, thus has the least edge-caused
+    error. For PCM, and FONS, the maximum number of edges is 2 n−1 . When using a
+    counter with 12 bits, there are 2048 edges in most PCM (or FONS) periods, which
+    can cause severe errors.
+
+
+    For MPWM, the maximum number of edges is SN=2 SF , where the SF can be chosen
+    from 1 to 10 for a 12-bit counter, hence MPWM has fewer edges and thus reduces
+    the static error caused by edges proportionally.
+
+
+    *2) Integral nonlinearity (INL):* The integral nonlinearity (INL) of a DAC is
+    the maximum deviation of the actual analog output from the ideal output. The INL
+    for low-cost DAC can be calculated as in [\[56\]](#page-17-29):
+
+
+    $$e\_{INL} = \max\_{D} |\ e\_{edge}(D)\rangle|\tag{10}$$
+
+
+    For MPWM-DAC, the INL is as follows:
+
+
+    $$|e\_{INL}(MPWM)| = |\, 2^{n-1}(t\_dr - t\_df)f\_{clk}| \, | \, SF = 1, \ldots,
+    n-2. \tag{11}$$
+
+
+    For PWM-DAC, PCM-DAC, and FONS-DAC, the INL is as follows:
+
+
+    $$e\_{INL} = \begin{cases} |(t\_d r - t\_d f) f\_{clk}| \, | \, \text{PWM} \\
+    |\, 2^{n-1} (t\_d r - t\_d f) f\_{clk}| \, | \, \text{PCM} \, \& \text{FONS} .
+    \end{cases} \tag{12}$$
+
+
+    Since SF ranges from 1 to n − 1, MPWM can have much better INL performance than
+    PCM-DAC and FONS-DAC.
+
+
+    *3) Differential nonlinearity (DNL):* The Differential nonlinearity(DNL) for DAC
+    is defined as the maximum voltage deviation of the DAC output between two adjacent
+    digital inputs in terms of an ideal output voltage step corresponding to 1 LSB.
+    It is calculated as:
+
+
+    $$\varepsilon\_{DNL} = \frac{\bar{u\_d}(D+1) - \bar{u\_d}(D)}{U\_{LSB}} - 1. \tag{13}$$
+
+
+    Substitude Eq[.8](#page-11-2) and Eq[.9,](#page-11-3) the DNL for MPWM is
+
+
+    $$|e\_{DNL}(MPWM)| = |(t\_dr - t\_df)f\_{clk}|\,. \tag{14}$$
+
+
+    The DNL performance of MPWM is the same as that of PWM-DAC, PCM-DAC, and FONS-DAC.
+    To improve the DNL of MPWM, the output stage needs to be as symmetric as possible,
+    i.e. having the same characteristics for the rising and falling edges, to reduce
+    the | tdr − tdf | item. This symmetry is crucial when the clock frequency is high.
+    Due to its operating principle, MPWM-DAC is monotonic.
+
+
+    <span id="page-12-0"></span>![](_page_12_Figure_0.jpeg)
+
+
+    Fig. 9: Normalized cutoff frequency vs. DAC resolution, using second order Butterworth
+    low pass filter.
+
+
+    <span id="page-12-1"></span>*4) Dynamic Characteristics:* For dynamic characteristics
+    analysis, getting a general analytical computation for the output from MPWM-DAC
+    is quite difficult, therefore, we use numerical computation. The ripple of the
+    output of an MPWM-DAC with second order Butterworth low pass filter is calculated
+    to get normalized cutoff frequency fcT of the filter for different SF in Fig.
+    [9.](#page-12-0) The fcT increases with the increase of SF. For instance, when
+    designing a 12-bit DAC, fcT is 0.01 for PWM-DAC, and for MPWM-DAC it increases
+    to 0.04 and 0.1 when SF equals 3 and 7 respectively. Thus the cutoff frequency
+    is 4 and 10 times that of PWM-DAC, and the settling time is 1/4 and 1/10 of that
+    of PWM-DAC.
+
+
+    ## V. FPGA DESIGN AND RISC-V SOC
+
+
+    ![](_page_12_Figure_4.jpeg)
+
+
+    Fig. 10: MPWM Circuit.
+
+
+    # *A. MPWM circuit design*
+
+
+    The block diagram for an MPWM circuit is shown in Fig[.10,](#page-12-1) where
+    the bit width of the counter is n. For an MPWM wave with SF, the output of the
+    counter is rearranged according to CR={Cn−SF <sup>−</sup>1, Cn−SF <sup>−</sup>2,
+    · · · , C0, Cn−SF , · · · , Cn−2, Cn−1}, where C<sup>0</sup> to Cn−<sup>1</sup>
+    are the output of the counter, and C<sup>R</sup> is the result of rearrangement.
+    The duty target is input from dutyinput, which ranges from 0 to 2 <sup>n</sup>−<sup>1</sup>
+    − 1. Then dutyinput is compared with CR, and MPWM outputs according to Eq. [15.](#page-12-2)
+
+
+    <span id="page-12-2"></span>
+
+    $$MPWM\\_OUT = \begin{cases} 1, \text{ } duty\\_input \ge C\_r\\ 0, \text{ } duty\\_input
+    < C\_r. \end{cases} \tag{15}$$
+
+
+    ## *B. HR-MPWM design in FPGA*
+
+
+    To increase the DAC''s resolution, one can increase the bit width of the counter,
+    but the clock rate needs to be raised simultaneously, or the DAC''s speed will
+    decrease proportionally. In many cases, it is very difficult to raise the clock
+    rate due to the process limit or power consumption. To solve this problem, the
+    circuit to generate a pulse with a resolution better than one clock cycle can
+    be designed. An MPWM with this kind of circuit is named high-resolution MPWM,
+    i.e. HR-MPWM. When implemented in Xilinx FPGA, the HR-MPWM circuit is shown in
+    Fig. [11,](#page-13-0) where IODELAY E1 is the I/O delay element and can allow
+    a fine delay-time t<sup>d</sup> = 1/(32 × 2 × fclkref ). Thus, this circuit can
+    provide an additional 6-bit resolution for MPWM. Considering the HR-MPWM in the
+    final SoC needs only 4 additional bits, the design in FPGA uses a delay tap out
+    of every 4 taps.
+
+
+    <span id="page-13-0"></span>![](_page_13_Figure_0.jpeg)
+
+
+    Fig. 11: Block diagram of HR-MPWM in FPGA.
+
+
+    # *C. SoC Structure with the proposed DAC*
+
+
+    The MPWM-DAC is integrated into a RISC-V SoC for IoT applications. Its position
+    within the SoC level range is shown in Fig. [15,](#page-15-0) where it is located
+    alongside its associated auxiliary modules within the "MPWM-DAC".
+
+
+    Control over the entire system is exerted by an open-source 32-bit RISC-V core.
+    For the support of complex vector operations, commonly required in AI acceleration,
+    a specialized parallel computing core is strategically deployed. Configuration
+    of the proposed MPWM-DAC module is undertaken by the RISC-V core, facilitated
+    through a high-speed bus linking them. The responsibility for managing massive
+    data transportation falls to DMAs. Wireless communication capabilities are introduced
+    via an off-chip Wi-Fi chip, which is connected to a UART port. The system''s memory
+    requirements are addressed with on-chip 128KB instruction SRAM and an equal capacity
+    for data SRAM. Additionally, the External Memory Interface is employed to access
+    further memory, with the capacity to address nearly the entirety of the remaining
+    4GB.
+
+
+    ## <span id="page-13-1"></span>*D. Test in FPGA*
+
+
+    ![](_page_13_Figure_6.jpeg)
+
+
+    Fig. 12: DLL design in the RISC-V SoC.
+
+
+    The prototyping SoC with MPWM-DAC is implemented in an Xilinx ARTIX-7 FPGA (XC7A200TFBG484-3),
+    as shown in Fig. [16.](#page-15-1) The second-order Butterworth filter is connected
+    to the output of the DAC. The INL and DNL for an MPWM-DAC with 10-bit resolution
+    are measured, and compared with PWM-DAC and PCM-DAC as presented in Fig. [13.](#page-14-2)
+
+
+    These results show that MPWM-DAC has improved the INL performance greatly when
+    compared to PCM-DAC, and has a shorter settling time than PWM-DAC in Fig. [14.](#page-14-3)
+    When designing an MPWM-DAC, one can get a higher accurate DAC by choosing a smaller
+    SF or get a faster DAC by selecting a larger SF.
+
+
+    ## *E. RISC-V SOC using MPWM-DAC for THz IoT devices*
+
+
+    In the SoC, the HRMPWM module is a fully customized design, which comprises a
+    typical PWM generator and delay elements calibrated by a DLL. The DLL is applied
+    to get 16 fine phases, refer to Fig. [12.](#page-13-1) After the DLL is locked,
+    vc is generated and applied to the signal path for MPWM, which has the same delay
+    element as in DLL. A multiplexer circuit with the same delay in every branch is
+    employed to get the required phase. The laboratory experiment for the FPGA test
+    is
+
+
+    <span id="page-14-3"></span><span id="page-14-2"></span>![](_page_14_Figure_0.jpeg)
+
+
+    Fig. 14: Setting time performance for MPWM.
+
+
+    illustrated in Fig. [16](#page-15-1) and the layout of the MPWM SoC is shown in
+    Fig. [17.](#page-16-23) It is fabricated (taped out in March 2021) in a 180nm
+    CMOS process with a size of 3.8mm × 4.7mm. The size of HRMPWM is 0.53mm × 0.27mm.
+
+
+    ## VI. CONCLUSION
+
+
+    THz communications are expected to have a crucial impact on the development of
+    wireless systems in the sixth generation (6G). This study provides a comprehensive
+    analysis of THz IoT devices. In addition, the MPWM modulation mechanism, introduced
+    in an MPWM circuit with a n-bit counter, may exhibit (n−1) distinct configurations
+    and waveforms. The MPWM-DAC is developed using the MPWM technology, offering superior
+    conversion speed compared to PWM-DAC, and higher accuracy than the PCM-DAC. By
+    virtue of its versatility, the designer is able to modify their design to suit
+    unique applications, resulting in a superior outcome. An implementation using
+    a delay line has been developed in order to enhance the resolution of MPWM-DAC.
+    The MPWM-DAC is included in a RISC-V SoC and evaluated on an FPGA. The SoC is
+    specifically engineered using a 180nm CMOS fabrication technique.
+
+
+    ## REFERENCES
+
+
+    - <span id="page-14-0"></span>[1] Y. Xu, Z. Liu, C. Huang, and C. Yuen, "Robust
+    resource allocation algorithm for energy-harvesting-based d2d communication underlaying
+    uav-assisted networks," *IEEE Internet of Things Journal*, vol. 8, no. 23, pp.
+    17 161–17 171, 2021.
+
+    - <span id="page-14-1"></span>[2] H. Jang, K. Han, S. Lee, J.-J. Lee, S.-Y. Lee,
+    J.-H. Lee, and W. Lee, "Developing a multicore platform utilizing open risc-v
+    cores," *IEEE Access*, vol. 9, pp. 120 010–120 023, 2021.
+
+
+    <span id="page-15-0"></span>![](_page_15_Figure_0.jpeg)
+
+
+    <span id="page-15-1"></span>Fig. 15: A brief design architecture of the RISC-V
+    SoC for THz IoT devices.
+
+
+    ![](_page_15_Picture_2.jpeg)
+
+
+    Fig. 16: Experimental setup with FPGA.
+
+
+    **ESP8266 Wi-Fi Module**
+
+
+    <span id="page-16-23"></span>![](_page_16_Figure_0.jpeg)
+
+
+    CPU1 Fig. 17: Layout of the RISC-V SoC.
+
+
+    - <span id="page-16-0"></span>[3] H. B. Amor, C. Bernier, and Z. Pˇrikryl, "A
+    risc-v isa extension for ultra-low power iot wireless signal processing," *IEEE
+    Transactions on Computers*, vol. 71, no. 4, pp. 766–778, 2022.
+
+    - <span id="page-16-1"></span>[4] T. Kurner and S. Priebe, "Towards thz communications
+    - status in research, standardization and regulation," ¨ *Journal of Infrared,
+    Millimeter, and Terahertz Waves*, vol. 35, pp. 53–62, 2014. [Online]. Available:<https://api.semanticscholar.org/CorpusID:28353094>
+
+    - <span id="page-16-2"></span>[5] H. Sarieddeen, M.-S. Alouini, and T. Y. Al-Naffouri,
+    "Terahertz-band ultra-massive spatial modulation mimo," *IEEE Journal on Selected
+    Areas in Communications*, vol. 37, no. 9, pp. 2040–2052, 2019.
+
+    - <span id="page-16-3"></span>[6] P. Heydari, "Terahertz integrated circuits and
+    systems for high-speed wireless communications: Challenges and design perspectives,"
+    *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 18–36, 2021.
+
+    - <span id="page-16-4"></span>[7] M. Alibakhshikenari, E. M. Ali, M. Soruri, M.
+    Dalarsson, M. Naser-Moghadasi, B. S. Virdee, C. Stefanovic, A. Pietrenko-Dabrowska,
+    S. Koziel, S. Szczepanski, and E. Limiti, "A comprehensive survey on antennas
+    on-chip based on metamaterial, metasurface, and substrate integrated waveguide
+    principles for millimeter-waves and terahertz integrated circuits and systems,"
+    *IEEE Access*, vol. 10, pp. 3668–3692, 2022.
+
+    - <span id="page-16-5"></span>[8] H. Jalili and O. Momeni, "A 0.34-thz wideband
+    wide-angle 2-d steering phased array in 0.13- µ m sige bicmos," *IEEE Journal
+    of Solid-State Circuits*, vol. 54, no. 9, pp. 2449–2461, 2019.
+
+    - <span id="page-16-6"></span>[9] M. Alibakhshikenari, B. S. Virdee, C. H. See,
+    R. A. Abd-Alhameed, F. Falcone, and E. Limiti, "High-performance 50µm silicon-based
+    on-chip antenna with high port-to-port isolation implemented by metamaterial and
+    siw concepts for thz integrated systems," in *2019 Thirteenth International Congress
+    on Artificial Materials for Novel Wave Phenomena (Metamaterials)*, 2019, pp. X–023–X–025.
+
+    - <span id="page-16-7"></span>[10] X. Yi, C. Wang, X. Chen, J. Wang, J. Grajal,
+    and R. Han, "A 220-to-320-ghz fmcw radar in 65-nm cmos using a frequency-comb
+    architecture," *IEEE Journal of Solid-State Circuits*, vol. 56, no. 2, pp. 327–339,
+    2021.
+
+    - <span id="page-16-8"></span>[11] H. Jalili and O. Momeni, "A 0.46-thz 25-element
+    scalable and wideband radiator array with optimized lens integration in 65-nm
+    cmos," *IEEE Journal of Solid-State Circuits*, vol. 55, no. 9, pp. 2387–2400,
+    2020.
+
+    - <span id="page-16-9"></span>[12] C.-H. Li and T.-Y. Chiu, "340-ghz low-cost
+    and high-gain on-chip higher order mode dielectric resonator antenna for thz applications,"
+    *IEEE Transactions on Terahertz Science and Technology*, vol. 7, no. 3, pp. 284–294,
+    2017.
+
+    - <span id="page-16-10"></span>[13] K. Schmalz, R. Wang, J. Borngraber, W. Debski,
+    W. Winkler, and C. Meliani, "245 ghz sige transmitter with integrated antenna
+    and external pll," in ¨ *2013 IEEE MTT-S International Microwave Symposium Digest
+    (MTT)*, 2013, pp. 1–3.
+
+    - <span id="page-16-11"></span>[14] W. T. Khan, A. C¸ agrı Ulusoy, G. Dufour,
+    M. Kaynak, B. Tillack, J. D. Cressler, and J. Papapolymerou, "A d-band micromachined
+    end-fire antenna in ˘ 130-nm sige bicmos technology," *IEEE Transactions on Antennas
+    and Propagation*, vol. 63, no. 6, pp. 2449–2459, 2015.
+
+    - <span id="page-16-12"></span>[15] I. Sarkas, J. Hasch, A. Balteanu, and S. P.
+    Voinigescu, "A fundamental frequency 120-ghz sige bicmos distance sensor with
+    integrated antenna," *IEEE Transactions on Microwave Theory and Techniques*, vol.
+    60, no. 3, pp. 795–812, 2012.
+
+    - <span id="page-16-13"></span>[16] Y. Tousi and E. Afshari, "A high-power and
+    scalable 2-d phased array for terahertz cmos integrated systems," *IEEE Journal
+    of Solid-State Circuits*, vol. 50, no. 2, pp. 597–609, 2015.
+
+    - <span id="page-16-14"></span>[17] M. Alibakhshikenari, B. S. Virdee, C. H. See,
+    R. Abd-Alhameed, F. Falcone, and E. Limiti, "A novel 0.3-0.31 thz gaas-based transceiver
+    with on-chip slotted metamaterial antenna based on siw technology," in *2019 IEEE
+    Asia-Pacific Microwave Conference (APMC)*, 2019, pp. 69–71.
+
+    - <span id="page-16-15"></span>[18] M. H. Maktoomi, S. Saadat, O. Momeni, P. Heydari,
+    and H. Aghasi, "Broadband antenna design for terahertz communication systems,"
+    *IEEE Access*, vol. 11, pp. 20 897–20 911, 2023.
+
+    - <span id="page-16-16"></span>[19] H. J. Ng and D. Kissinger, "Highly miniaturized
+    120-ghz simo and mimo radar sensor with on-chip folded dipole antennas for range
+    and angular measurements," *IEEE Transactions on Microwave Theory and Techniques*,
+    vol. 66, no. 6, pp. 2592–2603, 2018.
+
+    - <span id="page-16-17"></span>[20] J. M. Edwards and G. M. Rebeiz, "High-efficiency
+    elliptical slot antennas with quartz superstrates for silicon rfics," *IEEE Transactions
+    on Antennas and Propagation*, vol. 60, no. 11, pp. 5010–5020, 2012.
+
+    - <span id="page-16-18"></span>[21] M. Saad Khan, F. A. Tahir, A. Meredov, A.
+    Shamim, and H. M. Cheema, "A w-band ebg-backed double-rhomboid bowtie-slot on-chip
+    antenna," *IEEE Antennas and Wireless Propagation Letters*, vol. 18, no. 5, pp.
+    1046–1050, 2019.
+
+    - <span id="page-16-19"></span>[22] M. Frank, F. Lurz, R. Weigel, and A. Koelpin,
+    "122 ghz low-cost substrate integrated waveguide based leaky-wave antenna design,"
+    in *2019 IEEE Radio and Wireless Symposium (RWS)*, 2019, pp. 1–4.
+
+    - <span id="page-16-20"></span>[23] H. H. Bae, T. H. Jang, H. Y. Kim, and C. S.
+    Park, "Broadband 120 ghz l-probe differential feed dual-polarized patch antenna
+    with soft surface," *IEEE Transactions on Antennas and Propagation*, vol. 69,
+    no. 10, pp. 6185–6195, 2021.
+
+    - <span id="page-16-21"></span>[24] A. Simsek, A. S. H. Ahmed, A. A. Farid, U.
+    Soylu, and M. J. W. Rodwell, "A 140ghz two-channel cmos transmitter using low-cost
+    packaging technologies," in *2020 IEEE Wireless Communications and Networking
+    Conference Workshops (WCNCW)*, 2020, pp. 1–3.
+
+    - <span id="page-16-22"></span>[25] A. Simsek, S.-K. Kim, M. Abdelghany, A. S.
+    H. Ahmed, A. A. Farid, U. Madhow, and M. J. W. Rodwell, "A 146.7 ghz transceiver
+    with 5 gbaud data transmission using a low-cost series-fed patch antenna array
+    through wirebonding integration," in *2020 IEEE Radio and Wireless Symposium (RWS)*,
+    2020, pp. 68–71.
+
+    - <span id="page-17-0"></span>[26] R. Han and E. Afshari, "A cmos high-power broadband
+    260-ghz radiator array for spectroscopy," *IEEE Journal of Solid-State Circuits*,
+    vol. 48, no. 12, pp. 3090–3104, 2013.
+
+    - <span id="page-17-1"></span>[27] Y. Yang, O. D. Gurbuz, and G. M. Rebeiz, "An
+    eight-element 370–410-ghz phased-array transmitter in 45-nm cmos soi with peak
+    eirp of 8–8.5 dbm," *IEEE Transactions on Microwave Theory and Techniques*, vol.
+    64, no. 12, pp. 4241–4249, 2016.
+
+    - <span id="page-17-2"></span>[28] H. Saeidi, S. Venkatesh, C. R. Chappidi, T.
+    Sharma, C. Zhu, and K. Sengupta, "29.9 a 4×4 distributed multi-layer oscillator
+    network for harmonic injection and thz beamforming with 14dbm eirp at 416ghz in
+    a lensless 65nm cmos ic," in *2020 IEEE International Solid-State Circuits Conference
+    - (ISSCC)*, 2020, pp. 256–258.
+
+    - <span id="page-17-3"></span>[29] P. Herrero and J. Schoebel, "Microstrip patch
+    array antenna technology for 122 ghz ism sensing applications," in *2009 German
+    Microwave Conference*, 2009, pp. 1–4.
+
+    - <span id="page-17-4"></span>[30] S. Shahramian, M. Holyoak, A. Singh, B. J.
+    Farahani, and Y. Baeyens, "A fully integrated scalable w-band phased-array module
+    with integrated antennas, self-alignment and self-test," in *2018 IEEE International
+    Solid-State Circuits Conference-(ISSCC)*. IEEE, 2018, pp. 74–76.
+
+    - <span id="page-17-5"></span>[31] E. Naviasky, L. Iotti, G. LaCaille, B. Nikolic,
+    E. Alon, and A. M. Niknejad, "A 71-to-86-ghz 16-element by 16-beam multi-user
+    beamforming integrated ´ receiver sub-array for massive mimo," *IEEE Journal of
+    Solid-State Circuits*, vol. 56, no. 12, pp. 3811–3826, 2021.
+
+    - <span id="page-17-6"></span>[32] M. Alibakhshikenari, B. S. Virdee, C. H. See,
+    R. A. Abd-Alhameed, F. Falcone, and E. Limiti, "Silicon-based 0.450-0.475 thz
+    series-fed double dielectric resonator on-chip antenna array based on metamaterial
+    properties for integrated-circuits," in *2019 Thirteenth International Congress
+    on Artificial Materials for Novel Wave Phenomena (Metamaterials)*, 2019, pp. X–026–X–028.
+
+    - <span id="page-17-7"></span>[33] M. Alibakhshikenari, B. S. Virdee, C. H. See,
+    R. A. Abd-Alhameed, and E. Limiti, "High performance on-chip array antenna based
+    on metasurface feeding structure for terahertz integrated circuits," in *2019
+    44th International Conference on Infrared, Millimeter, and Terahertz Waves (IRMMW-THz)*,
+    2019, pp. 1–2.
+
+    - <span id="page-17-8"></span>[34] R. Beica, "Flip chip market and technology
+    trends," in *2013 Eurpoean Microelectronics Packaging Conference (EMPC)*. IEEE,
+    2013, pp. 1–4.
+
+    - <span id="page-17-9"></span>[35] W. Shin, B.-H. Ku, O. Inac, Y.-C. Ou, and G.
+    M. Rebeiz, "A 108–114 ghz 4 × 4 wafer-scale phased array transmitter with high-efficiency
+    on-chip antennas," *IEEE Journal of Solid-State Circuits*, vol. 48, no. 9, pp.
+    2041–2055, 2013.
+
+    - <span id="page-17-10"></span>[36] B. Yang, Z. Yu, J. Lan, R. Zhang, J. Zhou,
+    and W. Hong, "Digital beamforming-based massive mimo transceiver for 5g millimeter-wave
+    communications," *IEEE Transactions on Microwave Theory and Techniques*, vol.
+    66, no. 7, pp. 3403–3418, 2018.
+
+    - <span id="page-17-11"></span>[37] S. Mondal, R. Singh, A. I. Hussein, and J.
+    Paramesh, "A 25–30 ghz fully-connected hybrid beamforming receiver for mimo communication,"
+    *IEEE Journal of Solid-State Circuits*, vol. 53, no. 5, pp. 1275–1287, 2018.
+
+    - <span id="page-17-12"></span>[38] A. Natarajan, A. Komijani, X. Guan, A. Babakhani,
+    and A. Hajimiri, "A 77-ghz phased-array transceiver with on-chip antennas in silicon:
+    Transmitter and local lo-path phase shifting," *IEEE Journal of Solid-State Circuits*,
+    vol. 41, no. 12, pp. 2807–2819, 2006.
+
+    - <span id="page-17-13"></span>[39] B. Sadhu, Y. Tousi, J. Hallin, S. Sahl, S.
+    K. Reynolds, O. Renstrom, K. Sjogren, O. Haapalahti, N. Mazor, B. Bokinge, G.
+    Weibull, H. Bengtsson, A. Carlinger, E. Westesson, J.-E. Thillberg, L. Rexberg,
+    M. Yeck, X. Gu, M. Ferriss, D. Liu, D. Friedman, and A. Valdes-Garcia, "A 28-ghz
+    32-element trx phased-array ic with concurrent dual-polarized operation and orthogonal
+    phase and gain control for 5g communications," *IEEE Journal of Solid-State Circuits*,
+    vol. 52, no. 12, pp. 3373–3391, 2017.
+
+    - <span id="page-17-14"></span>[40] T. T. Cai and L. Wang, "Orthogonal matching
+    pursuit for sparse signal recovery with noise," *IEEE Transactions on Information
+    Theory*, vol. 57, no. 7, pp. 4680–4688, 2011.
+
+    - <span id="page-17-15"></span>[41] X. Yu, J.-C. Shen, J. Zhang, and K. B. Letaief,
+    "Alternating minimization algorithms for hybrid precoding in millimeter wave mimo
+    systems," *IEEE Journal of Selected Topics in Signal Processing*, vol. 10, no.
+    3, pp. 485–500, 2016.
+
+    - <span id="page-17-16"></span>[42] Y.-Y. Lee, C.-H. Wang, and Y.-H. Huang, "A
+    hybrid rf/baseband precoding processor based on parallel-index-selection matrix-inversion-bypass
+    simultaneous orthogonal matching pursuit for millimeter wave mimo systems," *IEEE
+    Transactions on Signal Processing*, vol. 63, no. 2, pp. 305–317, 2015.
+
+    - <span id="page-17-17"></span>[43] C.-K. Ho, H.-Y. Cheng, and Y.-H. Huang, "Hybrid
+    precoding processor for millimeter wave mimo communications," *IEEE Transactions
+    on Circuits and Systems II: Express Briefs*, vol. 66, no. 12, pp. 1992–1996, 2019.
+
+    - <span id="page-17-18"></span>[44] W.-L. Hung, C.-H. Chen, C.-C. Liao, C.-R.
+    Tsai, and A.-Y. A. Wu, "Low-complexity hybrid precoding algorithm based on orthogonal
+    beamforming codebook," in *2015 IEEE Workshop on Signal Processing Systems (SiPS)*,
+    2015, pp. 1–5.
+
+    - <span id="page-17-19"></span>[45] K.-T. Chen, Y.-T. Hwang, and Y.-C. Liao, "Vlsi
+    design of a high throughput hybrid precoding processor for wireless mimo systems,"
+    *IEEE Access*, vol. 7, pp. 85 925–85 936, 2019.
+
+    - <span id="page-17-20"></span>[46] J. Brady, N. Behdad, and A. M. Sayeed, "Beamspace
+    mimo for millimeter-wave communications: System architecture, modeling, analysis,
+    and measurements," *IEEE Transactions on Antennas and Propagation*, vol. 61, no.
+    7, pp. 3814–3827, 2013.
+
+    - <span id="page-17-21"></span>[47] C.-H. Chen, C.-R. Tsai, Y.-H. Liu, W.-L. Hung,
+    and A.-Y. Wu, "Compressive sensing (cs) assisted low-complexity beamspace hybrid
+    precoding for millimeter-wave mimo systems," *IEEE Transactions on Signal Processing*,
+    vol. 65, no. 6, pp. 1412–1424, 2017.
+
+    - <span id="page-17-22"></span>[48] E. Gon¨ ultas¸, S. Taner, A. Gallyas-Sanhueza,
+    S. H. Mirfarshbafan, and C. Studer, "Hardware-aware beamspace precoding for all-digital
+    mmwave massive ¨ mu-mimo," *IEEE Communications Letters*, vol. 25, no. 11, pp.
+    3709–3713, 2021.
+
+    - <span id="page-17-23"></span>[49] D. F. Hoeschele, "Analog-to-digital and digital-to-analog
+    conversion techniques," pp. 397–397, 1994.
+
+    - <span id="page-17-24"></span>[50] D. S. The Engineering Staff of Analog Devices,
+    "Analog-digital conversion handbook," 1986.
+
+    - <span id="page-17-25"></span>[51] I. Corp., "Using a pwm as a digital-to-analog
+    converter," *AN035701-0915*.
+
+    - [52] F. Zhou and W. Xiong, "Using pwm output as a digital-to-analog converter
+    on dsp," in *2010 International Conference on System Science, Engineering Design
+    and Manufacturing Informatization*, vol. 2. IEEE, 2010, pp. 278–281.
+
+    - <span id="page-17-26"></span>[53] T. Instruments, "Using pwm output as a digital-to-analog
+    converter on a tms320c240 dsp," *APPLICATION REPORT: SPRA490*, November 1998.
+
+    - <span id="page-17-27"></span>[54] e. a. Halper, "Digital-to-analog conversion
+    by pulse-count modulation methods," *IEEE Transactions on Instrumentation and
+    Measurement*, 1996.
+
+    - <span id="page-17-28"></span>[55] B.-B. Corp., *Integrated Circuits Data Book
+    Holland*, 1986.
+
+    - <span id="page-17-29"></span>[56] H. Zander, *Datenwundler: AD/LlA-Wandler;
+    Schnittstellen der digitalen Signulverarbeitung*. Frankfurter Fachverlag, 1985.'
+  decisions:
+    evaluation_prompt: 'Qualified. Reason: The paper contains multiple sections that
+      discuss evaluation, including performance metrics and comparisons. Specifically,
+      it includes a section on the "Performance of MPWM-DACs" with detailed analysis
+      of static error, integral nonlinearity, differential nonlinearity, and dynamic
+      characteristics. Additionally, there are tables and figures summarizing the
+      state-of-the-art THz antennas and their performance, as well as FPGA testing
+      results for MPWM-DACs.'
+    related_work_prompt: '- Qualified. Reason: The paper meaningfully engages with
+      prior research, as evidenced by numerous academic citations throughout the text.
+      It discusses and compares its methods to previous work, particularly in the
+      sections on THz multi-antenna transceivers and MPWM-DACs. The paper also includes
+      a comprehensive examination of related work in the introduction and other sections,
+      demonstrating a thorough engagement with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel modulation technique
+      called Modified PWM (MPWM) for DACs, which is claimed to provide enhanced versatility
+      for DAC designers and is specifically tailored for THz IoT applications. The
+      paper also presents the design of an MPWM-DAC and RISC-V SoC, which are new
+      contributions to the field. Additionally, the paper makes clear claims of contribution,
+      such as "We present a comprehensive overview" and "By implementing a novel modulation
+      technique called Modified PWM (MPWM).'
+    review_only_prompt: 'Qualified. Reason: The paper introduces new contributions,
+      such as the novel modulation technique called Modified PWM (MPWM) and the design
+      of an MPWM-DAC and RISC-V SoC specifically tailored for THz IoT applications.
+      It goes beyond merely summarizing existing work by presenting original research
+      and developments.'
+  topics:
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses the design and implementation of a RISC-V
+      System-on-Chip (SoC) that integrates advanced digital-to-analog converter technology,
+      which is directly related to computer architecture in terms of hardware design
+      and optimization.
+    secondary_topic: Databases
+    secondary_topic_reasoning: Although not the primary focus, the paper may touch
+      upon data handling and storage solutions related to the THz IoT devices and
+      communications, which could involve database considerations.
+    main_topic_sub: IoT, mobile, and embedded architecture
+    secondary_topic_sub: Embedded databases, IoT and Sensor networks
