@@ -1,0 +1,365 @@
+Results:
+  '**Constable: Improving Performance and Power Efficiency by Safely Eliminating Load Instruction Execution**':
+    cost: 0.00019109999999999998
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on improving performance and power efficiency
+      by modifying the execution of load instructions, which directly relates to how
+      computer systems are designed and optimized.
+    main_topic_sub: Microarchitectural, architectural, compiler, and hybrid techniques
+      for improving system performance, power, energy-efficiency, security, cost,
+      complexity, programmer productivity, predictability, quality of service, reliability,
+      dependability, scalability, or sustainability
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.9417812824249268
+    tokens: 965
+  '*Mirage*: An RNS-Based Photonic Accelerator for DNN Training':
+    cost: 0.0003
+    main_topic: High-performance Computing
+    main_topic_reasoning: The paper discusses an RNS-Based Photonic Accelerator, which
+      is a hardware design aimed at improving the speed and efficiency of deep neural
+      network (DNN) training. This aligns closely with high-performance computing,
+      as it focuses on systems designed for intensive calculations and processing,
+      a core aspect of high-performance computing technology.
+    main_topic_sub: HPC for AI and Machine Learning
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper specifically addresses the training of deep
+      neural networks (DNNs), which falls under the domain of machine learning. However,
+      the primary focus on the accelerator itself signifies that high-performance
+      computing is the better fit for the main topic.
+    secondary_topic_sub: Deep Learning
+    time: 2.9454143047332764
+    tokens: 1541
+  ? 'A SAT Scalpel for Lattice Surgery: Representation and Synthesis of Subroutines
+    for Surface-Code Fault-Tolerant Quantum Computing'
+  : cost: 0.00013979999999999998
+    main_topic: Quantum Computing
+    main_topic_reasoning: The paper focuses on surface-code fault-tolerant quantum
+      computing, which is a key subject within the field of quantum computing, emphasizing
+      the application of error correction techniques like lattice surgery.
+    main_topic_sub: Other
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.320542097091675
+    tokens: 740
+  'A Tale of Two Domains: Exploring Efficient Architecture Design for Truly Autonomous Things':
+    cost: 0.00029235
+    main_topic: Embedded & Real-time Systems
+    main_topic_reasoning: The paper focuses on architecture design for autonomous
+      embedded systems, which are specialized computing systems designed for specific
+      control tasks within large-scale systems, fitting into the field of embedded
+      systems that require real-time performance and efficient resource utilization,
+      particularly in edge artificial intelligence applications.
+    main_topic_sub: Edge Computing and Edge AI
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper also discusses deep learning processes as
+      part of the architecture for autonomous systems, indicating an intersection
+      with machine learning methodologies, especially in the context of designing
+      systems that can learn and adapt to their environments.
+    secondary_topic_sub: Deep Learning
+    time: 4.302495956420898
+    tokens: 1547
+  'AVM-BTB: Adaptive and Virtualized Multi-level Branch Target Buffer':
+    cost: 0.00029009999999999995
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a specific aspect of computer architecture
+      related to branch target buffers (BTB), which are crucial components in CPU
+      design for optimizing instruction fetching.
+    main_topic_sub: Prediction and Speculation
+    secondary_topic: Software Engineering
+    secondary_topic_reasoning: Adaptive and virtualized approaches in managing BTB
+      can significantly affect software performance and necessitate considerations
+      in software design and engineering, although the primary focus remains on the
+      architectural level.
+    secondary_topic_sub: Compiler Construction and Optimization
+    time: 4.438844442367554
+    tokens: 1616
+  'Atomique: A Quantum Compiler for Reconfigurable Neutral Atom Arrays':
+    cost: 0.00029909999999999995
+    main_topic: Quantum Computing
+    main_topic_reasoning: The paper focuses on a quantum compiler specifically designed
+      for reconfigurable neutral atom arrays, which is a core aspect of quantum computing.
+    main_topic_sub: Other
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.1901681423187256
+    tokens: 1832
+  'Bosehedral: Compiler Optimization for Bosonic Quantum Computing':
+    cost: 0.00024494999999999996
+    main_topic: Computer Science Education
+    main_topic_reasoning: The paper focuses on compiler optimization within the context
+      of bosonic quantum computing, which is a specialized area that can contribute
+      significantly to the education and training in advanced computing techniques.
+      It emphasizes the development and application of algorithms, which are fundamental
+      concepts in computer science education.
+    main_topic_sub: Other
+    secondary_topic: Other
+    secondary_topic_reasoning: While the primary focus on compiler optimization is
+      a niche topic, it could also fit within broader categories such as 'Other',
+      as it deals with a specialized form of quantum computing that might not be thoroughly
+      covered by the other topics listed.
+    secondary_topic_sub: ''
+    time: 2.636489152908325
+    tokens: 1249
+  'DS-GL: Advancing Graph Learning via Harnessing Nature''s Power within Scalable Dynamical Systems':
+    cost: 0.0002562
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper discusses advancements in graph learning, which
+      is a subfield of machine learning concerned with learning patterns and representations
+      from graph-structured data. The keywords suggest a focus on how machine learning
+      techniques can be enhanced by leveraging dynamical systems and nature-inspired
+      methods.
+    main_topic_sub: General Machine Learning
+    secondary_topic: Natural Language Processing
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: Machine Learning for NLP
+    time: 2.5421464443206787
+    tokens: 1426
+  Determining the Minimum Number of Virtual Networks for Different Coherence Protocols:
+    cost: 0.00017114999999999999
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper focuses on determining the minimum number of virtual
+      networks (VNs) for different coherence protocols, which is a topic inherently
+      related to the design and optimization of network architectures and communication
+      protocols.
+    main_topic_sub: Approaches and techniques
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.380361318588257
+    tokens: 934
+  'FEATHER: A Reconfigurable Accelerator with Data Reordering Support for Low-Cost On-Chip Dataflow Switching':
+    cost: 0.00033570000000000003
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a reconfigurable accelerator, which
+      is a key aspect of computer architecture, focusing on the hardware design and
+      efficiency of processing data flows.
+    main_topic_sub: Accelerator-based, application-specific, and reconfigurable architectures
+    secondary_topic: Design Automation
+    secondary_topic_reasoning: The implementation of the accelerator may involve design
+      processes relevant to automation, particularly in evaluating the layout and
+      performance of the architecture.
+    secondary_topic_sub: SoC, Heterogeneous, and Reconfigurable Architectures
+    time: 3.876049280166626
+    tokens: 1899
+  'GhOST: a GPU Out-of-Order Scheduling Technique for Stall Reduction':
+    cost: 0.00025425
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on an out-of-order scheduling technique
+      specifically designed for GPUs, which falls under the domain of computer architecture,
+      as it addresses the underlying hardware's execution model.
+    main_topic_sub: Microarchitectural, architectural, compiler, and hybrid techniques
+      for improving system performance, power, energy-efficiency, security, cost,
+      complexity, programmer productivity, predictability, quality of service, reliability,
+      dependability, scalability, or sustainability
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.1018011569976807
+    tokens: 1371
+  'HiFi-DRAM: Enabling High-fidelity DRAM Research by Uncovering Sense Amplifiers with IC Imaging':
+    cost: 0.0001893
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on enabling high-fidelity DRAM research,
+      which involves the architectural aspects of dynamic random-access memory (DRAM)
+      and its associated components like sense amplifiers. This topic is a critical
+      area within computer architecture due to the implications it has on memory performance
+      and system design.
+    main_topic_sub: In-memory or near-storage processing
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 3.19665265083313
+    tokens: 992
+  'Mind the Gap: Attainable Data Movement and Operational Intensity Bounds for Tensor Algorithms':
+    cost: 0.00019035
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses data movement and operational intensity
+      bounds for tensor algorithms, which are key considerations in computer architecture
+      design, especially for optimizing performance in hardware designed for machine
+      learning and similar applications.
+    main_topic_sub: Architectures for emerging technologies and applications
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 1.719144582748413
+    tokens: 1059
+  'NDSEARCH: Accelerating Graph-Traversal-Based Approximate Nearest Neighbor Search through Near Data Processing':
+    cost: 0.00030285
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses Near Data Processing (NDP) which is
+      a method of optimizing data processing by performing computations closer to
+      where the data is stored, often involving hardware-level considerations typical
+      in computer architecture.
+    main_topic_sub: In-memory or near-storage processing
+    secondary_topic: Algorithms & Complexity
+    secondary_topic_reasoning: The paper also focuses on Approximate Nearest Neighbor
+      Search, which involves algorithms for efficiently finding nearest neighbors
+      in datasets, linking it to complexity considerations in the context of graph
+      traversal.
+    secondary_topic_sub: Approximation Algorithms
+    time: 2.1360538005828857
+    tokens: 1665
+  'PID-Comm: A Fast and Flexible Collective Communication Framework for Commodity Processing-in-DIMM Devices':
+    cost: 0.00034395
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a framework for collective communication
+      specifically designed for processing-in-memory devices, which falls under the
+      domain of computer architecture as it involves the hardware organization and
+      design of memory and processing capabilities.
+    main_topic_sub: In-memory or near-storage processing
+    secondary_topic: High-performance Computing
+    secondary_topic_reasoning: The framework is aimed at improving collective communication
+      performance, which is a key component of high-performance computing systems,
+      especially in the context of accelerated processing.
+    secondary_topic_sub: High-Performance Interconnects and Networks
+    time: 3.5009396076202393
+    tokens: 1945
+  'PreSto: An In-Storage Data Preprocessing System for Training Recommendation Models':
+    cost: 0.00027075
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper focuses on developing a data preprocessing system
+      specifically for training recommendation models, which falls under the domain
+      of machine learning techniques used for predictive modeling and data analysis.
+    main_topic_sub: Applications
+    secondary_topic: Computer Architecture
+    secondary_topic_reasoning: The use of computational storage devices and the concept
+      of near data processing indicate an intersection with computer architecture,
+      as these technologies impact how data is stored and processed to improve performance
+      in machine learning applications.
+    secondary_topic_sub: In-memory or near-storage processing
+    time: 2.321202278137207
+    tokens: 1472
+  'QuTracer: Mitigating Quantum Gate and Measurement Errors by Tracing Subsets of Qubits':
+    cost: 0.0001581
+    main_topic: Quantum Computing
+    main_topic_reasoning: The paper discusses mitigating quantum gate and measurement
+      errors, which is a central issue in quantum computing. Although this specific
+      topic is not listed, it falls under an emerging area related to computer science
+      focused on quantum information and computation.
+    main_topic_sub: Other
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.0844969749450684
+    tokens: 838
+  'ReAIM: A ReRAM-based Adaptive Ising Machine for Solving Combinatorial Optimization Problems':
+    cost: 0.0002829
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a ReRAM-based adaptive Ising machine,
+      which is fundamentally related to the design and implementation of computer
+      architecture, specifically in the context of hardware utilized for optimization
+      problems.
+    main_topic_sub: Architectures for emerging technologies and applications
+    secondary_topic: Algorithms & Complexity
+    secondary_topic_reasoning: The primary focus of the paper is to solve combinatorial
+      optimization problems, which involves algorithmic strategies and complexity
+      considerations.
+    secondary_topic_sub: Combinatorial Optimization
+    time: 4.937196493148804
+    tokens: 1571
+  'Splitwise: Efficient Generative LLM Inference Using Phase Splitting':
+    cost: 0.0003123
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper focuses on the inference of large language models
+      (LLMs), which is a key area within the machine learning domain. LLMs are typically
+      trained using various machine learning techniques, and their serving requires
+      efficient algorithms for real-time processing.
+    main_topic_sub: Applications
+    secondary_topic: Natural Language Processing
+    secondary_topic_reasoning: Given that LLMs are specifically designed for tasks
+      involving human language understanding and generation, this paper also fits
+      into the natural language processing category.
+    secondary_topic_sub: Language Modeling
+    time: 4.357139825820923
+    tokens: 1740
+  Suppressing Correlated Noise in Quantum Computers via Context-Aware Compiling:
+    cost: 0.0002919
+    main_topic: Computer Security
+    main_topic_reasoning: The paper focuses on suppressing correlated noise in quantum
+      computers, which involves error suppression techniques that are crucial for
+      maintaining the integrity and security of quantum information. This relates
+      closely to the area of Computer Security, as securing quantum systems against
+      errors and noise is essential for their reliable operation.
+    main_topic_sub: Other
+    secondary_topic: Algorithms & Complexity
+    secondary_topic_reasoning: The methods described, such as dynamical decoupling
+      and error compensation, may involve specific algorithmic strategies and complexity
+      considerations typical of the Algorithms & Complexity category, especially in
+      the context of quantum computing.
+    secondary_topic_sub: Quantum Algorithms
+    time: 3.7110986709594727
+    tokens: 1547
+  'Tetris: A Compilation Framework for VQA Applications in Quantum Computing':
+    cost: 0.00031365
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a compiler framework specifically designed
+      for quantum computing applications, which falls under the design and performance
+      aspects of computer architecture as it relates to how quantum circuits are constructed
+      and optimized.
+    main_topic_sub: Quantum computing
+    secondary_topic: Computer Security
+    secondary_topic_reasoning: The evaluation of circuit fidelity and comparisons
+      in a quantum context may imply considerations related to security aspects of
+      quantum computing, although this is less central than the architectural focus.
+    secondary_topic_sub: Other
+    time: 3.035627841949463
+    tokens: 1776
+  The Case For Data Centre Hyperloops:
+    cost: 0.00015059999999999997
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper discusses hyperloops in the context of data centers,
+      which involves the infrastructure and technological frameworks that facilitate
+      data communication and transfer. Hyperloops can significantly impact the efficiency
+      and speed of data transfer between data centers, thus strongly relating to computer
+      networks.
+    main_topic_sub: Networks and networked systems
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 2.7921931743621826
+    tokens: 761
+  'The Maya Cache: A Storage-efficient and Secure Fully-associative Last-level Cache':
+    cost: 0.00029025
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper discusses a specific type of cache architecture,
+      focusing on a storage-efficient and secure fully-associative last-level cache,
+      which is a core topic in computer architecture.
+    main_topic_sub: Memory Hierarchy
+    secondary_topic: Computer Security
+    secondary_topic_reasoning: The security aspect of the cache design is highlighted
+      as an important feature, indicating that the paper also addresses concerns related
+      to secure computing environments.
+    secondary_topic_sub: Hardware, Side Channels, and Cyber Physical Systems
+    time: 3.1141724586486816
+    tokens: 1614
+  Waferscale Network Switches:
+    cost: 0.0001461
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper discusses waferscale network switches, which are
+      integral to the architecture and function of networking systems. This indicates
+      a focus on how network components can be designed and implemented, aligning
+      with the topics of computer networks.
+    main_topic_sub: Networks and networked systems
+    secondary_topic: ''
+    secondary_topic_reasoning: ''
+    secondary_topic_sub: ''
+    time: 1.7233171463012695
+    tokens: 749
+  'pSyncPIM: Partially Synchronous Execution of Sparse Matrix Operations for All-Bank PIM Architectures':
+    cost: 0.00029685
+    main_topic: Computer Architecture
+    main_topic_reasoning: The paper focuses on the processing-in-memory (PIM) architectures
+      and discusses the execution of sparse matrix operations, which are fundamentally
+      related to computer architecture design and optimizations.
+    main_topic_sub: In-memory or near-storage processing
+    secondary_topic: High-performance Computing
+    secondary_topic_reasoning: The optimization of sparse matrix operations and the
+      mention of memory bandwidth relates this paper to high-performance computing,
+      as it addresses performance enhancements for computation-heavy tasks.
+    secondary_topic_sub: Memory and Storage Systems for HPC
+    time: 2.7595791816711426
+    tokens: 1646

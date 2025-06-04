@@ -1,0 +1,363 @@
+Results:
+  ? "A Hierarchical Optimization Framework Using Deep Reinforcement Learning\n  for\
+    \ Task-Driven Bandwidth Allocation in 5G Teleoperation"
+  : cost: 0.00341105
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper's primary focus is on optimizing resource allocation
+      in 5G networks to support specific applications, such as teleoperation tasks.
+      The study's framework extensively utilizes network slicing and tackles challenges
+      related to the management of different types of network traffic, specifically
+      eMBB and URLLC queues. These are core issues within the realm of Computer Networks.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper employs Deep Reinforcement Learning (DRL)
+      as a key methodological approach in its hierarchical optimization framework.
+      The integration of DRL techniques for optimizing network resource allocation
+      and control optimization suggests a significant application of machine learning
+      principles, justifying Machine Learning as the secondary topic.
+    secondary_topic_sub: Optimization
+    time: 4.210011959075928
+    tokens: 2527
+  A Novel Compound AI Model for 6G Networks in 3D Continuum:
+    cost: 0.0029255500000000003
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: "The paper primarily focuses on leveraging Compound AI systems\
+      \ to manage 6G networks within a 3D continuum. It discusses the use of artificial\
+      \ intelligence in the context of network management, highlighting the novel\
+      \ tripartite framework that breaks down tasks into interoperable modules\u2014\
+      reflecting an AI-driven approach."
+    main_topic_sub: Multidisciplinary Topics and Applications
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The paper addresses issues specifically related to
+      6G networks within the 3D continuum. It focuses on network management challenges
+      like cross-domain resource orchestration and maintaining AI service quality
+      across varied environments, positioning it under the domain of computer networks.
+    secondary_topic_sub: Networks and networked systems
+    time: 3.404832363128662
+    tokens: 2159
+  Characterization of Using Hybrid Beamforming in mmWave Virtual Reality:
+    cost: 0.00355265
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper's focus is on optimizing resource management in
+      wireless virtual reality systems, using technologies such as mmWave and IEEE
+      802.11ay, which clearly aligns with Computer Networks. It discusses protocols,
+      standards, and network characteristics specific to wireless LANs, emphasizing
+      the transmission and optimization of data over network infrastructures.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Mobile Computing
+    secondary_topic_reasoning: The paper also touches on aspects relevant to Mobile
+      Computing, as it discusses wireless VR systems that would typically be used
+      on mobile and portable devices, highlighting considerations like transmission
+      delay, processing delay, and QoS, which are significant in mobile and wireless
+      contexts.
+    secondary_topic_sub: Mobile Augmented and Virtual Reality (AR/VR)
+    time: 3.0805246829986572
+    tokens: 2910
+  Decoupling the Device and Identity in Cellular Networks with vSIM:
+    cost: 0.0032624999999999998
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper primarily discusses cellular network infrastructure
+      and the evolution of SIM technology, which directly relates to how devices connect
+      and authenticate themselves within a network. The central theme of decoupling
+      identity from devices to enhance privacy and flexibility is deeply embedded
+      in the domain of Computer Networks, as it involves network authentication and
+      management of connectivity.
+    main_topic_sub: Networks and networked systems
+    secondary_topic: Computer Security
+    secondary_topic_reasoning: The secondary aspect of the paper revolves around privacy
+      and security implications with respect to identity management. By focusing on
+      how identities can be rotated or separated from specific hardware, the paper
+      addresses key security concerns associated with user privacy and identity management
+      in cellular networks.
+    secondary_topic_sub: Privacy and Anonymity
+    time: 3.394263982772827
+    tokens: 2482
+  'Distributed Federated Learning for Vehicular Network Security: Anomaly Detection Benefits and Multi-Domain Attack Threats':
+    cost: 0.0022177499999999997
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper primarily focuses on 'Distributed Federated Learning',
+      a subset of machine learning, for vehicular network security. It highlights
+      the benefits of anomaly detection and addresses adversarial machine learning
+      challenges in the context of vehicular networks.
+    main_topic_sub: Applications
+    secondary_topic: Computer Security
+    secondary_topic_reasoning: The paper discusses how federated learning techniques
+      can be used to enhance security in vehicular networks by detecting anomalies
+      and countering potential threats. Thus, it also fits under the 'Computer Security'
+      topic as it involves securing vehicular communications against attacks.
+    secondary_topic_sub: Machine Learning and Security
+    time: 3.5972373485565186
+    tokens: 1508
+  ? "Distributionally Robust Optimization for Digital Twin Service\n  Provisioning\
+    \ over Edge Computing"
+  : cost: 0.0035343500000000003
+    main_topic: Embedded & Real-time Systems
+    main_topic_reasoning: The paper focuses on the deployment and selection of Digital
+      Twin (DT) models provisioned over edge computing, with a strong emphasis on
+      real-time requirements, specifically addressing the Age of Information (AoI)
+      to ensure freshness and latency considerations. This aligns well with the topic
+      of Embedded & Real-time Systems, which typically deals with real-time constraints
+      in embedded or distributed environments.
+    main_topic_sub: Edge Computing and Edge AI
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The secondary topic of Computer Networks is relevant
+      because the provisioning of DTaaS over edge computing inherently involves network
+      considerations. The paper discusses uncertainties in DT interactions which would
+      be facilitated by network systems, and it also aims to address limitations posed
+      by traditional cloud-centric models in favor of edge computing, which is a networking
+      paradigm.
+    secondary_topic_sub: Networks and networked systems
+    time: 5.257537841796875
+    tokens: 2678
+  'Edge-First Language Model Inference: Models, Metrics, and Tradeoffs':
+    cost: 0.0033510000000000007
+    main_topic: Edge Computing
+    main_topic_reasoning: The main focus of the paper is on deploying Language Models
+      (LMs) at the network edge. The term 'edge computing' encompasses the practice
+      of processing data closer to its source rather than relying primarily on centralized
+      data centers, a key concept discussed in this paper. The paper delves into the
+      benchmarking of Small Language Models on single edge devices, highlighting performance-cost
+      trade-offs, which further emphasizes the context of using computing resources
+      at the edge of a network.
+    main_topic_sub: Other
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The secondary focus lies in the application of Machine
+      Learning, specifically Language Models (LMs), and how advances in model compression
+      facilitate on-device inference. The paper examines the interplay of deploying
+      these models in various environments, making ML a crucial component of their
+      research into efficient, adaptive inference systems.
+    secondary_topic_sub: Applications
+    time: 5.229376792907715
+    tokens: 2236
+  ? "Generative AI-Aided QoE Maximization for RIS-Assisted Digital Twin\n  Interaction"
+  : cost: 0.0031012
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The main focus of the paper is the development and application
+      of a generative AI-aided approach called PG-ZFO to optimize quality of experience
+      in RIS-assisted digital twin interactions. This indicates that Artificial Intelligence
+      is central to the research as it leverages the capabilities of decision transformers
+      and generative AI.
+    main_topic_sub: Constraint Satisfaction and Optimization
+    secondary_topic: Mobile Computing
+    secondary_topic_reasoning: The paper mentions the interaction of mobile users
+      with a digital twin model through uplink and downlink channels. This context
+      fits well with the Mobile Computing topic, as it involves optimizing resource
+      allocation and interaction for mobile users in a network setting.
+    secondary_topic_sub: Mobile Networking and Connectivity
+    time: 4.0711987018585205
+    tokens: 2496
+  ? "Graph Attention Network for Optimal User Association in Wireless\n  Networks"
+  : cost: 0.00253775
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper focuses on optimizing user association in wireless
+      networks to improve network energy efficiency. This is directly related to Computer
+      Networks as it deals with aspects such as network topology, user association
+      policies, and energy consumption in cellular networks.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper utilizes graph neural networks with attention
+      mechanisms to perform the optimization, which are advanced machine learning
+      techniques. This makes 'Machine Learning' a secondary relevant topic.
+    secondary_topic_sub: Optimization
+    time: 4.044317007064819
+    tokens: 1969
+  Graph Neural Networks Based Anomalous RSSI Detection:
+    cost: 0.00276145
+    main_topic: Machine Learning
+    main_topic_reasoning: The main focus of the paper is on using graph neural networks,
+      a branch of machine learning, to detect anomalies in wireless link data. The
+      emphasis on a novel machine learning approach for anomaly detection and the
+      mention of the efficiency and performance of their model highlight the centrality
+      of machine learning to this work.
+    main_topic_sub: Deep Learning
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The paper deals with anomaly detection within IoT networks
+      by monitoring wireless links, which directly relates to the field of computer
+      networks. The context of ensuring network reliability and addressing link failures
+      situates the work solidly within this domain.
+    secondary_topic_sub: Wired and wireless technologies
+    time: 4.285104036331177
+    tokens: 1976
+  'Integration of TinyML and LargeML: A Survey of 6G and Beyond':
+    cost: 0.00364895
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper primarily focuses on the integration of TinyML
+      and LargeML, which are both subsets of machine learning, to enhance services
+      in the context of 6G networks. It discusses various machine learning models'
+      deployment and optimization, which is essential for the transition from 5G to
+      6G, indicating that machine learning is the core topic.
+    main_topic_sub: Applications
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The paper addresses the deployment and management of
+      machine learning solutions in 6G networks, highlighting its relevance to computer
+      networks. The discussion about integrating machine learning within the context
+      of 6G and IoT devices is heavily reliant on networking technologies and paradigms.
+    secondary_topic_sub: Networks and networked systems
+    time: 4.677601337432861
+    tokens: 2806
+  ? "LLM-Based Emulation of the Radio Resource Control Layer: Towards\n  AI-Native\
+    \ RAN Protocols"
+  : cost: 0.0034999500000000004
+    main_topic: Computer Networks
+    main_topic_reasoning: The primary focus of the paper is on 6G mobile network protocols,
+      specifically the emulation of the Radio Resource Control layer, which is an
+      essential component of mobile communication networks. This aligns closely with
+      the field of Computer Networks as it deals with protocols and network control-plane
+      procedures, which are central topics in this field.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Artificial Intelligence
+    secondary_topic_reasoning: The paper discusses the integration of Large AI Models
+      (LAMs) into mobile networks, demonstrating how these models can be used to enhance
+      protocol design and network intelligence. This reflects the application of AI
+      technologies in the domain of network control, justifying Artificial Intelligence
+      as a secondary topic.
+    secondary_topic_sub: Multidisciplinary Topics and Applications
+    time: 4.46606969833374
+    tokens: 2678
+  ? "Modeling and Optimizing Latency for Delayed Hit Caching with Stochastic\n  Miss\
+    \ Latency"
+  : cost: 0.002869
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper primarily focuses on caching mechanisms, a critical
+      component in networking for improving system performance by reducing data retrieval
+      times. The analysis of delayed hit caching directly pertains to network performance
+      issues, making 'Computer Networks' the most relevant main topic.
+    main_topic_sub: Approaches and techniques
+    secondary_topic: Algorithms & Complexity
+    secondary_topic_reasoning: The paper delves into the theoretical analysis of caching
+      strategies, employing algorithms to optimize latency. It involves deriving analytical
+      expressions and developing a variance-aware ranking function to improve cache
+      eviction decisions, aligning it with the 'Algorithms & Complexity' topic.
+    secondary_topic_sub: Network Algorithms and Routing
+    time: 3.269050359725952
+    tokens: 2297
+  ? "Optimizing Resource Allocation for QoS and Stability in Dynamic VLC-NOMA\n  Networks\
+    \ via MARL"
+  : cost: 0.0038499500000000004
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper focuses on optimizing resource allocation for
+      Visible Light Communication (VLC) networks, a topic clearly related to 'Computer
+      Networks'. The primary concerns are network stability, Quality of Service (QoS),
+      and the management of network resources in dynamic conditions, which align directly
+      with network-related challenges and innovations.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper employs Multi-Agent Reinforcement Learning
+      (MARL) to address the challenges within VLC-NOMA networks. This approach is
+      a subfield of machine learning, as it involves developing algorithms that enable
+      the agents (VLC access points) to learn strategies for resource allocation and
+      network management. Thus, 'Machine Learning' emerges as a significant secondary
+      topic.
+    secondary_topic_sub: Optimization
+    time: 4.4895851612091064
+    tokens: 2941
+  Recursive Offloading for LLM Serving in Multi-tier Networks:
+    cost: 0.0033904000000000004
+    main_topic: Natural Language Processing
+    main_topic_reasoning: The primary focus of the paper is on serving Large Language
+      Models (LLMs) efficiently across multi-tier networks, which falls directly under
+      the domain of Natural Language Processing. It deals with the challenges and
+      solutions specific to deploying NLP models, particularly LLMs, in distributed
+      computing environments.
+    main_topic_sub: Language Modeling
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The paper also heavily discusses the aspects of multi-tier
+      network infrastructures, task offloading, and communication efficiency, which
+      are central themes in Computer Networks. It explores how these networks can
+      be optimized to support LLMs, making it a relevant secondary topic.
+    secondary_topic_sub: Networks and networked systems
+    time: 3.2261486053466797
+    tokens: 2779
+  'SONIC: Cost-Effective Web Access for Developing Countries':
+    cost: 0.0031825500000000006
+    main_topic: Computer Networks
+    main_topic_reasoning: The core focus of the SONIC project is on developing a low-cost,
+      scalable data delivery system leveraging existing infrastructure like FM radio
+      and SMS. This directly pertains to Computer Networks, as it involves the transmission
+      and reception of data across a network (in this case, an unconventional one)
+      optimized for regions with limited connectivity.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Mobile Computing
+    secondary_topic_reasoning: The secondary relevance to Mobile Computing arises
+      from the adaptation of the technology to work with affordable mobile phones,
+      including modifications to Android for deployment. The use of mobile phones
+      with embedded FM tuners is critical for the target deployment environments and
+      user scenarios.
+    secondary_topic_sub: Mobile Networking and Connectivity
+    time: 4.6340012550354
+    tokens: 2519
+  'Sionna Research Kit: A GPU-Accelerated Research Platform for AI-RAN':
+    cost: 0.0032041500000000007
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper revolves around the development and testing of
+      AI/ML algorithms specifically in 5G NR cellular networks, a direct domain of
+      computer networks. It discusses implementing these algorithms in a network research
+      platform, Sionna Research Kit, for advanced network applications like AI-RAN,
+      edge computing, and utilization of 5G networks demonstrating its primary focus
+      on computer networks.
+    main_topic_sub: Networks and networked systems
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: While the primary focus is on networking, the paper
+      emphasizes the use of AI/ML algorithms to extend capabilities in the networking
+      context. This involves the development of algorithms and deployment of a neural
+      receiver, which are core Machine Learning applications. Thus, ML is a secondary
+      but significant aspect of the paper.
+    secondary_topic_sub: Applications
+    time: 5.410080671310425
+    tokens: 2233
+  'Smaller, Smarter, Closer: The Edge of Collaborative Generative AI':
+    cost: 0.00299955
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper discusses the deployment of Generative AI using
+      collaborative inference systems that leverage both edge and cloud resources,
+      which pertains to the topic of Computer Networks. The focus on addressing latency,
+      cost, and privacy concerns through edge-cloud orchestration suggests that the
+      primary issue is related to network architectures and how they can be optimized
+      for AI applications.
+    main_topic_sub: Networks and networked systems
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: While the primary focus of the paper is on infrastructure
+      and network considerations, it also prominently involves Machine Learning, specifically
+      in the context of deploying Generative AI and Small Language Models. The experimental
+      insights and design principles for deploying these models across different computing
+      environments relate directly to the efficient use of Machine Learning methodologies.
+    secondary_topic_sub: Applications
+    time: 2.921595335006714
+    tokens: 2062
+  ? "Transforming Decoder-Only Transformers for Accurate WiFi-Telemetry Based\n  Indoor\
+    \ Localization"
+  : cost: 0.0033570000000000006
+    main_topic: Computer Networks
+    main_topic_reasoning: The paper focuses on indoor positioning using WiFi telemetry
+      data, which directly relates to how devices are connected and interact within
+      a wireless network, placing it under the domain of 'Computer Networks.' The
+      majority of the references (25) are within this field, further supporting this
+      topic as the main focus.
+    main_topic_sub: Wired and wireless technologies
+    secondary_topic: Natural Language Processing
+    secondary_topic_reasoning: The method proposed utilizes a Generative Pretrained
+      Transformer (GPT), which falls under 'Natural Language Processing' given that
+      GPTs are a form of Large Language Model. There are 10 references associated
+      with NLP, indicating significant representation in the methods used in the paper.
+    secondary_topic_sub: Language Modeling
+    time: 4.2490622997283936
+    tokens: 2695
+  Wireless Agentic AI with Retrieval-Augmented Multimodal Semantic Perception:
+    cost: 0.0026977500000000005
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper primarily focuses on topics related to Semantic
+      communication, Retrieval-Augmented Generation (RAG), Large Language Models (LLMs),
+      and Deep Reinforcement Learning (DRL), which all fall under the broad category
+      of Artificial Intelligence. These technologies and methodologies are key components
+      in the development and implementation of intelligent systems that can perceive
+      and communicate effectively, aligning well with the core topics within AI research.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The mention of the term 'bandwidth-constrained communication'
+      suggests an emphasis on optimizing communication efficiency, particularly in
+      resource-constrained network environments. This makes Computer Networks a relevant
+      secondary topic as the paper might explore technological solutions that involve
+      the transmission of semantic information across networked systems.
+    secondary_topic_sub: Wired and wireless technologies
+    time: 4.779070615768433
+    tokens: 1706

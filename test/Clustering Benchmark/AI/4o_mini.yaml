@@ -1,0 +1,304 @@
+Results:
+  ? "AGENTIF: Benchmarking Instruction Following of Large Language Models in\n  Agentic\
+    \ Scenarios"
+  : cost: 0.00043604999999999995
+    main_topic: Natural Language Processing
+    main_topic_reasoning: The paper focuses on large language models (LLMs) and their
+      ability to follow complex instructions in agentic scenarios, which directly
+      involves natural language understanding and processing.
+    main_topic_sub: Machine Learning for NLP
+    secondary_topic: Artificial Intelligence
+    secondary_topic_reasoning: The research also falls under the broader umbrella
+      of artificial intelligence as it explores the capabilities and performance of
+      AI models in practical applications.
+    secondary_topic_sub: Multidisciplinary Topics and Applications
+    time: 3.531092643737793
+    tokens: 2601
+  ? "Beyond Correlation: Towards Causal Large Language Model Agents in\n  Biomedicine"
+  : cost: 0.0003612
+    main_topic: Comp. Bio & Bioinformatics
+    main_topic_reasoning: The paper focuses on the application of Large Language Models
+      (LLMs) in biomedicine, emphasizing their potential role in drug discovery and
+      personalized medicine, which directly relates to computational biology and bioinformatics.
+    main_topic_sub: Biomedical Informatics
+    secondary_topic: Artificial Intelligence
+    secondary_topic_reasoning: The paper discusses the development of causal LLM agents,
+      which fall under the broader category of Artificial Intelligence, as they involve
+      machine learning, reasoning, and data integration.
+    secondary_topic_sub: Multidisciplinary Topics and Applications
+    time: 3.6426312923431396
+    tokens: 2048
+  ? "Beyond Needle(s) in the Embodied Haystack: Environment, Architecture,\n  and\
+    \ Training Considerations for Long Context Reasoning"
+  : cost: 0.00035204999999999996
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on a framework for long-horizon embodied
+      tasks in AI and ways to enhance long-context reasoning which falls under the
+      domain of Artificial Intelligence.
+    main_topic_sub: Planning and Scheduling
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper discusses various architectural adaptations
+      and training strategies for embodied AI systems, which often involve machine
+      learning techniques.
+    secondary_topic_sub: Applications
+    time: 2.232588529586792
+    tokens: 2080
+  ? "Data-Driven Breakthroughs and Future Directions in AI Infrastructure: A\n  Comprehensive\
+    \ Review"
+  : cost: 0.00040514999999999995
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper deals with major breakthroughs and future directions
+      in AI, discussing the evolution of AI technologies and approaches such as GPU
+      model training, data-centric shifts, and the development of algorithms like
+      the Transformer and GPT series. It is fundamentally focused on the field of
+      artificial intelligence.
+    main_topic_sub: Data Mining
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The paper discusses concepts from statistical learning
+      theory, sample complexity, and data efficiency, which are all key components
+      of machine learning. Additionally, it addresses emerging solutions related to
+      data access and privacy that are relevant to machine learning practices.
+    secondary_topic_sub: Learning Theory
+    time: 4.308811902999878
+    tokens: 2293
+  ? "ELABORATION: A Comprehensive Benchmark on Human-LLM Competitive\n  Programming"
+  : cost: 0.00037815000000000006
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper discusses human feedback in the context of large
+      language models (LLMs), which are often trained using machine learning techniques.
+      It also involves benchmarking and evaluation methods which are key aspects of
+      machine learning research.
+    main_topic_sub: Applications
+    secondary_topic: Programming Languages
+    secondary_topic_reasoning: The focus on competitive programming inherently involves
+      programming languages, as the research aims to assess and promote collaboration
+      between humans and LLMs in coding tasks.
+    secondary_topic_sub: Other
+    time: 2.813690423965454
+    tokens: 2203
+  ? "From EduVisBench to EduVisAgent: A Benchmark and Multi-Agent Framework\n  for\
+    \ Pedagogical Visualization"
+  : cost: 0.00042239999999999997
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper discusses the application of foundation models
+      (FMs) in educational contexts, focusing on their capabilities and limitations,
+      which are central to the field of artificial intelligence. This makes 'Artificial
+      Intelligence' the most relevant topic.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Visualization
+    secondary_topic_reasoning: The paper emphasizes the importance of structured and
+      interpretable visualizations in educational settings, highlighting the development
+      of visual explanations and educational visualizations, which fall under the
+      scope of visualization.
+    secondary_topic_sub: Applications
+    time: 4.106149196624756
+    tokens: 2459
+  ? "Fuzzy Information Evolution with Three-Way Decision in Social Network\n  Group\
+    \ Decision-Making"
+  : cost: 0.00038639999999999996
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on group decision-making in social networks,
+      utilizing a novel framework that integrates opinion dynamics, decision theory,
+      and uncertainty management, which are fundamental aspects of artificial intelligence
+      research.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: The model involves dynamic social network reconstruction
+      and agent communication links, making computer networks relevant as these concepts
+      pertain to network dynamics in group decision-making scenarios.
+    secondary_topic_sub: Networks and networked systems
+    time: 2.4994051456451416
+    tokens: 2243
+  ? "GUI-explorer: Autonomous Exploration and Mining of Transition-aware\n  Knowledge\
+    \ for GUI Agent"
+  : cost: 0.000441
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper discusses the development of a GUI agent that
+      uses autonomous exploration and unsupervised learning techniques to gather knowledge
+      and interact with dynamic environments. This points to a significant use of
+      machine learning principles in the design and functioning of the agent.
+    main_topic_sub: Applications
+    secondary_topic: Human-computer Interaction
+    secondary_topic_reasoning: The paper inherently deals with the interaction between
+      users and graphical user interfaces (GUIs), which falls under the domain of
+      human-computer interaction, particularly how the automation of GUI actions improves
+      user experiences.
+    secondary_topic_sub: Human-AI Interaction and Explainability
+    time: 4.766884803771973
+    tokens: 2550
+  Gaze Into the Abyss -- Planning to Seek Entropy When Reward is Scarce:
+    cost: 0.00043620000000000003
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper focuses on model-based reinforcement learning
+      (MBRL), which is a subfield of machine learning that specifically deals with
+      improving learning efficiency through predictive models. It discusses methods
+      for training world models and optimizing actor-critic approaches, which are
+      core concepts in the machine learning discipline.
+    main_topic_sub: Applications
+    secondary_topic: Artificial Intelligence
+    secondary_topic_reasoning: Reinforcement learning, as studied in this paper, is
+      a subset of artificial intelligence, especially in how it involves agents making
+      decisions based on interaction with the environment. However, the primary focus
+      is more on the machine learning techniques rather than broader AI topics.
+    secondary_topic_sub: Planning and Scheduling
+    time: 3.528416156768799
+    tokens: 2476
+  ? "HyGenar: An LLM-Driven Hybrid Genetic Algorithm for Few-Shot Grammar\n  Generation"
+  : cost: 0.00042855
+    main_topic: Natural Language Processing
+    main_topic_reasoning: The paper focuses on grammar generation, which is a significant
+      aspect of Natural Language Processing (NLP). It specifically addresses the use
+      of large language models (LLMs) for generating grammars necessary for creating
+      parsers and structured outputs in NLP tasks.
+    main_topic_sub: Generation
+    secondary_topic: Algorithms & Complexity
+    secondary_topic_reasoning: The introduction of a hybrid genetic algorithm to optimize
+      grammar generation implies the use of algorithmic techniques, thus connecting
+      the research to the field of Algorithms & Complexity. However, the primary focus
+      remains on NLP.
+    secondary_topic_sub: Other
+    time: 3.242717981338501
+    tokens: 2476
+  Identifying, Evaluating, and Mitigating Risks of AI Thought Partnerships:
+    cost: 0.00035715
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on AI thought partnerships, discussing
+      the collaboration between AI systems and humans in reasoning processes. It specifically
+      addresses risks related to these AI systems, which falls squarely under the
+      umbrella of artificial intelligence.
+    main_topic_sub: Humans and AI
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: While the primary focus is on AI, the mention of risks
+      implies potential concerns related to data exchange and communication between
+      AI systems and humans, which can relate to computer networks, especially given
+      the implications of collaborative technologies.
+    secondary_topic_sub: Other
+    time: 3.160517930984497
+    tokens: 2015
+  ? "KTAE: A Model-Free Algorithm to Key-Tokens Advantage Estimation in\n  Mathematical\
+    \ Reasoning"
+  : cost: 0.0003858
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper primarily focuses on enhancing reasoning capabilities
+      in large language models through reinforcement learning, which falls under the
+      umbrella of artificial intelligence.
+    main_topic_sub: Multidisciplinary Topics and Applications
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The methods discussed, such as Key-token Advantage
+      Estimation (KTAE) and the integration with reinforcement learning, are specifically
+      related to machine learning techniques, as they involve improving learning processes
+      and model performance.
+    secondary_topic_sub: Applications
+    time: 3.333777904510498
+    tokens: 2251
+  ? "Know the Ropes: A Heuristic Strategy for LLM-based Multi-Agent System\n  Design"
+  : cost: 0.00041235
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper discusses a framework for improving the performance
+      of multi-agent systems using large language models (LLMs), which falls squarely
+      under the realm of Artificial Intelligence. The focus is on enhancing collaborative
+      capabilities of AI agents, which is a fundamental aspect of AI research.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: Machine learning techniques are utilized within the
+      framework for augmenting the performance of the LLMs. The paper specifically
+      mentions various augmentation strategies like chain-of-thought and micro-tuning,
+      which are typical approaches in machine learning.
+    secondary_topic_sub: Applications
+    time: 3.6389994621276855
+    tokens: 2338
+  ? "MCP-RADAR: A Multi-Dimensional Benchmark for Evaluating Tool Use\n  Capabilities\
+    \ in Large Language Models"
+  : cost: 0.0004521
+    main_topic: Natural Language Processing
+    main_topic_reasoning: The paper deals with evaluating the capabilities of Large
+      Language Models (LLMs), which are a key area of research in Natural Language
+      Processing. The focus on how these models can understand and utilize tools through
+      the Model Context Protocol (MCP) aligns closely with advancements in NLP technology.
+    main_topic_sub: Resources and Evaluation
+    secondary_topic: Artificial Intelligence
+    secondary_topic_reasoning: While the primary focus is on Natural Language Processing,
+      the broader implications of LLMs functioning as reasoning agents also involve
+      concepts from Artificial Intelligence, making it relevant as a secondary topic.
+    secondary_topic_sub: Multidisciplinary Topics and Applications
+    time: 3.4020395278930664
+    tokens: 2609
+  ? "NovelSeek: When Agent Becomes the Scientist -- Building Closed-Loop\n  System\
+    \ from Hypothesis to Verification"
+  : cost: 0.0003828
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on leveraging AI to create a closed-loop
+      system for autonomous scientific research, which falls squarely under the domain
+      of artificial intelligence.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Computer Networks
+    secondary_topic_reasoning: Given the mention of multi-agent interaction and automated
+      processes, there is a relevance to networking concepts, particularly how agents
+      communicate and collaborate, making Computer Networks a suitable secondary topic.
+    secondary_topic_sub: Networks and networked systems
+    time: 2.721804618835449
+    tokens: 2231
+  ? "Predicate-Conditional Conformalized Answer Sets for Knowledge Graph\n  Embeddings"
+  : cost: 0.00041115
+    main_topic: Machine Learning
+    main_topic_reasoning: The paper discusses methods for Knowledge Graph Embeddings
+      (KGE), which rely on machine learning techniques to generate embeddings that
+      capture relationships between entities. The focus on uncertainty quantification
+      in KGE methods aligns with the principles of machine learning, particularly
+      in the context of predictive modeling and the evaluation of model reliability.
+    main_topic_sub: Trustworthy Machine Learning
+    secondary_topic: Natural Language Processing
+    secondary_topic_reasoning: While the primary focus is on machine learning, Knowledge
+      Graphs are often used in conjunction with Natural Language Processing tasks,
+      such as understanding and processing human language data. Thus, NLP is a relevant
+      secondary topic due to its potential application in extracting and utilizing
+      knowledge graphs.
+    secondary_topic_sub: Machine Learning for NLP
+    time: 3.503997325897217
+    tokens: 2276
+  'SPaRC: A Spatial Pathfinding Reasoning Challenge':
+    cost: 0.00035654999999999997
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper discusses a dataset and challenges related to
+      spatial and abstract reasoning, focusing on evaluating AI models' capabilities
+      in pathfinding and complex problem-solving, which directly ties into the field
+      of Artificial Intelligence.
+    main_topic_sub: Planning and Scheduling
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: While the primary focus is on artificial intelligence,
+      the paper's context also involves machine learning, especially since it evaluates
+      reasoning models and suggests improvements in training methods for better performance
+      on reasoning tasks.
+    secondary_topic_sub: Applications
+    time: 3.5625855922698975
+    tokens: 2035
+  ? "Think or Not? Selective Reasoning via Reinforcement Learning for\n  Vision-Language\
+    \ Models"
+  : cost: 0.0004305
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on enhancing reasoning capabilities in
+      vision-language models through reinforcement learning, which falls under the
+      broader category of artificial intelligence. It deals with how these models
+      can emulate human-like thinking patterns, a core aspect of AI research.
+    main_topic_sub: Humans and AI
+    secondary_topic: Machine Learning
+    secondary_topic_reasoning: The approach taken in this paper involves reinforcement
+      learning techniques, which are a subset of machine learning. The improvements
+      to Vision-Language Models (VLMs) are achieved through methods commonly used
+      in machine learning, specifically regarding training and optimization strategies.
+    secondary_topic_sub: Optimization
+    time: 5.847923994064331
+    tokens: 2474
+  'X-MAS: Towards Building Multi-Agent Systems with Heterogeneous LLMs':
+    cost: 0.00042165
+    main_topic: Artificial Intelligence
+    main_topic_reasoning: The paper focuses on multi-agent systems utilizing heterogeneous
+      large language models (LLMs) to enhance collective intelligence, which is a
+      fundamental aspect of Artificial Intelligence research.
+    main_topic_sub: Agent-based and Multi-agent Systems
+    secondary_topic: Natural Language Processing
+    secondary_topic_reasoning: The paper involves the use of large language models,
+      which are primarily developed and utilized for Natural Language Processing tasks.
+    secondary_topic_sub: Dialogue and Interactive Systems
+    time: 4.15201473236084
+    tokens: 2517
