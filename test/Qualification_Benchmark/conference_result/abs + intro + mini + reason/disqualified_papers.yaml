@@ -1,0 +1,1033 @@
+papers:
+- title: 'Dynamic Explainability in AI for Neurological Disorders: An Adaptive Model
+    for Transparent Decision-Making in Alzheimer''s Disease Diagnosis'
+  abstract: '**In this paper, we proposed a model that will solve the ''X'' of the
+    ''Xai'' that is Explainable AI. The model is developed using deep learning and
+    transfer learning algorithms using different methods to depict how the decisions
+    and predictions of the Artificial Intelligence are made to be understandable for
+    humans to interpret. The term deals with explaining how the models work and what
+    all happens in each layer of neurons and the output is shown. The transparency
+    in the process lets humans understand the way how the predictions are carried
+    out, what are the parameters that the model is considering, what are the steps
+    it takes to generate the final output. Here, we considered Alzheimer disease in
+    the brain and brought out the results per layer of the model to comprehend the
+    reason of the final result. This could made easy for humans to identify what are
+    the errors, unknown biases and the number of possible paths the model can take
+    in order to generate the more accurate output. This proposed model is able to
+    identify and depict the processes going on while generating the result. The field
+    tends to address the "black box" problem in the complex machine learning models.
+    The analysis would be used by stakeholders to identify the real cause behind the
+    interpretation of results. Considering these, there are many use cases for this
+    new emerging field, some of them includes in the field of medical diagnosis, where
+    the doctors would be able to identify the paradigm and produce the most accurate
+    diagnosis that will cure the patient''s disease, in the finance sector to identify
+    the future trends, for the real time processing and many such fields.**'
+  keywords: ''
+  document: "# Dynamic Explainability in AI for Neurological Disorders: An Adaptive\
+    \ Model for Transparent Decision-Making in Alzheimer's Disease Diagnosis\n\nAnushka\
+    \ Shukla anushkashukla11902@gmail.com CSE GGITS\n\nShivanshu Upadhyay shivanshuupadhyay798@gmail.co\
+    \ m CSE GGITS\n\nUdit Narayan Bera uditnarayanbera@gmail.com ECE GGITS\n\nRV Kshirsagar\
+    \ principal@ggits.org ECE GGITS\n\n*Abstract*— **In this paper, we proposed a\
+    \ model that will solve the 'X' of the 'Xai' that is Explainable AI. The model\
+    \ is developed using deep learning and transfer learning algorithms using different\
+    \ methods to depict how the decisions and predictions of the Artificial Intelligence\
+    \ are made to be understandable for humans to interpret. The term deals with explaining\
+    \ how the models work and what all happens in each layer of neurons and the output\
+    \ is shown. The transparency in the process lets humans understand the way how\
+    \ the predictions are carried out, what are the parameters that the model is considering,\
+    \ what are the steps it takes to generate the final output. Here, we considered\
+    \ Alzheimer disease in the brain and brought out the results per layer of the\
+    \ model to comprehend the reason of the final result. This could made easy for\
+    \ humans to identify what are the errors, unknown biases and the number of possible\
+    \ paths the model can take in order to generate the more accurate output. This\
+    \ proposed model is able to identify and depict the processes going on while generating\
+    \ the result. The field tends to address the \"black box\" problem in the complex\
+    \ machine learning models. The analysis would be used by stakeholders to identify\
+    \ the real cause behind the interpretation of results. Considering these, there\
+    \ are many use cases for this new emerging field, some of them includes in the\
+    \ field of medical diagnosis, where the doctors would be able to identify the\
+    \ paradigm and produce the most accurate diagnosis that will cure the patient's\
+    \ disease, in the finance sector to identify the future trends, for the real time\
+    \ processing and many such fields.**\n\n**Keywords—** *Explainable AI, Alzheimer's\
+    \ Disease Diagnosis, Neural Network prediction, MobileNet V2.* \n\n#### I. INTRODUCTION\n\
+    \nAlzheimer's disease is a progressive neurological disorder that impacts cerebral\
+    \ function, resulting in the deterioration of memory, cognitive capabilities,\
+    \ and overall bodily functioning [1]. It stands as the most prevalent cause of\
+    \ dementia. Individuals afflicted by Alzheimer's frequently encounter memory lapses\
+    \ that disrupt their daily activities, such as forgetting recently acquired information,\
+    \ important dates, and repetitive inquiries for the same details, or an increasing\
+    \ reliance on memory aids. Alzheimer's can induce significant alterations in behavior\
+    \ and personality. Figure 2 illustrates the specific region of the brain affected\
+    \ by Alzheimer's disease, which may manifest in symptoms such as confusion, agitation,\
+    \ mood fluctuations, social withdrawal,\n\nPriya Rachel Bachan bachanpriya20@gmail.com\
+    \ CSE GGITS\n\nNeeta Nathani neetanathani@ggits.org ECE GGITS\n\nand heightened\
+    \ irritability. The examination is conducted through the application of neural\
+    \ network models. A neural network is a computational paradigm designed to emulate\
+    \ the structure and functionality of the neural networks in the human brain [2].\
+    \ It serves as a framework in machine learning and artificial intelligence for\
+    \ processing information, executing pattern recognition, and making predictions\
+    \ or classifications. The architecture of the neural network is depicted in Figure\
+    \ 1.\n\n![](_page_0_Figure_14.jpeg)\n\nFig 1. Deep Neural Network Architecture\
+    \ [2].\n\n![](_page_0_Figure_18.jpeg)\n\nFig 2. The brain affected with Alzheimer's\
+    \ Disease [3]\n\n#### II. METHODOLOGY\n\nThe dataset utilized in this study was\
+    \ sourced from Kaggle [4] and comprised images related to Alzheimer's disease,\
+    \ classified into four distinct categories. These categories were delineated based\
+    \ on the Clinical Dementia Rating (CDR) scale, which assesses observed symptoms\
+    \ and impairment levels. The classes encompass Non-demented (indicating no significant\
+    \ memory loss), Very mild-demented (reflecting slight memory loss), Mild-demented\
+    \ (indicating a mild level of cognitive impairment), and Moderate-demented (characterized\
+    \ by memory loss, compromised communication, and an inability to recognize individuals).\
+    \ Subsequently, we imported the dataset, as illustrated in Figure 3, employing\
+    \ an image data generator, and conducted the analysis through a series of preprocessing\
+    \ steps. These steps encompassed rescaling, rotation, width-shift, heightshift,\
+    \ shearing, flipping, among others.\n\n![](_page_1_Picture_2.jpeg)\n\nFig 3. Input\
+    \ images for the study from dataset.\n\n![](_page_1_Picture_4.jpeg)\n\nFig 4.\
+    \ Output of MobileNet V2.\n\nSubsequently, various transfer learning models were\
+    \ constructed, including VGG-19 (with training accuracy at 58% and testing accuracy\
+    \ at 53%), MobileNet V2, Inception V3 (with training accuracy at 55% and testing\
+    \ accuracy at 52%), ResNet-50 (with training accuracy at 45% and testing accuracy\
+    \ at 36%), and a custom model developed through deep learning algorithms (with\
+    \ training accuracy at 62% and testing accuracy at 53%). Moving forward, each\
+    \ model generated distinct outputs with varying accuracies. Notably, MobileNet\
+    \ V2 outperformed other models, achieving a training accuracy of 67% and testing\
+    \ accuracy of 60%, as depicted in Figure 4. The ensuing table presents the metrics\
+    \ associated with each model.\n\n| S.n | Neural  | Traini | Traini | Validati\
+    \ | Validati |\n|-----|---------|--------|--------|----------|----------|\n| o.\
+    \  | Netwo   | ng     | ng     | on       | on Loss  |\n|     | rks     | Accura\
+    \ | Loss   | Accura   |          |\n|     |         | cy     |        | cy   \
+    \    |          |\n| 1   | Incepti | 0.6586 | 4.275  | 0.5324   | 5.8107   |\n\
+    |     | on V3   |        | 2      |          |          |\n| 2   | VGG     | 0.5053\
+    \ | 1.031  | 0.4812   | 1.0586   |\n|     | 19      |        | 3      |      \
+    \    |          |\n| 3   | Mobile  | 0.5728 | 1.208  | 0.5286   | 1.2869   |\n\
+    |     | Net V1  |        | 6      |          |          |\n| 4   | Mobile  | 0.6741\
+    \ | 3.912  | 0.6000   | 6.0617   |\n|     | Net V2  |        | 6      |      \
+    \    |          |\n| 5   | ResNet  | 0.4439 | 1.331  | 0.3623   | 1.4430   |\n\
+    |     | 50      |        | 1      |          |          |\n| 6   | Custo   | 0.2600\
+    \ | 6.078  | 0.3400   | 6.1568   |\n|     | m       |        | 2      |      \
+    \    |          |\n|     | Model   |        |        |          |          |\n\
+    \nTable 1. Training and test validation and loss.\n\nThe process of the Alzheimer\
+    \ disease detection that proceeds with the loading of dataset, training, model\
+    \ selection, testing, evaluation and the final analysis is shown in the figure\
+    \ 5.\n\n![](_page_2_Figure_1.jpeg)\n\nFig 5. The model development process of\
+    \ Alzheimer's disease detection.\n\nThe confusion matrix is the evaluation metrics\
+    \ used for classification models [5]. The figure 6 shows the parameters involved\
+    \ in the confusion metrics.\n\n|                           | Actually<br>Positive\
+    \ (1)           | Actually<br>Negative (0)                    |\n|---------------------------|------------------------------------|---------------------------------------------|\n\
+    | Predicted<br>Positive (1) | True<br><b>Positives</b><br>(TPs)  | False<br><b>Positives</b><br>(FPs)\
+    \          |\n| Predicted<br>Negative (0) | False<br><b>Negatives</b><br>(FNs)\
+    \ | True<br><b>Negatives</b><br>TN <sub>S</sub> |\n\nFig 6. Confusion Matrix [5].\n\
+    \nHere's what each term represents:\n\nTrue Positives (TP): The cases where the\
+    \ model predicted the positive class correctly, and the actual value was also\
+    \ positive.\n\nTrue Negatives (TN): The cases where the model predicted the negative\
+    \ class correctly, and the actual value was also negative.\n\nFalse Positives\
+    \ (FP): T cases where the model predicted the positive class, but the actual value\
+    \ was negative.\n\nFalse Negatives (FN): T cases where the model predicted the\
+    \ negative class, but the actual value was positive.\n\nThe confusion matrix of\
+    \ the Mobile Net V2 as shown in figure 7, depicts the evaluation of classification\
+    \ models. It includes certain parameters such as Precision, Recall, Accuracy,\
+    \ F1-score, and Support vectors. It provides the abstract of a prediction of a\
+    \ classification model compared to the actual true values.\n\n![](_page_2_Figure_12.jpeg)\n\
+    \nFig 7. Evaluation metrics and confusion metrics of MobileNet V2.\n\nPrecision\
+    \ gauges the precision of the positive predictions made by the model, representing\
+    \ the ratio of accurately predicted positive observations to the total predicted\
+    \ positives. On the other hand, recall assesses the model's capability to accurately\
+    \ identify positive instances from the genuine positives in the dataset, denoting\
+    \ the ratio of correctly predicted positive observations to the total actual positives.\
+    \ Accuracy reflects the overall correctness of predictions, indicating the ratio\
+    \ of correctly predicted observations (both positive and negative) to the total\
+    \ observations. The F1 Score serves as the harmonic mean of precision and recall,\
+    \ offering a balanced assessment, particularly crucial in handling imbalanced\
+    \ datasets where one class prevails over the other. The formulas for the employed\
+    \ evaluation metrics are presented in Figure 8, while Table 2 provides additional\
+    \ details, such as input size, learning rate, batch size, epochs, and the optimizer\
+    \ used in the models.\n\n| Assessments | Formula                     |\n|-------------|-----------------------------|\n\
+    | Accuracy    | $\\frac{TP+TN}{TP+TN+FP+FN}$ |\n| Precision   | TP<br>$TP + FP$\
+    \             |\n| Recall      | тp<br>$r_{P+FN}$            |\n| F1-score   \
+    \ | 2TP<br>ユエドアエドル              |\n\nFig 8. The formulas of Evaluation metrics\
+    \ [6].\n\n| Parameters<br>Networks | Initial<br>Input | Initial<br>Learning |\
+    \ Batc<br>h | Ep<br>oc | Optimi<br>zer |\n|------------------------|------------------|---------------------|-----------|----------|---------------|\n\
+    |                        | Size             | Rate                | Size     \
+    \ | hs       |               |\n| Inception              | 224,224,         |\
+    \ 0.001               | 32        | 10       | Adam          |\n| V3         \
+    \            | 3                |                     |           |          |\
+    \               |\n| VGG-19                 | 224,224,         | 0.001       \
+    \        | 32        | 10       | Adam          |\n|                        |\
+    \ 3                |                     |           |          |            \
+    \   |\n| MobileNet              | 224,224,         | 0.0001              | 32\
+    \        | 10       | Adam          |\n| V1                     | 3          \
+    \      |                     |           |          |               |\n| MobileNet\
+    \              | 224,224,         | 0.0001              | 32        | 10     \
+    \  | Adam          |\n| V2                     | 3                |          \
+    \           |           |          |               |\n| ResNet 50            \
+    \  | 224,224,         | 0.001               | 32        | 10       | Adam    \
+    \      |\n|                        | 3                |                     |\
+    \           |          |               |\n\n| Custom | 224,224, | 0.001 | 32 |\
+    \ 10 | Adam |\n|--------|----------|-------|----|----|------|\n| Model  | 3  \
+    \      |       |    |    |      |\n|        |          |       |    |    |   \
+    \   |\n\nTable 2. The networks and their parameters.\n\nMobileNetV2 is a convolutional\
+    \ neural network architecture that is designed for mobile and edge devices that\
+    \ can be used with limited computational resources. It is an evolution of the\
+    \ original MobileNet, developed by Google, aimed at achieving efficient and lightweight\
+    \ neural network models for tasks such as image classification, object detection,\
+    \ and more, particularly on mobile devices [7, 21]. The MobileNet V2 architecture\
+    \ is shown in figure 9.\n\n![](_page_3_Figure_3.jpeg)\n\nFig 9. The architecture\
+    \ of MobileNet V2 [8].\n\nThe approach employed for interpreting the processes\
+    \ carried out within each layer involves visualizing the outputs generated by\
+    \ the neurons. MobileNet V2 comprises several key layers [9], including:\n\n-\
+    \ 1. Inverted Residuals with Linear Bottlenecks: MobileNet V2 leverages depthwise\
+    \ separable convolutions, a pivotal component contributing to the model's computational\
+    \ efficiency. The process involves a depthwise convolution, which applies different\
+    \ filters to each input channel, and a 1x1 pointwise convolution that amalgamates\
+    \ information across channels. This dual operation maintains expressive power\
+    \ while demanding fewer computations and parameters than traditional convolutions.\n\
+    - 2. Linear Bottlenecks: The linear bottleneck, inserted between depthwise separable\
+    \ convolution layers, incorporates a 1x1 convolution with linear activation, devoid\
+    \ of non-linearity. This linear bottleneck simplifies tuning and enhances the\
+    \ network's capability to capture nuanced features.\n- 3. Inverted Residual Block\
+    \ Structure: The construction of the inverted residual block in MobileNet V2 involves\
+    \ linear activation, 1x1 pointwise convolution, depthwise separable convolution\
+    \ (with linear bottleneck), and a shortcut link connecting the input to the output.\
+    \ This structure promotes efficient learning and information transfer across the\
+    \ network.\n\n4. Global Average Pooling and Final Dense Layer: Unlike conventional\
+    \ fully connected layers, MobileNet V2 employs global average pooling near the\
+    \ network's conclusion. The global average pooling reduces spatial dimensions\
+    \ to a single value per channel before a final dense layer with softmax activation\
+    \ is applied for classification. This design enhances efficiency, particularly\
+    \ for deployment on resource-constrained devices like mobile phones.\n\nThe outputs\
+    \ of certain layers are illustrated, such as the output of the 1st layer (Convolution\
+    \ Layer) capturing low-level features like edges and corners, depicted in Figure\
+    \ 10. Convolutional layers often integrate operations like max pooling to condense\
+    \ the spatial dimensions of extracted features while retaining essential information,\
+    \ thereby focusing on salient features and reducing computational complexity.\
+    \ The hierarchical representation generated by the convolutional layers is utilized\
+    \ by subsequent layers for classification or prediction tasks.\n\n![](_page_3_Picture_11.jpeg)\n\
+    \nFig 10. The feature of the output of 1st layer of MobileNet V2\n\nThe 5st layer\
+    \ (Expanded Convolution depthwise) performs the spatial filter independently for\
+    \ each input channel, instead of having a single convolution filter for each channel,\
+    \ it applies a separate filters to each input channel reducing the parameters.\
+    \ This is a technique used in neural network architectures to reduce the computational\
+    \ complexity of standard convolutions by decomposing them into two separate operations:\
+    \ depthwise convolution and pointwise convolution. The depthwise convolution applies\
+    \ a single filter per input channel, and the pointwise convolution performs a\
+    \ 1x1 convolution to combine the outputs as shown in figure 11.\n\n![](_page_4_Picture_0.jpeg)\n\
+    \nFig 11. The features of the output of 5th layer of MobileNet V2\n\nThe 15th\
+    \ layer (Batch Normalization) normalizes the input of each layer, within a neural\
+    \ network by adjusting and scaling the activations. It does this by normalizing\
+    \ the inputs of each layer in a mini-batch (a subset of the training data) to\
+    \ have a mean close to zero and a variance close to one. shown in the figure 12.\n\
+    \n![](_page_4_Picture_3.jpeg)\n\nFig 12. The output of 15th layer of MobileNet\
+    \ V2\n\nThe convolution layer 153th (Out Relu) is generating the final output\
+    \ that is flattened and is going to 155th (Dense layer) for final output [11].\
+    \ It introduces non-linearity by allowing the network to learn complex patterns\
+    \ in the data. It replaces all negative pixel values in the feature map with zero\
+    \ while leaving positive values unchanged as shown in the figure 13.\n\n![](_page_4_Figure_6.jpeg)\n\
+    \nFig 13. The features of the output of 153th layer of MobileNet V2\n\nNow the\
+    \ normalization in each layer are performed. The layer normalization normalizes\
+    \ across the feature dimension for each individuals. It is different from batch\
+    \ normalization because the batch normalization normalizes the batch dimension\
+    \ while layer normalization normalizes the layer feature dimension.\n\nThen the\
+    \ PCA (Principal Component Analysis) [12] was applied in the layer outputs. The\
+    \ PCA allows us to reduce the dimensionality while preserving the most of the\
+    \ variance in the data. It represents the layer output in the lower dimensional\
+    \ space [10, 17, 18]. It helps us to understand the distribution of features and\
+    \ patterns learned by the network. By examining we can gain insights about the\
+    \ relevant features for Alzheimer Classification. PC's can be more interpretable\
+    \ as shown in the figure 14.\n\n![](_page_4_Figure_10.jpeg)\n\n![](_page_4_Picture_12.jpeg)\n\
+    \nFig 14. The PCA and its components [10].\n\nThen the Grade CAM (Gradient weighted\
+    \ Class Activation Map) [14] was used which is a technique used for visualizing\
+    \ and understanding the areas of an input image that contribute the most to final\
+    \ classification decision of a neural network. Grad-CAM, or Gradient-weighted\
+    \ Class Activation Mapping, is used to identify and visualize the areas of an\
+    \ input picture that have the most influence on a neural network's final classification\
+    \ judgment. Any model having a convolutional architecture can use Grad-CAM [15,\
+    \ 16]; no changes to the model architecture are necessary. By examining the gradients\
+    \ of the projected class in relation to the feature maps, it draws attention to\
+    \ significant areas. Priorly we also used normal CAM method to interpret the most\
+    \ contributing part of an input image but it was unable to provide the relevant\
+    \ output which explains the most significant part of an image for final decision\
+    \ as given in the figure 15.\n\n![](_page_5_Picture_1.jpeg)\n\nFig 15. The most\
+    \ significant part of the brain.\n\nSo we proceeded with Grade CAM model interprets\
+    \ the target output layer [13] to identify the significant part which gave us\
+    \ the relevant output as shown in the figure 16.\n\n![](_page_5_Picture_4.jpeg)\n\
+    \nFig 16. The output of Grade CAM [16].\n\nThe blue part in the image is depicting\
+    \ a least significant area and the red part depicts the high significant area\
+    \ and the rest yellow part is depicting the approximate significant values. The\
+    \ results of four different classes shown by Grade CAM technique is given in the\
+    \ figure 17.\n\n![](_page_5_Figure_7.jpeg)\n\nThis comprehensive analysis through\
+    \ Grade CAM not only enhances our understanding of the neural network's decisionmaking\
+    \ process but also provides valuable insights into the intricate dynamics of feature\
+    \ importance during classification. By pinpointing the critical areas contributing\
+    \ to classification outcomes, the Grade CAM visualization unveils the neural network's\
+    \ inherent focus on specific regions within the input images. This nuanced understanding\
+    \ allows us to discern the model's interpretability and ascertain the significance\
+    \ of various anatomical features in the context of Alzheimer's disease classification\
+    \ [19-20].\n\nThe Grade CAM technique, by highlighting regions of high significance\
+    \ in vivid red and less critical areas in blue, offers a nuanced perspective on\
+    \ the neural network's attention allocation. This visual representation aids researchers\
+    \ and practitioners in identifying the key features that influence the model's\
+    \ decision, facilitating informed interpretations and potential refinement of\
+    \ the underlying neural network architecture.\n\nMoreover, the utilization of\
+    \ Grade CAM transcends mere visualization; it serves as a powerful tool for not\
+    \ only validating the model's decision but also for potentially uncovering subtle\
+    \ patterns or anomalies that might be crucial for accurate diagnosis. This deeper\
+    \ level of insight contributes to the ongoing efforts to enhance the transparency\
+    \ and reliability of neural network-based diagnostic models, particularly in the\
+    \ context of complex medical conditions like Alzheimer's disease. The integration\
+    \ of interpretability techniques, such as Grade CAM, thus plays a pivotal role\
+    \ in bridging the gap between the model's complex computations and the practical\
+    \ application of its outputs in clinical settings.\n\n985\n\n## III. CONCLUSION\n\
+    \nIn the pursuit of creating a bridge between artificial intelligence and human\
+    \ understanding, our proposed model emerges as a beacon of clarity in the intricate\
+    \ world of Explainable AI (XAI). By delving into the depths of deep learning and\
+    \ transfer learning, our model not only addresses the complexities of neural networks\
+    \ but also sheds light on the 'black box' problem that often shrouds machine learning\
+    \ models in mystery.\n\nFocused on the realm of Alzheimer's disease, our model's\
+    \ after-effects of sleep-like transparency have the power to revolutionize the\
+    \ field of medical diagnosis. The ability to decode each layer of the neural network,\
+    \ revealing the decision-making processes, opens avenues for medical professionals\
+    \ to gain profound insights into the diagnosis of neurological disorders. It's\
+    \ not just about accuracy; it's about empowering doctors to comprehend the intricate\
+    \ dance of parameters, errors, and biases within the model, paving the way for\
+    \ more accurate and timely patient care.\n\nAs we presented the results, the MobileNet\
+    \ V2 model emerged as a frontrunner, showcasing impressive training and testing\
+    \ accuracies. Leveraging techniques such as PCA and Grade CAM, we went beyond\
+    \ traditional evaluation metrics, offering a deeper understanding of the model's\
+    \ inner workings. The Grade CAM's vivid visualization of significant brain areas\
+    \ during the Alzheimer's classification process exemplifies the power of transparency\
+    \ in machine learning.\n\nBeyond the confines of medical diagnosis, the applications\
+    \ of our proposed model extend into various domains, from finance to real-time\
+    \ processing. The transparency it provides serves as a beacon for stakeholders,\
+    \ enabling them to make informed decisions based on a clear understanding of the\
+    \ model's predictions.\n\nIn conclusion, our journey through the intricacies of\
+    \ Explainable AI in the context of Alzheimer's diagnosis has not only unveiled\
+    \ the potential of our model but also highlighted the transformative impact it\
+    \ can have on the synergy between artificial intelligence and human interpretation.\
+    \ The after-effects of sleep, metaphorically embodied in our model's transparency,\
+    \ promise a new era where machine learning not only predicts but also enlightens,\
+    \ ensuring a future where AI and human intelligence work hand in hand for the\
+    \ greater good.\n\n### REFERENCES\n\n- 1. Diseases and Conditions, \"Alzheimer's\
+    \ disease\", Mayo Clinic, https://www.mayoclinic.org/diseases-conditions/alzheimersdisease/symptoms-causes/syc-20350447,\
+    \ Aug. 2023.\n- 2. Kinza Yasar, \"What is Machine Learning and how does it work:\
+    \ The in-depth guide\", Tech Target, https://www.techtarget.com/searchenterpriseai/definition/neuralnetwork,\
+    \ Mar. 2023.\n- 3. Lakeside Manor, \"How do you tell if a parent has Alzheimer's\
+    \ disease?\", https://lakesidemanor.org/how-do-you-tell-if-aparent-has-alzheimers-disease/,\
+    \ Jun. 2017.\n- 4. S.Dubey, \"Alzheimer's Dataset (4 types of images)\", https://www.kaggle.com/datasets?search=alzheimers+image+da\
+    \ taset&fileType=csv, Sept. 2020.\n- 5. Geeks for Geeks, \"Confusion Matrix in\
+    \ Machine Learning\", https://www.geeksforgeeks.org/confusion-matrix-machinelearning/,\
+    \ Dec. 2023.\n- 6. Xue, Dan, et al. \"An application of transfer learning and\
+    \ ensemble learning techniques for cervical histopathology image classification.\"\
+    \ *IEEE Access* 8: 104603-104618, (2020).\n- 7. Hariharan, Kulathumani. \"Best\
+    \ Practices: Extending enterprise applications to Mobile devices.\" *The Architecture\
+    \ Journal, Microsoft Architecture Center* 14, 2008.\n- 8. Tragoudaras, Antonios,\
+    \ et al. \"Design space exploration of a sparse mobilenetv2 using high-level synthesis\
+    \ and sparse matrix techniques on FPGAs.\" *Sensors* 22.12, 2022: 4318.\n- 9.\
+    \ Chandola, Yashvi, et al. \"Deep Learning for Chest Radiographs.\" *Computer\
+    \ Aided Classification, Academic Press*, 2021.\n- 10. \"A Guide to Principal Component\
+    \ Analysis (PCA) for Machine learning.\" https://www.keboola.com/blog/pca-machinelearning#:~:text=Principal%20Component%20Analysis%20(PC\
+    \ A)%20is,%2Dnoising%2C%20and%20plenty%20more,%20Ap r.%202022.\n- 11. Xu, Yuesheng,\
+    \ and Haizhang Zhang. \"Convergence of deep convolutional neural networks.\" *Neural\
+    \ Networks* 153 (2022): 553-563.\n- 12. Daffertshofer, Andreas, et al. \"PCA in\
+    \ studying coordination and variability: a tutorial.\" *Clinical biomechanics*\
+    \ 19.4 (2004): 415- 428.\n- 13. Fu, Ruigang, et al. \"Axiom-based grad-cam: Towards\
+    \ accurate visualization and explanation of cnns.\" *arXiv preprint arXiv:2008.02312*\
+    \ (2020).\n- 14. \"Grad-CAM reveals the why behind deep learning decisions MATLAB\
+    \ & Simulink.\" https://www.mathworks.com/help/deeplearning/ug/gradcamexplains-why.html\n\
+    - 15. Selvaraju, Ramprasaath R., et al. \"Grad-cam: Visual explanations from deep\
+    \ networks via gradient-based localization.\" *Proceedings of the IEEE international\
+    \ conference on computer vision*. 2017.\n- 16. Selvaraju, Ramprasaath R., et al.\
+    \ \"Grad-CAM: Why did you say that?.\" *arXiv preprint arXiv:1611.07450* (2016).\n\
+    - 17. Maćkiewicz, Andrzej, and Waldemar Ratajczak. \"Principal components analysis\
+    \ (PCA).\" *Computers & Geosciences* 19.3 (1993): 303-342.\n- 18. Granato, Daniel,\
+    \ et al. \"Use of principal component analysis (PCA) and hierarchical cluster\
+    \ analysis (HCA) for multivariate association between bioactive compounds and\
+    \ functional properties in foods: A critical perspective.\" *Trends in Food Science\
+    \ & Technology* 72 (2018): 83-90.\n- 19. Chethana, Savarala, et al. \"A Novel\
+    \ Approach for Alzheimer's Disease Detection using XAI and Grad-CAM.\" *2023 4th\
+    \ IEEE Global Conference for Advancement in Technology (GCAT)*. IEEE, 2023.\n\
+    - 20. Li, Qi, and Mary Qu Yang. \"Comparison of machine learning approaches for\
+    \ enhancing Alzheimer's disease classification.\" *PeerJ* 9 (2021): e10549.\n\
+    - 21. Bukhres, Omran A., et al. \"A proposed mobile architecture for a distributed\
+    \ database environment.\" *PDP*. 1997.\n\n**.**"
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      do not mention any empirical, experimental, or quantitative evaluation, such
+      as experiments, benchmarks, or metrics. They focus on the proposed model and
+      its conceptual framework without providing evidence of structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The introduction includes citations [1],
+      [2], and [3], which reference prior research related to Alzheimer''s disease
+      and neural networks, indicating engagement with existing literature. Additionally,
+      the abstract discusses the "black box" problem in machine learning, suggesting
+      a comparison to prior work in the field of Explainable AI.'
+    novelty_prompt: '- Qualified. Reason: The abstract explicitly states, "we proposed
+      a model that will solve the ''X'' of the ''Xai'' that is Explainable AI," indicating
+      a new contribution in the form of a proposed model for Explainable AI, specifically
+      addressing the "black box" problem in machine learning models.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a new model for Explainable
+      AI that addresses the "black box" problem in machine learning, indicating that
+      it presents new methods and contributions rather than merely summarizing existing
+      work.'
+  llm_input_used: '## Abstract
+
+    **In this paper, we proposed a model that will solve the ''X'' of the ''Xai''
+    that is Explainable AI. The model is developed using deep learning and transfer
+    learning algorithms using different methods to depict how the decisions and predictions
+    of the Artificial Intelligence are made to be understandable for humans to interpret.
+    The term deals with explaining how the models work and what all happens in each
+    layer of neurons and the output is shown. The transparency in the process lets
+    humans understand the way how the predictions are carried out, what are the parameters
+    that the model is considering, what are the steps it takes to generate the final
+    output. Here, we considered Alzheimer disease in the brain and brought out the
+    results per layer of the model to comprehend the reason of the final result. This
+    could made easy for humans to identify what are the errors, unknown biases and
+    the number of possible paths the model can take in order to generate the more
+    accurate output. This proposed model is able to identify and depict the processes
+    going on while generating the result. The field tends to address the "black box"
+    problem in the complex machine learning models. The analysis would be used by
+    stakeholders to identify the real cause behind the interpretation of results.
+    Considering these, there are many use cases for this new emerging field, some
+    of them includes in the field of medical diagnosis, where the doctors would be
+    able to identify the paradigm and produce the most accurate diagnosis that will
+    cure the patient''s disease, in the finance sector to identify the future trends,
+    for the real time processing and many such fields.**
+
+
+    ## Introduction
+
+    Alzheimer''s disease is a progressive neurological disorder that impacts cerebral
+    function, resulting in the deterioration of memory, cognitive capabilities, and
+    overall bodily functioning [1]. It stands as the most prevalent cause of dementia.
+    Individuals afflicted by Alzheimer''s frequently encounter memory lapses that
+    disrupt their daily activities, such as forgetting recently acquired information,
+    important dates, and repetitive inquiries for the same details, or an increasing
+    reliance on memory aids. Alzheimer''s can induce significant alterations in behavior
+    and personality. Figure 2 illustrates the specific region of the brain affected
+    by Alzheimer''s disease, which may manifest in symptoms such as confusion, agitation,
+    mood fluctuations, social withdrawal,
+
+
+    Priya Rachel Bachan bachanpriya20@gmail.com CSE GGITS
+
+
+    Neeta Nathani neetanathani@ggits.org ECE GGITS
+
+
+    and heightened irritability. The examination is conducted through the application
+    of neural network models. A neural network is a computational paradigm designed
+    to emulate the structure and functionality of the neural networks in the human
+    brain [2]. It serves as a framework in machine learning and artificial intelligence
+    for processing information, executing pattern recognition, and making predictions
+    or classifications. The architecture of the neural network is depicted in Figure
+    1.
+
+
+    ![](_page_0_Figure_14.jpeg)
+
+
+    Fig 1. Deep Neural Network Architecture [2].
+
+
+    ![](_page_0_Figure_18.jpeg)
+
+
+    Fig 2. The brain affected with Alzheimer''s Disease [3]'
+  token_usage: 3507
+  time_usage: 4.550420761108398
+- title: 'Human-Centric Proactive Quality Control in Industry5.0: The critical role
+    of explainable AI'
+  abstract: The integration of human knowledge and experience with artificial intelligence,
+    especially in the context of Industry5.0, holds the promise of advanced capabilities
+    for manufacturing that may facilitate reduced waste and increased efficiency.
+    However, there is a gap between the two. This work discusses the critical role
+    of Explainable AI (XAI) within this paradigm, fostering a collaborative environment
+    where human operators can leverage AI-driven insights. A framework for data-driven
+    proactive quality control is coupled with XAI and human-centric approaches to
+    enable a path towards zero-defect manufacturing processes, improved operational
+    efficiency, and enhanced workforce empowerment. Furthermore, practical implications,
+    the impact of XAI and recommendations for upskilling and reskilling the manufacturing
+    personnel are discussed with a focus on small and medium-sized enterprises.**
+  keywords: ''
+  document: "# Human-Centric Proactive Quality Control in Industry5.0: The critical\
+    \ role of explainable AI\n\nPaoloCatti *Laboratory for Manufacturing Systems &\
+    \ Automation Department of Mechanical Engineering and Aeronautics, University\
+    \ of Patras*  Rio, Patras, Greece catti@lms.mech.upatras.gr\n\nNatalia Cardona\
+    \ *F6S EU Tech Innovation Network 77 Camden Street Lowe, Saint Kevin's* Dublin,\
+    \ Ireland natalia@f6s.com\n\n Emmanouil Bakopoulos *Laboratory for Manufacturing\
+    \ Systems & Automation Department of Mechanical Engineering and Aeronautics, University\
+    \ of Patras*  Rio, Patras, Greece bakopoulos@lms.mech.upatras.gr\n\nNikolaos Nikolakis\
+    \ *Laboratory for Manufacturing Systems & Automation Department of Mechanical\
+    \ Engineering and Aeronautics, University of Patras*  Rio, Patras, Greece nikolakis@lms.mech.upatras.gr\n\
+    \n Anja Stipankov *F6S EU Tech Innovation Network 77 Camden Street Lowe, Saint\
+    \ Kevin's* Dublin, Ireland anja@f6s.com\n\nKosmas Alexopoulos *Laboratory for\
+    \ Manufacturing Systems & Automation Department of Mechanical Engineering and\
+    \ Aeronautics, University of Patras*  Rio, Patras, Greece alexokos@lms.mech.upatras.gr\n\
+    \n*Abstract***—The integration of human knowledge and experience with artificial\
+    \ intelligence, especially in the context of Industry5.0, holds the promise of\
+    \ advanced capabilities for manufacturing that may facilitate reduced waste and\
+    \ increased efficiency. However, there is a gap between the two. This work discusses\
+    \ the critical role of Explainable AI (XAI) within this paradigm, fostering a\
+    \ collaborative environment where human operators can leverage AI-driven insights.\
+    \ A framework for data-driven proactive quality control is coupled with XAI and\
+    \ human-centric approaches to enable a path towards zero-defect manufacturing\
+    \ processes, improved operational efficiency, and enhanced workforce empowerment.\
+    \ Furthermore, practical implications, the impact of XAI and recommendations for\
+    \ upskilling and reskilling the manufacturing personnel are discussed with a focus\
+    \ on small and medium-sized enterprises.** \n\n## *Keywords—Explainable AI, Industry\
+    \ 5.0, Proactive Quality Control, Manufacturing*\n\n# I. INTRODUCTION\n\nQuality\
+    \ control is an integral part of a production process [1], aiming at identifying\
+    \ defects, at different stages of production; with traditional quality control\
+    \ approaches including testing and visual or manual inspection [2]. Manufacturing\
+    \ systems, typically involve quality control in their manufacturing processes,\
+    \ where randomly selected products or a batch of products or even every product\
+    \ is inspected for defects [3]. Manual quality control techniques typically rely\
+    \ on operators' expertise and are time-consuming, cost-ineffective and prone to\
+    \ errors [4]. Such techniques are designed to leverage operators' expertise. This\
+    \ makes them hard to replicate while little explainability or insights regarding\
+    \ the root cause of the generation of defects can be extracted [5].\n\nIn the\
+    \ shift towards Industry 5.0, quality control integrates human insights with AI-driven\
+    \ automation to enhance the adaptability and the personalization of manufacturing\
+    \ processes but also to make them more proactive [6]. Unlike Industry 4.0, where\
+    \ the focus was primarily on automation and predictive analytics to preemptively\
+    \ identify defects [7][8][9], Industry 5.0 emphasizes a symbiotic interaction\
+    \ between human operators and technology [10]. This approach allows for real-time\
+    \ adjustments in production lines, based on both data-driven insights and human\
+    \ experience, effectively reducing waste and improving product quality and work\
+    \ satisfaction, putting the human at the centre of the production [11][12].\n\n\
+    Nevertheless, modern AI-driven solutions lack the capability of reasoning about\
+    \ their outcomes and recommendations [13]. This is due to the nature of complex\
+    \ algorithms that are considered \"black boxes\" because their internal workings\
+    \ and decision processes are not transparent [14][15][16]. In this context, Explainable\
+    \ AI (XAI) can be used to make AI decisions transparent and understandable to\
+    \ human operators, thereby not only increasing trust but also enabling operators\
+    \ to make informed decisions about when and how to intervene in the production\
+    \ process [17]. Thus, the integration of human insight with AI in Industry 5.0\
+    \ allows for dynamic and responsive quality control systems.\n\nThis paper explores\
+    \ a framework that integrates a digital twin model, predictive analytics for defect\
+    \ detection, and shapley additive explanations (SHAP) [18] XAI to enhance the\
+    \ collaboration between human operators and automated AI systems within Industry\
+    \ 5.0. We detail how these technologies converge to provide a holistic view of\
+    \ predictive analytics, empowering operators with a deeper understanding of AI\
+    \ decision-making and the implications of their actions. Moreover, this study\
+    \ discusses the broader implications of such integrations for workforce development\
+    \ and policymaking, with a special focus on the practical deployment of these\
+    \ advanced technologies in small and medium-sized enterprises.\n\n# II. LITERATURE\
+    \ REVIEW\n\nXAI techniques can be classified into two distinct categories which\
+    \ include transparent and post-hoc models [19]. The transparent method is applied\
+    \ in AI techniques whose inner workings and decision-making processes are simple\
+    \ to interpret and represent, while post-hoc is applied in AI techniques built\
+    \ with data that are characterised by nonlinear relationships or high data complexity\
+    \ [19]. A transparent model is characterised by its high simulatability, decomposability\
+    \ and algorithmic transparency; with models like linear/logistic regression, decision\
+    \ trees, K-nearest neighbours, and rule-based models some AI transparent models\
+    \ [20]. Lastly, post-hoc methods are grouped into two categories; including the\
+    \ model-agnostic and model-specific categories, as described in [19].\n\nModel-specific\
+    \ XAI techniques support explainability constraints targeting an AI Deep Learning\
+    \ algorithm and its internal structure [21]. Model-specific techniques include\
+    \ feature relevance, example-based explanation, rule-based learning, and feature-based\
+    \ saliency maps [21].\n\nIn [22] a systematic review is performed on the use of\
+    \ feature relevance in anomaly detection algorithms, concluding that while approaches\
+    \ such as perturbation-based approaches, and gradient-based approaches can pinpoint\
+    \ important features of the models, they can also potentially introduce biases;\
+    \ such as in the case of gradient-based approaches may highlight features with\
+    \ high numerical gradients but ignore others, equally important, that don't exhibit\
+    \ strong gradient signals. Furthermore, in [23] the use of example-based explanations\
+    \ is discussed, whose goal is the clarification of why a specific decision was\
+    \ made as opposed to another potential decision by an algorithm. As discussed\
+    \ in [23], example-based explanations use historical data to evaluate the model's\
+    \ correctness, offering users insight into the application of advice across different\
+    \ scenarios. However, despite an increase in the persuasiveness of the advice,\
+    \ example-based explanations may not enhance a user's understanding of the model's\
+    \ outputs. Rule-based learning is examined in [24], where the ability to enhance\
+    \ transparency and understandability of decisions in complex AI systems is documented.\
+    \ However, rule-based learning is not suited to dynamic and unpredictable environments\
+    \ due to the extensiveness and complexity of rule sets often accompanying such\
+    \ use cases. Lastly, in [25] feature-based saliency maps are discussed, where\
+    \ pixels were inserted and removed from images used to train a DL algorithm, in\
+    \ a computer vision application, to determine the importance of different pixels\
+    \ and visualise the calculated importance in heat maps. Nevertheless, this technique\
+    \ is computationally heavy and requires constant optimisation of mask parameters\
+    \ [25].\n\nModel-agnostic XAI techniques typically analyse a model's inputs and\
+    \ outputs, aiming at interpreting the model's behaviour to generate explanations\
+    \ [26]. Model-agnostic techniques include the local interpretable model-agnostic\
+    \ explanations (LIME), the shapley addictive explanations (SHAP), and layer-wise\
+    \ relevance propagation (LRP) [19],[26].\n\nLIME is discussed in [27], where its\
+    \ strengths and limitations are reviewed. LIME is perturbing the input data to\
+    \ observe how the model's outputs change; thus understanding features with significant\
+    \ influence in the output. LIME provides explanations for individual outputs which\
+    \ increases its ability to understand the underlying decision-making process of\
+    \ models at a local level. However, LIME can potentially provide misleading interpretations\
+    \ due to its focus on local explanations rather than providing a global overview\
+    \ of the model's behaviour [28]. SHAP was introduced in [18]. SHAP can be used\
+    \ for both local and global explanations; increasing its versatility and ability\
+    \ to explain the global model's behaviour [18]. Nevertheless, SHAP's effectiveness\
+    \ in explaining a model's results is highly dependent on the sample of the dataset\
+    \ used by SHAP to build the explanation model and SHAP can be computationally\
+    \ intensive; however, this is a characteristic of all model-agnostic techniques\
+    \ [29]. Lastly, LRP is examined in [30]. LRP shifts its focus towards the output\
+    \ layer and progresses in a backwards manner to the input layer, proportionally\
+    \ distributing relevance scores to each neuron based on their contribution to\
+    \ the final output [30]. Nevertheless, LRP is accompanied by potential misinterpretations\
+    \ since the interpretations provided by LRP heavily rely on the underlying model's\
+    \ accuracy and correct implementation of the propagation rules [31].\n\nAiming\
+    \ to assist the human workforce, manufacturers are increasingly adopting XAI techniques\
+    \ together with their existing AI solutions to facilitate the efficient decision-making\
+    \ of personnel to improve quality control [32]. In [33] a system utilising XAI,\
+    \ based on LIME, provides insights on predictions generated by AI algorithms regarding\
+    \ defective rotating machines. Providing clear explanations of the predictions\
+    \ generated by the AI models, enhanced decisionmaking is achieved by providing\
+    \ equipment maintenance recommendations to ensure optimal equipment performance\
+    \ to prevent the generation of defects [33]. Additionally, in [34] XAI was used\
+    \ to improve the classification of defects in aircraft components, while in [35]\
+    \ the importance of humancentric approaches in quality control is emphasized,\
+    \ pinpointing that XAI can be an enabling technology to achieve operator support\
+    \ in an automated quality control environment.\n\nIn conclusion, the literature\
+    \ review underscores a significant demand for increased insight into the modern\
+    \ quality control approach employed in the manufacturing industry. Existing strategies\
+    \ often focus on adopting XAI to indirectly influence quality control in manufacturing,\
+    \ such as through predictive maintenance. In this study, the focus relies on describing\
+    \ the behaviour of the entire quality control system using an XAI layer running\
+    \ on top of predictive AI analytics and a digital twin providing recommendations\
+    \ to operators to enhance proactive quality control.\n\n# III. METHODOLOGY\n\n\
+    This study aims to introduce a framework that couples XAI and a human-centric\
+    \ layer with advanced digital solutions, powered by complex AI models, aiming\
+    \ at increasing the understanding of results generated by AI models and incorporating\
+    \ a feedback loop to improve the AI models' performance and XAI model's explainability.\
+    \ An overview of the proposed methodology is illustrated in Fig. 1.\n\nThe framework's\
+    \ core is a digital twin. The digital twin is the digital representation of the\
+    \ physical manufacturing system providing the system's behaviour using AI-enabled\
+    \ approaches [36].\n\n Apart from the behaviour of the manufacturing processes\
+    \ in the system, the digital twin also provides the behaviour of the product as\
+    \ it traverses the different processes. In conjunction with the digital twin,\
+    \ AI-powered data analysis modules access the behaviour of the product and processes\
+    \ as well as real-time data from the physical manufacturing system. Enabling proactive\
+    \ quality control, the AI data analysis modules utilise the provided product and\
+    \ process behaviour and real-time production data to predict future product defects.\n\
+    \nPositioned on top of the digital twin and AI-enabled quality assessment models,\
+    \ an XAI layer provides explanations generated by the digital twin and AI models\
+    \ to human workers. The formation of the XAI layer is performed in three sequential\
+    \ steps, which include:\n\n• *Step 1 - Access product/process behaviour & AI model\
+    \ predictions*: The digital twin and AI-enabled predictive model feed behavioural\
+    \ and prediction data to the XAI layer, using dedicated components facilitating\
+    \ data access,\n\n- *Step 2 SHAP values calculation*: Using the provided data\
+    \ by the digital twin and AI-enabled predictive model, SHAP values are dynamically\
+    \ calculated for each set of data points,\n- *Step 3 User presentation*: Explanations\
+    \ generated by SHAP are presented to the human worker, through a User Interface\
+    \ of the system.\n\nIn greater detail, to guarantee a robust and constant feed\
+    \ of data from the digital twin and AI-enabled data analytics modules, a dedicated\
+    \ data access layer sits between the XAI layer and the rest of the system. Once\
+    \ the data is accessed cooperative game theory algorithms are employed to calculate\
+    \ the SHAP values. The algorithms measure each data point's contribution to the\
+    \ behaviour of the product and process as well as to the contribution to the predictive\
+    \ model's output. The SHAP values are calculated using (1) [18], and are dimensionless.\n\
+    \n$$\n\\varphi_i(f, x) = \\sum_{z' \\subseteq x'} \\frac{|z'| (M - |z'| - 1)}{M!}\
+    \ [f_x(z') - f_x(\\frac{z'}{i})] \\tag{1}\n$$\n\nWhere:\n\n- *φ*: the impact of\
+    \ the data point *i* for the AI model *f* at a record *x*,\n- | |: the number\
+    \ of data points in the subset ,\n- *M*: the total number of data points,\n- :\
+    \ the prediction of the AI model when the data points in the subset are used along\
+    \ with the data point *i,*\n- -: the prediction of the AI model when the data\
+    \ points in the subset are used without the data point *i.*\n\nTogether with the\
+    \ XAI layer, a human-centric interaction layer collects and processes feedback\
+    \ from human workers regarding the explanations of the XAI layer and the predictions\
+    \ of the AI model. The formation of the humancentric interaction layer is performed\
+    \ in four sequential steps, which include:\n\n- *Step 1 Collect human worker feedback*:\
+    \ Through the user interface, the human worker can provide feedback on both the\
+    \ AI model's results and the explanations provided by the XAI layer,\n- *Step\
+    \ 2 Feedback categorisation*: The provided feedback is categorised to facilitate\
+    \ its consumption by the human-centric interaction layer,\n- *Step 3 Feedback\
+    \ analysis*: Based on the categorisation of the feedback, it is processed to identify\
+    \ repetitive feedback patterns,\n- *Step 4 Corrective actions application***:**\
+    \ Based on the feedback analysis results, corrective actions are taken with corrections\
+    \ applied to the XAI layer and AI models.\n\nDelving deeper into the human-centric\
+    \ interaction layer, the user interface prompts the user to provide feedback on\
+    \ the results provided by the digital twin, AI models and the XAI\n\n![](_page_2_Figure_17.jpeg)\n\
+    \nFig. 1. The XAI Framework.\n\nlayer. Upon feedback receival, it is categorised\
+    \ against predetermined categories. The categories include, \"feature importance\
+    \ correction\", \"defect prediction correction\", \"digital twin behaviour correction\"\
+    , \"explanation misunderstood\", \"explanations helpful\", and \"predictions accurate\"\
+    . Additionally, the specific data points used during the AI models' execution\
+    \ and their output are grouped with the provided feedback to facilitate the feedback\
+    \ analysis and generation of corrective actions.\n\nFollowing the feedback categorisation,\
+    \ the feedback is systematically analysed to determine common patterns within\
+    \ feedback data and corrective actions are applied to the AI models and XAI layer.\
+    \ To analyse feedback data statistical analysis approaches are pursued. A combination\
+    \ of association rule mining and correlation analysis is employed to uncover a\
+    \ high proportion of feedback about specific categories, with correlation analysis\
+    \ pinpointing the data points influencing most of the collected feedback. Ultimately,\
+    \ based on the feedback analysis alterations are performed in the AI models to\
+    \ increase their performance as well as alterations on the XAI layer to improve\
+    \ its explanation generation approach; reducing confusion caused by the explanation\
+    \ visualisation approach employed.\n\nLastly, the XAI framework includes a visualisation\
+    \ environment utilising AR/VR technology to enable humans to interact with the\
+    \ system to get a better understanding of the manufacturing systems operations\
+    \ and the areas where AI solutions are applied along with their outputs, presented\
+    \ interactively, to enhance their AI literacy and familiarity with the AI and\
+    \ XAI concept. Lastly, through AR/VR technology, new human workers in the production\
+    \ line can become easily accustomed and familiar with the entire manufacturing\
+    \ system, given the increased immersity such technologies offer compared to traditional\
+    \ desktop or mobile interfaces, displaying manufacturing assets using a 2D/3D\
+    \ representation.\n\n## IV. USE CASE\n\nThe XAI framework has been applied to\
+    \ a virtual manufacturing environment to test its performance and suitability\
+    \ in assisting humans in understanding the outputs of AI models. The virtual manufacturing\
+    \ environment replicates a real-world robotic welding station, part of a larger\
+    \ manufacturing system capable of producing products for the automotive industry.\
+    \ The virtual robot welding process is of key importance due to its potential\
+    \ high welding defect generation and the important role of operators in proactively\
+    \ reducing defects, assisted by advanced digital solutions.\n\nThe virtual environment's\
+    \ backbone is a digital twin. The digital twin is powered by an AI model responsible\
+    \ for providing real-time high-quality synthetic data of the welding process including\
+    \ the welding speed, the peak welding temperature, the current, and the voltage.\
+    \ The real-time data collected by the digital twin are used by a predictive AI\
+    \ model that predicts potential welding defects. Welding defects include spots\
+    \ on the weld due to bad welding, laser cuts on the product due to the laser welding\
+    \ process and missing welding. The labelling of the synthetically generated data\
+    \ was performed in conjunction with human experts in the welding process, and\
+    \ *0* indicates defect absence, and *1* presence.\n\nHumans interact with the\
+    \ virtual manufacturing system through a user interface that displays the results\
+    \ of predictive analytics, and based on the results of the AI predictive model,\
+    \ corrective actions on the process need to be performed by the operator. Assisting\
+    \ in the decision-making process the SHAP XAI's explanations are displayed to\
+    \ the operator alongside the predictive model's outputs.\n\nThe virtual environment\
+    \ was constructed in a development environment consisting of a Windows PC equipped\
+    \ with an Intel Core i7-13700H processor, 32 GB of DDR5 RAM, and a cuda-enabled\
+    \ NVIDIA RTX A1000 GPU with 6 GB GDDR6 VRAM, running Windows 11 Pro version 23H2.\
+    \ Python was used in the creation of the AI models and SHAP, together with its\
+    \ libraries such as PyTorch for the model creation. The digital twin was constructed\
+    \ using Node-RED and the React.js framework.\n\nThe application of SHAP necessitates\
+    \ a deep learning model capable of generating accurate defect results. The model\
+    \ used in the virtual environment is a custom deeplearning model. The model's\
+    \ architecture can be seen in Fig. 2. The AI model utilises as input the real-time\
+    \ synthetically generated data of the digital twin, and the predictions generated\
+    \ are then provided to the XAI layer.\n\n![](_page_3_Figure_9.jpeg)\n\nFig. 2.\
+    \ Architecture Of The Predictive AI Model.\n\nThe predictive AI model was trained\
+    \ with 77,120 data points and its performance was validated using 19,280 data\
+    \ points. The data points represent the total number of values included in the\
+    \ dataset used to train and validate the predictive AI model. The dataset was\
+    \ composed based on the data generated by the digital twin and a representation\
+    \ of the dataset can be seen in Table I. Lastly, the dataset includes a label\
+    \ against welding defects that the model aims to predict.\n\nTABLE I. SAMPLE OF\
+    \ THE DATASET USED TO TRAIN & VALIDATE THE PREDICTIVE MODEL.\n\n| Dataset Sample\
+    \               |                                         |             |    \
+    \            |       |  |  |\n|------------------------------|-----------------------------------------|-------------|----------------|-------|--|--|\n\
+    | Welding<br>speed<br>(mm/min) | Peak Welding<br>Temperature<br>oC)<br>( | Current\
+    \ (A) | Voltage<br>(V) | Label |  |  |\n| 127.2                        | 1587.8\
+    \                                  | 25.26       | 21.26          | 0     |  |\
+    \  |\n| 133.2                        | 1588.2                                \
+    \  | 72.51       | 17.93          | 1     |  |  |\n\nThe model was capable of\
+    \ predicting the presence or absence of defects given a set of real-time data\
+    \ provided by the digital twin. Given the nature of the task (predicting the presence\
+    \ or absence of welding defects), the model performs binary classification. The\
+    \ model's performance was measured using the validation data and the following\
+    \ performance metrics (2), (3), (4), (5).\n\n$$\nAccuracy = \\frac{TP + TN}{TP\
+    \ + TN + FP + FN'}\n$$\n (2)\n\n$$\nPrecision = \\frac{TP}{TP + FP},\\tag{3}\n\
+    $$\n\n$$\nRecall = \\frac{TP}{TP + FN'},\n$$\n\\n(4)\n\n$$\nF1 score = 2 \\times\
+    \ \\frac{Precision \\times Recall}{Precision + Recall},\n$$\n (5)\n\nWhere:\n\n\
+    - *TP is* the true positives,\n- *FP* is the false positives,\n- *FN* is the false\
+    \ negatives, and\n- *TN* is the true negatives of the classification.\n\nThe deep\
+    \ learning model's performance can be seen in Table II.\n\n| Initial Predictive\
+    \ Model's Performance |        |  |  |  |\n|----------------------------------------|--------|--|--|--|\n\
+    | Performance metric                     | Values |  |  |  |\n| Accuracy     \
+    \                          | 0.85   |  |  |  |\n| Precision                  \
+    \            | 0.84   |  |  |  |\n| Recall                                 | 0.84\
+    \   |  |  |  |\n| F1-score                               | 0.84   |  |  |  |\n\
+    \nTABLE II. PREDICTIVE MODEL'S PERFORMANCE.\n\nGiven the relatively high performance\
+    \ of the deep learning algorithm, SHAP was applied. High performance of the AI\
+    \ model is essential to the correct application of SHAP to ensure accurate explanations\
+    \ and avoid misinterpretations, as discussed in section II. In the SHAP application,\
+    \ the *GradientExplainer* function was used. The *GradientExplainer* function\
+    \ was selected due to its high efficiency compared to alternative explanation\
+    \ functions, its ability to utilise the internal structure of the deep learning\
+    \ predictive model; resulting in more accurate and theoretically sound explanations,\
+    \ and its suitability in explaining neural network algorithms. In essence, the\
+    \ *GradientExplainer*  function approximates the SHAP values provided by (1),\
+    \ due to the computational complexity a direct calculation of (1) would introduce.\
+    \ The performance of SHAP was measured using local accuracy, and additivity, given\
+    \ by (6), and (7), and can be seen in Table III.\n\n$$\nf(x) = \\varphi_0 + \\\
+    sum_{i=1}^{M} \\varphi_i(x),\n$$\n (6)\n\n$$\nf(X) = \\varphi_0 + \\sum_{i=1}^{M}\
+    \ \\varphi_i(X), \\tag{7}\n$$\n\nWhere:\n\n- *f(x)*: the prediction for a specific\
+    \ instance *x.*\n- , : the expected value of the model outputs over the background\
+    \ dataset using the SHAP calculation,\n- -: the SHAP values for each data point\
+    \ *i* for the instance *x*,\n- *M*: the total number of data points,\n- *f(X)*:\
+    \ the predictions across all instances in a set *X*.\n\nThe SHAP's performance\
+    \ can be seen in Table III.\n\nTABLE III. THE PERFORMANCE OF SHAP.\n\n| Performance\
+    \ of SHAP |        |  |  |  |\n|---------------------|--------|--|--|--|\n| Performance\
+    \ metric  | Values |  |  |  |\n| Local accuracy      | 0.2    |  |  |  |\n| Additivity\
+    \          | 0.4    |  |  |  |\n\nThe results of local accuracy that are presented\
+    \ in Table III indicate that the SHAP has a moderate degree of error when SHAP\
+    \ values combined with the model's expected values, approximate an individual\
+    \ prediction; suggesting that the SHAP requires further adjustments to improve\
+    \ its explanations. Additionally, the additivity score of 0.4 from Table III points\
+    \ out that the overall discrepancy between the summed contributions of the SHAP\
+    \ values across all predictions and the actual outputs of the model is moderate;\
+    \ indicating that the SHAP can provide some valuable insight into the model's\
+    \ behaviour. In general, it can be observed that while SHAP explanations can generally\
+    \ provide adequate approximations of the model's behaviour, they may struggle\
+    \ with more specific predictions where the model's decisionmaking process is more\
+    \ complex.\n\nProvided the relatively adequate ability of SHAP to explain the\
+    \ predictive AI model's behaviour and the importance of each feature in reaching\
+    \ the results shown to the user, summary plots are generated by SHAP to be displayed\
+    \ to the user. The SHAP plots explain to the human worker the\n\n![](_page_4_Figure_24.jpeg)\n\
+    \nFig. 3. The Summary Plot Of the SHAP For The Importance Of Features In Predicting\
+    \ Welding Defects.\n\nimportance of each feature used during the AI model's training\
+    \ in reaching a decision; which is the prediction of the presence or absence of\
+    \ a welding defect. The summary plot was configured to provide the importance\
+    \ of each feature against the prediction of a welding defect, and it can be seen\
+    \ in Fig. 3. In the summary plot, the features are displayed on the vertical axis.\
+    \ The SHAP values are indicated in the horizontal axis. The colour represents\
+    \ the importance of each data point of each feature, and points to the right from\
+    \ the *0* SHAP value increase the likelihood of the positive class; in this case\
+    \ the presence of welding defects. For example, for the \"Current\", the significant\
+    \ presence of high values on the positive side of the SHAP values points to the\
+    \ \"Current\" feature being of high significance in predicting the positive class;\
+    \ which in this case is the presence of welding defects.\n\nAn experiment was\
+    \ formulated, where four humans interacted with the virtual manufacturing environment.\
+    \ Humans were exposed to the results of the predictive AI model as well as the\
+    \ explanations generated by the XAI layer. Using the XAI framework the humans\
+    \ included in the experiment provided recommendations on the defects prediction\
+    \ model based on the importance and explanation generated for each data point,\
+    \ provided by SHAP. The feedback was used to adjust the AI model and its performance\
+    \ was recalculated as seen in Table IV.\n\nTABLE IV. PREDICTIVE MODEL'S PERFORMANCE\
+    \ AFTER CORRECTIONS.\n\n| Predictive Model's Performance After Corrections | \
+    \       |                                              |  |  |\n|--------------------------------------------------|--------|----------------------------------------------|--|--|\n\
+    | Performance metric                               | Values | Recorded difference<br>against\
+    \ initial model |  |  |\n| Accuracy                                         |\
+    \ 0.89   | 4.7%                                         |  |  |\n| Precision \
+    \                                       | 0.88   | 4.7%                      \
+    \                   |  |  |\n| Recall                                        \
+    \   | 0.87   | 3.6%                                         |  |  |\n| F1-score\
+    \                                         | 0.87   | 3.6%                    \
+    \                     |  |  |\n\nThe results of Table IV indicate that through\
+    \ the XAI framework, the predictive AI model's performance was improved by an\
+    \ average of 4.15% across the four performance metrics. Nevertheless, it is worth\
+    \ pointing out here, that two of the four humans included in the experiment had\
+    \ prior experience with AI models, which could have played an important role in\
+    \ providing accurate feedback to the humancentric interaction layer of the framework.\
+    \ However, results may differ in an actual manufacturing environment where human\
+    \ operators, who interact with the framework, may have limited to no prior exposure\
+    \ to AI systems.\n\n### V. DISCUSSION\n\nEffective integration of XAI in Industry\
+    \ 5.0 begins with the strategic selection of appropriate XAI models, such as SHAP,\
+    \ tailored to meet specific operational needs for detailed feature attribution.\
+    \ This selection process must ensure that the chosen models align well with existing\
+    \ operational workflows. Organisations are encouraged to adopt an iterative approach\
+    \ to enhance XAI efficacy, initiating pilot projects that allow for continuous\
+    \ feedback-driven refinements. This method not only builds familiarity with XAI\
+    \ systems but also strengthens trust and confidence among operators.\n\nIn conjunction\
+    \ with technical integration, the development of robust training programs is crucial.\
+    \ These programs should focus on enhancing AI literacy, demonstrating practical\
+    \ applications of XAI, and providing hands-on experience with AI systems. By educating\
+    \ workers about both the functionalities and limitations of AI and specifically\
+    \ illustrating how tools like SHAP deliver interpretable insights, the workforce\
+    \ can more effectively understand and leverage AI outputs.\n\nFurthermore, the\
+    \ successful adoption and utility of XAI require the support of thoughtful policy\
+    \ frameworks that incentivise innovation while upholding ethical standards. Such\
+    \ policies should foster transparency and accountability, ensuring that AI and\
+    \ XAI systems are both auditable and their decisions contestable by human operators.\n\
+    \nAdditionally, promoting cross-sector collaboration through forums and consortia\
+    \ is essential to standardise XAI practices across industries. This approach not\
+    \ only simplifies the adoption process, particularly for small and medium-sized\
+    \ enterprises but also facilitates the dissemination of best practices and experiences.\
+    \ Consequently, it accelerates the practical deployment of XAI and ensures its\
+    \ benefits are broadly accessible.\n\nLastly, in an actual manufacturing environment,\
+    \ which highly relies on operators' expertise in the identification of welding-related\
+    \ defects, an accepted average defect detection rate is approximately 85%. This\
+    \ signals that the original AI predictive model can not be considered up to par\
+    \ with manual inspection techniques. Thus, an average improvement of 4% (as seen\
+    \ in Table IV) of a predictive AI system assisting in the early identification\
+    \ of defects could be of high importance. Such an improvement would directly impact\
+    \ the total number of defects that can be identified at an early stage of production,\
+    \ thus advancing the quality control process. Nonetheless, further improvement\
+    \ of the approach, targeting the improvement of SHAP could be critical in optimising\
+    \ the proposed XAI framework. Lastly, while a learning curve exists to use the\
+    \ framework, the high potential for improving AI systems based on human experts'\
+    \ feedback alleviates the potential man-hours and associated costs required to\
+    \ train new teams to utilise such tools in day-to-day operations.\n\n### VI. CONCLUSION\n\
+    \nThis paper discussed the integration of XAI within Industry 5.0, emphasizing\
+    \ its critical role in bridging the gap between advanced automation technologies\
+    \ and human expertise. By implementing a framework that combines digital twins,\
+    \ predictive analytics, and SHAP-based XAI, this study supported that such integration\
+    \ can enhance proactive quality control, enabling a move towards zero-defect manufacturing\
+    \ processes.\n\nThe potential of XAI to make AI systems more transparent and understandable\
+    \ has proven substantial, empowering human operators to trust and effectively\
+    \ interact with AIdriven systems. This transparency fosters a more inclusive work\
+    \ environment, where technology augments rather than replaces human skills, potentially\
+    \ yielding broader economic and social benefits and promoting a collaborative,\
+    \ and adaptive workforce.\n\nNevertheless, the proposed methodology presents complexities\
+    \ and high computational needs, particularly with real-time SHAP implementation.\
+    \ Additionally, integrating sophisticated XAI models into legacy systems poses\
+    \ significant challenges.\n\nFuture research will focus on optimising XAI algorithm\
+    \ efficiency for real-world applications and broadening the adaptability of XAI\
+    \ systems to accommodate diverse manufacturing scenarios and operator expertise\
+    \ levels.\n\n### ACKNOWLEDGEMENT\n\nThis work was partially supported by the HORIZON-CL4-\
+    \ 2021-TWIN-TRANSITION-01 openZDM project, under Grant Agreement No. 1010586.\n\
+    \n### REFERENCES\n\n- [1] M. Colledani et al., \"Design and management of manufacturing\
+    \ systems for production quality,\" CIRP Annals, vol. 63, no. 2, pp. 773– 796,\
+    \ 2014.\n- [2] J. Butt, R. Bhaskar, and V. Mohaghegh, \"Non-Destructive and Destructive\
+    \ Testing to Analyse the Effects of Processing Parameters on the Tensile and Flexural\
+    \ Properties of FFF-Printed Graphene-Enhanced PLA,\" J. Compos. Sci., vol. 6,\
+    \ no. 5, p. 148, May 2022.\n- [3] G. Chryssolouris, Manufacturing systems: theory\
+    \ and practice, 2nd ed. in Mechanical engineering series. New York: Springer,\
+    \ 2006.\n- [4] V. Medici et al., \"Integration of Non-Destructive Inspection (NDI)\
+    \ systems for Zero-Defect Manufacturing in the Industry 4.0 era,\" in 2023 IEEE\
+    \ International Workshop on Metrology for Industry 4.0 & IoT (MetroInd4.0&IoT),\
+    \ Brescia, Italy: IEEE, Jun. 2023, pp. 439–444.\n- [5] Y. Torres, S. Nadeau, and\
+    \ K. Landau, \"Classification and Quantification of Human Error in Manufacturing:\
+    \ A Case Study in Complex Manual Assembly,\" Applied Sciences, vol. 11, no. 2,\
+    \ p. 749, Jan. 2021.\n- [6] M. H. Zafar, E. F. Langås, and F. Sanfilippo, \"Exploring\
+    \ the synergies between collaborative robotics, digital twins, augmentation, and\
+    \ industry 5.0 for smart manufacturing: A state-of-the-art review,\" Robotics\
+    \ and Computer-Integrated Manufacturing, vol. 89, p. 102769, Oct. 2024.\n- [7]\
+    \ G. Dutta, R. Kumar, R. Sindhwani, and R. Kr. Singh, \"Digitalization priorities\
+    \ of quality control processes for SMEs: a conceptual study in perspective of\
+    \ Industry 4.0 adoption,\" J Intell Manuf, vol. 32, no. 6, pp. 1679–1698, Aug.\
+    \ 2021.\n- [8] P. Catti, N. Nikolakis, K. Sipsas, N. Picco, and K. Alexopoulos,\
+    \ \"A hybrid digital twin approach for proactive quality control in manufacturing,\"\
+    \ Procedia Computer Science, vol. 232, pp. 3083–3091, Jan. 2024.\n- [9] N. Leberruyer,\
+    \ J. Bruch, M. Ahlskog, and S. Afshar, \"Toward Zero Defect Manufacturing with\
+    \ the support of Artificial Intelligence— Insights from an industrial application,\"\
+    \ Computers in Industry, vol. 147, p. 103877, May 2023.\n- [10] X. Xu, Y. Lu,\
+    \ B. Vogel-Heuser, and L. Wang, \"Industry 4.0 and Industry 5.0—Inception, conception\
+    \ and perception,\" Journal of Manufacturing Systems, vol. 61, pp. 530–535, Oct.\
+    \ 2021.\n- [11] A. Hanif et al., \"A Comprehensive Survey of Explainable Artificial\
+    \ Intelligence (XAI) Methods: Exploring Transparency and Interpretability,\" in\
+    \ Web Information Systems Engineering – WISE 2023, vol. 14306, F. Zhang, H. Wang,\
+    \ M. Barhamgi, L. Chen, and R. Zhou, Eds., in Lecture Notes in Computer Science,\
+    \ vol. 14306. , Singapore: Springer Nature Singapore, 2023, pp. 915–925.\n- [12]\
+    \ N. V. Naveen Vemuri, \"Enhancing Human-Robot Collaboration in Industry 4.0 with\
+    \ AI-driven HRI,\" pst, vol. 47, no. 4, pp. 341–358, Dec. 2023.\n- [13] J. Maclure,\
+    \ \"AI, Explainability and Public Reason: The Argument from the Limitations of\
+    \ the Human Mind,\" Minds & Machines, vol. 31, no. 3, pp. 421–438, Sep. 2021.\n\
+    - [14] P. N. Mueller, L. Woelfl, and S. Can, \"Bridging the gap between AI and\
+    \ the industry — A study on bearing fault detection in PMSM-driven systems using\
+    \ CNN and inverter measurement,\" Engineering Applications of Artificial Intelligence,\
+    \ vol. 126, p. 106834, Nov. 2023.\n- [15] W. Gao et al., \"Machine tool calibration:\
+    \ Measurement, modeling, and compensation of machine tool errors,\" International\
+    \ Journal of Machine Tools and Manufacture, vol. 187, p. 104017, Apr. 2023.\n\
+    - [16] C. Ferreira and G. Gonçalves, \"Remaining Useful Life prediction and challenges:\
+    \ A literature review on the use of Machine Learning Methods,\" Journal of Manufacturing\
+    \ Systems, vol. 63, pp. 550–562, Apr. 2022.\n- [17] S. Huang, B. Wang, X. Li,\
+    \ P. Zheng, D. Mourtzis, and L. Wang, \"Industry 5.0 and Society 5.0—Comparison,\
+    \ complementation and co-\n\nevolution,\" Journal of Manufacturing Systems, vol.\
+    \ 64, pp. 424–428, Jul. 2022.\n\n- [18] S. Lundberg and S.-I. Lee, \"A Unified\
+    \ Approach to Interpreting Model Predictions.\" arXiv, Nov. 24, 2017.\n- [19]\
+    \ P. Gohel, P. Singh, and M. Mohanty, \"Explainable AI: current status and future\
+    \ directions.\" arXiv, Jul. 12, 2021.\n- [20] T. P. Quinn, S. Gupta, S. Venkatesh,\
+    \ and V. Le, \"A Field Guide to Scientific XAI: Transparent and Interpretable\
+    \ Deep Learning for Bioinformatics Research.\" arXiv, Oct. 13, 2021.\n- [21] W.\
+    \ Saeed and C. Omlin, \"Explainable AI (XAI): A systematic metasurvey of current\
+    \ challenges and future opportunities,\" Knowledge-Based Systems, vol. 263, p.\
+    \ 110273, Mar. 2023.\n- [22] J. Tritscher, A. Krause, and A. Hotho, \"Feature\
+    \ relevance XAI in anomaly detection: Reviewing approaches and challenges,\" Front.\
+    \ Artif. Intell., vol. 6, p. 1099521, Feb. 2023.\n- [23] J. Van Der Waa, E. Nieuwburg,\
+    \ A. Cremers, and M. Neerincx, \"Evaluating XAI: A comparison of rule-based and\
+    \ example-based explanations,\" Artificial Intelligence, vol. 291, p. 103404,\
+    \ Feb. 2021.\n- [24] B. M. Keneni et al., \"Evolving Rule-Based Explainable Artificial\
+    \ Intelligence for Unmanned Aerial Vehicles,\" IEEE Access, vol. 7, pp. 17001–17016,\
+    \ 2019.\n- [25] Z. Wang and I. Joe, \"OISE: Optimized Input Sampling Explanation\
+    \ with a Saliency Map Based on the Black-Box Model,\" Applied Sciences, vol. 13,\
+    \ no. 10, p. 5886, May 2023.\n- [26] L. Gianfagna and A. Di Cecco, \"Model-Agnostic\
+    \ Methods for XAI,\" in Explainable AI with Python, Cham: Springer International\
+    \ Publishing, 2021, pp. 81–113.\n- [27] J. Dieber and S. Kirrane, \"Why model\
+    \ why? Assessing the strengths and limitations of LIME.\" arXiv, Nov. 30, 2020.\n\
+    - [28] E. Amparore, A. Perotti, and P. Bajardi, \"To trust or not to trust an\
+    \ explanation: using LEAF to evaluate local linear XAI methods,\" PeerJ Computer\
+    \ Science, vol. 7, p. e479, Apr. 2021.\n- [29] K. Roshan and A. Zafar, \"Utilizing\
+    \ XAI Technique to Improve Autoencoder based Model for Computer Network Anomaly\
+    \ Detection with Shapley Additive Explanation(SHAP),\" IJCNC, vol. 13, no. 6,\
+    \ pp. 109–128, Sep. 2021.\n- [30] I. Ullah, A. Rios, V. Gala, and S. Mckeever,\
+    \ \"Explaining Deep Learning Models for Tabular Data Using Layer-Wise Relevance\
+    \ Propagation,\" Applied Sciences, vol. 12, no. 1, p. 136, Dec. 2021.\n- [31]\
+    \ S. G. Kim, S. Ryu, H. Kim, K. Jin, and J. Cho, \"Enhancing the Explainability\
+    \ of AI Models in Nuclear Power Plants with Layer-wise Relevance Propagation,\"\
+    \ presented at the Proceedings of the Transactions of the Korean Nuclear Society\
+    \ Virtual Autumn Meeting, Jeju, Korea, 2021, pp. 21–22.\n- [32] Z. Alexander,\
+    \ D. H. Chau, and C. Saldaña, \"An Interrogative Survey of Explainable AI in Manufacturing,\"\
+    \ IEEE Trans. Ind. Inf., pp. 1–13, 2024.\n- [33] S. Gawde, S. Patil, S. Kumar,\
+    \ P. Kamat, and K. Kotecha, \"An explainable predictive maintenance strategy for\
+    \ multi-fault diagnosis of rotating machines using multi-sensor data fusion,\"\
+    \ Decision Analytics Journal, vol. 10, p. 100425, Mar. 2024.\n- [34] S. Meister,\
+    \ M. Wermes, J. Stüve, and R. M. Groves, \"Investigations on Explainable Artificial\
+    \ Intelligence methods for the deep learning classification of fibre layup defect\
+    \ in the automated composite manufacturing,\" Composites Part B: Engineering,\
+    \ vol. 224, p. 109160, Nov. 2021.\n- [35] C. Bechinie, S. Zafari, L. Kroeninger,\
+    \ J. Puthenkalam, and M. Tscheligi, \"Toward human-centered intelligent assistance\
+    \ system in manufacturing: challenges and potentials for operator 5.0,\" Procedia\
+    \ Computer Science, vol. 232, pp. 1584–1596, 2024.\n- [36] M. Grieves, \"Origins\
+    \ of the Digital Twin Concept,\" 2016."
+  decisions:
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      discuss concepts and frameworks related to Explainable AI and quality control
+      in manufacturing but do not mention any empirical, experimental, or quantitative
+      evaluation, such as experiments, metrics, or datasets.'
+    related_work_prompt: '- Qualified. Reason: The paper discusses the integration
+      of Explainable AI (XAI) with traditional quality control methods and references
+      prior work on Industry 4.0 and Industry 5.0, comparing its goals and contributions
+      with existing approaches. It also cites multiple sources to support its claims
+      and context.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a framework that integrates
+      a digital twin model, predictive analytics for defect detection, and Explainable
+      AI (XAI) to enhance collaboration between human operators and automated AI systems
+      within Industry 5.0, indicating a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a framework that
+      integrates various technologies (digital twin model, predictive analytics, and
+      SHAP) to enhance collaboration between human operators and AI systems, indicating
+      new contributions rather than merely summarizing existing work.'
+  llm_input_used: '## Abstract
+
+    The integration of human knowledge and experience with artificial intelligence,
+    especially in the context of Industry5.0, holds the promise of advanced capabilities
+    for manufacturing that may facilitate reduced waste and increased efficiency.
+    However, there is a gap between the two. This work discusses the critical role
+    of Explainable AI (XAI) within this paradigm, fostering a collaborative environment
+    where human operators can leverage AI-driven insights. A framework for data-driven
+    proactive quality control is coupled with XAI and human-centric approaches to
+    enable a path towards zero-defect manufacturing processes, improved operational
+    efficiency, and enhanced workforce empowerment. Furthermore, practical implications,
+    the impact of XAI and recommendations for upskilling and reskilling the manufacturing
+    personnel are discussed with a focus on small and medium-sized enterprises.**
+
+
+    ## Introduction
+
+    Quality control is an integral part of a production process [1], aiming at identifying
+    defects, at different stages of production; with traditional quality control approaches
+    including testing and visual or manual inspection [2]. Manufacturing systems,
+    typically involve quality control in their manufacturing processes, where randomly
+    selected products or a batch of products or even every product is inspected for
+    defects [3]. Manual quality control techniques typically rely on operators'' expertise
+    and are time-consuming, cost-ineffective and prone to errors [4]. Such techniques
+    are designed to leverage operators'' expertise. This makes them hard to replicate
+    while little explainability or insights regarding the root cause of the generation
+    of defects can be extracted [5].
+
+
+    In the shift towards Industry 5.0, quality control integrates human insights with
+    AI-driven automation to enhance the adaptability and the personalization of manufacturing
+    processes but also to make them more proactive [6]. Unlike Industry 4.0, where
+    the focus was primarily on automation and predictive analytics to preemptively
+    identify defects [7][8][9], Industry 5.0 emphasizes a symbiotic interaction between
+    human operators and technology [10]. This approach allows for real-time adjustments
+    in production lines, based on both data-driven insights and human experience,
+    effectively reducing waste and improving product quality and work satisfaction,
+    putting the human at the centre of the production [11][12].
+
+
+    Nevertheless, modern AI-driven solutions lack the capability of reasoning about
+    their outcomes and recommendations [13]. This is due to the nature of complex
+    algorithms that are considered "black boxes" because their internal workings and
+    decision processes are not transparent [14][15][16]. In this context, Explainable
+    AI (XAI) can be used to make AI decisions transparent and understandable to human
+    operators, thereby not only increasing trust but also enabling operators to make
+    informed decisions about when and how to intervene in the production process [17].
+    Thus, the integration of human insight with AI in Industry 5.0 allows for dynamic
+    and responsive quality control systems.
+
+
+    This paper explores a framework that integrates a digital twin model, predictive
+    analytics for defect detection, and shapley additive explanations (SHAP) [18]
+    XAI to enhance the collaboration between human operators and automated AI systems
+    within Industry 5.0. We detail how these technologies converge to provide a holistic
+    view of predictive analytics, empowering operators with a deeper understanding
+    of AI decision-making and the implications of their actions. Moreover, this study
+    discusses the broader implications of such integrations for workforce development
+    and policymaking, with a special focus on the practical deployment of these advanced
+    technologies in small and medium-sized enterprises.'
+  token_usage: 3766
+  time_usage: 4.866837024688721

@@ -1,0 +1,115 @@
+papers:
+- title: Real-Time Air Quality Monitoring with Edge AI and Machine Learning Algorithm
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 9635
+  time_usage: 2.41
+- title: Enhancing the Fairness and Performance of Edge Cameras with Explainable AI
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 7223
+  time_usage: 2.44
+- title: Recovering Trace Links Between Software Documentation And Code
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 3402
+  time_usage: 1.82
+- title: Multidimensional Static Code Analysis Method for Automotive Software
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 3590
+  time_usage: 1.73
+- title: 'Collaborative Sketching: Human-AI Collaboration Modes for Enhancing Designers''
+    Performance and Experience in Sketching'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 1814
+  time_usage: 1.73
+- title: Deductive Software Architecture Recovery via Chain-of-thought Prompting
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 4506
+  time_usage: 1.73
+- title: 'Demystifying AI: A Robust and Comprehensive Approach to Explainable AI'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 7185
+  time_usage: 2.75
+- title: 'Dynamic Explainability in AI for Neurological Disorders: An Adaptive Model
+    for Transparent Decision-Making in Alzheimer''s Disease Diagnosis'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 15209
+  time_usage: 3.16
+- title: Evaluating the Features of Indoor Positioning Systems Using Explainable AI
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 17144
+  time_usage: 3.09
+- title: 'Human-Centric Proactive Quality Control in Industry5.0: The critical role
+    of explainable AI'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 12413
+  time_usage: 2.51
+- title: 'Cyber-Resilient Edge Computing: A Holistic Approach with Multi-Level MAPE-K
+    Loops'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 10158
+  time_usage: 2.45

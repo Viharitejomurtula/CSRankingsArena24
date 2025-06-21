@@ -1,0 +1,11 @@
+papers:
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems_greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 18144
+  time_usage: 2.95

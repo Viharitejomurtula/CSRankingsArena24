@@ -1,0 +1,2062 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps_on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps
+  url: http://arxiv.org/abs/2401.02500v2
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on a literature review and categorization of existing work on the integration
+      of LLMs in automated planning and scheduling. There is no mention of empirical
+      testing, experiments, performance metrics, or quantitative evaluation of methods.
+      The paper synthesizes insights from existing literature but does not provide
+      evidence of conducting new empirical evaluations or comparisons.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction both
+      reference prior work extensively. The abstract mentions a comprehensive review
+      of 126 papers and synthesizes insights from existing literature. The introduction
+      cites specific works (e.g., Russell and Norvig 2003; Ghallab, Nau, and Traverso
+      2004) and discusses the evolution of Automated Planning and Scheduling alongside
+      advancements in LLMs, indicating engagement with prior research.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract and introduction
+      primarily describe a literature review and analysis of existing work on the
+      integration of LLMs in Automated Planning and Scheduling. There is no explicit
+      claim of proposing a new method, model, framework, or system, nor is there an
+      application of known techniques in a novel domain. The paper synthesizes insights
+      from existing literature but does not claim any new contributions or novel approaches.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title and content
+      indicate that the paper is a comprehensive review of existing literature on
+      the integration of LLMs in Automated Planning and Scheduling. The abstract and
+      introduction describe the paper as primarily summarizing existing work without
+      proposing new methods, results, or tools.'
+  token_usage: 3782
+  time_usage: 5.2
+  llm_input_used: '## Abstract
+
+    Automated Planning and Scheduling is among the growing areas in Artificial
+
+    Intelligence (AI) where mention of LLMs has gained popularity. Based on a
+
+    comprehensive review of 126 papers, this paper investigates eight categories
+
+    based on the unique applications of LLMs in addressing various aspects of
+
+    planning problems: language translation, plan generation, model construction,
+
+    multi-agent planning, interactive planning, heuristics optimization, tool
+
+    integration, and brain-inspired planning. For each category, we articulate the
+
+    issues considered and existing gaps. A critical insight resulting from our
+
+    review is that the true potential of LLMs unfolds when they are integrated with
+
+    traditional symbolic planners, pointing towards a promising neuro-symbolic
+
+    approach. This approach effectively combines the generative aspects of LLMs
+
+    with the precision of classical planning methods. By synthesizing insights from
+
+    existing literature, we underline the potential of this integration to address
+
+    complex planning challenges. Our goal is to encourage the ICAPS community to
+
+    recognize the complementary strengths of LLMs and symbolic planners, advocating
+
+    for a direction in automated planning that leverages these synergistic
+
+    capabilities to develop more advanced and intelligent planning systems.
+
+
+    ## Introduction
+
+    As a sub-field of Artificial Intelligence (Russell and Norvig 2003), Automated
+    Planning and Scheduling (Ghallab, Nau, and Traverso 2004) refers to developing
+    algorithms and systems to generate plans or sequences of actions to achieve specific
+    goals in a given environment or problem domain. APS is a valuable tool in domains
+    where there is a need for intelligent decision-making, goal achievement, and efficient
+    resource utilization. It enables the automation of complex tasks, making systems
+    more capable and adaptable in dynamic environments. Over time, APS has evolved
+    from the early development of robust theoretical foundations to practical applications
+    in diverse sectors like manufacturing, space exploration, and personal scheduling.
+    This evolution underscores the versatility and critical significance of APS.
+
+
+    In parallel with advancements in APS, the development and proliferation of LLMs
+    have marked a substantial leap in AI, particularly within computational linguistics.
+    Evolving from early efforts in natural language processing (NLP), LLMs have undergone
+    significant transformation. Initially focused on basic tasks like word prediction
+    and syntax analysis, newer models are characterized by their ability to generate
+    coherent, contextually relevant text and perform diverse, complex linguistic tasks.
+    Trained on extensive text corpora, LLMs have mastered human-like language patterns.
+    Their recent success in various NLP tasks has prompted efforts to apply these
+    models in APS. There is a notable shift towards using language constructs to specify
+    aspects of planning, such as preconditions, effects, and goals, rather than relying
+    solely on traditional planning domain languages like PDDL.
+
+
+    This paper presents an exhaustive literature review exploring the integration
+    of LLMs in APS across eight categories: Language Translation, Plan Generation,
+    Model Construction, Multi-agent Planning, Interactive Planning, Heuristics Optimization,
+    Brain-Inspired Planning, and Tool Integration. Table 1 provides the description
+    for the eight categories. Our comprehensive analysis of 126 papers not only categorizes
+    LLMs'' diverse contributions but also identifies significant gaps in each domain.
+    Through our review, we put forward the following position:'
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: training_and_serving_system_of_foundation_models_a_comprehensive_survey_school_of_systems_science_and_engineering_sun_yat_sen_university_guangzhou_528406_china_school_of_software_engineering_sun_yat_sen_university_guangzhou_510275_china_department_of_computing_in_the_hong_kong_polytechnic_university_hong_kong_999077_china_peng_cheng_laboratory_shenzhen_518000_china
+  url: http://arxiv.org/abs/2401.02643v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on providing a survey of methods for training and serving foundation models,
+      categorizing these methods, and discussing challenges and future directions.
+      There is no mention of empirical, experimental, or quantitative evaluation,
+      nor are there references to experiments, benchmarks, performance metrics, or
+      comparisons with prior work.'
+    related_work_prompt: '- Qualified. Reason: The paper''s introduction references
+      prior work by mentioning specific models like GPT3, LLaMA, PanGu-Σ, and PengCheng
+      Mind. It also discusses existing surveys on foundation models and highlights
+      their limitations, indicating engagement with prior research.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract and introduction
+      describe a comprehensive survey of existing methods for training and serving
+      foundation models but do not claim to propose any new methods, models, frameworks,
+      or systems. The paper aims to provide an analysis and categorization of existing
+      methods rather than introducing novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the abstract and introduction describe the paper as primarily
+      summarizing existing work on training and serving strategies for foundation
+      models. No new methods, results, or tools are proposed.'
+  token_usage: 4963
+  time_usage: 5.3
+  llm_input_used: '## Abstract
+
+    Foundation models (e.g., ChatGPT, DALL-E, PengCheng Mind, PanGu-$\Sigma$)
+
+    have demonstrated extraordinary performance in key technological areas, such as
+
+    natural language processing and visual recognition, and have become the
+
+    mainstream trend of artificial general intelligence. This has led more and more
+
+    major technology giants to dedicate significant human and financial resources
+
+    to actively develop their foundation model systems, which drives continuous
+
+    growth of these models'' parameters. As a result, the training and serving of
+
+    these models have posed significant challenges, including substantial computing
+
+    power, memory consumption, bandwidth demands, etc. Therefore, employing
+
+    efficient training and serving strategies becomes particularly crucial. Many
+
+    researchers have actively explored and proposed effective methods. So, a
+
+    comprehensive survey of them is essential for system developers and
+
+    researchers. This paper extensively explores the methods employed in training
+
+    and serving foundation models from various perspectives. It provides a detailed
+
+    categorization of these state-of-the-art methods, including finer aspects such
+
+    as network, computing, and storage. Additionally, the paper summarizes the
+
+    challenges and presents a perspective on the future development direction of
+
+    foundation model systems. Through comprehensive discussion and analysis, it
+
+    hopes to provide a solid theoretical basis and practical guidance for future
+
+    research and applications, promoting continuous innovation and development in
+
+    foundation model systems.
+
+
+    ## Introduction
+
+    T He combination of deep learning techniques and powerful computational capabilities
+    continuously drives the development of artificial general intelligence, ushering
+    us into the era of foundation models. However, achieving successful applications
+    of foundation models is inseparable from comprehensive support at the system level.
+    A foundation model system is built upon extensive training data, state-ofthe-art
+    models, high-performance computing resources, and meticulously optimized training
+    and serving algorithms. The primary purpose of this system is to handle complex
+    tasks with heightened precision, such as GPT3 [\[1\]](#page-10-0), LLaMA [\[2\]](#page-10-1),
+    PanGu-Σ [\[3\]](#page-10-2), PengCheng Mind [\[4\]](#page-10-3) etc.
+
+
+    Foundation models have demonstrated extraordinary performance in many tasks. This
+    has led more and more major technology giants to dedicate significant human and
+    financial resources to actively develop their foundation model systems, which
+    increases the parameter size (Figure [1\)](#page-1-0). However, as the parameter
+    size of foundational model systems continues to grow, challenges are posed throughout
+    the lifecycle of foundation models, particularly during the training and serving
+    phases. In the training phase, the substantial parameter size results in significant
+    demands for computation and storage, creating immense pressure on hardware resources
+    and computational efficiency. Consequently, training these models usually takes
+    a long time and requires efficient utilization of computational resources. In
+    the serving phase, with the widespread application of foundation models, the significant
+    increase in workload has become an unavoidable challenge. This heightened demand
+    may lead to issues for serving systems, such as latency, performance decline,
+    or resource bottlenecks. Therefore, employing highly efficient
+
+
+    ![](_page_1_Figure_1.jpeg)
+
+
+    <span id="page-1-0"></span>**FIGURE 1. Evolutionary Chart of Model Sizes Over
+    Time.**
+
+
+    <span id="page-1-1"></span>**FIGURE 2. The lifecycle of the foundation model system.**
+
+
+    training and serving strategies becomes particularly crucial. Many researchers
+    have actively explored and proposed effective methods for training and serving.
+    However, different approaches have different application scenarios. So, it poses
+    a challenge for system developers who struggle to identify the most suitable method
+    for their problems. This challenge is precisely why this paper was proposed.
+
+
+    Although there have been some surveys on foundation models, Most surveys [\[5\]](#page-10-4)–[\[11\]](#page-10-5)
+    predominantly focus on model design and downstream task adaptation, with only
+    a minority delving into foundation model training. However, there are two notable
+    shortcomings in these training-centric surveys [\[12\]](#page-10-6): firstly,
+    they lack in-depth exploration from the perspective of updates in network, computing,
+    and storage; secondly, their primary emphasis is on the training phase, neglecting
+    considerations for the serving phase. Therefore, a comprehensive survey of foundation
+    model training and serving methods is essential for system developers and researchers.
+    Accordingly, this paper presents an in-depth analysis of the state-of-the-art
+    methods in this domain. This paper provides systems developers and researchers
+    valuable information through comprehensive analysis and comparison. It assists
+    them in making the right decisions when confronted with the challenges associated
+    with foundation model systems. evaluation and fine-tuning involve assessing performance
+    Training Dataset Foundation model'
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: a_survey_on_verification_and_validation_testing_and_evaluations_of_neurosymbolic_artificial_intelligence_2024_ieee_personal_use_of_this_material_is_permitted_permission_from_ieee_must_be_obtained_for_all_other_uses_in_any_current_or_future_media_including_reprinting_republishing_this_material_for_advertising_or_promotional_purposes_creating_new_collective_works_for_resale_or_redistribution_to_servers_or_lists_or_reuse_of_any_copyrighted_component_of_this_work_in_other_works_doi_10_1109_tai_2024_3351798_https_www_doi_org_10_1109_tai_2024_3351798_arxiv_2401_03188v2_cs_ai_10_jan_2024
+  url: http://arxiv.org/abs/2401.03188v2
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on providing an overview of neurosymbolic AI and its potential to improve
+      testing and evaluation processes but do not mention any empirical, experimental,
+      or quantitative evaluation. There is no evidence of experiments, datasets, performance
+      metrics, or comparisons with prior work. The paper appears to be a survey or
+      theoretical discussion rather than an empirical study.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations to previous research
+      on neurosymbolic AI, testing & evaluation, and verification & validation processes.
+      The paper discusses existing taxonomies and frameworks, compares them, and builds
+      upon them to explore the potential of neurosymbolic AI, indicating engagement
+      with prior research.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a survey that
+      reviews existing taxonomies and techniques related to neurosymbolic AI and its
+      V&V processes. It does not propose a new method, model, framework, or system,
+      nor does it apply known techniques in a novel domain. The contributions listed
+      are primarily about presenting, comparing, and analyzing existing concepts and
+      methods, rather than introducing new ones.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the abstract and introduction describe the paper as primarily
+      summarizing existing work without proposing new methods, results, or tools.
+      The paper focuses on presenting and comparing taxonomies, mapping V&V concepts,
+      surveying current approaches, and analyzing applicability, which aligns with
+      the characteristics of a review paper.'
+  token_usage: 8456
+  time_usage: 6.01
+  llm_input_used: '## Abstract
+
+    Neurosymbolic artificial intelligence (AI) is an emerging branch of AI that
+
+    combines the strengths of symbolic AI and sub-symbolic AI. A major drawback of
+
+    sub-symbolic AI is that it acts as a "black box", meaning that predictions are
+
+    difficult to explain, making the testing & evaluation (T&E) and validation &
+
+    verification (V&V) processes of a system that uses sub-symbolic AI a challenge.
+
+    Since neurosymbolic AI combines the advantages of both symbolic and
+
+    sub-symbolic AI, this survey explores how neurosymbolic applications can ease
+
+    the V&V process. This survey considers two taxonomies of neurosymbolic AI,
+
+    evaluates them, and analyzes which algorithms are commonly used as the symbolic
+
+    and sub-symbolic components in current applications. Additionally, an overview
+
+    of current techniques for the T&E and V&V processes of these components is
+
+    provided. Furthermore, it is investigated how the symbolic part is used for T&E
+
+    and V&V purposes in current neurosymbolic applications. Our research shows that
+
+    neurosymbolic AI as great potential to ease the T&E and V&V processes of
+
+    sub-symbolic AI by leveraging the possibilities of symbolic AI. Additionally,
+
+    the applicability of current T&E and V&V methods to neurosymbolic AI is
+
+    assessed, and how different neurosymbolic architectures can impact these
+
+    methods is explored. It is found that current T&E and V&V techniques are partly
+
+    sufficient to test, evaluate, verify, or validate the symbolic and sub-symbolic
+
+    part of neurosymbolic applications independently, while some of them use
+
+    approaches where current T&E and V&V methods are not applicable by default, and
+
+    adjustments or even new approaches are needed. Our research shows that there is
+
+    great potential in using symbolic AI to test, evaluate, verify, or validate the
+
+    predictions of a sub-symbolic model, making neurosymbolic AI an interesting
+
+    research direction for safe, secure, and trustworthy AI.
+
+
+    ## Introduction
+
+    N EUROSYMBOLIC artificial intelligence (AI) is an increasingly important trend
+    in machine learning (ML) and has been referred to as the 3rd wave of artificial
+    intelligence [\[1\]](#page-11-0). The word "neuro" in its name implies the use
+    of neural networks, especially deep learning (DL), which is sometimes also referred
+    to as sub-symbolic AI. This technique is known for its powerful learning and abstraction
+    ability, allowing models to find underlying patterns in large datasets or learn
+    complex behaviors [\[2\]](#page-11-1). On the other hand, "symbolic" refers to
+    symbolic AI. It is based on the idea that intelligence can be represented using
+    symbols like rules based on logic or other representations of knowledge [\[3\]](#page-11-2).
+    Neurosymbolic AI combines these two approaches to create a hybrid system that
+    benefits from the reasoning abilities of symbolic AI and the adaptability of sub-symbolic
+    AI, opening new opportunities to improve a variety of different AI branches [\[4\]](#page-11-3),
+    [\[5\]](#page-11-4).
+
+
+    A disadvantage of sub-symbolic AI is its nature of being a "black box". This means
+    that predictions made by these systems can be challenging to explain. Therefore,
+    when an edge case leads to a system failure, it is often hard to find the reason
+    for it. Accordingly, the rigorous testing & evaluation (T&E) and validation &
+    verification (V&V) of these "black box" is a relevant topic recognized by governments
+    [\[6\]](#page-11-5) and discussed in current literature [\[7\]](#page-11-6), [\[8\]](#page-11-7).
+    As neurosymbolic systems incorporate a sub-symbolic component, this work aims
+    to provide an overview of current techniques used to validate and verify the symbolic
+    as well as sub-symbolic component, and how the architecture of neurosymbolic systems
+    affects this process and can be used for V&V purposes.
+
+
+    In software engineering, common terms are testing & evaluation or T&E and verification
+    & validation or V&V. As defined by Wallace and Fujii in [\[9\]](#page-12-0), V&V
+    intends to ensure that software performs as intended and meets certain quality
+    and reliability standards. T&E are the methods and processes used to carry out
+    V&V. Validation refers to the process of ensuring that a system performs as expected
+    and delivers the desired result with sufficient accuracy, while verification focuses
+    on checking if the design and implementation is correct according to the specified
+    requirements [\[10\]](#page-12-1). Usually, verification is a process that takes
+    place during development, while validation occurs at the end to evaluate if the
+    program "does what it''s supposed to do" [\[11\]](#page-12-2). For reasons of
+    readability, we primarily use the term V&V in the following.
+
+
+    Recent frameworks propose methods to validate and verify symbolic and sub-symbolic
+    AI, but discussing how the architecture of neurosymbolic AI can benefit the V&V
+    process of the system as a whole has not received enough attention yet. Therefore,
+    this paper focuses on two areas. First, the concept of V&V is mapped to symbolic
+    and sub-symbolic AI, and an overview of current techniques and procedures used
+    during the V&V process is provided. Secondly, it assesses how different neurosymbolic
+    applications use the symbolic side to enable V&V of the sub-symbolic component.
+    For this purpose, two different taxonomies of neurosymbolic AI are addressed,
+    which categorize applications based on their architecture. 1) In 2020, Kautz proposed
+    six possible designs of neurosymbolic systems [\[12\]](#page-12-3). 2) An alternative
+    taxonomy was introduced by Yu et al. [\[13\]](#page-12-4) in 2021. These taxonomies
+    are discussed and compared. Based on this, it is analyzed how current neurosymbolic
+    applications leverage these architectures to use the symbolic component to make
+    the sub-symbolic part more transparent, accurate, or safe, therefore enabling
+    the V&V process through a neurosymbolic system design. The structure of the discussion
+    within this paper is visualized in Fig. [1.](#page-2-0)
+
+
+    Our work demonstrates that some of the current testing methods used for V&V are
+    applicable to neurosymbolic AI. In particular, the combination of knowledge graphs
+    (KGs) and DL is common, and it would be interesting to design a dedicated testing
+    framework based on current techniques to validate neurosymbolic AI as a whole.
+    However, there are also neurosymbolic AI applications that are not easy to test
+    with current means. With this work, we show that there is much research potential
+    in this area, and advocate the awareness of V&V for neurosymbolic AI systems and
+    AI in general. Overall, this paper makes the following contributions:
+
+
+    - Present and compare two current taxonomies of neurosymbolic AI.
+
+    - Map the concepts of V&V as used in software engineer-
+
+
+    ![](_page_2_Figure_6.jpeg)
+
+
+    <span id="page-2-0"></span>Fig. 1. Contents of this paper.
+
+
+    ing to symbolic and sub-symbolic AI.
+
+
+    - Survey current V&V approaches for symbolic and subsymbolic AI.
+
+    - Analyze the applicability of current V&V methods to neurosymbolic applications.
+
+    - Investigate how symbolic AI can support the V&V process of sub-symbolic AI within
+    a neurosymbolic system.
+
+    - Discuss opportunities and challenges of V&V in the domain of neurosymbolic AI.
+
+
+    The remainder of this paper is structured as follows: In section [II](#page-2-1)
+    we analyze the related work. After that, in section [III](#page-3-0) we examine
+    and compare two different taxonomies for neurosymbolic AI. Then, in section [IV](#page-5-0)
+    and [V](#page-6-0) we survey the most important methods to verify and validate
+    symbolic AI and sub-symbolic AI respectively. In section [VI](#page-8-0) we analyze
+    if these methods are applicable to current neurosymbolic AI applications and opportunities
+    to leverage different neurosymbolic architectures using the symbolic part to verify
+    and validate sub-symbolic AI. Afterward, in section [VII](#page-10-0) we explain
+    research gaps and problems that might be worth exploring in further research.
+    In section [VIII](#page-11-8) we summarize our findings and explain our planned
+    future work.'
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: computational_argumentation_based_chatbots_a_survey_brunel_university_london_kingston_lane_london_ub8_3ph_united_kingdom
+  url: http://arxiv.org/abs/2401.03454v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      describe a survey of literature on argumentation-based chatbots but do not mention
+      any empirical, experimental, or quantitative evaluation. There is no evidence
+      of experiments, benchmarks, performance metrics, or comparisons with prior work.
+      The paper focuses on reviewing existing literature and drawing conclusions rather
+      than conducting new evaluations.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations of previous
+      research on chatbots and computational argumentation. The paper discusses the
+      historical development of chatbots, mentions specific prior models like ELIZA,
+      and references various studies and technologies that have contributed to the
+      field. Additionally, it compares the current state of chatbots with argumentation-based
+      approaches and discusses the integration of computational argumentation with
+      existing technologies.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by stating, "To
+      the best of our knowledge, this is the first survey that combines computational
+      argumentation and chatbots." This indicates a new contribution in the form of
+      a novel survey in the intersection of these two fields.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the abstract and introduction describe the paper as primarily
+      summarizing existing work on argumentation-based chatbots. The paper does not
+      propose any new methods, results, or tools, but rather reviews literature and
+      draws conclusions from existing research.'
+  token_usage: 4713
+  time_usage: 4.88
+  llm_input_used: '## Abstract
+
+    Chatbots are conversational software applications designed to interact
+
+    dialectically with users for a plethora of different purposes. Surprisingly,
+
+    these colloquial agents have only recently been coupled with computational
+
+    models of arguments (i.e. computational argumentation), whose aim is to
+
+    formalise, in a machine-readable format, the ordinary exchange of information
+
+    that characterises human communications. Chatbots may employ argumentation with
+
+    different degrees and in a variety of manners. The present survey sifts through
+
+    the literature to review papers concerning this kind of argumentation-based
+
+    bot, drawing conclusions about the benefits and drawbacks that this approach
+
+    entails in comparison with standard chatbots, while also envisaging possible
+
+    future development and integration with the Transformer-based architecture and
+
+    state-of-the-art Large Language models.
+
+
+    ## Introduction
+
+    Chatbots are conversational software applications designed to mimic human discourse
+    mostly to enable automated online guidance and support (Caldarini et al., 2022).
+    These computer programs generate responses based on given inputs, producing replies
+    via text or speech format (Sojasingarayar, 2020; Bala et al., 2017). In addition,
+    to be defined as such, chatbots must satisfy specific functions. As colloquial
+    agents, they need to be able to understand the user (comprehension), have access
+    to a knowledge base (competence) and provide an ''anthropomorphic effect'' to
+    increase the users'' trust (presence) (Cahn, 2017; Sansonnet et al., 2006). Nowadays,
+    these bots represent familiar tools that exist in our lives in the form of virtual
+    agents. Their assistance ranges from answering inquiries to e-commerce, from information
+    retrieval to educational tasks, and from developing new industrial solutions (Dale,
+    2016) to connecting smart objects (Kar & Haldar, 2016). The manifold investments
+    of the past decade, the technological advancements (from both software and hardware
+    viewpoints), and the development of more efficient Machine Learning (ML) models,
+    including the latest Transformer-based architecture (Vaswani et al., 2017), have
+    contributed to the steady growth of the research field of chatbot design and implementation.
+    Many steps forward have been taken since the release of ELIZA around sixty years
+    ago, which is widely considered to be the first conversational agent (Weizenbaum,
+    1966).
+
+
+    The investigation of computational models of arguments in relation to chatbots
+    has only recently received attention from researchers. Computational argumentation
+    (Rahwan & Simari, 2009) has been applied in Artificial Intelligence (AI) as a
+    mechanism for reasoning in which conclusions are drawn from evidence that supports
+    the conclusions. Being an intuitive (i.e. closer to everyday human dialectical
+    interplay), yet formal, approach for modelling conflicting information occurring
+    during exchange of arguments, computational argumentation should be qualified
+    as a highly appropriate methodology to enhance current bot behaviours. The benefits
+    from such a combination include: more natural discourse, response coherence and
+    strategical conveyance of information. Evaluating argumentation semantics would
+    also provide the rationale for positing replies in a more transparent way than
+    the black-box Large Language models (LLMs) employed in today''s state-of-the-art
+    conversational agents. In recent years, cutting-edge technologies have produced
+    implementations, such as the various versions of ChatGPT<sup>1</sup> , which currently
+    outperform argumentation-based conversational agents. Nonetheless, taking a closer
+    look—as we do here—shows that there is plenty of room for improvement for these
+    recent advanced models, and integration with the computational argumentation formalism
+    may solve their present shortcomings (e.g. lack of explainability), thus potentially
+    initiating a new generation of chatbots. To the best of our knowledge, this is
+    the first survey that combines computational argumentation and chatbots<sup>2</sup>
+    . Our main contribution involves an extensive examination of the relevant literature
+    and the subsequent findings that can be drawn from such analysis.
+
+
+    The paper is structured as follows. We first start by introducing background information
+    in Section 2 about the essential theoretical notions involved. In Section 3, we
+    then discuss the methodology adopted for reviewing the relevant articles. A thorough
+    classification and analysis of conversational agents leveraging computational
+    argumentation is given in Section 4. Section 5 illustrates a comprehensive examination
+    of the paper''s findings and potential future directions of the argumentation-based
+    chatbot research field, and Section 6 concludes the survey with final remarks.'
+- title: "A Universal Knowledge Model and Cognitive Architecture for Prototyping\n\
+    \  AGI"
+  id: a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi_a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi
+  url: http://arxiv.org/abs/2401.06256v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on proposing a new cognitive architecture for AGI and reviewing existing
+      architectures. There is no mention of empirical testing, experiments, performance
+      metrics, or comparisons with prior work that would indicate structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1-10] and discussions
+      of previous reviews and cognitive architectures. The paper engages with existing
+      research by identifying and analyzing 42 cognitive architectures, comparing
+      them, and discussing their relevance to AGI development.'
+    novelty_prompt: 'Qualified. Reason: The abstract clearly claims novelty by proposing
+      a new cognitive architecture for intelligent systems approaching AGI in their
+      capabilities. It also introduces a universal method of knowledge representation
+      and mentions the development of archigraph models, which are new contributions
+      to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new cognitive architecture and a universal method of knowledge
+      representation, indicating new contributions beyond a mere survey or review
+      of existing work.'
+  token_usage: 5215
+  time_usage: 4.28
+  llm_input_used: '## Abstract
+
+    The article identified 42 cognitive architectures for creating general
+
+    artificial intelligence (AGI) and proposed a set of interrelated functional
+
+    blocks that an agent approaching AGI in its capabilities should possess. Since
+
+    the required set of blocks is not found in any of the existing architectures,
+
+    the article proposes a new cognitive architecture for intelligent systems
+
+    approaching AGI in their capabilities. As one of the key solutions within the
+
+    framework of the architecture, a universal method of knowledge representation
+
+    is proposed, which allows combining various non-formalized, partially and fully
+
+    formalized methods of knowledge representation in a single knowledge base, such
+
+    as texts in natural languages, images, audio and video recordings, graphs,
+
+    algorithms, databases, neural networks, knowledge graphs, ontologies, frames,
+
+    essence-property-relation models, production systems, predicate calculus
+
+    models, conceptual models, and others. To combine and structure various
+
+    fragments of knowledge, archigraph models are used, constructed as a
+
+    development of annotated metagraphs. As components, the cognitive architecture
+
+    being developed includes machine consciousness, machine subconsciousness,
+
+    blocks of interaction with the external environment, a goal management block,
+
+    an emotional control system, a block of social interaction, a block of
+
+    reflection, an ethics block and a worldview block, a learning block, a
+
+    monitoring block, blocks of statement and solving problems, self-organization
+
+    and meta learning block.
+
+
+    ## Introduction
+
+    In recent years, there has been a rapid and multidirectional development of intelligent
+    information systems developed by people [1]. In [2], it was assumed that a relatively
+    distant extrapolation of the functionality of these developments would be the
+    creation of a general artificial intelligence comparable to human intelligence
+    (in current terminology – AGI). The main capabilities of an intelligent information
+    system, such as perceptual abilities, attention mechanisms, choice of actions,
+    learning, memory, reasoning and their practical application are determined by
+    the cognitive architecture used in the system [3]. If we consider the basic principles
+    of functioning, then cognitive architectures are the opposite of expert systems.
+    Expert systems provide solutions to intellectual tasks in a narrowly defined context,
+    in the segment of activity for which they have knowledge, in contrast, cognitive
+    architectures aim to providing a wide coverage, solving a diverse set of tasks
+    in different fields. More importantly, cognitive architectures provide intelligent
+    behavior at the system level, rather than at the level of methods of individual
+    components designed to solve specialized tasks [3].
+
+
+    In 2016-18, after a relatively long break, two reviews of cognitive architectures
+    were published [4, 5] (the third version of the publication [4], like the publication
+    [5], appeared in 1918). After that, no systematic reviews were published until
+    preparation of this article. Only brief reviews were published as part of the
+    justification for the need to develop new architectures. In these two reviews,
+    which cover about 140 architectures, we identified cognitive architectures designed
+    to create AGI, and supplemented the list with the results of a bibliographic search.
+
+
+    Unlike the reviews in [6,7], the authors of which considered cognitive architectures
+    for creating AGI, including architectures that were not intended for this purpose
+    in the review, we consider it important to analyze precisely cognitive architectures
+    that are declared as architectures intended for creating AGI, since additional
+    requirements are imposed on them [8]. Other cognitive architectures could be developed
+    to test some technical solutions or to solve more utilitarian tasks, for example,
+    for image processing or controlling a transport robot transporting workpieces
+    in the workshop.
+
+
+    In the list of cognitive architectures, if the architecture does not have a name,
+    it will be presented simply with a link to the publication. The final list of
+    cognitive architectures for analysis includes 42 architectures, presented in Table
+    1. For each architecture, this table contains citations indicating that the architecture
+    is intended to enable AGI. For some architectures, publications do not explicitly
+    mention AGI as a target. In these cases, the decision to include in the list is
+    determined by the goals of the architecture to model human-like behavior or by
+    focusing on the complex of functions inherent with humans.
+
+
+    | # | Name  | Link(s) | Citations about purpose of cognitive architecture                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+    |---|-------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+    | 1 | Soar  | [9]     | Soar … have used … to build complex integrated AI agents,
+    and to create<br>detailed models of human behavior. … We have found that combining
+    what<br>is known in psychology, in neuroscience, and in AI is an effective approach<br>to
+    building a comprehensive cognitive architecture. … Our bet is that achiev<br>ing
+    human-level intelligence is a long path of incremental experiments, dis<br>coveries,
+    tests, reformulations and refinements. |
+
+    | 2 | ACT-R | [10]    | This paper explores requirements on cognitive architectures
+    for artificial gen<br>eral intelligence. The goal of the analysis is to determine
+    the requirements for<br>cognitive architectures that support the full-range of
+    human-level intelligent<br>behavior.                                                                                                                                                                                   |'
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities_cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities
+  url: http://arxiv.org/abs/2401.06375v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      discuss the design and potential benefits of ProcessGPT in improving business
+      processes and aiding individuals with cognitive disabilities, but they do not
+      provide evidence of empirical, experimental, or quantitative evaluation. There
+      is no mention of experiments, datasets, performance metrics, or comparisons
+      with prior work.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1][2][3][4][5][6][7][8][9][10][11][12],
+      and discuss related approaches such as Cognitive BPM and AI models like ProcessGPT.
+      These references indicate engagement with existing research and contextualize
+      the paper''s contributions within the broader academic discourse.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The abstract and introduction
+      do not claim any new contributions or propose a new method, model, framework,
+      or system. The paper examines an existing AI model, ProcessGPT, and discusses
+      its application in business processes, particularly for individuals with cognitive
+      disabilities, but does not claim any novel development or application.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the examination and application of ProcessGPT, an AI model, to improve business
+      processes, particularly for individuals with cognitive disabilities. The paper
+      discusses the implementation and benefits of ProcessGPT, indicating new contributions
+      in terms of applying AI to enhance business process management. There is no
+      indication that the paper is solely a review or survey of existing work.'
+  token_usage: 2927
+  time_usage: 4.94
+  llm_input_used: '## Abstract
+
+    We examine ProcessGPT, an AI model designed to automate, augment, and improve
+
+    business processes, to study the challenges of managing business processes
+
+    within the cognitive limitations of the human workforce, particularly
+
+    individuals with cognitive disabilities. ProcessGPT provides a blueprint for
+
+    designing efficient business processes that take into account human cognitive
+
+    limitations. By viewing this through the lens of cognitive disabilities, we
+
+    show that ProcessGPT improves process usability for individuals with and
+
+    without cognitive disabilities. We also demonstrate that organizations
+
+    implementing ProcessGPT-like capabilities will realize increased productivity,
+
+    morale, and inclusion.
+
+
+    ## Introduction
+
+    Human cognitive factors such as perception, attention, memory, language, reasoning,
+    processing speed, and executive functions [1] have known limitations. [2][3][4][5]
+    In contrast, Artificial intelligence (AI) systems transcend many boundaries of
+    human cognition, particularly for memory, attention, and executive function. [6][7]
+    Large language models such as GPT-4 already outperform humans in language areas
+    such as lexical knowledge, grammatical sensitivity, communication ability, naming
+    facility, and fluency. [\[1\]](#page-0-0)[8]
+
+
+    Exploration of AI''s cognitive capabilities in the context of business process
+    management (BPM) offers insights into knowledge-intensive processes that are predominantly
+    driven by human activities. [9] Knowledge-intensive processes can only be partially
+    mapped to a process model and commonly vary due to circumstances and administrative
+    discretion. [10] Facilitation of these processes is within the domain of Cognitive
+    BPM, which manages business processes using cognitive computing technologies.
+    [11] We reference other researchers'' AI model, ProcessGPT, as a practical representation
+    of a Cognitive BPM solution (Fig. 1). ProcessGPT is an AI model whose goal is
+    to suggest the best next step in a process based on a Process Knowledge Graph
+    and extensive supporting elements. [12] While ProcessGPT is capable of process
+    augmentation, automation, and improvement, we highlight the challenges faced by
+    employees with cognitive disabilities by considering how ProcessGPT can augment
+    their experience.
+
+
+    <span id="page-0-0"></span>![](_page_0_Figure_10.jpeg)'
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems_greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems
+  url: http://arxiv.org/abs/2401.06793v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      do not provide any evidence of empirical, experimental, or quantitative evaluation.
+      The paper discusses theoretical aspects and algorithm development but does not
+      mention experiments, datasets, performance metrics, or comparisons with prior
+      work. Although there is a mention of planning future computer experiments, this
+      does not constitute current evaluation evidence.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations of previous studies on
+      decision trees and decision rule systems. The paper discusses existing methods
+      for converting decision trees into decision rule systems and builds upon previous
+      research by addressing the inverse transformation problem. Additionally, it
+      references earlier studies related to the complexity and construction of decision
+      trees, demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by developing a new
+      algorithm with polynomial time complexity that models the behavior of a decision
+      tree for a given tuple of attribute values. This is explicitly stated in the
+      introduction, indicating a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new algorithm with
+      polynomial time complexity to model the behavior of decision trees for a given
+      tuple of attribute values. It discusses the development and accuracy of this
+      algorithm, indicating new contributions beyond summarizing existing work.'
+  token_usage: 8124
+  time_usage: 5.18
+  llm_input_used: '## Abstract
+
+    Decision trees and decision rule systems play important roles as classifiers,
+
+    knowledge representation tools, and algorithms. They are easily interpretable
+
+    models for data analysis, making them widely used and studied in computer
+
+    science. Understanding the relationships between these two models is an
+
+    important task in this field. There are well-known methods for converting
+
+    decision trees into systems of decision rules. In this paper, we consider the
+
+    inverse transformation problem, which is not so simple. Instead of constructing
+
+    an entire decision tree, our study focuses on a greedy polynomial time
+
+    algorithm that simulates the operation of a decision tree on a given tuple of
+
+    attribute values.
+
+
+    ## Introduction
+
+    Decision trees [\[3,](#page-7-0) [4,](#page-7-1) [8,](#page-7-2) [31,](#page-9-0)
+    [34,](#page-10-0) [40\]](#page-10-1) and systems of decision rules [\[6,](#page-7-3)
+    [7,](#page-7-4) [11,](#page-8-0) [14,](#page-8-1) [33,](#page-10-2) [34,](#page-10-0)
+    [35,](#page-10-3) [36\]](#page-10-4) are widely used as classifiers, knowledge
+    representation tools, and algorithms. They are known for their interpretability
+    in data analysis [\[10,](#page-8-2) [15,](#page-8-3) [23,](#page-9-1) [41\]](#page-10-5).
+
+
+    Investigating the relationship between these two models is an important task in
+    computer science. Converting decision trees into decision rule systems is a well-known
+    and simple process [\[37,](#page-10-6) [38,](#page-10-7) [39\]](#page-10-8). This
+    paper focuses on the inverse transformation problem, which is not trivial.
+
+
+    The research related to this problem encompasses several directions:
+
+
+    • Two-stage construction of decision trees. This approach involves building decision
+    rules based on input data, followed by the construction of decision trees or decision
+    structures (which are generalizations of decision trees) using the generated rules.
+    The benefits of this two-stage construction method are explained in [\[1,](#page-7-5)
+    [2,](#page-7-6) [17,](#page-8-4) [18,](#page-8-5) [19,](#page-8-6) [20,](#page-9-2)
+    [21,](#page-9-3) [22,](#page-9-4) [42\]](#page-10-9).
+
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for computing Boolean functions [\[5,](#page-7-7) [16,](#page-8-7) [24,](#page-9-5)
+    [43\]](#page-10-10). Note that the nondeterministic decision trees can be interpreted
+    as decision rule systems. Note also that the minimum depth of a nondeterministic
+    decision tree for a Boolean function is equal to its certificate complexity [\[9\]](#page-8-8).
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for problems over finite and infinite information systems [\[25,](#page-9-6)
+    [27,](#page-9-7) [29,](#page-9-8) [30,](#page-9-9) [32\]](#page-10-11). These
+    systems consist of a universe and a set of attributes defined on it [\[35\]](#page-10-3).
+
+
+    This paper builds upon the syntactic approach proposed in previous works [\[26,](#page-9-10)
+    [28\]](#page-9-11). The approach assumes that we have a system of decision rules
+    but lack knowledge of the input data, and our objective is to transform these
+    rules into a decision tree.
+
+
+    Let us consider a system of decision rules S, which consists of rules of the form
+
+
+    $$
+
+    (a_{i_1} = \delta_1) \wedge \cdots \wedge (a_{i_m} = \delta_m) \rightarrow \sigma,
+
+    $$
+
+
+    where ai<sup>1</sup> , . . . , ai<sup>m</sup> represent attributes, δ1, . . .
+    , δ<sup>m</sup> are the corresponding attribute values, and σ is the decision.
+
+
+    The problem associated with this system is to determine, for a given input (a
+    tuple of values of attributes included in S), all the realizable rules, i.e.,
+    rules with a true left-hand side. It is important to note that any attribute in
+    the input can take any value.
+
+
+    The objective of this paper is to minimize the number of queries required to determine
+    the attribute values. To achieve this, decision trees are explored as algorithms
+    for solving the problem at hand.
+
+
+    In our previous work [\[12\]](#page-8-9), we investigated the minimum depth of
+    decision trees for the considered problem and established both upper and lower
+    bounds. These bounds depend on three parameters of the decision rule system: the
+    total number of distinct attributes, the maximum length of a decision rule, and
+    the maximum number of attribute values. We demonstrated that there exist systems
+    of decision rules where the minimum depth of the decision trees is significantly
+    smaller than the total number of attributes in the rule system. This finding shows
+    that decision trees are a reasonable choice for such systems of decision rules.
+
+
+    In another study [\[13\]](#page-8-10), we examined the complexity of constructing
+    decision trees and acyclic decision graphs that represent decision trees. We found
+    that in many cases, the minimum number of nodes in decision trees can grow as
+    a superpolynomial function depending on the size of the decision rule systems.
+    To address this issue, we introduced two types of acyclic decision graphs as representations
+    of decision trees. However, simultaneously minimizing the depth and the number
+    of nodes in these graphs poses a challenging bi-criteria optimization problem.
+
+
+    We left this problem for future research and pursued an alternative approach:
+    instead of constructing the entire decision tree, we developed a polynomial time
+    algorithm that models the behavior of the decision tree for a given tuple of attribute
+    values. This algorithm is based on an auxiliary algorithm for the construction
+    of a node cover for a hypergraph corresponding to a decision rule system: nodes
+    of this hypergraph correspond to attributes and edges – to rules from the rule
+    system. The auxiliary algorithm is not greedy: at each step, this algorithm adds
+    to the cover being constructed all the attributes belonging to a rule that has
+    not yet been covered.
+
+
+    In this paper, we develop a new algorithm with polynomial time complexity, which
+    models the behavior of a decision tree solving the considered problem for a given
+    tuple of attribute values. The auxiliary algorithm for it is a standard greedy
+    algorithm for the set cover problem. Therefore we talk about the entire algorithm
+    for describing the operation of decision trees as greedy. We study the accuracy
+    of this algorithm, i.e., we compare the depth of the decision tree described by
+    it and the minimum depth of a decision tree. The obtained bound is a bit worse
+    in the comparison with the bound for the algorithm considered in [\[13\]](#page-8-10).
+    However, we expect that the considered algorithms are mutually complementary:
+    the old one will work better for systems with short decision rules and the new
+    one will work better for systems with long decision rules. In the future, we are
+    planning to do computer experiments to explore this hypothesis.
+
+
+    In this paper, we repeat the main definitions from [\[12\]](#page-8-9) and give
+    some lemmas from [\[12\]](#page-8-9) without proofs.
+
+
+    This paper consists of five sections. Section [2](#page-2-0) considers the main
+    definitions and notation. Section [3](#page-4-0) contains auxiliary statements.
+    Section [4](#page-5-0) discusses the greedy algorithm, which models the behavior
+    of a decision tree. Section [5](#page-6-0) contains short conclusions.'
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: automated_test_production_complement_to_ad_hoc_testing_automated_test_production_complement_to_ad_hoc_testing
+  url: http://arxiv.org/abs/2401.02230v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      discuss the importance of software testing and the challenges of adopting academic
+      advances in industry, but there is no mention of empirical, experimental, or
+      quantitative evaluation. There are no references to experiments, datasets, performance
+      metrics, or comparisons with prior work.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations of the Agile Manifesto
+      and various studies and reports related to agile software development and continuous
+      integration. The paper discusses industry trends and compares its views with
+      existing practices, indicating engagement with prior research.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract and introduction
+      do not present any claims of novelty, such as proposing a new method, model,
+      or framework. Instead, they discuss existing views and trends in software testing
+      and agile methodologies without indicating any new contributions or applications.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction discuss
+      existing methods and challenges in software testing and agile practices but
+      also mention an intended approach to search for a solution, suggesting potential
+      new contributions or perspectives beyond a mere survey.'
+  token_usage: 3373
+  time_usage: 4.32
+  llm_input_used: '## Abstract
+
+    A view on software testing, taken in a broad sense and considered a important
+
+    activity is presented. We discuss the methods and techniques for applying tests
+
+    and the reasons we recognize make it difficult for industry to adopt the
+
+    advances observed in academia. We discuss some advances in the area and briefly
+
+    point out the approach we intend to follow in the search for a solution.
+
+
+    ## Introduction
+
+    Accepting that tests are important, but are not always implemented or kept up
+    to date during the lifetime of a program, we conclude that nothing has changed
+    since the introduction of the Agile Manifesto earlier this century [\[1\]](#page-13-0)
+    which we reproduce below and from which we highlight the passage "Software that
+    works rather than complete documentation"[\[1\]](#page-13-0).
+
+
+    - "Individuals and interactions over processes and tools"
+
+    - "Working software over comprehensive documentation"
+
+    - "Customer collaboration over contract negotiation"
+
+    - "Responding to change over following a plan"
+
+
+    This view has come to become an important industry trend [\[2\]](#page-13-1)[1](#page-0-0)
+    , where face-to-face interactions are preferable to formal communication processes
+    and working programs are preferable to comprehensive documentation, leaving the
+    interpretation of the term "comprehensive" to each agile development team to decide
+    [\[4](#page-13-2)]. In fact the agile method suggests that all documentation can
+    be replaced by informal communication with an emphasis on tacit rather than explicit
+    knowledge [\[5\]](#page-14-0).
+
+
+    <span id="page-0-0"></span><sup>1</sup>The 14<sup>o</sup> annual report STATEofAGILE
+    from 2020 points out that 95% of organizations practice agile software development
+    methods. [\[3](#page-13-3)].
+
+
+    On the other hand, the adoption of continuous integration and continuous delivery
+    processes and tools has been steadily and unequivocally growing in both industry
+    [\[6](#page-14-1), [7](#page-14-2)] and open source projects [\[8\]](#page-14-3),
+    which can to some extent be interpreted as a denial of one of the principles of
+    the Agile Manifesto: "Individuals and interactions over processes and tools",
+    yet this does not come as a relief to the fact that many see benefits in building
+    and maintaining formal models, but are not content to build them as they believe
+    they consume too much time and resources, even believing in the slim chances of
+    success of projects that do not use some modeling [\[9\]](#page-14-4).
+
+
+    The implications of this view for the construction and maintenance of programs
+    and the use and application of development methods and tools are discussed.'
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: automated_test_production_systematic_literature_mapping_automated_test_production_systematic_literature_mapping
+  url: http://arxiv.org/abs/2401.01430v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract does not
+      mention any empirical, experimental, or quantitative evaluation. It focuses
+      on obtaining the state of the art, listing, and categorizing methods without
+      indicating any structured evaluation or testing.'
+    related_work_prompt: 'Disqualified: no related work. Reason: The abstract does
+      not contain any academic citations, references, or discussion of prior work,
+      methods, or findings. It only outlines the goals of the research without engaging
+      with existing literature or previous studies.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract does not claim
+      any new contributions, methods, or applications. It focuses on obtaining the
+      state of the art and categorizing existing methods and tools without indicating
+      any novel approach or findings.'
+    review_only_prompt: '- Disqualified: review paper. Reason: The abstract describes
+      the paper as aiming to obtain the state of the art in Automated Test Production
+      (ATP), find open questions, track research progress, and list and categorize
+      existing methods, techniques, and tools. This indicates that the paper is primarily
+      summarizing existing work without proposing new methods, results, or tools.'
+  token_usage: 1560
+  time_usage: 5.08
+  llm_input_used: '## Abstract
+
+    The broader goal of this research, on the one hand, is to obtain the State of
+
+    the Art in Automated Test Production (ATP), to find the open questions and
+
+    related problems and to track the progress of researchers in the field, and on
+
+    the other hand is to list and categorize the methods, techniques and tools of
+
+    ATP that meet the needs of practitioners who produce computerized business
+
+    applications for internal use in their corporations - eventually it can be
+
+    extended to the needs of practitioners in companies that specialize in
+
+    producing computer applications for generic use.
+
+
+    '
+- title: Automated Test Production -- Systematic Literature Review
+  id: automated_test_production_systematic_literature_review_automated_test_production_systematic_literature_review
+  url: http://arxiv.org/abs/2401.02033v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract does not
+      mention any empirical, experimental, or quantitative evaluation. It only describes
+      the aim of conducting a Systematic Literature Review (SLR) and does not provide
+      evidence of structured evaluation such as experiments, datasets, or performance
+      metrics.'
+    related_work_prompt: '- Disqualified: no related work. Reason: The abstract does
+      not mention any prior research, related approaches, previous findings, or academic
+      citations. It only describes the aim and methodology of the current study without
+      engaging with existing literature.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract does not claim
+      any new contributions, methods, models, frameworks, or applications. It describes
+      a systematic literature review aimed at identifying existing contributions and
+      providing an overview, without indicating any novel work or findings introduced
+      by the authors.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The abstract explicitly
+      states that the paper is a Systematic Literature Review (SLR) aimed at providing
+      an overview of existing models, methodologies, and tools related to Automated
+      Test Production, without mentioning any new methods, results, or tools.'
+  token_usage: 1524
+  time_usage: 6.77
+  llm_input_used: '## Abstract
+
+    Identifying the main contributions related to the Automated Test Production
+
+    (ATP) of Computer Programs and providing an overview about models,
+
+    methodologies and tools used for this purpose is the aim of this Systematic
+
+    Literature Review (SLR). The results will enable a comprehensive analysis and
+
+    insight to evaluate their applicability. A previously produced Systematic
+
+    Literature Mapping (SLM) contributed to the formulation of the ``Research
+
+    Questions'''' and parameters for the definition of the qualitative analysis
+
+    protocol of this review.
+
+
+    '
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: exception_aware_lifecycle_model_construction_for_framework_apis_yan_ji_wei1_2_huang_jin_hao3_yang_heng_qin2_4_yan_jun1_2
+  url: http://arxiv.org/abs/2401.02660v1
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+  llm_input_used: ''
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering_15_practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering
+  url: http://arxiv.org/abs/2401.01508v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on providing guidelines and insights for selecting and evaluating NLP
+      techniques in Requirements Engineering but do not mention any empirical, experimental,
+      or quantitative evaluation conducted by the authors. There is no reference to
+      experiments, datasets, performance metrics, or comparisons with prior work.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior work by referencing various NLP techniques and their application in requirements
+      engineering. The introduction specifically cites previous studies on requirements
+      automation problems, such as compliance checking, glossary construction, and
+      ambiguity handling, indicating engagement with existing research.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The abstract and introduction
+      do not claim any new method, model, framework, or system. Instead, they provide
+      guidelines and reflections based on existing research and technologies in the
+      field of NLP for Requirements Engineering. There is no explicit claim of novelty
+      or new contributions.'
+    review_only_prompt: '- Disqualified: review paper. Reason: The abstract and introduction
+      describe the paper as primarily summarizing existing work, offering guidelines
+      for selecting and evaluating NLP techniques in Requirements Engineering. It
+      reflects on past research and provides insights without proposing new methods,
+      results, or tools.'
+  token_usage: 3808
+  time_usage: 5.09
+  llm_input_used: '## Abstract
+
+    Natural Language Processing (NLP) is now a cornerstone of requirements
+
+    automation. One compelling factor behind the growing adoption of NLP in
+
+    Requirements Engineering (RE) is the prevalent use of natural language (NL) for
+
+    specifying requirements in industry. NLP techniques are commonly used for
+
+    automatically classifying requirements, extracting important information, e.g.,
+
+    domain models and glossary terms, and performing quality assurance tasks, such
+
+    as ambiguity handling and completeness checking. With so many different NLP
+
+    solution strategies available and the possibility of applying machine learning
+
+    alongside, it can be challenging to choose the right strategy for a specific RE
+
+    task and to evaluate the resulting solution in an empirically rigorous manner.
+
+    In this chapter, we present guidelines for the selection of NLP techniques as
+
+    well as for their evaluation in the context of RE. In particular, we discuss
+
+    how to choose among different strategies such as traditional NLP, feature-based
+
+    machine learning, and language-model-based methods. Our ultimate hope for this
+
+    chapter is to serve as a stepping stone, assisting newcomers to NLP4RE in
+
+    quickly initiating themselves into the NLP technologies most pertinent to the
+
+    RE field.
+
+
+    ## Introduction
+
+    NLP''s role in requirements automation is pivotal, due to the widespread use of
+    natural language (NL) in industrial requirements specifications. Historically,
+    NL has posed challenges for requirements analysis because of its inherent proneness
+    to defects such as incompleteness and ambiguity. Recent breakthroughs in NLP,
+    e.g., the emergence of large language models, have nonetheless drastically enhanced
+    our ability to automatically analyze textual information. This development is
+    poised to even further amplify the adoption and influence of NL in requirements
+    engineering.
+
+
+    Due to the rapid advancement of NLP, newcomers to NLP4RE may feel overwhelmed
+    by the numerous potentially applicable technologies. Another challenge is the
+    necessity to empirically assess a proposed automation solution, ensuring proper
+    optimization, and, where applicable, improve performance over existing solutions.
+
+
+    Over the past several years, we have studied various requirements automation problems,
+    including checking compliance with requirements templates [\[5\]](#page-20-0),
+    glossary construction [\[7\]](#page-20-1), model extraction [\[6\]](#page-20-2),
+    requirements demarcation [\[2\]](#page-20-3), ambiguity handling [\[19\]](#page-21-0),
+    and question answering [\[20\]](#page-21-1). With the benefit of hindsight, this
+    chapter aims to reflect on our research process and offer our collective insights
+    into how we approach NLP4RE problems. Before we start, we need to emphasize that
+    our perspective is retrospective. Given the fast pace of progress in NLP technologies,
+    new considerations may surface, and existing technologies could become outdated.
+    Therefore, it is important for readers to consider the time this chapter was written
+    (2023) when dealing with new technologies. This advice applies to most works in
+    the fast-changing field of Applied AI.
+
+
+    Structure. Section [2](#page-1-0) outlines the steps for automating pre-processing,
+    analysis, and post-processing in NLP4RE. Section [3](#page-6-0) describes various
+    NLP techniques and discusses their key considerations for automation in RE. Finally,
+    Section [4](#page-20-4) summarizes the chapter and presents conclusions.'
+- title: What Is an App Store? The Software Engineering Perspective
+  id: what_is_an_app_store_the_software_engineering_perspective_wenhan_zhu_sebastian_proksch_daniel_m_german_michael_w_godfrey_li_li_shane_mcintosh
+  url: http://arxiv.org/abs/2401.04287v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the authors
+      performed unsupervised clustering on app stores to find their natural groupings,
+      which indicates an empirical analysis. Additionally, the abstract discusses
+      deriving a set of features common to app stores and building a dimensional model,
+      suggesting a structured evaluation approach.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior research, such as the study by Harman et al. on the BlackBerry App World
+      and the findings by Lin et al. on game reviews in mobile app stores versus the
+      Steam platform. Additionally, the paper discusses the existing focus of research
+      on mobile app stores and aims to build on this by taking a more holistic approach.
+      This demonstrates engagement with prior work.'
+    novelty_prompt: 'Qualified. Reason: The abstract and introduction claim novelty
+      by proposing a dimensional model of app stores, which is a new approach to understanding
+      the broader diversity and influence of app stores beyond mobile platforms. The
+      paper explicitly states its aim to create a more general model of app stores
+      that fits a broader space, which indicates a novel contribution to the field.'
+    review_only_prompt: '- Disqualified: review paper. Reason: The paper''s title
+      includes the word "survey," and the abstract and introduction describe the work
+      as primarily summarizing existing research on app stores. The paper aims to
+      characterize the broader dimensionality of app stores and explore their influence
+      on software development practices without proposing new methods, results, or
+      tools.'
+  token_usage: 7100
+  time_usage: 5.61
+  llm_input_used: "## Abstract\n\"App stores\" are online software stores where end\
+    \ users may browse, purchase,\ndownload, and install software applications. By\
+    \ far, the best known app stores\nare associated with mobile platforms, such as\
+    \ Google Play for Android and\nApple's App Store for iOS. The ubiquity of smartphones\
+    \ has led to mobile app\nstores becoming a touchstone experience of modern living.\
+    \ However, most of app\nstore research has concentrated on properties of the apps\
+    \ rather than the\nstores themselves. Today, there is a rich diversity of app\
+    \ stores and these\nstores have largely been overlooked by researchers: app stores\
+    \ exist on many\ndistinctive platforms, are aimed at different classes of users,\
+    \ and have\ndifferent end-goals beyond simply selling a standalone app to a smartphone\n\
+    user.\n  We survey and characterize the broader dimensionality of app stores,\
+    \ and\nexplore how and why they influence software development practices, such\
+    \ as\nsystem design and release management. We begin by collecting a set of app\
+    \ store\nexamples from web search queries. By analyzing and curating the results,\
+    \ we\nderive a set of features common to app stores. We then build a dimensional\n\
+    model of app stores based on these features, and we fit each app store from our\n\
+    web search result set into this model. Next, we performed unsupervised\nclustering\
+    \ to the app stores to find their natural groupings. Our results\nsuggest that\
+    \ app stores have become an essential stakeholder in modern software\ndevelopment.\
+    \ They control the distribution channel to end users and ensure that\nthe applications\
+    \ are of suitable quality; in turn, this leads to developers\nadhering to various\
+    \ store guidelines when creating their applications. However,\nwe found the app\
+    \ stores operational model could vary widely between stores, and\nthis variability\
+    \ could in turn affect the generalizability of existing\nunderstanding of app\
+    \ stores.\n\n## Introduction\nThe widespread proliferation of smartphones and\
+    \ other mobile devices in recent years has in turn produced an immense demand\
+    \ for applications that run on these platforms. In response, online \"app stores\"\
+    \ such as Google Play and Apple's App Store have emerged to facilitate the discovery,\
+    \ purchasing, installation, and management of apps by users on their mobile devices.\
+    \ The success of mobile app stores has enabled a new and more direct relationship\
+    \ between app creators and users. The app store serves as a conduit between software\
+    \ creators (often, developers) and their users, with some mediation provided by\
+    \ the app store. The app store provides a \"one-stop shopping\" experience for\
+    \ users, who can compare competing products and read reviews of other users. The\
+    \ app store might also acts as a quality gatekeeper for the platform, providing\
+    \ varying levels of guarantees about the apps, such as easy installation and removal,\
+    \ expected functionality, and malware protection. To the software creator, the\
+    \ app store provides a centralized marketplace for their app, where potential\
+    \ users can find, purchase, and acquire the app easily; the app store also relieves\
+    \ the developer from basic support problems related to distribution and installation,\
+    \ since apps must be shown to install easily during the required approval process.\
+    \ Indeed, one of the key side effects of mobile app stores is that it has forced\
+    \ software developers to streamline their release management practices and ensure\
+    \ hassle-free deployment at the user's end.\n\nThe success of mobile app stores\
+    \ has also led to the establishment of a plethora of other kinds of app store,\
+    \ often for non-mobile platforms, serving diverse kinds of user communities, offering\
+    \ different kinds of services, and using a variety of monetization strategies.\
+    \ Many technical platforms now operate in a store-centric way: essential services\
+    \ and functionality are provided by the platform while access to extensions/add-ons\
+    \ is offered only through interaction with the app store. For instance, Google\
+    \ Play, the app store, operates on top of the technical platform Android, which\
+    \ provides the runtime environment for the applications. When new technical platforms\
+    \ are introduced, an app store is often expected to serve as a means to host and\
+    \ deliver products to its users [1]. Example technical platforms that use app\
+    \ store-like approaches\n\ninclude Steam [2], GitHub Marketplace [3], the Chrome\
+    \ Web Store [4], Word-Press [5], AutoDesk [6], DockerHub [7], Amazon Web Services\
+    \ (AWS) [8], Homebrew [9], or Ubuntu Packages [10].\n\nFor platforms that operate\
+    \ in this way, the app store is an essential part of the platform's design. For\
+    \ example, consider source code editors, such as VSCode and IntelliJ. The tool\
+    \ itself — which we consider to be a technical platform in this context — offers\
+    \ the essential functionality of a modern source code editor; however, many additional\
+    \ services are available through the associated app store that are not included\
+    \ by default. Thus, extensions that allow for language-specific syntax highlighting\
+    \ or version control integration must be added manually by the user through interaction\
+    \ with the tool's app store. We conjecture that the app store has fundamentally\
+    \ changed how some classes of software systems are designed, from the overall\
+    \ ecosystem architecture of the technical platform to the way in which add-ons\
+    \ are engineered to fit within its instances.\n\nIn this work, we will explore\
+    \ the general space of app stores, and also consider how app store-centric design\
+    \ can affect software development practices. Previous research involving app stores\
+    \ has focused mainly on mobile app stores, often concentrating on properties of\
+    \ the apps rather than properties of the stores. For example, Harman et al. performed\
+    \ one of the first major studies of app stores in 2012, focusing on the BlackBerry\
+    \ App World [11]. However, concentrating the investigative scope so narrowly may\
+    \ lead to claims that do not generalize well across the space of all app stores.\
+    \ For example, Lin et al. found that reviews of games that appeared in mobile\
+    \ app stores differed significantly from the reviews of the same game that appeared\
+    \ within the Steam platform's own app store [12]. In our work, we aim to take\
+    \ a more holistic approach to studying app stores by considering both mobile and\
+    \ non-mobile variants. In so doing, we hope to create a more general model of\
+    \ app stores that fits this broader space.\n\nTo achieve a holistic view, we start\
+    \ from the definition of an app store. A precise definition of the term \"app\
+    \ store\" has been omitted in much of the previous research in this area. Currently,\
+    \ Google Play and Apple's App Store dominate the market and are the main targets\
+    \ of research on app stores; in the past, the BlackBerry App World and Microsoft's\
+    \ Windows Phone Store were also important players, but these stores are now defunct.<sup>1</sup>\
+    \ Wikipedia recognizes Electronic AppWrapper [13] as the first true platform-specific\
+    \ electronic marketplace for software applications, but the term became popular\
+    \ when Apple introduced its App Store along with the iPhone 3G in 2008. Since\
+    \ then, the term has largely come to refer to any centralized store for mobile\
+    \ applications. We present our own working definition of the term \"app store\"\
+    \ in Sec. 2.4.\n\nThe goal of this work is to survey and characterize the broader\
+    \ dimensionality of app stores, and also to explore how and why they may feed\
+    \ back into software development practices, such as release management. As a step\
+    \ toward\n\n<sup>1</sup> The Windows Phone Store was absorbed into the broader\
+    \ Windows Store in 2015.\n\nthis goal, we focus on two research questions (RQs)\
+    \ that aim to explore the space of app stores:"
+- title: 'Next4: Snapshots in Ext4 File System'
+  id: next4_snapshots_in_ext4_file_system_aditya_dani_1_shardul_mangade_2_piyush_nimbalkar_3_harshad_shirwadkar_4
+  url: http://arxiv.org/abs/2403.06790v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract does not
+      mention any empirical testing, experiments, or quantitative evaluation of the
+      proposed Next4 file system. It describes the design and implementation but lacks
+      evidence of structured evaluation or performance metrics.'
+    related_work_prompt: '- Disqualified: no related work. Reason: The abstract does
+      not mention any prior research, related approaches, or previous findings. There
+      are no academic citations or references, and it does not compare its goals or
+      contributions with existing work.'
+    novelty_prompt: '- Qualified. Reason: The abstract clearly claims novelty by proposing
+      and implementing "Next4," a new file system-based snapshot feature in Ext4.
+      It highlights the unique approach of infusing the copy-on-write strategy into
+      the Ext4 file system, which distinguishes it from existing methods.'
+    review_only_prompt: '- Qualified. Reason: The abstract proposes and implements
+      a new method, Next4, which is a file system-based snapshot feature in Ext4 for
+      data backup and recovery. This indicates the paper includes new contributions
+      rather than just summarizing existing work.'
+  token_usage: 1847
+  time_usage: 4.47
+  llm_input_used: '## Abstract
+
+    The growing value of data as a strategic asset has given rise to the
+
+    necessity of implementing reliable backup and recovery solutions in the most
+
+    efficient and cost-effective manner. The data backup methods available today on
+
+    linux are not effective enough, because while running, most of them block I/Os
+
+    to guarantee data integrity. We propose and implement Next4 - file system based
+
+    snapshot feature in Ext4 which creates an instant image of the file system, to
+
+    provide incremental versions of data, enabling reliable backup and data
+
+    recovery. In our design, the snapshot feature is implemented by efficiently
+
+    infusing the copy-on-write strategy in the write-in-place, extent based Ext4
+
+    file system, without affecting its basic structure. Each snapshot is an
+
+    incremental backup of the data within the system. What distinguishes Next4 is
+
+    the way that the data is backed up, improving both space utilization as well as
+
+    performance.
+
+
+    '
+- title: Crash Consistency in DRAM-NVM-Disk Hybrid Storage System
+  id: crash_consistency_in_dram_nvm_disk_hybrid_storage_system_1_st_guoyu_wang_college_of_computer_science_and_technology_jilin_university_changchun_china
+  url: http://arxiv.org/abs/2408.04238v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      discuss the consistency problems and propose solutions for heterogeneous storage
+      systems but do not mention any empirical, experimental, or quantitative evaluation,
+      such as experiments, benchmarks, or performance metrics. The focus is on discussing
+      problems and solutions without evidence of structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The introduction mentions various works
+      that leverage NVM''s characteristics and references specific prior works ([5],
+      [8], [11]). It also discusses the NVPC accelerator in relation to previous work,
+      indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The abstract explicitly states that the paper
+      proposes a solution to the consistency problems in heterogeneous storage systems,
+      indicating a claim of novelty.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes solutions to consistency
+      problems in heterogeneous storage systems and discusses these solutions in detail,
+      indicating new contributions beyond merely summarizing existing work.'
+  token_usage: 3051
+  time_usage: 4.38
+  llm_input_used: '## Abstract
+
+    NVM is used as a new hierarchy in the storage system, due to its intermediate
+
+    speed and capacity between DRAM, and its byte granularity. However, consistency
+
+    problems emerge when we attempt to put DRAM, NVM, and disk together as an
+
+    efficient whole. In this paper, we discuss the challenging consistency problems
+
+    faced by heterogeneous storage systems, and propose our solution to the
+
+    problems. The discussion is based on NVPC as a case study, but can be inspiring
+
+    and adaptive to all similar heterogeneous storage systems.
+
+
+    ## Introduction
+
+    With the emergence of non-volatile memory (NVM), various works have been proposed
+    to leverage its byte-addressable and persistence characteristics. Among these
+    approaches, the most compatible, efficient, and promising one is to use NVM to
+    accelerate existing disk file systems [\[5\]](#page-7-0), [\[8\]](#page-8-0),
+    [\[11\]](#page-8-1), in which case users can utilize NVM in their current system
+    transparently without migration cost. However, we discover that the heterogeneity
+    between DRAM, NVM, and disk makes it harder for these works to fully exploit the
+    potential of NVM.
+
+
+    NVPC [\[8\]](#page-8-0) is the only one of the accelerators that precisely accelerates
+    only the slow path, i.e. sync writes, of the legacy storage stack, with no slow-down
+    to its lower file system. We notice that its implementation abandons the layered
+    design adopted by previous work, introducing an on-demand sync absorbing mechanism,
+    which is the fundamental of its high efficiency. However, this design also introduces
+    consistency
+
+
+    <sup>∗</sup>Corresponding author.
+
+
+    problems between NVM and disk, which are only briefly and insufficiently discussed
+    in that work. We observe that this consistency problem is common to a heterogeneous
+    storage system with different write sequences and access granularity. Thus we
+    believe that it is necessary to further discuss the consistency problems in such
+    systems.
+
+
+    In this work, we will first introduce the background of NVM-based heterogeneous
+    storage systems. Then based on NVPC, we will discuss the consistency problems
+    and solutions. Specifically, for each heterogeneous characteristic, we will first
+    figure out the exact problems that the system is facing. Then we will analyze
+    the causes of the consistency problems. Finally, we will provide the solutions
+    to each problem based on our analysis.'
+- title: 'Modern Computing: Vision and Challenges'
+  id: modern_computing_vision_and_challenges_sukhpal_singh_gill_a_huaming_wu_b_panos_patros_c_carlo_ottaviani_d_priyansh_arora_e_victor_casamayor_pujol_f_david_haunschild_g_ajith_kumar_parlikad_h_oktay_cetinkaya_i_hanan_lutfiyya_j_vlado_stankovski_k_ruidong_li_l_yuemin_ding_m_junaid_qadir_n_ajith_abraham_o_p_soumya_k_ghosh_q_houbing_herbert_song_r_rizos_sakellariou_s_omer_rana_t_joel_j_p_c_rodrigues_u_v_salil_s_kanhere_w_schahram_dustdar_f_steve_uhlig_a_kotagiri_ramamohanarao_x_and_rajkumar_buyya_y
+  url: http://arxiv.org/abs/2401.02469v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on the historical and conceptual evolution of computing systems and discuss
+      trends and challenges in the field. However, there is no mention of empirical,
+      experimental, or quantitative evaluation, nor any reference to experiments,
+      datasets, performance metrics, or comparisons with prior work.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction both contain
+      multiple references to prior work, including mentions of historical developments
+      in computing systems, such as mainframes, PCs, and IoT. The introduction also
+      includes citations to previous research, indicating engagement with existing
+      literature and prior technological advancements.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The abstract and introduction
+      provide a comprehensive review of the evolution and current state of computing
+      systems, highlighting trends and challenges. However, there is no explicit claim
+      of novelty, such as proposing a new method, model, or framework, or applying
+      known techniques in a novel domain. The paper appears to be a review rather
+      than presenting new contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The abstract and introduction
+      describe the paper as a comprehensive review of modern computing systems, focusing
+      on assessing factors influencing their evolution and highlighting key challenges
+      and emerging trends. There is no mention of proposing new methods, results,
+      or tools, and the paper is primarily summarizing existing work.'
+  token_usage: 4305
+  time_usage: 5.46
+  llm_input_used: '## Abstract
+
+    Over the past six decades, the computing systems field has experienced
+
+    significant transformations, profoundly impacting society with transformational
+
+    developments, such as the Internet and the commodification of computing.
+
+    Underpinned by technological advancements, computer systems, far from being
+
+    static, have been continuously evolving and adapting to cover multifaceted
+
+    societal niches. This has led to new paradigms such as cloud, fog, edge
+
+    computing, and the Internet of Things (IoT), which offer fresh economic and
+
+    creative opportunities. Nevertheless, this rapid change poses complex research
+
+    challenges, especially in maximizing potential and enhancing functionality. As
+
+    such, to maintain an economical level of performance that meets ever-tighter
+
+    requirements, one must understand the drivers of new model emergence and
+
+    expansion, and how contemporary challenges differ from past ones. To that end,
+
+    this article investigates and assesses the factors influencing the evolution of
+
+    computing systems, covering established systems and architectures as well as
+
+    newer developments, such as serverless computing, quantum computing, and
+
+    on-device AI on edge devices. Trends emerge when one traces technological
+
+    trajectory, which includes the rapid obsolescence of frameworks due to business
+
+    and technical constraints, a move towards specialized systems and models, and
+
+    varying approaches to centralized and decentralized control. This comprehensive
+
+    review of modern computing systems looks ahead to the future of research in the
+
+    field, highlighting key challenges and emerging trends, and underscoring their
+
+    importance in cost-effectively driving technological progress.
+
+
+    ## Introduction
+
+    The Internet, the expansive computational backbone of interactive machines, is
+    largely responsible for the 21st century''s social, financial, and technological
+    growth [\[1\]](#page-39-0). The growing reliance on the computing resources it
+    encapsulates has pushed the complexity and scope of such platforms, leading to
+    the development of innovative computing systems. These systems have genuinely
+    improved the capabilities and expectations of computing equipment driven by rapid
+    technical and user-driven evolution [\[2\]](#page-40-0). For instance, vintage
+    mainframes combined centralized data processing and storage with transmission
+    interfaces for user input. Due to advancements in clusters and packet-switching
+    technologies, microchip gadgets, and graphical user interfaces, technology originally
+    shifted from big, centrally-run mainframe computers to Personal Computers (PCs).
+    The globalization of network standards made it possible for interconnected networks
+    worldwide to communicate and share data [\[3\]](#page-40-1). Businesses slowly
+    combined sensor and actuator goals with built-in network connectivity by creating
+    architectures and standards that submit tasks to remote pools of computing resources,
+    such as memory, storage, and data processing [\[4\]](#page-40-2). As a result,
+    newer models like the Internet of Things (IoT) and edge computing are now beginning
+    to expand the reach of technology outside the confines of traditional network
+    nodes [\[5\]](#page-40-3).
+
+
+    Over the past six decades, computing models have fundamentally shifted to address
+    the problems posed by the ever-evolving nature of our civilization and its associated
+    computer system architectures [\[6\]](#page-40-4). The evolution of computing
+    from mainframes to workstations to the cloud to autonomous and decentralized architectures,
+    such as edge computing and IoT technologies, however, maintains identical core
+    parts and traits that characterize their function [\[7\]](#page-40-5). Research
+    in computing underpins all of them! Advancements in areas like security, computer
+    hardware acceleration, edge computing, and energy efficiency typically serve as
+    catalysts for innovation and entrepreneurship that span across various business
+    domains [\[8\]](#page-40-6). While computing systems and other forms of system
+    integration create new problems/opportunities, software frameworks have been developed
+    to address them. Thus, middleware, network protocols, and safe segregation techniques
+    must be continually developed and refined to support novel computing systems—and
+    their innovative use cases.'
+- title: "XaaS: Acceleration as a Service to Enable Productive High-Performance\n\
+    \  Cloud Computing"
+  id: xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing_xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing
+  url: http://arxiv.org/abs/2401.04552v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on the conceptual framework and potential benefits of Acceleration as
+      a Service (XaaS) but do not provide any evidence of empirical, experimental,
+      or quantitative evaluation. There is no mention of experiments, datasets, performance
+      metrics, or comparisons with prior work.'
+    related_work_prompt: '- Qualified. Reason: The introduction mentions prior work
+      by discussing how HPC and Cloud have progressed independently and references
+      specific technologies and concepts like RDMA, containers, and cloud-native interfaces.
+      It also includes citations (e.g., [\[7\]](#page-7-0), [\[1\]](#page-7-1)) indicating
+      engagement with existing research.'
+    novelty_prompt: '- Qualified. Reason: The paper introduces "Acceleration as a
+      Service (XaaS)" as a novel unified architecture that bridges HPC and cloud advancements.
+      It claims to provide a new model that combines the benefits of both fields,
+      offering a performance-portable container-based solution for resource-intensive
+      workloads. The abstract and introduction clearly state the novelty of this approach
+      and its potential contributions to both HPC and cloud computing communities.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new architecture, Acceleration as a Service (XaaS), which
+      aims to bridge HPC and cloud computing. The paper discusses the introduction
+      of a unified architecture and model, indicating new contributions rather than
+      merely summarizing existing work.'
+  token_usage: 5835
+  time_usage: 5.4
+  llm_input_used: '## Abstract
+
+    HPC and Cloud have evolved independently, specializing their innovations into
+
+    performance or productivity. Acceleration as a Service (XaaS) is a recipe to
+
+    empower both fields with a shared execution platform that provides transparent
+
+    access to computing resources, regardless of the underlying cloud or HPC
+
+    service provider. Bridging HPC and cloud advancements, XaaS presents a unified
+
+    architecture built on performance-portable containers. Our converged model
+
+    concentrates on low-overhead, high-performance communication and computing,
+
+    targeting resource-intensive workloads from climate simulations to machine
+
+    learning. XaaS lifts the restricted allocation model of Function-as-a-Service
+
+    (FaaS), allowing users to benefit from the flexibility and efficient resource
+
+    utilization of serverless while supporting long-running and
+
+    performance-sensitive workloads from HPC.
+
+
+    ## Introduction
+
+    Acceleration as a Service (XaaS) is a recipe for enabling high-performance computing
+    (HPC) workloads in the cloud. Cloud computing ("the Cloud") provides the opportunity
+    to offer computational capabilities as a simple transactional service, similar
+    to how we use electricity or the internet. Today''s Cloud already offers a wide
+    range of powerful services, from online storage to specific applications
+
+
+    ![](_page_0_Picture_16.jpeg)
+
+
+    such as video calls or search. However, its performance is limited by inefficiencies
+    in current Cloud architectures. XaaS addresses those inefficiencies and enables
+    the computation of high-performance accelerated workloads, ranging from simulations
+    to AI/ML inference and training, as a high-performance cloud service capable of
+    serving most demanding workloads.
+
+
+    XaaS provides different opportunities for people with different backgrounds and
+    mindsets. Members of the HPC community will find a vision for productive high-performance
+    computing connecting today''s manually compiled-and-run HPC applications to a
+    new world of automated high-performance containers running finegrained transactional
+    computations. Members of the datacenter systems and cloud computing communities
+    will find a vision for lifting standard container deployments seamlessly to low-overhead,
+    high-performance accelerated infrastructures, enabling the fastest communication
+    and specialized computing at the highest system utilization and reliability, whereby
+    deployed containers utilize library interfaces and remote direct memory access
+    (RDMA) technologies for specialized acceleration and communication with close-to-zero
+    overheads compared to traditional bare-metal deployments.
+
+
+    Here, we define HPC workloads as resource-intensive and performance sensitive
+    applications. Traditionally, HPC systems were aimed at executing extremely demanding
+    scientific computing workloads. Recently, HPC systems have also been employed
+    for data analytics, machine learning, and other workloads that, like scientific
+    computing, require massive concurrency and rapid interprocess communication. Supercomputing
+    is the subset of HPC that uses the fastest and most powerful general purpose scientific
+    computing systems available at any given time [\[7\]](#page-7-0). Cloud computing
+    can be characterized by the desire to separate provider and user by a simple,
+    clear, and automatable interface (ideally as simple as a power socket!) and by
+    business and operations models designed to ensure that user requests can always
+    be satisfied. To this end, cloud computing employs composable (micro)services
+    that run in containers and interact through clearly defined interfaces (e.g.,
+    REST, JSON) that often however compromise performance.
+
+
+    Applications that only rely on container and cloud service interfaces are called
+    "cloud native." Container creation, deployment, and management are largely handled
+    by the de-facto standards Docker and Kubernetes. However, cloud service interfaces
+    such as storage or machine learning inference are usually specific to the provider''s
+    ecosystem. Most modern cloud systems aim to offer
+
+
+    Torsten Hoefler, Marcin Copik, Pete Beckman, Andrew Jones, Ian Foster, Manish
+    Parashar, Daniel Reed, Matthias Troyer, Thomas Schulthess, Dan Ernst, and Jack
+    Dongarra
+
+
+    <span id="page-1-1"></span>![](_page_1_Figure_1.jpeg)
+
+
+    Figure 1: Both Cloud and HPC converge to containers as an application and service
+    deployment model. Containers bind all dependencies and system aspects (users,
+    rights, etc.) into a single portable unit that can be flexibly deployed. XaaS
+    enables HPC features for such containers.
+
+
+    an execution environment for cloud-native containers, which is similar to an operating
+    system''s interface to a process. The Cloud Native Foundation seeks to define
+    an interface in the spirit of the POSIX interfaces[a](#page-1-0) . This design
+    is traditionally aimed at providing a productive ecosystem. Only recently, performance
+    has become a center of attention when using compute accelerators for demanding
+    video processing tasks or AI/ML workloads. Thus, the goals of modern cloud computing
+    and HPC align well and could converge towards the same infrastructure.
+
+
+    HPC and Cloud have progressed largely independently in the past. Both according
+    to their specialization: The Cloud innovates in terms of business model, software
+    packaging (containers), and productive ecosystems (e.g., cloud native) and HPC
+    in terms of performance (e.g., RDMA) and abstractions for performance (performance
+    libraries). However, each field trails the other in other respects: for example,
+    HPC has explored as-aservices abstractions [\[1\]](#page-7-1) and is only just
+    beginning to embrace the simpler deployment philosophy of containerized environments,
+    while cloud started to explore ideas of RDMA. Each feature was established in
+    the other community a decade ago. XaaS provides a way to accelerate this transition
+    to a common architecture based on high-performance containers. Figure [1](#page-1-1)
+    shows a schematic overview of where each field is coming from and what containerized
+    deployments could enable today or in the near future. If those two communities
+    do not join forces, they are bound to re-invent each other''s methods.
+
+
+    All-in-all, the high-level architectural vision for a converged high-performance
+    cloud with XaaS is based on three fundamental principles:'
+- title: "A Logic for Repair and State Recovery in Byzantine Fault-tolerant\n  Multi-agent\
+    \ Systems"
+  id: a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems_a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems
+  url: http://arxiv.org/abs/2401.06451v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract does not
+      mention any empirical, experimental, or quantitative evaluation. It describes
+      the development of a logical language and semantics for modeling but does not
+      reference experiments, datasets, performance metrics, or comparisons with prior
+      work.'
+    related_work_prompt: '- Disqualified: no related work. Reason: The abstract does
+      not mention any prior research, related approaches, or previous findings. There
+      are no academic citations or references, and it does not compare its contributions
+      with existing work.'
+    novelty_prompt: '- Qualified. Reason: The abstract claims novelty by introducing
+      a new epistemic logical language and semantics specifically designed for modeling
+      and analyzing byzantine fault-tolerant multi-agent systems. It also introduces
+      a new modality called "hope" and dynamic modalities for model updates, which
+      are novel contributions to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract describes the introduction
+      of a new epistemic logical language and semantics for modeling and analysis,
+      complete with axiomatizations and examples. This indicates the paper proposes
+      new methods and contributions rather than solely summarizing existing work.'
+  token_usage: 2051
+  time_usage: 4.44
+  llm_input_used: '## Abstract
+
+    We provide an epistemic logical language and semantics for the modeling and
+
+    analysis of byzantine fault-tolerant multi-agent systems. This not only
+
+    facilitates reasoning about the agents'' fault status but also supports model
+
+    updates for implementing repair and state recovery. For each agent, besides the
+
+    standard knowledge modality our logic provides an additional modality called
+
+    hope, which is capable of expressing that the agent is correct (not faulty),
+
+    and also dynamic modalities enabling change of the agents'' correctness status.
+
+    These dynamic modalities are interpreted as model updates that come in three
+
+    flavours: fully public, more private, or involving factual change. We provide
+
+    complete axiomatizations for all these variants in the form of reduction
+
+    systems: formulas with dynamic modalities are equivalent to formulas without.
+
+    Therefore, they have the same expressivity as the logic of knowledge and hope.
+
+    Multiple examples are provided to demonstrate the utility and flexibility of
+
+    our logic for modeling a wide range of repair and state recovery techniques
+
+    that have been implemented in the context of fault-detection, isolation, and
+
+    recovery (FDIR) approaches in fault-tolerant distributed computing with
+
+    byzantine agents.
+
+
+    '
+- title: Structured Acyclic Nets
+  id: structured_acyclic_nets_all_sets_used_in_the_relational_structures_considered_in_this_paper_are_finite_which_simplifies_some_of_the_definitions_and_results_for_two_sets_x_and_y_x_y_means_that_x_is_a_proper_subset_of_y_i_e_x_y_and_x_6_y_the_disjoint_union_of_x_and_y_is_denoted_by_x_y_and_nonempty_sets_x_1_xk_form_a_partition_of_a_sets_x_if_x_x_1_xk
+  url: http://arxiv.org/abs/2401.07308v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on the theoretical extension of structured occurrence nets and their conceptual
+      application to complex systems. There is no mention of empirical testing, experiments,
+      performance metrics, or quantitative evaluation methods.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [\[11\]], [\[16\]], and
+      [\[20\]], and discuss how the current paper extends and systematizes ideas from
+      previous models.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing an extension
+      of structured occurrence nets to include models built up of acyclic nets rather
+      than occurrence nets. This extension is intended to generalize previously introduced
+      models, indicating a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces an extension of
+      structured occurrence nets by replacing occurrence nets with more general acyclic
+      nets, which suggests a new contribution rather than merely summarizing existing
+      work.'
+  token_usage: 3861
+  time_usage: 4.17
+  llm_input_used: '## Abstract
+
+    The concept of structured occurrence nets is an extension of that of
+
+    occurrence nets which are directed acyclic graphs that represent causality and
+
+    concurrency information concerning a single execution of a distributed system.
+
+    The formalism of structured occurrence nets has been introduced to facilitate
+
+    the portrayal and analysis of the behaviours, and in particular failures, of
+
+    complex evolving systems. Such systems are composed of a large number of
+
+    sub-systems which may proceed concurrently and interact with each other and
+
+    with the external environment while their behaviour is subject to modification
+
+    by other systems. The purpose of this paper is to provide an extension of
+
+    structured occurrence nets to include models built up of acyclic nets rather
+
+    than occurrence nets.
+
+
+    ## Introduction
+
+    The concept of structured occurrence nets [\[16,](#page-34-0)[20\]](#page-34-1)
+    is an extension of that of occurrence nets [\[11\]](#page-34-2) which are directed
+    acyclic graphs (a subclass of Petri nets) that represent causality and concurrency
+    information concerning a single execution of a distributed system. The formalism
+    of structured occurrence nets has been introduced to facilitate the portrayal
+    and analysis of the behaviours, and in particular failures, of complex evolving
+    systems. Examples include a large hardware system which suffers component break-downs,
+    reconfigurations and replacements, a large distributed system whose software is
+    being continually updated (or patched), a gang of criminals whose membership is
+    changing, and an operational railway system that is being extended. (In these
+    latter cases we are regarding crimes and accidents as types of failure.) The underlying
+    idea of a structured occurrence net is to combine multiple related occurrence
+    nets by using various formal relationships (in particular, abstractions) in order
+    to express dependencies among the component occurrence nets. By means of these
+    relations, a structured occurrence net is able to portray a more explicit view
+    of system activity, involving various types of communication between subsystems,
+    and of system upgrades, reconfigurations and replacements than is possible with
+    an occurrence net, so allowing one to document and exploit behavioural knowledge
+    of (actual or envisaged) complex evolving systems.
+
+
+    Communication structured occurrence nets are a basic variant of structured occurrence
+    nets that enable the explicit representation of synchronous and asynchronous interaction
+    between communicating subsystems. A communication structured occurrence net is
+    composed of a set of distinct component occurrence nets representing separate
+
+
+    subsystems. When it is determined that there is a potential for an interaction
+    between subsystems, an asynchronous or synchronous communication link can be made
+    between events in the different subsystems'' occurrence nets via a channel/buffer
+    place.
+
+
+    Another variant of structured occurrence nets, behavioural structured occurrence
+    nets, conveys information about the evolution of individual systems. They use
+    a two level view to represent an execution history, with the lower level providing
+    details of its behaviours during the different evolution stages represented in
+    the upper level view. Thus a behavioural structured occurrence net gives information
+    about the evolution of an individual system, and the phases of the overall activity
+    are used to represent each successive stage of the evolution of this system.
+
+
+    This document extends and systematises the ideas contained in [\[16\]](#page-34-0),
+    after allowing backward non-determinism and forward non-determinism in the representation
+    of the components of a complex evolving system. This is achieved by replacing
+    occurrence nets with more general acyclic nets. As a result, it leads to communication
+    structured acyclic nets and behavioural structured acyclic nets generalising previously
+    introduced models.'
+- title: Semantic Web Technology for Agent Communication Protocols
+  id: semantic_web_technology_for_agent_communication_protocols_idoia_berges_jes_us_berm_udez_alfredo_go_ni_and_arantza_illarramendi
+  url: http://arxiv.org/abs/2401.11841v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The abstract and introduction
+      focus on the proposal of a framework for describing communication protocols
+      using Semantic Web technology. There is no mention of empirical testing, experiments,
+      benchmarks, performance metrics, or comparisons with prior work. The paper describes
+      the theoretical aspects and potential benefits of the proposal but lacks evidence
+      of structured evaluation or quantitative outcomes.'
+    related_work_prompt: '- Qualified. Reason: The introduction references prior work
+      by mentioning the recent efforts of members from both the agent technology and
+      Web Services communities to consolidate their approaches into a common specification.
+      It also cites specific sources ([1], [2], [3], [4], [5]) that are indicative
+      of engagement with existing research. Additionally, the paper discusses the
+      use of existing standard communication protocols and ontologies, indicating
+      a comparison with and building upon prior work.'
+    novelty_prompt: 'Qualified. Reason: The paper explicitly claims novelty by proposing
+      a new approach to describe standard communication protocols using Semantic Web
+      technology, specifically OWL-DL and SWRL. It introduces a communication acts
+      ontology called CommOnt and outlines several contributions, such as facilitating
+      flexible interoperation among agents, customizing standard communication protocols,
+      and providing a basis for reasoning about protocol relationships.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a method for describing
+      standard communication protocols using Semantic Web technology, introduces a
+      communication acts ontology called CommOnt, and discusses reasoning about protocol
+      relationships. These elements indicate new contributions rather than merely
+      summarizing existing work.'
+  token_usage: 7070
+  time_usage: 5.61
+  llm_input_used: '## Abstract
+
+    One relevant aspect in the development of the Semantic Web framework is the
+
+    achievement of a real inter-agents communication capability at the semantic
+
+    level. The agents should be able to communicate and understand each other using
+
+    standard communication protocols freely, that is, without needing a laborious
+    a
+
+    priori preparation, before the communication takes place. For that setting we
+
+    present in this paper a proposal that promotes to describe standard
+
+    communication protocols using Semantic Web technology (specifically, OWL-DL and
+
+    SWRL). Those protocols are constituted by communication acts. In our proposal
+
+    those communication acts are described as terms that belong to a communication
+
+    acts ontology, that we have developed, called CommOnt. The intended semantics
+
+    associated to the communication acts in the ontology is expressed through
+
+    social commitments that are formalized as fluents in the Event Calculus. In
+
+    summary, OWL-DL reasoners and rule engines help in our proposal for reasoning
+
+    about protocols. We define some comparison relationships (dealing with notions
+
+    of equivalence and specialization) between protocols used by agents from
+
+    different systems.
+
+
+    ## Introduction
+
+    In the scenario that promotes the emergent Web, administrators of existing Information
+    Systems, that belong to nodes distributed along the Internet network, are encouraged
+    to provide the functionalities of those systems through agents that represent
+    them or through Web Services. The underlying idea is to get a real interoperation
+    among those Information Systems in order to enlarge the benefits that users can
+    get from the Web by increasing the machine processable tasks.
+
+
+    <sup>⋆</sup> The work of Idoia Berges is supported by a grant of the Basque Government.
+
+
+    <sup>⋆⋆</sup> All authors are members of the Interoperable DataBases Group. This
+    work is also supported by the University of the Basque Country, Diputaci´on Foral
+    de Gipuzkoa (cosupported by the European Social Fund) and the Spanish Ministry
+    of Education and Science TIN2007-68091-C02-01.
+
+
+    Although agent technology and Web Services technology have been developed in a
+    separate way, there exists a recent work of several members from both communities
+    trying to consolidate their approaches into a common specification describing
+    how to seamlessly interconnect FIPA compliant agent systems [\[1\]](#page-13-0)
+    with W3C compliant Web Services. The purpose of specifying an infrastructure for
+    integrating these two technologies is to provide a common means of allowing each
+    to discover and invoke instances of the other [\[2\]](#page-13-1). Considering
+    the previous approach, in the rest of this paper we will only concentrate on inter-agent
+    communication aspects.
+
+
+    Communication among agents is in general based on the interchange of communication
+    acts. However, different Information Systems have incorporated different classes
+    of communication acts as their Agent Communication Language (acl) to the point
+    that they do not understand each other. Moreover, protocols play a relevant role
+    in agents communication. A protocol specifies the rules of interaction between
+    agents by restricting the range of allowed follow-up communication acts for each
+    agent at any stage during a communicative interaction. It is widely recognized
+    the interest of using standard communication protocols.
+
+
+    We advocate so that the administrators of the Information Systems proceed in the
+    following way. When they wish to implement the agents that will represent their
+    systems, they first select, from a repository of standard protocols (there can
+    exist one or more repositories), those protocols that fulfill the goals of their
+    agents. Sometimes a single protocol will be sufficient and other times it will
+    be necessary to design a protocol as a composition of some other protocols. Next,
+    they can customize the selected protocols before they incorporate them to the
+    agents. In that setting, when agents of different Information Systems want to
+    interoperate it will be relevant to reason about the protocols embedded in the
+    agents in order to discover relationships such as equivalence or restriction between
+    them. Moreover, once those relationships are discovered both agents can use the
+    same protocol by replacing dynamically in one agent the protocol supported by
+    the other. Finally, in our opinion it will be desirable to use a formal language
+    to represent the protocols.
+
+
+    In this paper we present a proposal that promotes to describe standard communication
+    protocols using Semantic Web Technology (OWL-DL and SWRL). In addition, communication
+    acts that take part of the protocols are described as terms that belong to a communication
+    acts ontology, that we have developed, called CommOnt (see more details about
+    the ontology in [\[3\]](#page-13-2)). The use of that ontology favours on the
+    one hand, the explicit representation of the meaning of the communication acts
+    and on the other hand, the customization of existing standard protocols by allowing
+    the use of particular communication acts that can be defined as specializations
+    of existing standard communication acts.
+
+
+    Terms of the CommOnt ontology are described using OWL-DL and we have adopted the
+    so called social approach [\[4,](#page-13-3)[5\]](#page-13-4) for expressing the
+    intended semantics of the communication acts included in the protocols. According
+    to the social approach, when agents interact they become involved in social commitments
+    or obligations to each other. Those commitments are public, and therefore they
+    are suitable for an objective and verifiable semantics of agent interaction. Social
+    commitments can be considered as fluents in the Event Calculus, which is a logic-based
+    formalism for representing actions and their effects. Fluents are propositions
+    that hold during time intervals. A formula in the Event Calculus is associated
+    to a communication act for describing its social effects. The set of fluents that
+    hold at a moment describes a state of the interaction. DL axioms and Event Calculus
+    formulae apply to different facets of communication acts. DL axioms describe static
+    features and are principally used for communication act interpretation purposes.
+    Event Calculus formulae describe dynamic features, namely the social effects of
+    communication acts, and are principally used for communication act operational
+    contexts such as supervising conversations.
+
+
+    In summary the main contributions of the proposal presented in this paper are:
+
+
+    - It favours a flexible interoperation among agents of different systems by using
+    standard communication protocols described through tools promoted by the W3C.
+
+    - It facilitates the customization of those standard communication protocols allowing
+    to use communication acts in the protocols that belong to specific acl of Information
+    Systems. The particular communication acts are described in an ontology.
+
+    - It provides a basis to reason about relationships between two protocols in such
+    a way that the following relations can be discovered: equivalence or restriction
+    (and also considering a notion of specialization). Moreover, notice that our approach
+    allows to get protocols classification in terms of the intended semantics of communication
+    acts that appear in the protocols.
+
+    - It allows modeling the communication among agents without regarding only to
+    the lower level operational details of how communication acts are interchanged
+    but taking also into account the meaning of those acts.
+
+
+    The rest of the paper is organized as follows: Section [2](#page-2-0) provides
+    background on the communication ontology, that contains terms corresponding to
+    communication acts that appear in the protocols, and on the semantics associated
+    to those acts. Section [3](#page-6-0) explains how protocols are described using
+    Semantic Web Technology and presents the definitions of the relationships considered
+    between protocols. Section [4](#page-11-0) discusses different related works,
+    and conclusions appear in the last section.'

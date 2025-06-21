@@ -1,0 +1,50 @@
+papers:
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities_cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities
+  url: http://arxiv.org/abs/2401.06375v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a structured evaluation
+      of the ProcessGPT model, detailing its capabilities and potential benefits for
+      individuals with cognitive disabilities, along with quantifiable metrics related
+      to usability improvements and productivity gains.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior research on
+      cognitive factors and AI capabilities, discusses the concept of Cognitive BPM,
+      and mentions other researchers'' work related to ProcessGPT, indicating engagement
+      with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new AI model, ProcessGPT,
+      designed to automate and improve business processes while specifically addressing
+      the challenges faced by individuals with cognitive disabilities, indicating
+      a novel contribution in the field of Cognitive BPM.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes the AI model ProcessGPT
+      and discusses its capabilities in automating and improving business processes,
+      particularly for individuals with cognitive disabilities. It does not solely
+      summarize existing work but introduces a specific application and potential
+      benefits of the model.'
+  token_usage: 14347
+  time_usage: 4.73
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems_greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems
+  url: http://arxiv.org/abs/2401.06793v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The introduction mentions the development
+      of a polynomial time algorithm that models the behavior of a decision tree and
+      discusses the accuracy of this algorithm, including a comparison of the depth
+      of the decision tree described by it and the minimum depth of a decision tree.
+      Additionally, it states plans for future computer experiments to explore the
+      hypothesis regarding the performance of the algorithms, indicating empirical
+      evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper includes multiple academic
+      citations and references to prior work, discusses the relationship between decision
+      trees and decision rule systems, and compares its approach to existing methods
+      and findings in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new polynomial time algorithm
+      that models the behavior of a decision tree for a given tuple of attribute values,
+      which is a clear claim of novelty in the abstract and introduction.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a new polynomial time
+      algorithm that models the behavior of decision trees, indicating that it presents
+      new methods and contributions rather than merely summarizing existing work.'
+  token_usage: 8071
+  time_usage: 3.67

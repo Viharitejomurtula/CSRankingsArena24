@@ -1,0 +1,78 @@
+papers:
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      through systematic literature mapping, detailing search criteria, inclusion/exclusion
+      criteria, and categorization of studies, which demonstrates empirical analysis
+      of the topic.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a comprehensive "Literature
+      Systematic Mapping" section that discusses prior research, includes meaningful
+      citations to academic papers, and explains how the work builds upon previous
+      studies in the field of Automated Test Production.'
+    novelty_prompt: 'Qualified. Reason: The paper presents a systematic literature
+      mapping (SLM) of Automated Test Production (ATP), which identifies and categorizes
+      existing methods, techniques, and tools in the field. It claims contributions
+      such as identifying open questions, tracking research progress, and proposing
+      a structured approach to classify studies, demonstrating novelty in its methodology
+      and insights.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "mapping" which indicates a systematic literature mapping, and the main
+      body primarily summarizes existing work without introducing new methods, datasets,
+      experiments, or frameworks.'
+  token_usage: 34943
+  time_usage: 10.3
+- title: Automated Test Production -- Systematic Literature Review
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a systematic literature
+      review that outlines research questions, selection criteria, and qualitative
+      analysis, indicating a structured evaluation of existing studies related to
+      Automated Test Production. It presents tables and figures summarizing findings,
+      which demonstrate empirical analysis and evaluation of methodologies and tools.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a comprehensive "Related
+      Work" section, meaningful citations to academic papers, and discusses prior
+      research extensively, framing its contributions within the context of existing
+      literature.'
+    novelty_prompt: '- Qualified. Reason: The paper presents a systematic literature
+      review (SLR) on Automated Test Production, which contributes to the field by
+      categorizing existing methods, techniques, and tools, and aims to identify gaps
+      and challenges in the current research landscape. It makes clear claims of contribution,
+      such as providing an overview of models and methodologies, and aims to evaluate
+      their applicability, indicating a novel synthesis of existing knowledge.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "review" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 44493
+  time_usage: 12.46
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: ''
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+- title: What Is an App Store? The Software Engineering Perspective
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions performing unsupervised
+      clustering on app stores to find their natural groupings, indicating an empirical
+      evaluation approach. Additionally, the introduction discusses the aim to survey
+      and characterize app stores, which implies structured evaluation of their properties
+      and impacts on software development practices.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior research,
+      including studies by Harman et al. and Lin et al., and discusses how their findings
+      relate to the current work, indicating engagement with existing literature on
+      app stores.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a holistic
+      approach to studying app stores, aiming to create a more general model that
+      encompasses both mobile and non-mobile variants, which is a new contribution
+      to the existing research landscape.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 36775
+  time_usage: 9.09

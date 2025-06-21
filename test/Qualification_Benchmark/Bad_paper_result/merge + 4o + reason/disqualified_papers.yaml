@@ -1,0 +1,544 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps_on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps
+  url: http://arxiv.org/abs/2401.02500v2
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It primarily provides a literature
+      review and theoretical discussion without presenting any structured evaluation,
+      benchmarks, datasets, comparisons, or performance metrics.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction both
+      reference prior work extensively. The abstract mentions a comprehensive review
+      of 126 papers and synthesizes insights from existing literature. The introduction
+      references foundational texts in AI and APS, indicating engagement with prior
+      research.'
+    novelty_prompt: 'Qualified. Reason: The paper presents a comprehensive review
+      of the integration of Large Language Models (LLMs) in Automated Planning and
+      Scheduling (APS), identifying eight distinct categories of application. It offers
+      a novel insight into the potential of combining LLMs with traditional symbolic
+      planners, advocating for a neuro-symbolic approach. The paper makes clear claims
+      of contribution, such as highlighting the gaps in current research and proposing
+      directions for future exploration, thereby demonstrating novelty in its synthesis
+      of existing literature and its proposed framework for advancing the field.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 56280
+  time_usage: 10.45
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: training_and_serving_system_of_foundation_models_a_comprehensive_survey_school_of_systems_science_and_engineering_sun_yat_sen_university_guangzhou_528406_china_school_of_software_engineering_sun_yat_sen_university_guangzhou_510275_china_department_of_computing_in_the_hong_kong_polytechnic_university_hong_kong_999077_china_peng_cheng_laboratory_shenzhen_518000_china
+  url: http://arxiv.org/abs/2401.02643v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Disqualified: no evaluation. Reason: The paper is a comprehensive
+      survey of training and serving systems for foundation models and does not include
+      empirical, experimental, or quantitative evaluation. It lacks sections titled
+      “Evaluation”, “Experiments”, or “Results”, and there are no benchmarks, datasets,
+      comparisons, or performance metrics presented.'
+    related_work_prompt: 'Qualified. Reason: The paper mentions prior work by referencing
+      specific foundation models such as GPT3, LLaMA, PanGu-Σ, and PengCheng Mind.
+      It also discusses existing surveys on foundation models and highlights their
+      limitations, indicating engagement with prior research. Additionally, the paper
+      references several other works ([5]–[11], [12]) in the context of existing surveys
+      and methods, demonstrating a comparison and discussion of previous findings.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a comprehensive
+      survey of existing methods and techniques for training and serving foundation
+      models. It does not propose any new methods, algorithms, architectures, datasets,
+      or insights, nor does it apply known techniques in a novel context or domain.
+      The paper primarily categorizes and summarizes existing state-of-the-art methods
+      without making any clear claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 58069
+  time_usage: 10.62
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: a_survey_on_verification_and_validation_testing_and_evaluations_of_neurosymbolic_artificial_intelligence_2024_ieee_personal_use_of_this_material_is_permitted_permission_from_ieee_must_be_obtained_for_all_other_uses_in_any_current_or_future_media_including_reprinting_republishing_this_material_for_advertising_or_promotional_purposes_creating_new_collective_works_for_resale_or_redistribution_to_servers_or_lists_or_reuse_of_any_copyrighted_component_of_this_work_in_other_works_doi_10_1109_tai_2024_3351798_https_www_doi_org_10_1109_tai_2024_3351798_arxiv_2401_03188v2_cs_ai_10_jan_2024
+  url: http://arxiv.org/abs/2401.03188v2
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a survey
+      on verification and validation of neurosymbolic AI, focusing on taxonomies and
+      theoretical discussions. It lacks empirical, experimental, or quantitative evaluation,
+      as there are no sections dedicated to "Evaluation", "Experiments", or "Results",
+      nor any use of benchmarks, datasets, comparisons, or performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations of previous studies and
+      taxonomies by Kautz and Yu et al. The paper discusses existing techniques and
+      frameworks for validation and verification (V&V) in AI, compares current methods,
+      and evaluates their applicability to neurosymbolic AI. This demonstrates engagement
+      with prior research.'
+    novelty_prompt: '- Qualified. Reason: The paper demonstrates novelty by providing
+      a comprehensive survey on the verification and validation, testing, and evaluation
+      of neurosymbolic AI, which is an emerging field. It presents new insights by
+      mapping V&V concepts to neurosymbolic AI, comparing taxonomies, and discussing
+      the applicability of current V&V methods to neurosymbolic systems. The paper
+      also identifies open challenges and opportunities for future research, contributing
+      to the advancement of safe and trustworthy AI.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on verification
+      and validation, testing, and evaluations of neurosymbolic AI without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 89949
+  time_usage: 14.02
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: computational_argumentation_based_chatbots_a_survey_brunel_university_london_kingston_lane_london_ub8_3ph_united_kingdom
+  url: http://arxiv.org/abs/2401.03454v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a survey
+      and does not include any empirical, experimental, or quantitative evaluation
+      of its own. It lacks sections titled “Evaluation”, “Experiments”, or “Results”,
+      and does not present any benchmarks, datasets, comparisons, or performance metrics.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations of previous studies and
+      technologies related to chatbots and computational argumentation. The paper
+      discusses existing approaches, such as ELIZA and ChatGPT, and compares them
+      with the argumentation-based chatbots being surveyed.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by stating, "To the
+      best of our knowledge, this is the first survey that combines computational
+      argumentation and chatbots." This indicates a new contribution in the form of
+      a novel survey in the field.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on computational
+      argumentation-based chatbots without introducing new methods, datasets, experiments,
+      or frameworks.'
+  token_usage: 59170
+  time_usage: 10.73
+- title: "A Universal Knowledge Model and Cognitive Architecture for Prototyping\n\
+    \  AGI"
+  id: a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi_a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi
+  url: http://arxiv.org/abs/2401.06256v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It does not include sections titled
+      “Evaluation”, “Experiments”, or “Results”, nor does it present benchmarks, datasets,
+      comparisons, or performance metrics. There are no tables, charts, or figures
+      presenting quantifiable results, and it does not contain statements indicating
+      empirical testing or comparison against baselines.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1-10] and discussions
+      of previous reviews and cognitive architectures. The paper compares its proposed
+      architecture with existing ones and builds upon prior research in the field
+      of cognitive architectures and AGI.'
+    novelty_prompt: 'Qualified. Reason: The abstract explicitly states that the paper
+      proposes a new cognitive architecture for intelligent systems approaching AGI
+      capabilities, which is a clear claim of novelty. Additionally, it introduces
+      a universal method of knowledge representation and other novel components within
+      the architecture.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new cognitive architecture and a universal method of knowledge
+      representation, indicating new contributions beyond summarizing existing work.'
+  token_usage: 39807
+  time_usage: 6.69
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities_cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities
+  url: http://arxiv.org/abs/2401.06375v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It does not include sections titled
+      “Evaluation”, “Experiments”, or “Results”, nor does it present benchmarks, datasets,
+      comparisons, or performance metrics. There are no tables, charts, or figures
+      presenting quantifiable results, and it does not contain statements indicating
+      measurable or comparative empirical testing.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior research, including citations [1][2][3][4][5][6][7][8][9][10][11][12].
+      The paper discusses existing AI models and cognitive BPM, compares the capabilities
+      of AI systems to human cognitive limitations, and references the ProcessGPT
+      model as a representation of a Cognitive BPM solution.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes the use of ProcessGPT,
+      an AI model, to improve business process management (BPM) by accommodating individuals
+      with cognitive disabilities. It claims novelty by suggesting that ProcessGPT
+      can enhance workplace inclusivity and efficiency, particularly for individuals
+      with cognitive disabilities, which is a novel application of AI in BPM. The
+      paper also makes clear claims of contribution, such as "We propose a new..."
+      and "Our main contribution is...," and it correlates ProcessGPT functions with
+      W3C guidelines, demonstrating a novel approach to improving process usability
+      for all users.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction discuss
+      the examination and application of ProcessGPT, an AI model, to improve business
+      processes, particularly for individuals with cognitive disabilities. The paper
+      appears to propose a practical application and exploration of ProcessGPT, suggesting
+      new insights and potential benefits, rather than solely summarizing existing
+      work.'
+  token_usage: 26004
+  time_usage: 10.82
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems_greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems
+  url: http://arxiv.org/abs/2401.06793v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It does not include sections titled
+      “Evaluation”, “Experiments”, or “Results”, nor does it present benchmarks, datasets,
+      comparisons, or performance metrics. There are no tables, charts, or figures
+      presenting quantifiable results, and the paper does not contain statements indicating
+      empirical testing or comparisons against baselines.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations of previous
+      studies on decision trees and decision rule systems. The introduction discusses
+      related approaches, previous findings, and builds upon earlier research, demonstrating
+      engagement with existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by developing a new
+      algorithm with polynomial time complexity that models the behavior of a decision
+      tree for a given tuple of attribute values. The introduction explicitly states
+      that this new algorithm is a greedy algorithm for the set cover problem, which
+      is different from previous approaches, indicating a novel contribution.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new algorithm with
+      polynomial time complexity to model the behavior of decision trees for a given
+      tuple of attribute values. It also discusses the accuracy of this algorithm
+      and plans for future experiments, indicating new contributions beyond summarizing
+      existing work.'
+  token_usage: 18523
+  time_usage: 5.85
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: automated_test_production_complement_to_ad_hoc_testing_automated_test_production_complement_to_ad_hoc_testing
+  url: http://arxiv.org/abs/2401.02230v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It does not include sections titled
+      “Evaluation”, “Experiments”, or “Results”, nor does it present any benchmarks,
+      datasets, comparisons, or performance metrics. There are no tables, charts,
+      or figures presenting quantifiable results, and no statements indicating empirical
+      testing or comparisons against baselines.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction engage
+      with prior research by referencing the Agile Manifesto and discussing its impact
+      on industry practices. The introduction also cites several sources, indicating
+      engagement with existing literature and trends in software development methodologies.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper provides a comprehensive
+      review of existing software testing methods and discusses the gap between industry
+      practices and academic advances. However, it does not propose any new methods,
+      algorithms, architectures, datasets, or insights, nor does it apply known techniques
+      in a novel context or domain. The paper primarily focuses on summarizing existing
+      knowledge and discussing challenges without making clear claims of novel contributions.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction discuss
+      the challenges and trends in software testing and agile methodologies but do
+      not explicitly state that the paper is a survey or review. Additionally, the
+      abstract mentions an intention to follow a particular approach in search of
+      a solution, suggesting potential new contributions or perspectives.'
+  token_usage: 30253
+  time_usage: 8.27
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: automated_test_production_systematic_literature_mapping_automated_test_production_systematic_literature_mapping
+  url: http://arxiv.org/abs/2401.01430v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a systematic
+      literature mapping study and does not include empirical, experimental, or quantitative
+      evaluation of a method or technique. It focuses on categorizing and analyzing
+      existing literature rather than presenting new empirical findings or evaluations.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a systematic literature
+      mapping section that discusses prior research, methods, and techniques in the
+      field of Automated Test Production (ATP). It includes meaningful citations to
+      academic papers and scholarly publications, and it provides a substantive discussion
+      of past literature, framing the paper''s contributions within the context of
+      existing research.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a systematic literature
+      mapping study that aims to categorize existing research in the field of Automated
+      Test Production (ATP). It does not propose any new methods, algorithms, architectures,
+      datasets, or insights, nor does it apply known techniques in a novel context
+      or domain. The paper primarily focuses on summarizing and categorizing existing
+      literature without making any claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "systematic literature mapping," which is synonymous with a survey or review,
+      and the main body primarily summarizes existing work without introducing new
+      methods, datasets, experiments, or frameworks.'
+  token_usage: 35014
+  time_usage: 10.54
+- title: Automated Test Production -- Systematic Literature Review
+  id: automated_test_production_systematic_literature_review_automated_test_production_systematic_literature_review
+  url: http://arxiv.org/abs/2401.02033v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      through sections like "Analysis of Results" and "Qualitative Analysis," and
+      it presents quantifiable results with tables and figures. It discusses the evaluation
+      of models, processes, frameworks, and tools used in Automated Test Production,
+      employing metrics and comparisons.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a comprehensive discussion
+      of prior research, including a "Systematic Literature Review" section that references
+      multiple academic sources and methodologies. It includes a "Related Work" section
+      equivalent, with meaningful citations to academic papers and research reports,
+      and it compares and critiques prior methods, framing the paper''s contributions
+      effectively.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The paper is a systematic
+      literature review (SLR) that aims to provide an overview of existing models,
+      methodologies, and tools used in Automated Test Production (ATP). It does not
+      propose any new methods, algorithms, architectures, datasets, or insights, nor
+      does it apply known techniques in a novel context or domain. The paper''s primary
+      contribution is the aggregation and analysis of existing literature, which does
+      not meet the criteria for novelty as defined.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "review," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 44218
+  time_usage: 11.1
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: exception_aware_lifecycle_model_construction_for_framework_apis_yan_ji_wei1_2_huang_jin_hao3_yang_heng_qin2_4_yan_jun1_2
+  url: http://arxiv.org/abs/2401.02660v1
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering_15_practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering
+  url: http://arxiv.org/abs/2401.01508v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper provides guidelines
+      and discussions on NLP techniques in requirements engineering but lacks empirical,
+      experimental, or quantitative evaluation. There are no sections titled “Evaluation”,
+      “Experiments”, or “Results”, nor are there any benchmarks, datasets, comparisons,
+      or performance metrics presented.'
+    related_work_prompt: 'Qualified. Reason: The introduction mentions prior work
+      by referencing specific studies on requirements automation problems, such as
+      checking compliance with requirements templates, glossary construction, model
+      extraction, requirements demarcation, ambiguity handling, and question answering.
+      These references indicate engagement with existing research in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper presents practical guidelines for
+      selecting and evaluating NLP techniques specifically in the context of Requirements
+      Engineering (RE). It offers novel insights by discussing the application of
+      NLP methods in a specific domain (RE), which is a novel context. The paper also
+      provides a structured decision process for selecting analysis techniques and
+      discusses the implications of using large language models, which are current
+      and relevant topics in the field. Additionally, the paper aims to assist newcomers
+      in quickly understanding the most pertinent NLP technologies for RE, indicating
+      a novel application of existing techniques.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "Guidelines," which suggests a review or survey nature, and the main body
+      primarily summarizes existing NLP techniques and their applications in Requirements
+      Engineering without introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 54705
+  time_usage: 11.46
+- title: What Is an App Store? The Software Engineering Perspective
+  id: what_is_an_app_store_the_software_engineering_perspective_wenhan_zhu_sebastian_proksch_daniel_m_german_michael_w_godfrey_li_li_shane_mcintosh
+  url: http://arxiv.org/abs/2401.04287v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the authors
+      performed unsupervised clustering on app stores to find their natural groupings,
+      which implies an empirical analysis. Additionally, the abstract discusses deriving
+      a set of features common to app stores and fitting each app store into a dimensional
+      model, suggesting a structured evaluation approach.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior research, such as the study by Harman et al. on BlackBerry App World and
+      Lin et al.''s findings on game reviews in mobile app stores versus the Steam
+      platform. Additionally, the introduction references various platforms and app
+      stores like Steam, GitHub Marketplace, and others, indicating engagement with
+      existing work and the broader context of app stores.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a dimensional
+      model of app stores and aims to provide a holistic view of app stores, including
+      both mobile and non-mobile variants. It explicitly states the intention to create
+      a more general model of app stores that fits a broader space, which indicates
+      a new contribution to the field.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper''s title includes
+      the word "survey," and the main body primarily summarizes existing work on app
+      stores without introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 36646
+  time_usage: 7.85
+- title: 'Next4: Snapshots in Ext4 File System'
+  id: next4_snapshots_in_ext4_file_system_aditya_dani_1_shardul_mangade_2_piyush_nimbalkar_3_harshad_shirwadkar_4
+  url: http://arxiv.org/abs/2403.06790v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper describes the
+      design and implementation of a snapshot feature in the Ext4 file system but
+      lacks any empirical, experimental, or quantitative evaluation. There are no
+      sections titled “Evaluation”, “Experiments”, or “Results”, nor are there any
+      benchmarks, datasets, comparisons, performance metrics, tables, charts, or figures
+      presenting quantifiable results.'
+    related_work_prompt: 'Disqualified: no related work. Reason: The paper does not
+      contain a "Related Work" section or any substitute section that discusses prior
+      research. While it does mention some tools and technologies, it lacks meaningful
+      citations to academic papers or scholarly publications that would demonstrate
+      engagement with prior research. The references listed are minimal and do not
+      provide a substantive discussion of past literature or how the work builds upon
+      previous studies.'
+    novelty_prompt: 'Qualified. Reason: The abstract clearly claims novelty by proposing
+      and implementing "Next4," a new file system-based snapshot feature in Ext4.
+      It highlights the unique approach of infusing the copy-on-write strategy into
+      the existing file system, which distinguishes it from current methods.'
+    review_only_prompt: '- Qualified. Reason: The abstract proposes and implements
+      a new method called Next4, which is a file system-based snapshot feature in
+      Ext4. This indicates that the paper introduces new contributions rather than
+      just summarizing existing work.'
+  token_usage: 9172
+  time_usage: 9.1
+- title: Crash Consistency in DRAM-NVM-Disk Hybrid Storage System
+  id: crash_consistency_in_dram_nvm_disk_hybrid_storage_system_1_st_guoyu_wang_college_of_computer_science_and_technology_jilin_university_changchun_china
+  url: http://arxiv.org/abs/2408.04238v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It primarily discusses theoretical
+      problems and solutions related to crash consistency in heterogeneous storage
+      systems without presenting any structured evaluation, benchmarks, datasets,
+      comparisons, or performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The introduction references prior work
+      by mentioning various approaches that leverage NVM, specifically citing several
+      works ([5], [8], [11]) that use NVM to accelerate existing disk file systems.
+      It also discusses the NVPC accelerator in relation to previous work, indicating
+      engagement with existing research.'
+    novelty_prompt: '- Qualified. Reason: The paper explicitly claims novelty by proposing
+      a solution to the challenging consistency problems faced by heterogeneous storage
+      systems, particularly in the context of NVM, DRAM, and disk integration. The
+      abstract mentions that the discussion and proposed solutions can be inspiring
+      and adaptive to similar systems, indicating a novel contribution.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes solutions to consistency
+      problems in heterogeneous storage systems, specifically discussing and analyzing
+      these issues and providing solutions based on their analysis. This indicates
+      new contributions rather than merely summarizing existing work.'
+  token_usage: 15895
+  time_usage: 6.02
+- title: 'Modern Computing: Vision and Challenges'
+  id: modern_computing_vision_and_challenges_sukhpal_singh_gill_a_huaming_wu_b_panos_patros_c_carlo_ottaviani_d_priyansh_arora_e_victor_casamayor_pujol_f_david_haunschild_g_ajith_kumar_parlikad_h_oktay_cetinkaya_i_hanan_lutfiyya_j_vlado_stankovski_k_ruidong_li_l_yuemin_ding_m_junaid_qadir_n_ajith_abraham_o_p_soumya_k_ghosh_q_houbing_herbert_song_r_rizos_sakellariou_s_omer_rana_t_joel_j_p_c_rodrigues_u_v_salil_s_kanhere_w_schahram_dustdar_f_steve_uhlig_a_kotagiri_ramamohanarao_x_and_rajkumar_buyya_y
+  url: http://arxiv.org/abs/2401.02469v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. There are no sections titled “Evaluation”,
+      “Experiments”, or “Results”, nor are there any benchmarks, datasets, comparisons,
+      or performance metrics presented. The paper primarily discusses concepts, trends,
+      and challenges in modern computing without providing measurable or comparative
+      empirical testing.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [\[1\]](#page-39-0) through
+      [\[8\]](#page-40-6), and discuss the evolution of computing systems by comparing
+      past and present models, such as mainframes, PCs, cloud computing, and IoT.
+      This indicates engagement with prior research and existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper presents novelty by developing the
+      first taxonomy of modern computing, exploring the history of computing paradigm
+      shifts, and introducing the hype cycle for modern computing systems. It also
+      provides a comprehensive classification of computing systems and discusses emerging
+      trends and future research directions, making clear claims of contribution throughout
+      the text.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "Challenges," and the main body primarily summarizes existing work, providing
+      a comprehensive review of modern computing systems without introducing new methods,
+      datasets, experiments, or frameworks.'
+  token_usage: 219127
+  time_usage: 20.83
+- title: "XaaS: Acceleration as a Service to Enable Productive High-Performance\n\
+    \  Cloud Computing"
+  id: xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing_xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing
+  url: http://arxiv.org/abs/2401.04552v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. There are no sections titled “Evaluation”,
+      “Experiments”, or “Results”, nor are there any benchmarks, datasets, comparisons,
+      or performance metrics presented. The paper primarily discusses concepts and
+      architectures without providing data-backed validation or measurable testing.'
+    related_work_prompt: '- Qualified. Reason: The introduction mentions prior work
+      by discussing the independent evolution of HPC and Cloud computing, and it references
+      specific technologies and approaches such as RDMA, containers, and cloud-native
+      interfaces. Additionally, it cites previous work ([\[7\]](#page-7-0) and [\[1\]](#page-7-1))
+      and discusses how each field has historically developed its own methods and
+      technologies, indicating engagement with prior research.'
+    novelty_prompt: '- Qualified. Reason: The abstract and introduction clearly claim
+      novelty by proposing "Acceleration as a Service (XaaS)" as a unified architecture
+      that bridges HPC and cloud advancements. The paper presents XaaS as a new model
+      that combines performance-portable containers with low-overhead, high-performance
+      communication and computing, which is a novel approach to addressing inefficiencies
+      in current cloud architectures and enabling high-performance workloads.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new architecture called Acceleration as a Service (XaaS) that
+      aims to bridge HPC and cloud computing. The paper discusses the novel contributions
+      of this architecture, such as performance-portable containers and a unified
+      execution platform, which indicates that it is not merely a survey or review
+      of existing work.'
+  token_usage: 17201
+  time_usage: 7.65
+- title: "A Logic for Repair and State Recovery in Byzantine Fault-tolerant\n  Multi-agent\
+    \ Systems"
+  id: a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems_a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems
+  url: http://arxiv.org/abs/2401.06451v3
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. It primarily focuses on theoretical
+      logic development and does not include sections or content related to empirical
+      testing, benchmarks, datasets, comparisons, or performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a comprehensive "State
+      of the art" section that discusses prior research and methods. It includes numerous
+      citations to academic papers and scholarly publications, demonstrating engagement
+      with existing literature. The paper also provides comparisons and critiques
+      of prior methods, framing its contributions within the context of established
+      research.'
+    novelty_prompt: '- Qualified. Reason: The abstract claims novelty by introducing
+      an "epistemic logical language and semantics" specifically designed for modeling
+      and analyzing byzantine fault-tolerant multi-agent systems. It also introduces
+      a new modality called "hope" and dynamic modalities for model updates, which
+      are claimed to be novel contributions to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract describes the introduction
+      of a new epistemic logical language and semantics for modeling and analysis,
+      which includes new modalities and complete axiomatizations. It also mentions
+      providing examples to demonstrate the utility and flexibility of the proposed
+      logic, indicating new contributions rather than merely summarizing existing
+      work.'
+  token_usage: 61249
+  time_usage: 9.39
+- title: Structured Acyclic Nets
+  id: structured_acyclic_nets_all_sets_used_in_the_relational_structures_considered_in_this_paper_are_finite_which_simplifies_some_of_the_definitions_and_results_for_two_sets_x_and_y_x_y_means_that_x_is_a_proper_subset_of_y_i_e_x_y_and_x_6_y_the_disjoint_union_of_x_and_y_is_denoted_by_x_y_and_nonempty_sets_x_1_xk_form_a_partition_of_a_sets_x_if_x_x_1_xk
+  url: http://arxiv.org/abs/2401.07308v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. There are no sections titled “Evaluation”,
+      “Experiments”, or “Results”, and there are no benchmarks, datasets, comparisons,
+      or performance metrics provided. The paper primarily focuses on theoretical
+      concepts and formal definitions without presenting any data-backed validation
+      or empirical testing.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [\[16\], [20\], [11\]],
+      and discuss how the current paper extends and systematises ideas from previous
+      research.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by proposing an
+      extension of structured occurrence nets to include models built up of acyclic
+      nets rather than occurrence nets. This is a clear indication of a new contribution
+      to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes an extension of structured
+      occurrence nets to include models built up of acyclic nets rather than occurrence
+      nets, indicating a new contribution or method.'
+  token_usage: 36128
+  time_usage: 7.3
+- title: Semantic Web Technology for Agent Communication Protocols
+  id: semantic_web_technology_for_agent_communication_protocols_idoia_berges_jes_us_berm_udez_alfredo_go_ni_and_arantza_illarramendi
+  url: http://arxiv.org/abs/2401.11841v1
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks empirical,
+      experimental, or quantitative evaluation. There are no sections titled “Evaluation”,
+      “Experiments”, or “Results”, nor are there any benchmarks, datasets, comparisons,
+      or performance metrics presented. The paper primarily describes a framework
+      and theoretical concepts without data-backed validation or measurable testing.'
+    related_work_prompt: '- Qualified. Reason: The introduction mentions prior work
+      by discussing the recent efforts of members from the agent technology and Web
+      Services communities to consolidate their approaches into a common specification.
+      It also references specific works [1] and [2] related to this integration. Additionally,
+      the introduction discusses the use of existing standard protocols and the customization
+      of these protocols, which implies engagement with prior research and methodologies.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a new
+      approach to describe standard communication protocols using Semantic Web technology,
+      specifically OWL-DL and SWRL. It introduces a communication acts ontology called
+      CommOnt and outlines several contributions, such as facilitating flexible interoperation
+      among agents, customizing standard communication protocols, and providing a
+      basis for reasoning about relationships between protocols. These claims indicate
+      clear signs of new contributions.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new approach to
+      describe standard communication protocols using Semantic Web technology, introduces
+      a communication acts ontology called CommOnt, and outlines contributions such
+      as facilitating flexible interoperation and reasoning about protocol relationships.
+      These elements indicate the paper includes new contributions and is not solely
+      a survey or review.'
+  token_usage: 16884
+  time_usage: 7.19

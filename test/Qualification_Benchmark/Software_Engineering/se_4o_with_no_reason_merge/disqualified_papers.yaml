@@ -1,0 +1,80 @@
+papers:
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 34286
+  time_usage: 4.9
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Qualified
+  token_usage: 57439
+  time_usage: 6.17
+- title: Automated Test Production -- Systematic Literature Review
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 33202
+  time_usage: 4.78
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Qualified
+  token_usage: 29768
+  time_usage: 3.62
+- title: On Augmenting Scenario-Based Modeling with Generative AI
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 21628
+  time_usage: 3.36
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: ''
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+- title: What Is an App Store? The Software Engineering Perspective
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified.
+    review_only_prompt: Disqualified
+  token_usage: 66240
+  time_usage: 6.55
+- title: "Formal Modelling of Safety Architecture for Responsibility-Aware\n  Autonomous\
+    \ Vehicle via Event-B Refinement"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 16466
+  time_usage: 3.16

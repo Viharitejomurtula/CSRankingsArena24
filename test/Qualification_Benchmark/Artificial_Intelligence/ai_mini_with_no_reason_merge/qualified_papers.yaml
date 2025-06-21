@@ -1,0 +1,231 @@
+papers:
+- title: Outlier Ranking in Large-Scale Public Health Streams
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 14449
+  time_usage: 2.51
+- title: Large Language Models Relearn Removed Concepts
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 4594
+  time_usage: 2.35
+- title: "Neural Control: Concurrent System Identification and Control Learning\n\
+    \  with Neural ODE"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 7202
+  time_usage: 1.78
+- title: 'Verifying Relational Explanations: A Probabilistic Approach'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5446
+  time_usage: 2.14
+- title: "XUAT-Copilot: Multi-Agent Collaborative System for Automated User\n  Acceptance\
+    \ Testing with Large Language Model"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 9238
+  time_usage: 1.82
+- title: "Parameter-Efficient Sparsity Crafting from Dense to Mixture-of-Experts\n\
+    \  for Instruction Tuning on General Tasks"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 8250
+  time_usage: 3.76
+- title: "Natural Language Programming in Medicine: Administering Evidence Based\n\
+    \  Clinical Workflows with Autonomous Agents Powered by Generative Large\n  Language\
+    \ Models"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5805
+  time_usage: 4.22
+- title: 'UMIE: Unified Multimodal Information Extraction with Instruction Tuning'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5334
+  time_usage: 1.88
+- title: Manifold-based Shapley for SAR Recognization Network Explanation
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 10539
+  time_usage: 3.06
+- title: "ClusterComm: Discrete Communication in Decentralized MARL using Internal\n\
+    \  Representation Clustering"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 16301
+  time_usage: 2.54
+- title: Quantifying stability of non-power-seeking in artificial agents
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 38243
+  time_usage: 3.66
+- title: "NovelGym: A Flexible Ecosystem for Hybrid Planning and Learning Agents\n\
+    \  Designed for Open Worlds"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5026
+  time_usage: 1.61
+- title: Sample-and-Bound for Non-Convex Optimization
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 3774
+  time_usage: 2.55
+- title: "Machine Learning Insides OptVerse AI Solver: Design Principles and\n  Applications"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 7098
+  time_usage: 1.71
+- title: 'Secrets of RLHF in Large Language Models Part II: Reward Modeling'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5306
+  time_usage: 1.92
+- title: "Vehicle: Bridging the Embedding Gap in the Verification of\n  Neuro-Symbolic\
+    \ Programs"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 24497
+  time_usage: 3.15
+- title: A Brain-inspired Computational Model for Human-like Concept Learning
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 22125
+  time_usage: 2.85
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 7842
+  time_usage: 1.72
+- title: "Graph-of-Thought: Utilizing Large Language Models to Solve Complex and\n\
+    \  Dynamic Business Problems"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 8171
+  time_usage: 2.36
+- title: 'TONE: A 3-Tiered ONtology for Emotion analysis'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 20552
+  time_usage: 2.52
+- title: Generalized Planning for the Abstraction and Reasoning Corpus
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 3877
+  time_usage: 1.72
+- title: "Inferring Preferences from Demonstrations in Multi-Objective Residential\n\
+    \  Energy Management"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 3406
+  time_usage: 1.89

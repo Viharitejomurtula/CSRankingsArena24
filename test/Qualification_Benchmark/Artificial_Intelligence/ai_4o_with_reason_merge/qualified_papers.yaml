@@ -1,0 +1,602 @@
+papers:
+- title: Outlier Ranking in Large-Scale Public Health Streams
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the novel
+      algorithm performed the best across traditional outlier detection metrics in
+      a human-expert evaluation using public health data streams, indicating empirical
+      evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a "Related Works"
+      section that provides a substantive discussion of prior research and methods.
+      It includes meaningful citations to academic papers and scholarly publications,
+      and it compares and critiques existing methods, framing the paper''s contributions
+      within the context of previous studies.'
+    novelty_prompt: '- Qualified. Reason: The abstract clearly claims novelty by proposing
+      a new task for algorithms to rank the outputs of univariate methods applied
+      to data streams. It also introduces a novel algorithm that leverages hierarchical
+      networks and extreme value analysis, indicating a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract describes the proposal
+      of a new task and a novel algorithm, as well as the implementation and evaluation
+      of this algorithm, indicating new contributions beyond summarizing existing
+      work.'
+  token_usage: 14832
+  time_usage: 8.91
+- title: Large Language Models Relearn Removed Concepts
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction clearly mention
+      structured evaluation through the investigation of concept relearning in models
+      by tracking concept saliency and similarity in pruned neurons during retraining.
+      The paper discusses evaluating models'' performance post-pruning and analyzing
+      how concept distribution changes, indicating empirical validation.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations of previous
+      studies on neuron pruning, neuroplasticity, and the adaptability of large language
+      models. The paper discusses its findings in the context of existing research,
+      such as the works by Qian et al. (2016), Wu et al. (2020), Mu and Andreas (2020),
+      LeCun et al. (1989), Liu et al. (2022), and Mittal et al. (2019). This demonstrates
+      meaningful engagement with prior research.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by investigating
+      the concept of "neuroplasticity" in large language models, specifically how
+      these models relearn and redistribute concepts after neuron pruning. The introduction
+      and abstract highlight the paper''s contribution to understanding the resilience
+      and adaptability of concept representations in models, which is a new exploration
+      in the context of model editing and safety.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the investigation of concept relearning in large language models, focusing on
+      neuroplasticity and the redistribution of concepts after neuron pruning. The
+      paper proposes new insights into how models regain performance and adapt, indicating
+      original research contributions rather than merely summarizing existing work.'
+  token_usage: 4938
+  time_usage: 9.6
+- title: "Neural Control: Concurrent System Identification and Control Learning\n\
+    \  with Neural ODE"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that "our experiments
+      demonstrate the effectiveness of our model for learning optimal control of unknown
+      dynamical systems," indicating that empirical evaluation is conducted.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including classical optimal
+      control theory, Pontryagin''s Maximum Principle, the Hamilton-Jacobi-Bellman
+      equation, and recent advancements in machine learning methods applied to optimal
+      control. The paper discusses existing methodologies and positions its contribution
+      in relation to these prior works, demonstrating engagement with the academic
+      literature.'
+    novelty_prompt: 'Qualified. Reason: The paper clearly claims novelty by proposing
+      a new method called Neural Control (NC), which integrates system identification
+      and optimal control learning within a coupled Neural ODE framework. The introduction
+      explicitly states, "to the best of our knowledge," indicating a novel contribution
+      in combining these processes in a singular framework.'
+    review_only_prompt: 'Qualified. Reason: The abstract and introduction clearly
+      propose a new method called Neural Control (NC), which integrates system identification
+      and optimal control learning using a coupled neural ODE. The paper describes
+      the novelty of this approach and mentions experiments demonstrating its effectiveness,
+      indicating that it is not merely a survey or review of existing work.'
+  token_usage: 7474
+  time_usage: 9.92
+- title: 'Verifying Relational Explanations: A Probabilistic Approach'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention that
+      the paper performs experiments on several benchmark relational datasets for
+      node classification using GCNs. It also discusses the use of the McNemar''s
+      statistical test to evaluate the significance of the estimations, indicating
+      a structured evaluation of their approach.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction of the
+      paper engage with prior research by mentioning and referencing several existing
+      methods and approaches, such as GNNExplainer, LIME, SHAP, and Graph Neural Networks
+      (GNNs). The paper also compares its approach to existing methods and discusses
+      the challenges associated with explaining GNNs, indicating a clear engagement
+      with prior work.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new approach to assess
+      the uncertainty in explanations generated by GNNExplainer, which involves generating
+      counterfactual examples and learning a factor graph model to quantify uncertainty.
+      This is a novel contribution to the field of explainable AI for Graph Neural
+      Networks.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new approach to
+      assess uncertainty in explanations generated by GNNExplainer, involving the
+      development of a probabilistic method and experiments to verify its effectiveness.
+      This indicates new contributions beyond summarizing existing work.'
+  token_usage: 5721
+  time_usage: 6.85
+- title: "XUAT-Copilot: Multi-Agent Collaborative System for Automated User\n  Acceptance\
+    \ Testing with Large Language Model"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the proposed
+      multi-agent system achieves close effectiveness to human testers in experimental
+      studies and shows a significant improvement in Pass@1 accuracy compared to a
+      single-agent architecture. This indicates that structured evaluation, including
+      experiments and metrics, has been conducted to assess the system''s performance.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      engagement with prior research, specifically noting the inspiration from recent
+      advancements in large language models (LLMs) and their application in autonomous
+      agents for decision-making. The paper discusses how these advancements have
+      influenced the development of their proposed system, XUAT-Copilot, for automating
+      user acceptance testing (UAT). Additionally, there are references to previous
+      work in the introduction, indicating a comparison and contextualization of their
+      contributions within existing research.'
+    novelty_prompt: 'Qualified. Reason: The paper clearly claims novelty by proposing
+      a new LLM-powered multi-agent collaborative system, named XUAT-Copilot, for
+      automating user acceptance testing (UAT). It explicitly states contributions
+      such as being the first to employ LLMs for UAT and introducing a novel multi-agent
+      collaborative approach.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new method, XUAT-Copilot,
+      which is an LLM-powered multi-agent collaborative system for automating user
+      acceptance testing (UAT). The abstract and introduction describe the development
+      and implementation of this novel system, highlighting its effectiveness and
+      improvements over existing methods. The paper does not primarily summarize existing
+      work but instead focuses on introducing and evaluating a new contribution.'
+  token_usage: 9577
+  time_usage: 7.14
+- title: "Parameter-Efficient Sparsity Crafting from Dense to Mixture-of-Experts\n\
+    \  for Instruction Tuning on General Tasks"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions "Our empirical evaluation
+      demonstrates the effectiveness of the PESC method," indicating that structured
+      evaluation, including experiments or empirical validation, has been conducted.
+      Additionally, the introduction references performance achievements and comparisons
+      with other models, suggesting the use of benchmarks or metrics for evaluation.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations of existing
+      models like GPT, Llama, and Mistral, as well as methods such as instruction
+      tuning and mixture-of-experts (MoE) architecture. The paper discusses its contributions
+      in the context of these existing approaches and compares its proposed method,
+      PESC, with previous methods, demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel approach called
+      parameter-efficient sparsity crafting (PESC) for expanding model capacity in
+      large language models. The abstract and introduction clearly state the novelty
+      of this method, highlighting its integration of adapters into the MoE layers
+      of sparse models and its ability to improve performance during instruction tuning.
+      The paper explicitly claims contributions, such as proposing the PESC method
+      and achieving significant performance improvements, which indicate clear claims
+      of novelty.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new method called
+      parameter-efficient sparsity crafting (PESC) and describes its implementation
+      and performance improvements. It proposes a novel approach and presents empirical
+      evaluations, indicating new contributions beyond summarizing existing work.'
+  token_usage: 8568
+  time_usage: 7.45
+- title: "Natural Language Programming in Medicine: Administering Evidence Based\n\
+    \  Clinical Workflows with Autonomous Agents Powered by Generative Large\n  Language\
+    \ Models"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract and introduction mention
+      the evaluation of both proprietary and open-source LLMs, the use of Retrieval
+      Augmented Generation (RAG) to enhance contextual relevance, and manual evaluation
+      by expert clinicians to validate the models'' outputs. These elements indicate
+      a structured evaluation involving empirical validation and comparison.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations to previous studies and
+      methods. The paper discusses related approaches, such as Retrieval Augmented
+      Generation (RAG), and compares its goals and contributions with existing work
+      in the field of healthcare and LLMs.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by exploring the
+      ability of both proprietary and open-source LLMs to function autonomously within
+      an agent-based workflow in a simulated tertiary care medical center. It highlights
+      the use of Retrieval Augmented Generation (RAG) to enhance LLM knowledge and
+      operation, and discusses the shift from Natural Language Processing to Natural
+      Language Programming as a new paradigm in complex systems. These elements indicate
+      new contributions and approaches in the application of LLMs in healthcare settings.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the paper as exploring the use of LLMs as autonomous agents in healthcare settings,
+      evaluating their performance, and discussing techniques like Retrieval Augmented
+      Generation. The paper mentions experiments and implementation, indicating new
+      contributions beyond a mere survey of existing work.'
+  token_usage: 6119
+  time_usage: 10.93
+- title: 'UMIE: Unified Multimodal Information Extraction with Instruction Tuning'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention extensive
+      experiments, outperforming state-of-the-art methods across six datasets, and
+      conducting in-depth quantitative analysis, indicating structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations of previous studies and
+      methods (e.g., Zhu et al. 2022; Zhang et al. 2018; Chen et al. 2022; Li et al.
+      2022; Moon, Neves, and Carvalho 2018; Sun et al. 2021; Zheng et al. 2021b; Wang
+      et al. 2022a; Li et al. 2020, 2022; Ouyang et al. 2022; Wang et al. 2022d).
+      The paper discusses the limitations of current methods and positions its contributions
+      in relation to existing approaches, demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper clearly claims novelty by proposing
+      a new unified multimodal information extractor (UMIE) that unifies different
+      MIE tasks as generation problems using instruction tuning. It also introduces
+      a novel gate attention module for integrating visual features, and explicitly
+      states its contributions and novelty in the MIE field.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new method called
+      UMIE, which is a unified multimodal information extractor. It introduces novel
+      contributions such as a gate attention module and demonstrates the effectiveness
+      of the proposed model through extensive experiments. The paper also claims novelty
+      in unifying MIE tasks and exploring instruction tuning and large language models
+      within the MIE domain.'
+  token_usage: 5688
+  time_usage: 9.4
+- title: Manifold-based Shapley for SAR Recognization Network Explanation
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper contains a section titled "EXPERIMENTAL
+      RESULTS" with subsections detailing "Experiment Settings," "Visualization and
+      Subjective Evaluation," "Axiomatic Validation," "Explanation Sensitivity and
+      Infidelity," and "Manifold Dimension and Explanation." It includes quantitative
+      metrics, tables, figures, and phrases indicating structured evaluation, such
+      as "We conducted qualitative and quantitative assessments" and "Table 1 shows
+      the results of subjective evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations [1] through
+      [11]. The paper discusses existing methods and challenges with the Shapley method,
+      compares its proposed method with previous approaches, and mentions how other
+      researchers have addressed related problems.'
+    novelty_prompt: 'Qualified. Reason: The abstract and introduction clearly claim
+      novelty by introducing a new explanation method called Fusion-Shap, which combines
+      manifold and traditional Shapley methods to address issues in high-dimensional
+      models. The paper explicitly states its contributions, including the proposal
+      of a manifold-based Shapley method using generative adversarial networks.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new method called
+      Fusion-Shap, which combines manifold and traditional Shapley methods to improve
+      network explanations in SAR tasks. The abstract and introduction clearly state
+      the proposal of a novel explanation method and outline the primary contributions,
+      indicating that the paper is not solely a survey or review of existing work.'
+  token_usage: 10950
+  time_usage: 10.74
+- title: "ClusterComm: Discrete Communication in Decentralized MARL using Internal\n\
+    \  Representation Clustering"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the proposed
+      approach "outperforms no communication and competes favorably with unbounded,
+      continuous communication," indicating that some form of empirical evaluation
+      or comparison has been conducted.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper include multiple references to prior work, such as those by Shalev-Shwartz
+      et al. (2016), Salzman and Stern (2020), Von Frisch (1992), Tan (1993), Foerster
+      et al. (2016), Sukhbaatar et al. (2016), Lowe et al. (2017), Das et al. (2019),
+      Lin et al. (2021), Wang and Sartoretti (2022), and others. The paper discusses
+      existing approaches to communication in Multi-Agent Reinforcement Learning (MARL)
+      and compares its proposed method, ClusterComm, with these prior methods, indicating
+      engagement with existing research.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel framework called
+      ClusterComm for Multi-Agent Reinforcement Learning (MARL), which enables discrete
+      communication in a fully decentralized manner. The abstract and introduction
+      clearly state the novelty by proposing a new method that utilizes Mini-Batch-K-Means
+      clustering to translate activations into discrete messages, which is claimed
+      to be a simple yet effective strategy for enhancing collaborative task-solving
+      in MARL.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new framework, ClusterComm, for decentralized communication
+      in multi-agent reinforcement learning. The paper introduces a novel method using
+      Mini-Batch-K-Means clustering and discusses its performance, indicating new
+      contributions beyond a survey or review.'
+  token_usage: 6732
+  time_usage: 7.97
+- title: Quantifying stability of non-power-seeking in artificial agents
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions the use of a bisimulation
+      metric on MDPs to prove stability in near-optimal policies and demonstrates
+      a quantitative bound on the probability of not shutting down. This indicates
+      structured evaluation through metrics and quantitative analysis.'
+    related_work_prompt: '- Qualified. Reason: The paper contains a comprehensive
+      "Related Work" section that discusses prior research and methods. It includes
+      meaningful citations to academic papers and scholarly publications, and it provides
+      comparisons and critiques of prior methods that frame the paper''s contributions.'
+    novelty_prompt: 'Qualified. Reason: The abstract claims novelty by investigating
+      a core question of AI alignment related to safety across different settings.
+      It introduces a novel focus on power-seeking behavior, specifically resisting
+      shutdown, and presents new findings on the stability of safety in Markov decision
+      processes. The paper also claims to demonstrate a quantitative bound and introduces
+      a metric on MDPs, indicating new contributions to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract describes new contributions,
+      including modeling agents as policies for Markov decision processes, proving
+      stability in certain cases, and demonstrating quantitative bounds on safety.
+      These elements indicate the paper proposes new methods and results rather than
+      solely summarizing existing work.'
+  token_usage: 38670
+  time_usage: 14.02
+- title: "NovelGym: A Flexible Ecosystem for Hybrid Planning and Learning Agents\n\
+    \  Designed for Open Worlds"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention the
+      use of NovelGym as a platform for benchmarking reinforcement learning and hybrid
+      planning and learning agents in open-world contexts. Additionally, it references
+      benchmarks of various state-of-the-art methods for novelty handling and agent-agnostic
+      evaluation metrics for novelty adaptation, indicating structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior research, including citations of previous work
+      on "open-world" systems and novelty-aware agents. The paper discusses the challenges
+      in evaluating such systems and compares its contributions to existing work,
+      indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces NovelGym, a new benchmark
+      and ecosystem for evaluating novelty-aware agents in open-world contexts. The
+      abstract and introduction clearly state the novelty of the proposed system,
+      highlighting its flexible and modular environment, compatibility with various
+      agent architectures, and agent-agnostic evaluation metrics.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces NovelGym, a new
+      benchmark and ecosystem for evaluating novelty-aware AI agents. It proposes
+      a flexible and modular environment, describes its architecture, and outlines
+      new evaluation metrics and benchmarks, indicating new contributions beyond a
+      mere survey or review.'
+  token_usage: 5291
+  time_usage: 5.49
+- title: Sample-and-Bound for Non-Convex Optimization
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the proposed
+      algorithms are evaluated on high-dimensional non-convex optimization benchmarks
+      against competitive baselines, indicating structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations of existing
+      approaches and methods in non-convex optimization, such as simulated annealing,
+      cross-entropy, and various tree search methods. The paper also compares its
+      proposed method with existing algorithms and discusses the challenges addressed
+      by previous research.'
+    novelty_prompt: 'Qualified. Reason: The abstract and introduction clearly state
+      the proposal of new sampling-based methods for non-convex optimization that
+      adapt Monte Carlo Tree Search (MCTS) to improve efficiency. The paper claims
+      novelty by introducing a new approach that combines sampling-based and tree-based
+      methods, and explicitly mentions the development of a "Sample-and-Bound" algorithm,
+      which indicates a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes new sampling-based
+      methods for non-convex optimization and introduces a novel approach called "Sample-and-Bound"
+      that adapts Monte Carlo Tree Search (MCTS). It also mentions evaluating the
+      proposed algorithms against competitive baselines, indicating new contributions
+      and experiments.'
+  token_usage: 4048
+  time_usage: 5.31
+- title: Consistent Query Answering for Existential Rules with Closed Predicates
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention a
+      detailed analysis of data complexity and associated tasks, such as repair checking,
+      under different semantics and for different classes of existential rules. This
+      indicates a structured evaluation involving complexity analysis, which qualifies
+      the paper.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including specific citations
+      (e.g., Bertossi, 2019; Arenas et al., 1999; Rosati, 2011; Bienvenu, 2012) and
+      comparisons with existing approaches. The paper discusses how its approach relates
+      to and differs from previous studies, particularly in the context of consistent
+      query answering and existential rules.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by studying Consistent
+      Query Answering (CQA) in databases with data dependencies expressed by existential
+      rules, specifically focusing on disjunctive embedded dependencies with inequalities
+      (DEDs). It provides a detailed analysis of the data complexity of CQA and associated
+      tasks under different semantics and for different classes of existential rules,
+      which is presented as a new contribution. Additionally, the paper highlights
+      its approach as complementary to existing work by adopting a closed-world assumption,
+      which is different from the open-world assumption used in related studies.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the study of consistent query answering (CQA) in databases with existential
+      rules, focusing on data complexity and repair checking under different semantics.
+      The paper proposes a detailed analysis of these problems, identifies tractable
+      classes, and discusses first-order rewritability, indicating new contributions
+      rather than merely summarizing existing work.'
+  token_usage: 9800
+  time_usage: 8.68
+- title: "Machine Learning Insides OptVerse AI Solver: Design Principles and\n  Applications"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the ML-augmented
+      OptVerse AI Solver demonstrates superior speed and precision compared to traditional
+      solvers across established benchmarks and real-world scenarios, indicating structured
+      evaluation through comparisons and performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper mention and compare the proposed methods with traditional solvers such
+      as Cplex and SCIP. They also reference prior work and techniques, such as the
+      advanced open-source/commercial solver ZIB, Bixby, and others. Additionally,
+      the paper discusses the use of machine learning algorithms like HEBO and Transformber
+      BO, indicating engagement with existing research and methods.'
+    novelty_prompt: 'Qualified. Reason: The abstract and introduction clearly claim
+      novelty by proposing new methods and frameworks, such as the integration of
+      machine learning techniques into the OptVerse AI Solver, the development of
+      novel ML-driven policies, and the introduction of new data generation and augmentation
+      techniques. The paper explicitly states contributions like the HardSATGEN and
+      G2MILP generative models, the AdaSolver training framework, and the application
+      of Graph Convolutional Networks and reinforcement learning, indicating new contributions
+      to the field.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the development and integration of new methods and tools, such as ML-driven
+      data generation, augmentation techniques, and novel ML-driven policies for solver
+      strategies. The paper proposes new contributions like the HardSATGEN and G2MILP
+      models, the AdaSolver training framework, and various ML applications for solver
+      optimization, indicating that it is not merely a survey or review.'
+  token_usage: 7439
+  time_usage: 7.69
+- title: 'Secrets of RLHF in Large Language Models Part II: Reward Modeling'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention experimental
+      results, the use of a preference strength measurement metric, and the application
+      of methods like contrastive learning and meta-learning to improve model performance.
+      Additionally, there is a reference to achieving improvements on specific datasets,
+      indicating structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1-12], and discuss existing
+      challenges and methods in the field of reinforcement learning from human feedback.
+      The paper compares its contributions with existing work and builds upon previous
+      findings and datasets.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a new
+      method to measure preference strength using a voting mechanism of multiple reward
+      models, introduces novel methods to mitigate incorrect and ambiguous preferences,
+      and applies contrastive learning and meta-learning to enhance reward model generalization.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      new methods, such as a preference strength measurement metric, contrastive learning,
+      and meta-learning, to address challenges in reinforcement learning from human
+      feedback. The paper proposes novel approaches and reports experimental results,
+      indicating contributions beyond a mere survey of existing work.'
+  token_usage: 5562
+  time_usage: 7.63
+- title: "Vehicle: Bridging the Embedding Gap in the Verification of\n  Neuro-Symbolic\
+    \ Programs"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the utility
+      of the Vehicle tool is demonstrated by formally verifying the safety of a simple
+      autonomous car controlled by a neural network in a stochastic environment. This
+      implies an empirical evaluation of the tool''s effectiveness in a specific application
+      scenario.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [57, 67, 79, 7, 69, 13,
+      58, 19], and discuss the challenges and existing efforts in the verification
+      of neuro-symbolic systems. The paper also compares its contributions with existing
+      methods and tools in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel tool called Vehicle,
+      which is a new intermediate programming language designed to address the verification
+      challenges in neuro-symbolic systems. The paper claims novelty by proposing
+      a general decomposition of the neuro-symbolic verification problem and introducing
+      Vehicle to close the embedding gap, explicitly stating its contributions in
+      the abstract and introduction.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new tool called
+      Vehicle, which is a dependently-typed language designed for verifying neuro-symbolic
+      systems. It proposes a method for addressing the embedding gap in neuro-symbolic
+      verification and demonstrates its utility through formal verification of a neural
+      network-controlled autonomous car. The paper includes novelty claims and describes
+      new contributions, such as the design and implementation of the Vehicle tool.'
+  token_usage: 4759
+  time_usage: 8.69
+- title: A Brain-inspired Computational Model for Human-like Concept Learning
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper contains sections titled "Results,"
+      "Similar Concepts Test," and "Case Study," which provide structured evaluation
+      through the use of datasets, performance metrics, and quantitative analysis.
+      It includes tables and figures presenting quantifiable outcomes and comparisons,
+      such as Table 4 showing results of human-like similar concepts tests and Table
+      5 providing a case study of similar concepts test.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior research, including theories and
+      findings from computational neuroscience, cognitive psychology, and artificial
+      intelligence. The paper discusses and compares its approach with existing models
+      and theories, such as the dual code theory, language and situated simulation
+      theory, and various computational models for concept learning. Additionally,
+      it cites numerous studies and methods, demonstrating engagement with prior work.'
+    novelty_prompt: '- Qualified. Reason: The abstract and introduction clearly state
+      the novelty of the paper by proposing a new human-like computational model for
+      concept learning based on spiking neural networks. The paper claims to address
+      challenges in concept representation by mimicking human cognitive processes,
+      which is a novel contribution.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the development of a new computational model for concept learning inspired by
+      human cognitive processes, indicating that the paper proposes a new method.'
+  token_usage: 22505
+  time_usage: 8.56
+- title: "Graph-of-Thought: Utilizing Large Language Models to Solve Complex and\n\
+    \  Dynamic Business Problems"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a case study demonstrating
+      the application of the GoTFlow framework in automating the generation of marketing
+      strategy reports. It describes the workflow design, execution process, and outcomes,
+      providing structured evaluation through examples, figures, and detailed descriptions
+      of the workflow components and their interactions.'
+    related_work_prompt: '- Qualified. Reason: The introduction discusses the limitations
+      of existing models like Chain-of-Thought (CoT) and Tree-of-Thought (ToT), comparing
+      them to the proposed Graph-of-Thought (GoT) model. This indicates engagement
+      with prior research by referencing and comparing existing approaches.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a new
+      model called Graph-of-Thought (GoT) for workflow automation, which is designed
+      to enhance the flexibility and efficiency of Large Language Models (LLMs) in
+      complex task execution. The introduction explicitly states that GoT is a new
+      thinking model that overcomes the limitations of existing models like Chain-of-Thought
+      (CoT) and Tree-of-Thought (ToT) by utilizing a graph structure for more dynamic,
+      interconnected reasoning.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new model called
+      Graph-of-Thought (GoT) and introduces an open-source engine, GoTFlow, demonstrating
+      its practical application. It discusses new methods and tools, indicating contributions
+      beyond a mere survey of existing work.'
+  token_usage: 8566
+  time_usage: 8.39
+- title: 'TONE: A 3-Tiered ONtology for Emotion analysis'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions "human and automatic
+      evaluation results" which indicates that there is some form of structured evaluation
+      conducted to assess the ontology''s quality.'
+    related_work_prompt: '- Qualified. Reason: The paper contains a "Related Work"
+      section that provides a substantive discussion of prior research, including
+      meaningful citations to academic papers and scholarly publications. It also
+      compares and critiques existing methods, framing the paper''s contributions
+      in the context of past literature.'
+    novelty_prompt: '- Qualified. Reason: The abstract claims novelty by introducing
+      "TONE," an emotion-based ontology, and a semi-automated vocabulary construction
+      process, which are presented as new contributions to the field of emotion classification.'
+    review_only_prompt: '- Qualified. Reason: The abstract describes the development
+      of a new ontology called TONE, a semi-automated vocabulary construction process,
+      and automated methods for establishing dependencies between emotions. It also
+      mentions evaluation results and use cases, indicating new contributions beyond
+      a mere survey of existing work.'
+  token_usage: 20938
+  time_usage: 19.95
+- title: Generalized Planning for the Abstraction and Reasoning Corpus
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that experiments
+      were conducted to demonstrate that GPAR outperforms state-of-the-art solvers
+      on the ARC tasks, indicating empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper engage with prior research by mentioning and citing several previous works,
+      such as those by Małkinski and Mandziuk (2023), Barrett et al. (2018), Moskvichev
+      et al. (2023), Chollet (2019), Johnson et al. (2021), Acquaviva et al. (2022),
+      and others. The paper discusses the challenges of the ARC benchmark and compares
+      its approach to existing methods, highlighting the contributions and limitations
+      of previous solvers.'
+    novelty_prompt: 'Qualified. Reason: The abstract explicitly states the introduction
+      of a new ARC solver called Generalized Planning for Abstract Reasoning (GPAR),
+      which casts ARC problems as generalized planning problems. This indicates a
+      novel method or approach, fulfilling the criteria for novelty.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the introduction of a new ARC solver called Generalized Planning for Abstract
+      Reasoning (GPAR), which proposes a novel method for solving ARC problems using
+      generalized planning and PDDL. The paper also mentions experiments demonstrating
+      the effectiveness of GPAR, indicating new contributions beyond a mere survey
+      of existing work.'
+  token_usage: 4180
+  time_usage: 9.1
+- title: "Inferring Preferences from Demonstrations in Multi-Objective Residential\n\
+    \  Energy Management"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions "experimental results"
+      and states that the DWPI model achieves accurate preference inferring in three
+      scenarios, indicating empirical evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior work and approaches, such as the multi-objective reinforcement learning
+      (MORL) paradigm and the dynamic weight-based preference inference (DWPI) algorithm.
+      The introduction also includes citations to previous studies and methods, indicating
+      engagement with existing research.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by stating that
+      it is the first study to apply the DWPI algorithm to infer preferences from
+      real-world data in the energy management domain. Additionally, it mentions that
+      this is the first work on inferring user preferences specifically in the energy
+      management domain, indicating a novel application of existing techniques.'
+    review_only_prompt: '- Qualified. Reason: The paper describes the application
+      of the DWPI algorithm to infer preferences in a new domain (energy management)
+      and mentions conducting experiments, which indicates that it is not solely a
+      survey or review of existing work.'
+  token_usage: 3644
+  time_usage: 7.57

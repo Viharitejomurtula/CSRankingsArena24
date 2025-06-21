@@ -1,0 +1,75 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 38320
+  time_usage: 4.7
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 57495
+  time_usage: 9.17
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 62252
+  time_usage: 8.06
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 58694
+  time_usage: 3.96
+- title: Consistent Query Answering for Existential Rules with Closed Predicates
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 38736
+  time_usage: 6.94
+- title: "A Universal Knowledge Model and Cognitive Architecture for Prototyping\n\
+    \  AGI"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 39457
+  time_usage: 7.13
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 14049
+  time_usage: 3.46

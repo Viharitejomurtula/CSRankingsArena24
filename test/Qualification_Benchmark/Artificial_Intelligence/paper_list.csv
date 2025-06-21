@@ -1,0 +1,47 @@
+paper_list
+title,url,Human_review
+A Brain-inspired Computational Model for Human-like Concept Learning,http://arxiv.org/abs/2401.06471v1,YES
+"A Survey on Verification and Validation, Testing and Evaluations of
+  Neurosymbolic Artificial Intelligence",http://arxiv.org/abs/2401.03188v2,NO (Survey Paper)
+"A Universal Knowledge Model and Cognitive Architecture for Prototyping
+  AGI",http://arxiv.org/abs/2401.06256v3,NO (No Evaluation)
+"ClusterComm: Discrete Communication in Decentralized MARL using Internal
+  Representation Clustering",http://arxiv.org/abs/2401.03504v1,YES
+"Cognitive BPM as an Equalizer: Improving Access and Efficiency for
+  Employees with (and without) Cognitive Disabilities",http://arxiv.org/abs/2401.06375v1,NO (No Evaluation)
+Computational Argumentation-based Chatbots: a Survey,http://arxiv.org/abs/2401.03454v1,NO (Survey Paper)
+Consistent Query Answering for Existential Rules with Closed Predicates,http://arxiv.org/abs/2401.05743v2,YES
+Generalized Planning for the Abstraction and Reasoning Corpus,http://arxiv.org/abs/2401.07426v1,YES
+"Graph-of-Thought: Utilizing Large Language Models to Solve Complex and
+  Dynamic Business Problems",http://arxiv.org/abs/2401.06801v2,NO (No Evaluation)
+"Greedy Algorithm for Inference of Decision Trees from Decision Rule
+  Systems",http://arxiv.org/abs/2401.06793v1,NO (No Evaluation)
+"Inferring Preferences from Demonstrations in Multi-Objective Residential
+  Energy Management",http://arxiv.org/abs/2401.07722v1,YES
+Large Language Models Relearn Removed Concepts,http://arxiv.org/abs/2401.01814v1,YES
+"Machine Learning Insides OptVerse AI Solver: Design Principles and
+  Applications",http://arxiv.org/abs/2401.05960v2,YES
+Manifold-based Shapley for SAR Recognization Network Explanation,http://arxiv.org/abs/2401.03128v1,YES
+"Natural Language Programming in Medicine: Administering Evidence Based
+  Clinical Workflows with Autonomous Agents Powered by Generative Large
+  Language Models",http://arxiv.org/abs/2401.02851v2,YES
+"Neural Control: Concurrent System Identification and Control Learning
+  with Neural ODE",http://arxiv.org/abs/2401.01836v4,YES
+"NovelGym: A Flexible Ecosystem for Hybrid Planning and Learning Agents
+  Designed for Open Worlds",http://arxiv.org/abs/2401.03546v1,YES
+"On the Prospects of Incorporating Large Language Models (LLMs) in
+  Automated Planning and Scheduling (APS)",http://arxiv.org/abs/2401.02500v2,NO (No Evaluation)
+Outlier Ranking in Large-Scale Public Health Streams,http://arxiv.org/abs/2401.01459v1,YES
+"Parameter-Efficient Sparsity Crafting from Dense to Mixture-of-Experts
+  for Instruction Tuning on General Tasks",http://arxiv.org/abs/2401.02731v4,YES
+Quantifying stability of non-power-seeking in artificial agents,http://arxiv.org/abs/2401.03529v1,YES
+Sample-and-Bound for Non-Convex Optimization,http://arxiv.org/abs/2401.04812v3,YES
+Secrets of RLHF in Large Language Models Part II: Reward Modeling,http://arxiv.org/abs/2401.06080v2,YES
+TONE: A 3-Tiered ONtology for Emotion analysis,http://arxiv.org/abs/2401.06810v1,YES
+Training and Serving System of Foundation Models: A Comprehensive Survey,http://arxiv.org/abs/2401.02643v1,NO (Survey Paper)
+UMIE: Unified Multimodal Information Extraction with Instruction Tuning,http://arxiv.org/abs/2401.03082v1,YES
+"Vehicle: Bridging the Embedding Gap in the Verification of
+  Neuro-Symbolic Programs",http://arxiv.org/abs/2401.06379v2,NOT SURE
+Verifying Relational Explanations: A Probabilistic Approach,http://arxiv.org/abs/2401.02703v1,YES
+"XUAT-Copilot: Multi-Agent Collaborative System for Automated User
+  Acceptance Testing with Large Language Model",http://arxiv.org/abs/2401.02705v2,YES

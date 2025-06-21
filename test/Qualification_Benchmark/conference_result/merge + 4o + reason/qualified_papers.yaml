@@ -1,0 +1,294 @@
+papers:
+- title: Real-Time Air Quality Monitoring with Edge AI and Machine Learning Algorithm
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the system
+      was implemented across 50 urban sites and evaluated against conventional reference
+      monitors, yielding a correlation coefficient of 0.92. It also notes improvements
+      in latency, bandwidth efficiency, and model accuracy, indicating empirical evaluation
+      and quantitative outcomes.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a "Literature Review"
+      section that discusses prior research and identifies gaps in existing studies.
+      It includes meaningful citations to academic papers and provides comparisons
+      and critiques of prior methods, framing the paper''s contributions within the
+      context of existing literature.'
+    novelty_prompt: 'Qualified. Reason: The abstract and introduction clearly claim
+      novelty by proposing a new decentralized approach to air quality monitoring
+      using Edge AI and machine learning techniques. The paper explicitly states that
+      it describes a "novel approach" and "proposes a novel decentralized methodology"
+      to address existing constraints in air quality monitoring systems.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      a novel approach to decentralized air quality monitoring using Edge AI and machine
+      learning techniques. The paper proposes new methods, including the use of IoT
+      sensors with NVIDIA Jetson devices and federated learning to improve model accuracy,
+      which indicates that it is not merely a survey or review of existing work.'
+  token_usage: 10082
+  time_usage: 6.39
+- title: Enhancing the Fairness and Performance of Edge Cameras with Explainable AI
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      with sections titled "Experiment" and "Analyzing Prediction Results," uses datasets
+      and benchmarks, and presents quantifiable results with tables and figures.'
+    related_work_prompt: '- Qualified. Reason: The introduction references prior work
+      by mentioning AI models like YOLO and YOLOX, and discusses the existing challenges
+      with these models. It also cites specific works [1], [2], and [3], indicating
+      engagement with prior research.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by introducing
+      an XAI-driven framework specifically for debugging human detection models in
+      security cameras, which is less explored in image data. The abstract and introduction
+      both highlight this new approach and its potential wider relevance, indicating
+      a clear claim of novelty.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new diagnostic method using XAI for model debugging, which
+      is validated on a real-world model. This indicates the paper includes new contributions
+      beyond summarizing existing work.'
+  token_usage: 7557
+  time_usage: 7.97
+- title: Recovering Trace Links Between Software Documentation And Code
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the paper
+      evaluates their approaches with five open-source projects and compares the results
+      to baseline approaches. It provides quantitative outcomes, such as the average
+      F1-scores for their model-to-code and documentation-to-code TLR approaches,
+      indicating structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations such as [8], [55], [51],
+      [7], [33], [39], [53], [10], [44], [46], [38], [40], [45], [9], [52], and [3].
+      The paper discusses existing approaches to traceability link recovery (TLR)
+      and compares its contributions to these existing methods, indicating engagement
+      with prior research.'
+    novelty_prompt: '- Qualified. Reason: The abstract clearly states the novelty
+      by introducing a new approach, TransArC, for traceability link recovery between
+      architecture documentation and code. It also mentions the novel approach ArCoTL
+      for linking architecture models to code, indicating a new contribution to the
+      field.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      a novel approach called TransArC for traceability link recovery between architecture
+      documentation and code, which includes new methods and results. The paper evaluates
+      these methods with experiments, indicating new contributions beyond a survey
+      or review.'
+  token_usage: 3715
+  time_usage: 5.29
+- title: Multidimensional Static Code Analysis Method for Automotive Software
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions "comparative experimental
+      validation" and states that the tool exhibits excellent performance in detection
+      accuracy, efficiency, compatibility, and reliability. This indicates that the
+      paper includes empirical evaluation through experiments and performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The introduction of the paper mentions
+      and compares existing tools and methods for static code analysis, such as Code
+      Climate, Codacy, FindBugs, and Checkstyle, indicating engagement with prior
+      research and existing solutions in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a new
+      multi-dimensional static code analysis method that integrates lexical analysis
+      with rule verification, Abstract Syntax Tree (AST) technology, data flow and
+      control flow analysis techniques, and parallel analysis technology. These claims
+      indicate a new contribution to the field of automotive software code analysis.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a new multi-dimensional
+      static code analysis method, which includes novel elements such as integrating
+      lexical analysis with rule verification, employing Abstract Syntax Tree (AST)
+      technology, and introducing parallel analysis technology. The abstract and introduction
+      describe the development and validation of this method, indicating new contributions
+      beyond a mere survey of existing work.'
+  token_usage: 3867
+  time_usage: 5.31
+- title: 'Collaborative Sketching: Human-AI Collaboration Modes for Enhancing Designers''
+    Performance and Experience in Sketching'
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The introduction mentions an experiment
+      involving 30 participants to compare the effects of different collaboration
+      modes on measurable outcomes such as the quantity, novelty, and variety of design
+      outcomes, as well as the designer''s experience. This indicates empirical evaluation
+      and quantitative analysis.'
+    related_work_prompt: '- Qualified. Reason: The introduction references prior work
+      by mentioning existing research on designer-AI collaboration frameworks and
+      cites specific studies [1][2][3][4][5]. This indicates engagement with previous
+      research in the field.'
+    novelty_prompt: '- Qualified. Reason: The introduction claims novelty by proposing
+      three new designer-AI collaboration modes specifically for the sketching stage,
+      which are visual-aid, subcontract, and cocreation. This indicates a new contribution
+      to the field of designer-AI collaboration frameworks.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes new designer-AI collaboration
+      modes and conducts an experiment to compare their effects, indicating new contributions
+      beyond summarizing existing work.'
+  token_usage: 2048
+  time_usage: 4.69
+- title: Deductive Software Architecture Recovery via Chain-of-thought Prompting
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions a proof-of-concept
+      with GPT-4 that demonstrates the deductive SAR approach, applying it to the
+      Android application K-9 Mail and achieving a 70% accuracy in classifying 54
+      classes and 184 methods. This indicates empirical evaluation with quantitative
+      outcomes.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction reference
+      prior work and existing techniques in software architecture recovery, mentioning
+      inductive recovery techniques and citing specific works ([1–3, 8, 11, 16, 19,
+      22, 23]). The paper also discusses how the proposed deductive approach differs
+      from current methods, indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by proposing a new
+      deductive software architecture recovery approach supported by Large Language
+      Models (LLMs). It explicitly contrasts this approach with existing inductive
+      techniques and outlines a novel method involving a Reference Architecture (RA)
+      and code units classification. The abstract and introduction both highlight
+      the innovative use of LLMs and chain-of-thought prompting to emulate deductive
+      reasoning, indicating a clear claim of novelty.'
+    review_only_prompt: 'Qualified. Reason: The abstract and introduction describe
+      a novel deductive software architecture recovery approach supported by Large
+      Language Models (LLMs). The paper proposes a new method, provides a proof-of-concept,
+      and discusses preliminary results and future research directions, indicating
+      new contributions beyond summarizing existing work.'
+  token_usage: 4835
+  time_usage: 8.38
+- title: 'Demystifying AI: A Robust and Comprehensive Approach to Explainable AI'
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a "Result and Discussion"
+      section that presents empirical evaluation with metrics such as accuracy, F1
+      score, and AUC ROC. It compares the proposed framework against baseline models
+      and other works, providing quantifiable results and performance metrics.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior work and engage with existing research by referencing studies and improvements
+      in XAI, human-computer interaction, ethics of AI, and causality. Specific citations
+      are included, indicating engagement with prior research.'
+    novelty_prompt: '- Qualified. Reason: The abstract and introduction claim the
+      development of a "unique XAI framework" and mention the creation of "comprehensive
+      robust XAI methods" for various computing platforms and domains. These statements
+      indicate a clear claim of novelty in proposing new methods and frameworks.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction indicate
+      that the paper proposes the development of new Explainable AI (XAI) methods
+      and a unique XAI framework. This suggests the paper includes new contributions
+      rather than solely summarizing existing work.'
+  token_usage: 7510
+  time_usage: 5.83
+- title: 'Dynamic Explainability in AI for Neurological Disorders: An Adaptive Model
+    for Transparent Decision-Making in Alzheimer''s Disease Diagnosis'
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      with sections presenting empirical testing, use of datasets, performance metrics,
+      and comparative analysis of different models. It contains tables and figures
+      showing quantifiable results, such as training and testing accuracies, and discusses
+      evaluation metrics like precision, recall, and F1-score.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a "References" section
+      with meaningful citations to academic papers and scholarly publications. It
+      also includes discussions of prior methods, such as PCA and Grad-CAM, and compares
+      the performance of different models, framing the paper''s contributions within
+      the context of existing research.'
+    novelty_prompt: '- Qualified. Reason: The abstract clearly states that the paper
+      proposes a new model to address the "black box" problem in Explainable AI, specifically
+      applied to Alzheimer''s disease. This claim of novelty is sufficient for qualification.'
+    review_only_prompt: '- Qualified. Reason: The abstract clearly states that the
+      paper proposes a new model to address the "black box" problem in Explainable
+      AI, specifically applied to Alzheimer''s disease. This indicates the introduction
+      of a new method, which disqualifies it from being a survey or review paper.'
+  token_usage: 15700
+  time_usage: 9.39
+- title: Evaluating the Features of Indoor Positioning Systems Using Explainable AI
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      with sections titled "Results and Discussion" and "Conclusion," uses performance
+      metrics like R² and RMSE, and presents quantifiable results with figures and
+      comparative analysis of SHAP and LIME results.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1]-[17], and discuss
+      various existing methods and techniques in indoor positioning systems, such
+      as WSN, RSSI, and machine learning approaches. The paper also compares its goals
+      and contributions with existing work, indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by investigating
+      the application of Explainable AI (XAI) techniques, specifically SHAP and LIME,
+      to evaluate features in indoor positioning systems. It aims to improve model
+      transparency and interpretability, which is presented as a novel contribution
+      to the field. Additionally, the study explicitly states its contributions in
+      guiding future improvements in system accuracy and reliability.'
+    review_only_prompt: '- Qualified. Reason: The paper describes the application
+      of Explainable AI techniques to improve the transparency and interpretability
+      of indoor positioning systems. It discusses the use of SHAP and LIME analyses
+      to identify influential features and enhance model performance, indicating that
+      it proposes methods and contributions beyond merely summarizing existing work.'
+  token_usage: 11610
+  time_usage: 8.79
+- title: 'Human-Centric Proactive Quality Control in Industry5.0: The critical role
+    of explainable AI'
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a "USE CASE" section
+      where a virtual manufacturing environment is used to test the performance and
+      suitability of the proposed XAI framework. It provides empirical evaluation
+      through the use of a predictive AI model, performance metrics (accuracy, precision,
+      recall, F1-score), and SHAP values to assess the model''s explanations. The
+      paper also presents tables with quantifiable results and discusses the improvements
+      in model performance after applying the framework, fulfilling the criteria for
+      structured evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1]-[18]. The paper discusses
+      traditional quality control approaches, the transition from Industry 4.0 to
+      Industry 5.0, and the role of Explainable AI (XAI), all of which indicate engagement
+      with existing research and methodologies.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by exploring a framework
+      that integrates a digital twin model, predictive analytics, and shapley additive
+      explanations (SHAP) XAI to enhance collaboration between human operators and
+      AI systems in Industry 5.0. This indicates a new approach to integrating these
+      technologies for improved quality control in manufacturing.'
+    review_only_prompt: 'Qualified. Reason: The abstract and introduction describe
+      the proposal of a framework integrating digital twin models, predictive analytics,
+      and explainable AI (XAI) to enhance collaboration in Industry 5.0. The paper
+      discusses new methods and practical implications, indicating contributions beyond
+      a mere survey of existing work.'
+  token_usage: 12841
+  time_usage: 6.95
+- title: 'Cyber-Resilient Edge Computing: A Holistic Approach with Multi-Level MAPE-K
+    Loops'
+  id: ''
+  url: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the authors
+      present a prototype of their framework and assess its viability and efficacy
+      by leveraging real-world edge devices deployed in an industrial production setting.
+      This indicates empirical evaluation through real-world deployment and assessment
+      of the framework''s effectiveness.'
+    related_work_prompt: '- Qualified. Reason: The introduction of the paper includes
+      multiple academic citations and references to prior work, such as the challenges
+      faced by current architectural solutions to secure ECSs and the mention of existing
+      issues like Coarse-Grained Access Control and Denial of Service attacks. Additionally,
+      it discusses the limitations of current approaches and indicates that the paper
+      aims to address these gaps, demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The abstract clearly states that the paper
+      introduces a novel approach to enhance the cyber-resilience of edge computing
+      systems by incorporating the MAPE-K loop. The introduction further emphasizes
+      the novelty by discussing the need for new strategies to secure ECSs and mentions
+      the paper''s focus on a self-adaptive holistic system architecture. These claims
+      indicate a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new methodology
+      for enhancing the cyber-resilience of edge computing systems using the MAPE-K
+      loop, presents a prototype framework, and discusses emerging results and initial
+      efforts, indicating new contributions rather than solely summarizing existing
+      work.'
+  token_usage: 4599
+  time_usage: 4.89

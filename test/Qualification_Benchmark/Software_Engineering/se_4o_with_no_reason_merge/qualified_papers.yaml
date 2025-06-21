@@ -1,0 +1,232 @@
+papers:
+- title: Automated Invariant Generation for Solidity Smart Contracts
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 9842
+  time_usage: 2.8
+- title: "Fixing Your Own Smells: Adding a Mistake-Based Familiarisation Step When\n\
+    \  Teaching Code Refactoring"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 5206
+  time_usage: 1.93
+- title: 'PTE: Axiomatic Semantics based Compiler Testing'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 2642
+  time_usage: 2.5
+- title: "Learning in the Wild: Towards Leveraging Unlabeled Data for Effectively\n\
+    \  Tuning Pre-trained Code Models"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 9803
+  time_usage: 3.6
+- title: Experimenting a New Programming Practice with LLMs
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 8022
+  time_usage: 2.01
+- title: "Applying Bayesian Data Analysis for Causal Inference about Requirements\n\
+    \  Quality: A Controlled Experiment"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified.
+    review_only_prompt: Qualified
+  token_usage: 6459
+  time_usage: 2.01
+- title: "Flexible Control Flow Graph Alignment for Delivering Data-Driven\n  Feedback\
+    \ to Novice Programming Learners"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 7842
+  time_usage: 1.91
+- title: "Which Syntactic Capabilities Are Statistically Learned by Masked\n  Language\
+    \ Models for Code?"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified.
+    review_only_prompt: Qualified.
+  token_usage: 6320
+  time_usage: 1.78
+- title: "De-Hallucinator: Mitigating LLM Hallucinations in Code Generation Tasks\n\
+    \  via Iterative Grounding"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified.
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 11740
+  time_usage: 2.32
+- title: Profiling the carbon footprint of performance bugs
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 6554
+  time_usage: 1.94
+- title: "ModuleGuard:Understanding and Detecting Module Conflicts in Python\n  Ecosystem"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 8946
+  time_usage: 2.16
+- title: 'REDriver: Runtime Enforcement for Autonomous Vehicles'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 8347
+  time_usage: 2.33
+- title: 'SliceLocator: Locating Vulnerable Statements with Graph-based Detectors'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified.
+    review_only_prompt: Qualified.
+  token_usage: 8944
+  time_usage: 2.53
+- title: "\"My GitHub Sponsors profile is live!\" Investigating the Impact of\n  Twitter/X\
+    \ Mentions on GitHub Sponsors"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 6443
+  time_usage: 2.13
+- title: "Guiding Effort Allocation in Open-Source Software Projects Using Bus\n \
+    \ Factor Analysis"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 6250
+  time_usage: 1.83
+- title: "T-FREX: A Transformer-based Feature Extraction Method from Mobile App\n\
+    \  Reviews"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 6903
+  time_usage: 1.69
+- title: "How Dataflow Diagrams Impact Software Security Analysis: an Empirical\n\
+    \  Experiment"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 6026
+  time_usage: 1.92
+- title: Finding XPath Bugs in XML Document Processors via Differential Testing
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 9182
+  time_usage: 3.35
+- title: 'Code Review Automation: Strengths and Weaknesses of the State of the Art'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 28831
+  time_usage: 3.71
+- title: 'MicroFuzz: An Efficient Fuzzing Framework for Microservices'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 7431
+  time_usage: 2.8
+- title: Optimistic Prediction of Synchronization-Reversal Data Races
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 9686
+  time_usage: 2.63
+- title: "Challenges, Adaptations, and Fringe Benefits of Conducting Software\n  Engineering\
+    \ Research with Human Participants during the COVID-19 Pandemic"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 23853
+  time_usage: 3.46

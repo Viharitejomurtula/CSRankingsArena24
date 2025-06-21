@@ -1,0 +1,618 @@
+papers:
+- title: Automated Invariant Generation for Solidity Smart Contracts
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      by stating that it evaluates the proposed method, INVCON+, on 361 ERC20 and
+      10 ERC721 real-world contracts, and discusses the experimental results indicating
+      its effectiveness in producing high-quality invariant specifications.'
+    related_work_prompt: '- Qualified. Reason: The paper discusses prior work extensively,
+      including references to the existing invariant detector InvCon, the use of Daikon
+      for identifying likely invariants, and mentions of related techniques and vulnerabilities
+      in smart contracts. It also compares its contributions with previous methods
+      and highlights the limitations of earlier approaches.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel invariant generation
+      framework, INVCON+, for Solidity smart contracts, which extends an existing
+      invariant detector and introduces a new approach for inferring verified contract
+      invariants. This clear claim of novelty is evident in both the abstract and
+      introduction.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a novel invariant
+      generation framework (INVCON+) for Solidity smart contracts, introduces a new
+      invariant specification language, and presents a custom algorithm for verifying
+      invariants, indicating new contributions beyond summarizing existing work.'
+  token_usage: 10091
+  time_usage: 10.88
+- title: "Fixing Your Own Smells: Adding a Mistake-Based Familiarisation Step When\n\
+    \  Teaching Code Refactoring"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper describes a study conducted with
+      35 novice undergraduates to evaluate a new teaching approach for refactoring,
+      mentioning specific metrics such as code smell identification and refactoring
+      success rates.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior work by discussing
+      concepts such as code smells, refactoring patterns, and the traditional teaching
+      methods in undergraduate computing curricula, along with academic citations
+      throughout the introduction.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new approach to teaching
+      code refactoring, specifically a "mistake-based" familiarization method, which
+      is a clear claim of novelty in the educational context.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a new approach to teaching
+      code refactoring and describes a study conducted to assess its efficacy, indicating
+      that it presents new methods and results rather than merely summarizing existing
+      work.'
+  token_usage: 5402
+  time_usage: 13.9
+- title: 'PTE: Axiomatic Semantics based Compiler Testing'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the proposed
+      method, PTE, has been applied to compilers and successfully identified bugs,
+      indicating empirical evaluation of the method''s effectiveness.'
+    related_work_prompt: '- Qualified. Reason: The introduction references the challenge
+      of effective compiler testing and cites multiple sources ([3], [14], [32], [34]),
+      indicating engagement with prior research in the field.'
+    novelty_prompt: '- Qualified. Reason: The abstract explicitly proposes a new approach
+      for testing compilers called PTE, which is based on axiomatic semantics and
+      introduces a novel method for evaluating compiler correctness.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      a new method (PTE) for testing compilers, including its application and results,
+      indicating that the paper presents original contributions rather than merely
+      summarizing existing work.'
+  token_usage: 2833
+  time_usage: 15.3
+- title: "Learning in the Wild: Towards Leveraging Unlabeled Data for Effectively\n\
+    \  Tuning Pre-trained Code Models"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention "experimental
+      results" and "extensive experiments demonstrate that HINT can consistently improve
+      the performance," indicating that structured evaluation is included in the study.'
+    related_work_prompt: 'Qualified. Reason: The paper engages with prior research
+      by referencing various existing works, discussing the limitations of current
+      labeled datasets, and comparing its proposed method (HINT) with previous approaches
+      in the field of code intelligence. It cites specific models and studies, indicating
+      a clear connection to earlier research.'
+    novelty_prompt: 'Qualified. Reason: The paper explicitly proposes a novel approach
+      named HINT to improve pre-trained code models by better utilizing pseudo-labeled
+      data, and it claims to be the first to leverage large-scale unlabeled data in
+      a task-specific way during the tuning phase for code intelligence tasks.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a novel approach
+      named HINT, which includes new methods and experimental results aimed at improving
+      pre-trained code models, indicating it has new contributions beyond summarizing
+      existing work.'
+  token_usage: 10032
+  time_usage: 7.32
+- title: Experimenting a New Programming Practice with LLMs
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention that
+      AISD has been evaluated with a novel benchmark of non-trivial software projects
+      and that experimental results demonstrate its effectiveness compared to state-of-the-art
+      baselines. This indicates structured evaluation through empirical testing.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple citations and references to prior work, including discussions of existing
+      frameworks like ChatDev and MetaGPT, and comparisons of their approaches to
+      the proposed AISD framework.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a new AI-aided software
+      development framework called AISD, which is designed to keep users engaged throughout
+      the software development process, and it also presents a novel benchmark named
+      CAASD for assessing AI-aided software development systems. Both claims indicate
+      new contributions in the field.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a novel framework
+      called AISD for AI-aided software development, proposes a new benchmark for
+      evaluation, and describes experiments conducted with these contributions, indicating
+      that it does not solely summarize existing work.'
+  token_usage: 8255
+  time_usage: 6.82
+- title: "Applying Bayesian Data Analysis for Causal Inference about Requirements\n\
+    \  Quality: A Controlled Experiment"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction provide clear
+      evidence of structured evaluation, including a controlled experiment with participants,
+      data analysis using frequentist and Bayesian methods, and the investigation
+      of the impact of quality factors on software engineering activities.'
+    related_work_prompt: 'Qualified. Reason: The paper engages with prior research
+      by mentioning existing studies on requirements quality, discussing gaps in the
+      literature, and referencing specific quality factors and their impacts. It also
+      cites previous work and compares its approach to existing studies, indicating
+      a clear engagement with the field.'
+    novelty_prompt: 'Qualified. Reason: The paper explicitly states its contributions,
+      including conducting a controlled experiment on the impact of requirements quality,
+      a conceptual replication of previous work, and the application of Bayesian data
+      analysis to requirements quality research, indicating clear signs of new contributions.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a controlled experiment
+      to investigate the impact of requirements quality, presents new empirical evidence,
+      and outlines specific contributions, indicating that it does not solely summarize
+      existing work.'
+  token_usage: 6681
+  time_usage: 6.8
+- title: "Flexible Control Flow Graph Alignment for Delivering Data-Driven\n  Feedback\
+    \ to Novice Programming Learners"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper mentions evaluating the proposed
+      approach against a baseline on a dataset of programming problems, indicating
+      structured evaluation through experiments and comparisons of performance metrics.'
+    related_work_prompt: '- Qualified. Reason: The paper engages with prior research
+      by referencing existing approaches and frameworks, such as CLARA and Sarfgen,
+      and discusses their limitations. It also cites multiple sources throughout the
+      introduction, indicating a clear comparison with previous work in the field
+      of automated feedback for programming learners.'
+    novelty_prompt: 'Qualified. Reason: The paper presents several modifications to
+      the CLARA approach, including a new flexible alignment algorithm over control
+      flow graphs, which indicates a clear claim of novelty in addressing the limitations
+      of existing automated feedback mechanisms for novice programming learners.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes several modifications
+      to the CLARA approach, introduces a flexible alignment algorithm, and presents
+      experimental results, indicating new contributions rather than merely summarizing
+      existing work.'
+  token_usage: 8054
+  time_usage: 5.29
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention the
+      necessity to "empirically assess a proposed automation solution" and discuss
+      various requirements automation problems, indicating that there is an intention
+      to evaluate NLP techniques in a structured manner.'
+    related_work_prompt: 'Qualified. Reason: The paper discusses various NLP techniques
+      and their application in Requirements Engineering (RE), referencing prior work
+      in the field with specific citations (e.g., compliance checking, glossary construction,
+      model extraction) and reflecting on the authors'' research process.'
+    novelty_prompt: 'Qualified. Reason: The paper presents practical guidelines for
+      the selection and evaluation of NLP techniques in Requirements Engineering,
+      contributing new insights and methods for applying NLP in this specific domain.
+      It discusses the automation process, various NLP techniques, and their evaluation,
+      which indicates a novel application of existing knowledge in a new context.'
+    review_only_prompt: 'Qualified. Reason: The paper presents guidelines for the
+      selection of NLP techniques and discusses various strategies, indicating that
+      it proposes new insights and contributions to the field of NLP in Requirements
+      Engineering, rather than merely summarizing existing work.'
+  token_usage: 21799
+  time_usage: 7.82
+- title: "Which Syntactic Capabilities Are Statistically Learned by Masked\n  Language\
+    \ Models for Code?"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention a
+      case study, the introduction of a technique called SyntaxEval, and the use of
+      causal analysis to evaluate the performance of Masked Language Models (MLMs)
+      in code completion tasks, indicating structured evaluation through experiments
+      and metrics.'
+    related_work_prompt: 'Qualified. Reason: The paper includes multiple academic
+      citations and references to prior research, discussing related approaches and
+      findings in the context of evaluating Masked Language Models (MLMs) for code
+      completion tasks. It compares its contributions with existing work and highlights
+      gaps in current evaluation methods, demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a new technique called
+      SyntaxEval for evaluating Masked Language Models (MLMs) in code completion tasks,
+      which leverages syntactic capabilities to enhance evaluation methods. It explicitly
+      states contributions, including the introduction of SyntaxEval and its application
+      in a case study, indicating clear signs of novelty.'
+    review_only_prompt: 'Qualified. Reason: The paper introduces a new technique called
+      SyntaxEval for evaluating Masked Language Models in code completion tasks, proposes
+      a causal analysis approach, and presents experimental results, indicating that
+      it contains new contributions rather than being a survey or review of existing
+      work.'
+  token_usage: 6585
+  time_usage: 7.46
+- title: "De-Hallucinator: Mitigating LLM Hallucinations in Code Generation Tasks\n\
+    \  via Iterative Grounding"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction provide clear
+      evidence of structured evaluation, including mentions of experiments, metrics
+      (e.g., edit distance, recall, number of passing tests), and comparisons across
+      multiple LLMs and programming languages.'
+    related_work_prompt: 'Qualified. Reason: The paper includes multiple academic
+      citations and references prior work on large language models, retrieval-augmented
+      generation, and specific challenges in code generation, demonstrating engagement
+      with existing research.'
+    novelty_prompt: '- Qualified. Reason: The paper presents a new technique called
+      De-Hallucinator, which combines retrieval-augmented generation with an iterative
+      method for improving code generation by addressing API hallucinations, explicitly
+      stating its contributions and novelty in both the abstract and introduction.'
+    review_only_prompt: '- Qualified. Reason: The paper presents a new technique called
+      De-Hallucinator that addresses specific challenges in code generation using
+      large language models, proposes a novel method, and provides empirical evidence
+      of its effectiveness, indicating it has new contributions beyond summarizing
+      existing work.'
+  token_usage: 11964
+  time_usage: 6.33
+- title: Profiling the carbon footprint of performance bugs
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper describes the simulation of performance
+      bugs using four different algorithms and mentions measuring the increased carbon
+      footprint caused by these simulations, indicating structured evaluation through
+      empirical methods.'
+    related_work_prompt: 'Qualified. Reason: The paper references several prior works
+      related to Green ICT and carbon emissions, discussing their methodologies and
+      findings, which demonstrates engagement with existing research in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by linking the identification
+      of performance bugs in software with measuring the increased carbon footprint
+      they cause, which is stated explicitly in the introduction and abstract.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes new methods for simulating
+      performance bugs and measuring their impact on carbon emissions, indicating
+      original contributions beyond summarizing existing work.'
+  token_usage: 6728
+  time_usage: 5.52
+- title: "ModuleGuard:Understanding and Detecting Module Conflicts in Python\n  Ecosystem"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention a
+      systematic study, the collection of module conflict issues, and a large-scale
+      analysis of the PyPI ecosystem and GitHub projects, indicating structured evaluation
+      through empirical analysis and the use of a tool (ModuleGuard) to detect module
+      conflicts.'
+    related_work_prompt: '- Qualified. Reason: The paper discusses prior work on namespace
+      conflicts in programming languages, specifically mentioning existing approaches
+      and tools related to the Python ecosystem, such as PyCRE, PyEGo, SnifferDog,
+      and DockerizeMe, and highlights their limitations in addressing module conflicts.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a novel technique called
+      InstSimulator for module extraction and implements a tool named ModuleGuard
+      to detect module conflicts in the Python ecosystem, clearly stating new contributions
+      in both the abstract and introduction.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a novel technique called
+      InstSimulator and implements a tool named ModuleGuard to detect module conflicts
+      in the Python ecosystem, indicating new contributions beyond summarizing existing
+      work.'
+  token_usage: 9176
+  time_usage: 7.28
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper discusses various testing methods
+      and includes references to empirical tests, formal methods, and static and dynamic
+      analysis, indicating a structured evaluation of software testing practices.'
+    related_work_prompt: '- Qualified. Reason: The paper references the Agile Manifesto
+      and discusses its implications in the context of software testing, indicating
+      engagement with prior work in the field of software development methodologies.
+      It also cites multiple sources related to agile practices and continuous integration,
+      demonstrating a clear connection to existing research and trends.'
+    novelty_prompt: '- Qualified. Reason: The paper discusses the challenges and advancements
+      in software testing, proposes a back-and-forth approach to integrate formal
+      methods with industry practices, and highlights the need for automation and
+      standardization in software testing. It makes clear contributions by suggesting
+      new insights and approaches to improve the adoption of formal testing methods
+      in the industry.'
+    review_only_prompt: 'Qualified. Reason: The abstract and introduction discuss
+      existing methods and challenges in software testing, but they also indicate
+      an intention to explore solutions and improvements, suggesting that the paper
+      may propose new insights or approaches rather than merely summarizing existing
+      work.'
+  token_usage: 30173
+  time_usage: 10.2
+- title: On Augmenting Scenario-Based Modeling with Generative AI
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions "favorable preliminary
+      results" and the introduction discusses the potential of the proposed modeling
+      scheme, indicating that there is an evaluation of the method being presented.
+      The paper outlines a structured approach to integrating ChatGPT with scenario-based
+      modeling, suggesting that empirical evaluation is part of the research.'
+    related_work_prompt: '- Qualified. Reason: The paper engages with prior research
+      by citing multiple sources, including works by Pettersson and Andersson (2016),
+      Biolchini et al. (2005), and others, discussing their relevance to the challenges
+      of modeling complex systems and the integration of ChatGPT into the modeling
+      process. It also compares its proposed method with existing approaches and highlights
+      the potential benefits of combining traditional modeling techniques with modern
+      AI tools.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new method for the structured
+      use of chatbots in the modeling process, leveraging scenario-based modeling
+      techniques, which indicates a clear claim of novelty in its approach.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a method for integrating
+      chatbots into the modeling process, discusses preliminary results, and outlines
+      a framework for future research, indicating new contributions rather than merely
+      summarizing existing work.'
+  token_usage: 7368
+  time_usage: 6.82
+- title: 'REDriver: Runtime Enforcement for Autonomous Vehicles'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention that
+      the authors implemented REDriver and subjected it to a benchmark of violations
+      of Chinese traffic laws, indicating that they conducted experiments to evaluate
+      their method. Additionally, they state that the results show significant improvements
+      in conformance, which implies structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper discusses existing approaches
+      to assessing the safety of autonomous driving systems (ADSs) and references
+      prior work, including various techniques for establishing confidence in ADSs,
+      such as modeling, verification, and runtime enforcement. It cites multiple sources
+      throughout the abstract and introduction, demonstrating engagement with prior
+      research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new framework called
+      REDriver for runtime enforcement in autonomous driving systems, allowing users
+      to specify a broad range of properties using a specification language based
+      on signal temporal logic (STL). This represents a novel contribution to the
+      field by addressing limitations of existing approaches that only monitor simple
+      safety properties.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new framework called
+      REDriver for runtime enforcement in autonomous driving systems, detailing its
+      implementation and evaluation, which indicates new contributions beyond summarizing
+      existing work.'
+  token_usage: 8605
+  time_usage: 7.77
+- title: 'SliceLocator: Locating Vulnerable Statements with Graph-based Detectors'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes structured evaluation
+      by mentioning the use of metrics such as vulnerability-triggering code line
+      coverage (TLC) and vulnerability-fixing code line coverage (FLC) to assess the
+      effectiveness of the proposed method, SliceLocator. It also describes comparisons
+      with other methods and provides performance results.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior work extensively,
+      including traditional approaches to vulnerability detection, deep learning-based
+      techniques, and specific methods such as SVF, Checkmarx, and DeepWukong. It
+      discusses limitations of existing methods and compares its proposed approach,
+      SliceLocator, with these prior works, indicating engagement with the relevant
+      research landscape.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new method called SliceLocator
+      for identifying fine-grained information from vulnerable code reported by GNN-based
+      vulnerability detectors, which is explicitly stated in both the abstract and
+      introduction.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a novel method called
+      SliceLocator for identifying vulnerability-triggering statements in code, demonstrating
+      new contributions and experimental results, rather than summarizing existing
+      work.'
+  token_usage: 9188
+  time_usage: 7.34
+- title: "\"My GitHub Sponsors profile is live!\" Investigating the Impact of\n  Twitter/X\
+    \ Mentions on GitHub Sponsors"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention a
+      structured evaluation involving the quantitative and qualitative analysis of
+      over 10,000 tweets linking to GitHub Sponsors profiles, as well as measuring
+      the impact of these tweets on sponsorship.'
+    related_work_prompt: 'Qualified. Reason: The paper includes multiple academic
+      citations and references to prior work, discussing previous findings related
+      to open-source software funding and the impact of social media on software development.
+      It compares its goals with existing studies, such as those by Overney et al.
+      and Fang et al., demonstrating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by investigating
+      the impact of tweets linking to GitHub Sponsors profiles on sponsorship, stating
+      that "to the best of our knowledge, the role of Twitter/X in obtaining funding
+      for open-source development has not yet been studied." This indicates a new
+      contribution to the field.'
+    review_only_prompt: 'Qualified. Reason: The paper investigates the impact of tweets
+      on GitHub Sponsors profiles and proposes new findings based on the analysis
+      of over 10,000 tweets, indicating that it presents new contributions rather
+      than merely summarizing existing work.'
+  token_usage: 6692
+  time_usage: 7.35
+- title: "Guiding Effort Allocation in Open-Source Software Projects Using Bus\n \
+    \ Factor Analysis"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper mentions conducting experiments
+      to measure the Bus Factor using different algorithms and metrics, and it describes
+      comparing the results of these algorithms in terms of accuracy, similarity,
+      execution time, and trends, indicating structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper references prior work on
+      bus factor algorithms and discusses existing methods, including comparisons
+      with the CST and RIG algorithms. It also cites specific studies and tools related
+      to bus factor calculation, indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new approach to calculating
+      the Bus Factor by using additional metrics (lines of code changes and cosine
+      difference of lines of code) alongside existing algorithms, which indicates
+      a clear claim of novelty in its contributions.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes new methods for calculating
+      the Bus Factor using different metrics and compares the results of two algorithms,
+      indicating that it presents original contributions rather than merely summarizing
+      existing work.'
+  token_usage: 6467
+  time_usage: 6.85
+- title: "T-FREX: A Transformer-based Feature Extraction Method from Mobile App\n\
+    \  Reviews"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention multiple
+      forms of structured evaluation, including the assessment of T-FREX''s performance
+      against ground truth features, comparisons with baseline methods, and the use
+      of a dataset for fine-tuning and evaluation.'
+    related_work_prompt: 'Qualified. Reason: The paper discusses prior work on feature
+      extraction methods, specifically mentioning traditional syntactic pattern-matching
+      techniques and comparing them with the proposed Transformer-based approach.
+      It also cites multiple sources throughout the introduction, indicating engagement
+      with existing research in the field.'
+    novelty_prompt: 'Qualified. Reason: The paper presents T-FREX, a novel Transformer-based
+      approach for feature extraction from mobile app reviews, explicitly stating
+      its contributions and claiming novelty in redefining the app feature extraction
+      problem as a named entity recognition task.'
+    review_only_prompt: 'Qualified. Reason: The paper presents T-FREX, a novel Transformer-based
+      approach for feature extraction from mobile app reviews, and describes experiments
+      and evaluations, indicating new contributions rather than merely summarizing
+      existing work.'
+  token_usage: 7127
+  time_usage: 6.53
+- title: "How Dataflow Diagrams Impact Software Security Analysis: an Empirical\n\
+    \  Experiment"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction provide clear
+      evidence of structured evaluation, including the mention of an empirical experiment,
+      comparisons of performance between conditions, and specific metrics related
+      to analysis correctness and evidence correctness.'
+    related_work_prompt: 'Qualified. Reason: The introduction mentions several prominent
+      security assessment techniques and model-based security approaches that utilize
+      Dataflow Diagrams (DFDs), providing academic citations to support these claims.
+      This indicates engagement with prior research and establishes the context for
+      the study.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by investigating
+      the impact of Dataflow Diagrams (DFDs) on security analysis, which has not been
+      explored before. It explicitly states, "to the best of our knowledge," indicating
+      a new contribution to the field.'
+    review_only_prompt: 'Qualified. Reason: The paper presents findings from an empirical
+      experiment investigating the impact of Dataflow Diagrams (DFDs) on security
+      analysis, proposes research questions, and discusses open challenges, indicating
+      new contributions rather than merely summarizing existing work.'
+  token_usage: 6252
+  time_usage: 5.63
+- title: "Formal Modelling of Safety Architecture for Responsibility-Aware\n  Autonomous\
+    \ Vehicle via Event-B Refinement"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention the
+      use of a case study and the refinement mechanism to derive and prove safety
+      conditions for autonomous vehicles, indicating structured evaluation through
+      modeling and formal reasoning.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior work, specifically
+      discussing responsibility-sensitive safety (RSS) and its extension to goal-aware
+      RSS (GA-RSS), along with citations to relevant studies. It compares its approach
+      to existing methods and highlights the novelty of its focus on model engineering
+      for AV safety.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new strategy for using
+      the refinement mechanism of Event-B to model, derive, and prove safety conditions
+      for autonomous vehicles, claiming this is the first attempt to focus on model
+      engineering over scenario variations in the deductive approach for AV safety.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a strategy for modeling,
+      deriving, and proving safety conditions for autonomous vehicles using the Event-B
+      refinement mechanism, indicating new contributions and methods rather than merely
+      summarizing existing work.'
+  token_usage: 4171
+  time_usage: 6.42
+- title: Finding XPath Bugs in XML Document Processors via Differential Testing
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction provide clear
+      evidence of structured evaluation, including mentions of testing the proposed
+      system XPress on six XML processors, finding unique bugs, and comparing the
+      efficiency of their approach against naive random generation.'
+    related_work_prompt: '- Qualified. Reason: The paper references prior work extensively,
+      including various XML processors, test suites, and related techniques such as
+      differential testing and Pivoted Query Synthesis (PQS). It discusses the limitations
+      of existing methods and positions its own contributions in relation to these
+      prior studies.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new approach called XPress
+      for automatically testing XML processors to find logic bugs, which is explicitly
+      stated in both the abstract and introduction. It claims novelty by being the
+      first general automated testing tool for XML processors and outlines its contributions
+      clearly.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new approach called
+      XPress for automatically testing XML processors to find logic bugs, which includes
+      novel methods and experimental results, indicating it is not merely a survey
+      or review of existing work.'
+  token_usage: 9419
+  time_usage: 6.43
+- title: 'Code Review Automation: Strengths and Weaknesses of the State of the Art'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions a structured evaluation
+      involving manual analysis of predictions generated by three code review automation
+      techniques, including the assessment of their performance and comparisons with
+      ChatGPT.'
+    related_work_prompt: '- Qualified. Reason: The paper references prior research
+      extensively in both the abstract and introduction, discussing previous findings
+      and techniques related to code review automation, including citations to specific
+      works.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by aiming to characterize
+      the cases in which code review automation techniques succeed or fail, and it
+      identifies issues in the datasets used for training and testing these techniques.
+      This indicates a new contribution to the understanding of code review automation.'
+    review_only_prompt: 'Qualified. Reason: The paper proposes a qualitative analysis
+      of code review automation techniques, identifies issues in datasets, and compares
+      performance with ChatGPT, indicating new contributions and insights rather than
+      merely summarizing existing work.'
+  token_usage: 4566
+  time_usage: 8.28
+- title: 'MicroFuzz: An Efficient Fuzzing Framework for Microservices'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction provide clear
+      evidence of structured evaluation, including mentions of the deployment of the
+      MicroFuzz framework, its evaluation in three distinct industrial scenarios,
+      and specific metrics such as the detection of potential security risks and improvements
+      in program coverage.'
+    related_work_prompt: '- Qualified. Reason: The paper references several existing
+      fuzzers and discusses their limitations in the context of Microservices, indicating
+      engagement with prior research. It also mentions specific challenges faced by
+      existing fuzzing techniques and compares them to the proposed MicroFuzz framework.'
+    novelty_prompt: 'Qualified. Reason: The paper introduces a novel fuzzing framework
+      called MicroFuzz specifically designed for Microservices, claiming new contributions
+      in addressing the challenges of fuzzing in this architecture through techniques
+      like Mocking-Assisted Seed Execution and Distributed Tracing.'
+    review_only_prompt: '- Qualified. Reason: The paper presents a novel fuzzing framework
+      called MicroFuzz, proposes new methods and techniques to address challenges
+      in fuzzing Microservices, and reports on its implementation and effectiveness,
+      indicating significant contributions beyond summarizing existing work.'
+  token_usage: 7668
+  time_usage: 5.89
+- title: Optimistic Prediction of Synchronization-Reversal Data Races
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention experiments
+      and evaluation of the proposed algorithm OSR on a comprehensive suite of benchmarks,
+      indicating structured evaluation of its performance.'
+    related_work_prompt: '- Qualified. Reason: The paper discusses existing state-of-the-art
+      techniques for data race prediction, compares its proposed algorithm OSR with
+      prior methods, and cites multiple references throughout the abstract and introduction,
+      indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a new algorithm called
+      OSR for detecting optimistic sync-reversal data races, which is explicitly stated
+      in both the abstract and introduction. The authors claim that this algorithm
+      is sound, has higher prediction power than prior algorithms, and achieves high
+      scalability, indicating clear contributions to the field of dynamic data race
+      detection.'
+    review_only_prompt: '- Qualified. Reason: The paper proposes a new algorithm (OSR)
+      for detecting optimistic sync-reversal data races, presents experimental results
+      demonstrating its effectiveness, and claims advancements over existing techniques,
+      indicating it contains new contributions.'
+  token_usage: 9911
+  time_usage: 7.57
+- title: "Challenges, Adaptations, and Fringe Benefits of Conducting Software\n  Engineering\
+    \ Research with Human Participants during the COVID-19 Pandemic"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper describes a mixed methods study
+      that includes a survey and follow-up interviews, indicating structured evaluation
+      through empirical data collection and analysis. It mentions specific research
+      questions and the methods used to gather and analyze data, which qualifies it
+      for structured evaluation.'
+    related_work_prompt: '- Qualified. Reason: The paper references multiple prior
+      studies and discusses the impact of the COVID-19 pandemic on software engineering
+      researchers, comparing its focus on researchers to existing work that primarily
+      addresses practitioners. It includes academic citations throughout the introduction,
+      indicating engagement with prior research.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes a mixed-methods study to
+      understand the impact of the COVID-19 pandemic on software engineering researchers,
+      highlighting new challenges and adaptations in conducting research involving
+      human participants. It explicitly states its research questions and aims to
+      provide recommendations for effective remote studies, indicating a clear contribution
+      to the field.'
+    review_only_prompt: 'Qualified. Reason: The paper presents a mixed-methods study
+      that investigates the impact of the COVID-19 pandemic on software engineering
+      researchers, proposing new insights and recommendations based on their findings.
+      It does not solely summarize existing work but contributes original research
+      and analysis.'
+  token_usage: 5426
+  time_usage: 5.61

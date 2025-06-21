@@ -1,0 +1,144 @@
+papers:
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It primarily focuses
+      on systematic literature mapping without presenting any structured or reproducible
+      testing or evaluation of methods or systems.'
+    related_work_prompt: 'Qualified. Reason: The paper contains a comprehensive discussion
+      of prior research, including a "Literature Systematic Mapping" section that
+      outlines the methodology used to engage with existing literature. It includes
+      meaningful citations to academic papers and research reports, and it discusses
+      how the current work builds upon and categorizes previous studies in the field
+      of Automated Test Production (ATP).'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper is a systematic literature
+      mapping study that aims to categorize and list existing methods, techniques,
+      and tools in the field of Automated Test Production (ATP). It does not propose
+      any new methods, algorithms, architectures, datasets, or insights, nor does
+      it apply known techniques in a novel context or domain. The paper primarily
+      focuses on summarizing and categorizing existing literature without making any
+      claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper''s title contains
+      the word "survey," and the main body primarily summarizes existing work through
+      a systematic literature mapping without introducing new methods, datasets, experiments,
+      or frameworks.'
+  token_usage: 35006
+  time_usage: 15.85
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper provides guidelines
+      and discussions on NLP techniques in requirements engineering but lacks any
+      empirical, experimental, or quantitative evaluation. There are no sections or
+      evidence of structured evaluation, such as experiments, results, or performance
+      measurements.'
+    related_work_prompt: 'Qualified. Reason: The introduction mentions prior research
+      and work by referencing various requirements automation problems they have studied,
+      such as checking compliance with requirements templates, glossary construction,
+      model extraction, requirements demarcation, ambiguity handling, and question
+      answering. Additionally, the abstract discusses the comparison of different
+      NLP strategies, indicating engagement with existing methods and approaches.'
+    novelty_prompt: 'Qualified. Reason: The paper presents practical guidelines for
+      selecting and evaluating NLP techniques in the context of Requirements Engineering
+      (RE), which is a novel application of known NLP methods. The paper also claims
+      to offer insights based on the authors'' research experiences, which could be
+      considered a new contribution to the field. Additionally, the paper discusses
+      the decision process for selecting analysis techniques, which adds a structured
+      approach to the application of NLP in RE.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "Guidelines," which suggests a survey or review nature, and the main body
+      primarily summarizes existing NLP techniques and methods in the context of requirements
+      engineering without introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 58049
+  time_usage: 18.62
+- title: Automated Test Production -- Systematic Literature Review
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper contains sections dedicated to
+      "Qualitative Analysis" and "Analysis of Results," which include figures and
+      tables presenting quantifiable outcomes of the studies reviewed. It discusses
+      the types of studies or evaluations conducted, such as models, methods, processes,
+      techniques, and tools used in Automated Test Production, providing structured
+      evaluation and empirical analysis.'
+    related_work_prompt: '- Qualified. Reason: The abstract mentions a "previously
+      produced Systematic Literature Mapping (SLM)" which indicates engagement with
+      prior research to formulate research questions and parameters for the current
+      review.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The paper is a systematic
+      literature review that aims to provide an overview of existing models, methodologies,
+      and tools related to Automated Test Production. It does not propose any new
+      methods, algorithms, architectures, datasets, or insights, nor does it apply
+      known techniques in a novel context or domain. The paper focuses on summarizing
+      and categorizing existing research rather than contributing new ideas or results.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "review," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 33777
+  time_usage: 20.03
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It contains only design
+      discussions, conceptual proposals, and subjective reflections without any structured
+      or reproducible testing or evaluation.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper engage with prior research by referencing the Agile Manifesto and discussing
+      its impact on industry trends. The introduction also cites several sources,
+      indicating engagement with existing literature and practices related to agile
+      software development and continuous integration.'
+    novelty_prompt: 'Disqualified: no novelty. Reason: The paper provides a comprehensive
+      review of existing software testing methods, both formal and empirical, and
+      discusses the challenges and gaps between industry practices and academic advances.
+      However, it does not propose any new methods, algorithms, architectures, datasets,
+      or insights, nor does it apply known techniques in a novel context or domain.
+      The paper primarily summarizes existing knowledge and discusses the state of
+      the field without making clear claims of novel contributions.'
+    review_only_prompt: 'Qualified. Reason: The abstract and introduction discuss
+      existing methods and challenges in software testing but also mention the intention
+      to follow a specific approach in search of a solution, suggesting potential
+      new contributions or perspectives beyond merely summarizing existing work.'
+  token_usage: 30222
+  time_usage: 16.97
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: ''
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+- title: What Is an App Store? The Software Engineering Perspective
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract mentions that the authors
+      collected a set of app store examples from web search queries, analyzed and
+      curated the results, derived a set of features, built a dimensional model, and
+      performed unsupervised clustering to find natural groupings of app stores. These
+      activities indicate a structured evaluation involving data collection, analysis,
+      and modeling.'
+    related_work_prompt: 'Qualified. Reason: The paper''s introduction references
+      prior research, such as studies by Harman et al. on BlackBerry App World and
+      Lin et al. on game reviews in mobile app stores versus the Steam platform. It
+      also discusses the historical context of app stores, mentioning platforms like
+      Google Play, Apple''s App Store, and others, indicating engagement with existing
+      literature and prior work in the field.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by proposing a
+      dimensional model of app stores, which is a new approach to understanding the
+      broader diversity and impact of app stores beyond just mobile platforms. The
+      abstract and introduction indicate that the research aims to provide a more
+      holistic view of app stores, which has not been extensively covered in previous
+      research.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The paper''s title contains
+      the word "survey," and the main body primarily summarizes existing work on app
+      stores without introducing new methods, datasets, experiments, or frameworks.
+      The paper aims to survey and characterize app stores and explore their influence
+      on software development practices, but it does not propose any novel contributions.'
+  token_usage: 36911
+  time_usage: 24.07

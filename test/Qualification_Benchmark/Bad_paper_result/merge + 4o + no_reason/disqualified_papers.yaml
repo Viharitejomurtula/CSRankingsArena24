@@ -1,0 +1,195 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps_on_the_prospects_of_incorporating_large_language_models_llms_in_automated_planning_and_scheduling_aps
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 55681
+  time_usage: 6.07
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: training_and_serving_system_of_foundation_models_a_comprehensive_survey_school_of_systems_science_and_engineering_sun_yat_sen_university_guangzhou_528406_china_school_of_software_engineering_sun_yat_sen_university_guangzhou_510275_china_department_of_computing_in_the_hong_kong_polytechnic_university_hong_kong_999077_china_peng_cheng_laboratory_shenzhen_518000_china
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 57438
+  time_usage: 5.59
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: a_survey_on_verification_and_validation_testing_and_evaluations_of_neurosymbolic_artificial_intelligence_2024_ieee_personal_use_of_this_material_is_permitted_permission_from_ieee_must_be_obtained_for_all_other_uses_in_any_current_or_future_media_including_reprinting_republishing_this_material_for_advertising_or_promotional_purposes_creating_new_collective_works_for_resale_or_redistribution_to_servers_or_lists_or_reuse_of_any_copyrighted_component_of_this_work_in_other_works_doi_10_1109_tai_2024_3351798_https_www_doi_org_10_1109_tai_2024_3351798_arxiv_2401_03188v2_cs_ai_10_jan_2024
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 89277
+  time_usage: 7.36
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: computational_argumentation_based_chatbots_a_survey_brunel_university_london_kingston_lane_london_ub8_3ph_united_kingdom
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 58697
+  time_usage: 6.63
+- title: "A Universal Knowledge Model and Cognitive Architecture for Prototyping\n\
+    \  AGI"
+  id: a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi_a_universal_knowledge_model_and_cognitive_architecture_for_prototyping_agi
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 39459
+  time_usage: 3.76
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities_cognitive_bpm_as_an_equalizer_improving_access_and_efficiency_for_employees_with_and_without_cognitive_disabilities
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 25419
+  time_usage: 4.18
+- title: Automated Test Production -- Complement to "Ad-hoc" Testing
+  id: automated_test_production_complement_to_ad_hoc_testing_automated_test_production_complement_to_ad_hoc_testing
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Qualified
+  token_usage: 29768
+  time_usage: 3.44
+- title: Automated Test Production -- Systematic Literature Mapping
+  id: automated_test_production_systematic_literature_mapping_automated_test_production_systematic_literature_mapping
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 34290
+  time_usage: 4.58
+- title: Automated Test Production -- Systematic Literature Review
+  id: automated_test_production_systematic_literature_review_automated_test_production_systematic_literature_review
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 32917
+  time_usage: 5.3
+- title: Exception-aware Lifecycle Model Construction for Framework APIs
+  id: exception_aware_lifecycle_model_construction_for_framework_apis_yan_ji_wei1_2_huang_jin_hao3_yang_heng_qin2_4_yan_jun1_2
+  decisions:
+    language: 'Disqualified: Not English. Reason: Paper is not primarily written in
+      English.'
+  token_usage: 0
+  time_usage: 0.0
+- title: "Practical Guidelines for the Selection and Evaluation of Natural\n  Language\
+    \ Processing Techniques in Requirements Engineering"
+  id: practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering_15_practical_guidelines_for_the_selection_and_evaluation_of_natural_language_processing_techniques_in_requirements_engineering
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Qualified
+  token_usage: 54067
+  time_usage: 6.11
+- title: What Is an App Store? The Software Engineering Perspective
+  id: what_is_an_app_store_the_software_engineering_perspective_wenhan_zhu_sebastian_proksch_daniel_m_german_michael_w_godfrey_li_li_shane_mcintosh
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Disqualified
+  token_usage: 95190
+  time_usage: 7.85
+- title: 'Next4: Snapshots in Ext4 File System'
+  id: next4_snapshots_in_ext4_file_system_aditya_dani_1_shardul_mangade_2_piyush_nimbalkar_3_harshad_shirwadkar_4
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 8655
+  time_usage: 3.06
+- title: Crash Consistency in DRAM-NVM-Disk Hybrid Storage System
+  id: crash_consistency_in_dram_nvm_disk_hybrid_storage_system_1_st_guoyu_wang_college_of_computer_science_and_technology_jilin_university_changchun_china
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 15555
+  time_usage: 2.44
+- title: 'Modern Computing: Vision and Challenges'
+  id: modern_computing_vision_and_challenges_sukhpal_singh_gill_a_huaming_wu_b_panos_patros_c_carlo_ottaviani_d_priyansh_arora_e_victor_casamayor_pujol_f_david_haunschild_g_ajith_kumar_parlikad_h_oktay_cetinkaya_i_hanan_lutfiyya_j_vlado_stankovski_k_ruidong_li_l_yuemin_ding_m_junaid_qadir_n_ajith_abraham_o_p_soumya_k_ghosh_q_houbing_herbert_song_r_rizos_sakellariou_s_omer_rana_t_joel_j_p_c_rodrigues_u_v_salil_s_kanhere_w_schahram_dustdar_f_steve_uhlig_a_kotagiri_ramamohanarao_x_and_rajkumar_buyya_y
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Disqualified
+    review_only_prompt: Disqualified
+  token_usage: 218533
+  time_usage: 15.52
+- title: "XaaS: Acceleration as a Service to Enable Productive High-Performance\n\
+    \  Cloud Computing"
+  id: xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing_xaas_acceleration_as_a_service_to_enable_productive_high_performance_cloud_computing
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 16760
+  time_usage: 3.77
+- title: "A Logic for Repair and State Recovery in Byzantine Fault-tolerant\n  Multi-agent\
+    \ Systems"
+  id: a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems_a_logic_for_repair_and_state_recovery_in_byzantine_fault_tolerant_multi_agent_systems
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 60742
+  time_usage: 4.76
+- title: Structured Acyclic Nets
+  id: structured_acyclic_nets_all_sets_used_in_the_relational_structures_considered_in_this_paper_are_finite_which_simplifies_some_of_the_definitions_and_results_for_two_sets_x_and_y_x_y_means_that_x_is_a_proper_subset_of_y_i_e_x_y_and_x_6_y_the_disjoint_union_of_x_and_y_is_denoted_by_x_y_and_nonempty_sets_x_1_xk_form_a_partition_of_a_sets_x_if_x_x_1_xk
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  token_usage: 35811
+  time_usage: 3.46
+- title: Semantic Web Technology for Agent Communication Protocols
+  id: semantic_web_technology_for_agent_communication_protocols_idoia_berges_jes_us_berm_udez_alfredo_go_ni_and_arantza_illarramendi
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Disqualified
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified.
+  token_usage: 16455
+  time_usage: 2.74

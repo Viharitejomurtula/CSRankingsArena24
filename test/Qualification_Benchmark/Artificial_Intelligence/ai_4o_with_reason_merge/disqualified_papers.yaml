@@ -1,0 +1,186 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It primarily consists
+      of a literature review and conceptual discussion without presenting structured
+      testing or evaluation results.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction both engage
+      with prior research by mentioning a comprehensive review of 126 papers, discussing
+      the evolution of Automated Planning and Scheduling (APS) and Large Language
+      Models (LLMs), and referencing foundational works in AI and APS (e.g., Russell
+      and Norvig 2003; Ghallab, Nau, and Traverso 2004). The paper also compares its
+      findings with existing literature and identifies gaps, indicating meaningful
+      engagement with prior work.'
+    novelty_prompt: 'Qualified. Reason: The paper presents a comprehensive review
+      of the integration of large language models (LLMs) in automated planning and
+      scheduling (APS), identifying eight distinct categories of application. It highlights
+      the novel insight that the integration of LLMs with traditional symbolic planners
+      can lead to a promising neuro-symbolic approach, which combines the generative
+      capabilities of LLMs with the precision of classical planning methods. This
+      represents a novel direction in the field, advocating for leveraging the complementary
+      strengths of LLMs and symbolic planners to develop more advanced planning systems.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work across eight
+      categories of LLM applications in APS without introducing new methods, datasets,
+      experiments, or frameworks.'
+  token_usage: 56367
+  time_usage: 15.26
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The paper contains structured evaluation,
+      including tables and figures presenting quantifiable outcomes, and discusses
+      various optimization strategies with references to empirical methods and results.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction mention
+      prior work and engage with existing research by referencing specific foundation
+      models like GPT-3, LLaMA, PanGu-Σ, and PengCheng Mind. Additionally, the introduction
+      discusses existing surveys and their limitations, citing them explicitly ([5]–[11],
+      [12]), and highlights the need for a comprehensive survey of training and serving
+      methods, indicating engagement with prior research.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The paper is a comprehensive
+      survey of existing methods and techniques related to the training and serving
+      of foundation models. It does not propose any new methods, algorithms, architectures,
+      datasets, or insights, nor does it apply known techniques in a novel context
+      or domain. The paper primarily categorizes and summarizes existing work without
+      making claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work without
+      introducing new methods, datasets, experiments, or frameworks.'
+  token_usage: 58073
+  time_usage: 14.06
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Qualified. Reason: The abstract mentions that the paper
+      evaluates two taxonomies of neurosymbolic AI and assesses the applicability
+      of current testing and evaluation (T&E) and validation and verification (V&V)
+      methods to neurosymbolic AI. This indicates a structured evaluation of the taxonomies
+      and methods discussed.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper contain multiple references to prior work, including citations [\[1\]](#page-11-0)
+      through [\[13\]](#page-12-4). The paper discusses existing taxonomies and frameworks,
+      compares current techniques, and references previous methods and findings related
+      to neurosymbolic AI and V&V processes.'
+    novelty_prompt: '- Disqualified: no novelty. Reason: The paper is a survey on
+      the verification and validation, testing, and evaluations of neurosymbolic AI,
+      which primarily compiles and reviews existing methods, taxonomies, and applications
+      in the field. It does not propose new methods, algorithms, architectures, datasets,
+      or insights, nor does it apply known techniques in a novel context or domain.
+      The paper provides an overview of current techniques and discusses their applicability
+      but does not make clear claims of novel contributions.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on verification
+      and validation, testing, and evaluations of neurosymbolic AI without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 62746
+  time_usage: 18.29
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper is a survey
+      and does not contain any empirical, experimental, or quantitative evaluation
+      of its own. It reviews existing literature without providing structured or reproducible
+      testing or evaluation of methods or systems.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction of the
+      paper engage with prior research by referencing multiple previous works, including
+      those by Caldarini et al. (2022), Sojasingarayar (2020), Bala et al. (2017),
+      Cahn (2017), Sansonnet et al. (2006), Dale (2016), Kar & Haldar (2016), Vaswani
+      et al. (2017), Weizenbaum (1966), and Rahwan & Simari (2009). The paper discusses
+      the development of chatbots over time, compares argumentation-based chatbots
+      with standard ones, and situates its contributions within the context of existing
+      research.'
+    novelty_prompt: '- Qualified. Reason: The paper claims novelty by stating, "To
+      the best of our knowledge, this is the first survey that combines computational
+      argumentation and chatbots." This indicates a new contribution in the form of
+      a novel survey in the field.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey," and the main body primarily summarizes existing work on computational
+      argumentation-based chatbots without introducing new methods, datasets, experiments,
+      or frameworks.'
+  token_usage: 59197
+  time_usage: 12.96
+- title: "A Universal Knowledge Model and Cognitive Architecture for Prototyping\n\
+    \  AGI"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. There are no dedicated
+      sections or paragraphs titled “Evaluation”, “Experiments”, “Results”, “Empirical
+      Analysis”, or similar, and no concrete use of benchmarks, metrics, comparisons,
+      datasets, or performance measurements.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1-10] and discussions
+      of previous reviews and cognitive architectures. The paper engages with existing
+      research by identifying and analyzing 42 cognitive architectures and comparing
+      its proposed architecture with existing ones.'
+    novelty_prompt: 'Qualified. Reason: The abstract explicitly states that the paper
+      proposes a new cognitive architecture for intelligent systems approaching AGI
+      in their capabilities, along with a universal method of knowledge representation.
+      This indicates a clear claim of novelty.'
+    review_only_prompt: '- Qualified. Reason: The abstract and introduction describe
+      the proposal of a new cognitive architecture and a universal method of knowledge
+      representation, indicating new contributions beyond summarizing existing work.'
+  token_usage: 39771
+  time_usage: 10.93
+- title: "Cognitive BPM as an Equalizer: Improving Access and Efficiency for\n  Employees\
+    \ with (and without) Cognitive Disabilities"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Disqualified: no evaluation. Reason: The paper lacks any form
+      of empirical, experimental, or quantitative evaluation. It primarily discusses
+      conceptual proposals and design discussions without presenting structured or
+      reproducible testing, benchmarks, metrics, or performance measurements.'
+    related_work_prompt: 'Qualified. Reason: The abstract and introduction contain
+      multiple references to prior work, including citations [1] through [12], and
+      discuss related approaches and findings in the context of AI and business process
+      management. The paper also compares its contributions with existing work by
+      referencing other researchers'' AI models and discussing the role of Cognitive
+      BPM.'
+    novelty_prompt: 'Qualified. Reason: The paper proposes the use of ProcessGPT,
+      a novel AI model, to improve business process management (BPM) by accommodating
+      individuals with cognitive disabilities. It claims novelty by applying AI in
+      a new context to enhance workplace inclusivity and efficiency, particularly
+      for those with cognitive limitations. The paper makes clear claims of contribution,
+      such as highlighting the potential benefits of ProcessGPT in reducing cognitive
+      load and improving usability for all employees, not just those with disabilities.'
+    review_only_prompt: '- Qualified. Reason: The paper discusses ProcessGPT, an AI
+      model designed to improve business processes, and highlights its application
+      and benefits, particularly for individuals with cognitive disabilities. It does
+      not primarily summarize existing work but rather examines and demonstrates the
+      capabilities and impacts of ProcessGPT, suggesting new insights and applications.'
+  token_usage: 25925
+  time_usage: 15.26
+- title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: '- Disqualified: no evaluation. Reason: The paper does not
+      contain any sections or content that provide empirical, experimental, or quantitative
+      evaluation. It discusses algorithms and theoretical aspects but lacks structured
+      or reproducible testing or evaluation.'
+    related_work_prompt: '- Qualified. Reason: The abstract and introduction contain
+      numerous references to prior work, including citations of previous methods,
+      studies, and findings related to decision trees and decision rule systems. The
+      paper discusses existing approaches and builds upon earlier research, clearly
+      engaging with prior work.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by developing a new
+      algorithm with polynomial time complexity that models the behavior of a decision
+      tree for a given tuple of attribute values. This is explicitly stated in the
+      abstract and introduction, indicating a new contribution to the field.'
+    review_only_prompt: '- Qualified. Reason: The paper introduces a new algorithm
+      with polynomial time complexity to model the behavior of decision trees for
+      a given tuple of attribute values. It discusses the development and accuracy
+      of this algorithm, indicating new contributions beyond summarizing existing
+      work.'
+  token_usage: 18503
+  time_usage: 7.77

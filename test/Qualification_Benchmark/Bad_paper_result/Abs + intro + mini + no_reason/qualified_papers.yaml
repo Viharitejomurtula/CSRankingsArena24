@@ -1,0 +1,858 @@
+papers:
+- id: greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems_greedy_algorithm_for_inference_of_decision_trees_from_decision_rule_systems
+  title: "Greedy Algorithm for Inference of Decision Trees from Decision Rule\n  Systems"
+  abstract: 'Decision trees and decision rule systems play important roles as classifiers,
+
+    knowledge representation tools, and algorithms. They are easily interpretable
+
+    models for data analysis, making them widely used and studied in computer
+
+    science. Understanding the relationships between these two models is an
+
+    important task in this field. There are well-known methods for converting
+
+    decision trees into systems of decision rules. In this paper, we consider the
+
+    inverse transformation problem, which is not so simple. Instead of constructing
+
+    an entire decision tree, our study focuses on a greedy polynomial time
+
+    algorithm that simulates the operation of a decision tree on a given tuple of
+
+    attribute values.'
+  url: http://arxiv.org/abs/2401.06793v1
+  keywords: ': decision rule systems, decision trees.'
+  document: '# Greedy Algorithm for Inference of Decision Trees from Decision Rule
+    Systems
+
+
+    Kerven Durdymyradov and Mikhail Moshkov Computer, Electrical and Mathematical
+    Sciences & Engineering Division and Computational Bioscience Research Center King
+    Abdullah University of Science and Technology (KAUST) Thuwal 23955-6900, Saudi
+    Arabia {kerven.durdymyradov,mikhail.moshkov}@kaust.edu.sa
+
+
+    ### Abstract
+
+
+    Decision trees and decision rule systems play important roles as classifiers,
+    knowledge representation tools, and algorithms. They are easily interpretable
+    models for data analysis, making them widely used and studied in computer science.
+    Understanding the relationships between these two models is an important task
+    in this field. There are well-known methods for converting decision trees into
+    systems of decision rules. In this paper, we consider the inverse transformation
+    problem, which is not so simple. Instead of constructing an entire decision tree,
+    our study focuses on a greedy polynomial time algorithm that simulates the operation
+    of a decision tree on a given tuple of attribute values.
+
+
+    *Keywords*: decision rule systems, decision trees.
+
+
+    # 1 Introduction
+
+
+    Decision trees [\[3,](#page-7-0) [4,](#page-7-1) [8,](#page-7-2) [31,](#page-9-0)
+    [34,](#page-10-0) [40\]](#page-10-1) and systems of decision rules [\[6,](#page-7-3)
+    [7,](#page-7-4) [11,](#page-8-0) [14,](#page-8-1) [33,](#page-10-2) [34,](#page-10-0)
+    [35,](#page-10-3) [36\]](#page-10-4) are widely used as classifiers, knowledge
+    representation tools, and algorithms. They are known for their interpretability
+    in data analysis [\[10,](#page-8-2) [15,](#page-8-3) [23,](#page-9-1) [41\]](#page-10-5).
+
+
+    Investigating the relationship between these two models is an important task in
+    computer science. Converting decision trees into decision rule systems is a well-known
+    and simple process [\[37,](#page-10-6) [38,](#page-10-7) [39\]](#page-10-8). This
+    paper focuses on the inverse transformation problem, which is not trivial.
+
+
+    The research related to this problem encompasses several directions:
+
+
+    • Two-stage construction of decision trees. This approach involves building decision
+    rules based on input data, followed by the construction of decision trees or decision
+    structures (which are generalizations of decision trees) using the generated rules.
+    The benefits of this two-stage construction method are explained in [\[1,](#page-7-5)
+    [2,](#page-7-6) [17,](#page-8-4) [18,](#page-8-5) [19,](#page-8-6) [20,](#page-9-2)
+    [21,](#page-9-3) [22,](#page-9-4) [42\]](#page-10-9).
+
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for computing Boolean functions [\[5,](#page-7-7) [16,](#page-8-7) [24,](#page-9-5)
+    [43\]](#page-10-10). Note that the nondeterministic decision trees can be interpreted
+    as decision rule systems. Note also that the minimum depth of a nondeterministic
+    decision tree for a Boolean function is equal to its certificate complexity [\[9\]](#page-8-8).
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for problems over finite and infinite information systems [\[25,](#page-9-6)
+    [27,](#page-9-7) [29,](#page-9-8) [30,](#page-9-9) [32\]](#page-10-11). These
+    systems consist of a universe and a set of attributes defined on it [\[35\]](#page-10-3).
+
+
+    This paper builds upon the syntactic approach proposed in previous works [\[26,](#page-9-10)
+    [28\]](#page-9-11). The approach assumes that we have a system of decision rules
+    but lack knowledge of the input data, and our objective is to transform these
+    rules into a decision tree.
+
+
+    Let us consider a system of decision rules S, which consists of rules of the form
+
+
+    $$
+
+    (a_{i_1} = \delta_1) \wedge \cdots \wedge (a_{i_m} = \delta_m) \rightarrow \sigma,
+
+    $$
+
+
+    where ai<sup>1</sup> , . . . , ai<sup>m</sup> represent attributes, δ1, . . .
+    , δ<sup>m</sup> are the corresponding attribute values, and σ is the decision.
+
+
+    The problem associated with this system is to determine, for a given input (a
+    tuple of values of attributes included in S), all the realizable rules, i.e.,
+    rules with a true left-hand side. It is important to note that any attribute in
+    the input can take any value.
+
+
+    The objective of this paper is to minimize the number of queries required to determine
+    the attribute values. To achieve this, decision trees are explored as algorithms
+    for solving the problem at hand.
+
+
+    In our previous work [\[12\]](#page-8-9), we investigated the minimum depth of
+    decision trees for the considered problem and established both upper and lower
+    bounds. These bounds depend on three parameters of the decision rule system: the
+    total number of distinct attributes, the maximum length of a decision rule, and
+    the maximum number of attribute values. We demonstrated that there exist systems
+    of decision rules where the minimum depth of the decision trees is significantly
+    smaller than the total number of attributes in the rule system. This finding shows
+    that decision trees are a reasonable choice for such systems of decision rules.
+
+
+    In another study [\[13\]](#page-8-10), we examined the complexity of constructing
+    decision trees and acyclic decision graphs that represent decision trees. We found
+    that in many cases, the minimum number of nodes in decision trees can grow as
+    a superpolynomial function depending on the size of the decision rule systems.
+    To address this issue, we introduced two types of acyclic decision graphs as representations
+    of decision trees. However, simultaneously minimizing the depth and the number
+    of nodes in these graphs poses a challenging bi-criteria optimization problem.
+
+
+    We left this problem for future research and pursued an alternative approach:
+    instead of constructing the entire decision tree, we developed a polynomial time
+    algorithm that models the behavior of the decision tree for a given tuple of attribute
+    values. This algorithm is based on an auxiliary algorithm for the construction
+    of a node cover for a hypergraph corresponding to a decision rule system: nodes
+    of this hypergraph correspond to attributes and edges – to rules from the rule
+    system. The auxiliary algorithm is not greedy: at each step, this algorithm adds
+    to the cover being constructed all the attributes belonging to a rule that has
+    not yet been covered.
+
+
+    In this paper, we develop a new algorithm with polynomial time complexity, which
+    models the behavior of a decision tree solving the considered problem for a given
+    tuple of attribute values. The auxiliary algorithm for it is a standard greedy
+    algorithm for the set cover problem. Therefore we talk about the entire algorithm
+    for describing the operation of decision trees as greedy. We study the accuracy
+    of this algorithm, i.e., we compare the depth of the decision tree described by
+    it and the minimum depth of a decision tree. The obtained bound is a bit worse
+    in the comparison with the bound for the algorithm considered in [\[13\]](#page-8-10).
+    However, we expect that the considered algorithms are mutually complementary:
+    the old one will work better for systems with short decision rules and the new
+    one will work better for systems with long decision rules. In the future, we are
+    planning to do computer experiments to explore this hypothesis.
+
+
+    In this paper, we repeat the main definitions from [\[12\]](#page-8-9) and give
+    some lemmas from [\[12\]](#page-8-9) without proofs.
+
+
+    This paper consists of five sections. Section [2](#page-2-0) considers the main
+    definitions and notation. Section [3](#page-4-0) contains auxiliary statements.
+    Section [4](#page-5-0) discusses the greedy algorithm, which models the behavior
+    of a decision tree. Section [5](#page-6-0) contains short conclusions.
+
+
+    # <span id="page-2-0"></span>2 Main Definitions and Notation
+
+
+    In this section, we consider the main definitions and notation related to decision
+    rule systems and decision trees. In fact, we repeat corresponding definitions
+    and notation from [\[12\]](#page-8-9).
+
+
+    ## 2.1 Decision Rule Systems
+
+
+    Let ω = {0, 1, 2, . . .} and A = {a<sup>i</sup> : i ∈ ω}. Elements of the set
+    A will be called *attributes*. A *decision rule* is an expression of the form
+
+
+    $$
+
+    (a_{i_1} = \delta_1) \wedge \cdots \wedge (a_{i_m} = \delta_m) \rightarrow \sigma,
+
+    $$
+
+
+    where m ∈ ω, ai<sup>1</sup> , . . . , ai<sup>m</sup> are pairwise different attributes
+    from A and δ1, . . . , δm, σ ∈ ω.
+
+
+    We denote this decision rule by r. The expression (ai<sup>1</sup> = δ1) ∧ · ·
+    · ∧ (ai<sup>m</sup> = δm) will be called the *left-hand side*, and the number
+    σ will be called the *right-hand side* of the rule r. The number m will be called
+    the *length* of the decision rule r. Denote A(r) = {ai<sup>1</sup> , . . . , aim}
+    and K(r) = {ai<sup>1</sup> = δ1, . . . , ai<sup>m</sup> = δm}. If m = 0, then
+    A(r) = K(r) = ∅.
+
+
+    A *system of decision rules* S is a finite nonempty set of decision rules. Denote
+    A(S) = S <sup>r</sup>∈<sup>S</sup> A(r), n(S) = |A(S)|, and d(S) the maximum length
+    of a decision rule from S. Let n(S) > 0. For a<sup>i</sup> ∈ A(S), let VS(ai)
+    = {δ : a<sup>i</sup> = δ ∈ S <sup>r</sup>∈<sup>S</sup> K(r)} and EVS(ai) = VS(ai)
+    ∪ {∗}, where the symbol ∗ is interpreted as a number from ω that does not belong
+    to the set VS(ai). Letter E here and later means *extended*: we consider not only
+    values of attributes occurring in S but arbitrary values from ω. Denote k(S) =
+    max{|VS(ai)| : a<sup>i</sup> ∈ A(S)}. If n(S) = 0, then k(S) = 0. We denote by
+    Σ the set of systems of decision rules.
+
+
+    Let S ∈ Σ, n(S) > 0, and A(S) = {aj<sup>1</sup> , . . . , aj<sup>n</sup> }, where
+    j<sup>1</sup> < · · · < jn. Denote EV (S) = EVS(aj<sup>1</sup> ) × · · · × EVS(aj<sup>n</sup>
+    ). For ¯δ = (δ1, . . . , δn) ∈ EV (S), denote K(S, ¯δ) = {aj<sup>1</sup> = δ1,
+    . . . , aj<sup>n</sup> = δn}. We will say that a decision rule r from S is *realizable*
+    for a tuple ¯δ ∈ EV (S) if K(r) ⊆ K(S, ¯δ). It is clear that any rule with the
+    empty left-hand side is realizable for the tuple ¯δ.
+
+
+    We now define a problem related to the rule system S.
+
+
+    Problem *Extended All Rules*: for a given tuple ¯δ ∈ EV (S), it is required to
+    find the set of rules from S that are realizable for the tuple ¯δ. We denote this
+    problem EAR(S). In the special case, when n(S) = 0, all rules from S have the
+    empty left-hand side. In this case, it is natural to consider the set S as the
+    solution to the problem EAR(S).
+
+
+    ### 2.2 Decision Trees
+
+
+    A *finite directed tree with root* is a finite directed tree in which only one
+    node has no entering edges. This node is called the *root*. The nodes without
+    leaving edges are called *terminal* nodes. The nodes that are not terminal will
+    be called *working* nodes. A *complete path* in a finite directed tree with root
+    is a sequence ξ = v1, d1, . . . , vm, dm, vm+1 of nodes and edges of this tree
+    in which v<sup>1</sup> is the root, vm+1 is a terminal node and, for i = 1, .
+    . . , m, the edge d<sup>i</sup> leaves the node v<sup>i</sup> and enters the node
+    vi+1.
+
+
+    An *extended decision tree over a decision rule system* S is a labeled finite
+    directed tree with root Γ satisfying the following conditions:
+
+
+    - Each working node of the tree Γ is labeled with an attribute from the set A(S).
+
+    - Let a working node v of the tree Γ be labeled with an attribute a<sup>i</sup>
+    . Then exactly |EVS(ai)| edges leave the node v and these edges are labeled with
+    pairwise different elements from the set EVS(ai).
+
+    - Each terminal node of the tree Γ is labeled with a subset of the set S.
+
+
+    Let Γ be an extended decision tree over the decision rule system S. We denote
+    by CP(Γ) the set of complete paths in the tree Γ. Let ξ = v1, d1, . . . , vm,
+    dm, vm+1 be a complete path in Γ. We correspond to this path a set of attributes
+    A(ξ) and an equation system K(ξ). If m = 0 and ξ = v1, then A(ξ) = ∅ and K(ξ)
+    = ∅. Let m > 0 and, for j = 1, . . . , m, the node v<sup>j</sup> be labeled with
+    the attribute ai<sup>j</sup> and the edge d<sup>j</sup> be labeled with the element
+    δ<sup>j</sup> ∈ ω ∪ {∗}. Then A(ξ) = {ai<sup>1</sup> , . . . , aim} and K(ξ) =
+    {ai<sup>1</sup> = δ1, . . . , ai<sup>m</sup> = δm}. We denote by τ (ξ) the set
+    of decision rules attached to the node vm+1.
+
+
+    A system of equations {ai<sup>1</sup> = δ1, . . . , ai<sup>m</sup> = δm}, where
+    ai<sup>1</sup> , . . . , ai<sup>m</sup> ∈ A and δ1, . . . , δ<sup>m</sup> ∈ ω
+    ∪ {∗}, will be called *inconsistent* if there exist l, k ∈ {1, . . . , m} such
+    that l 6= k, i<sup>l</sup> = ik, and δ<sup>l</sup> 6= δk. If the system of equations
+    is not inconsistent, then it will be called *consistent*.
+
+
+    Let S be a decision rule system and Γ be an extended decision tree over S.
+
+
+    We will say that Γ *solves* the problem EAR(S) if any path ξ ∈ CP(Γ) with consistent
+    system of equations K(ξ) satisfies the following conditions:
+
+
+    • For any decision rule r ∈ τ (ξ), the relation K(r) ⊆ K(ξ) holds.
+
+
+    • For any decision rule r ∈ S \ τ (ξ), the system of equations K(r) ∪ K(ξ) is
+    inconsistent.
+
+
+    For any complete path ξ ∈ CP(Γ), we denote by h(ξ) the number of working nodes
+    in ξ. The value h(Γ) = max{h(ξ) : ξ ∈ CP(Γ)} is called the *depth* of the decision
+    tree Γ.
+
+
+    Let S be a decision rule system. We denote by hEAR(S) the minimum depth of a decision
+    tree over S, which solves the problem EAR(S).
+
+
+    If n(S) = 0, then there is only one decision tree solving the problem EAR(S).
+    This tree consists of one node labeled with the set of rules S. Therefore if n(S)
+    = 0, then hEAR(S) = 0.
+
+
+    # <span id="page-4-0"></span>3 Auxiliary Statements
+
+
+    In this section, we first give some statements from [\[12\]](#page-8-9) and then
+    we prove a new one.
+
+
+    Let S be a decision rule system and α = {ai<sup>1</sup> = δ1, . . . , ai<sup>m</sup>
+    = δm} be a consistent equation system such that ai<sup>1</sup> , . . . , ai<sup>m</sup>
+    ∈ A and δ1, . . . , δ<sup>m</sup> ∈ ω ∪ {∗}. We now define a decision rule system
+    Sα. Let r be a decision rule for which the equation system K(r) ∪ α is consistent.
+    We denote by r<sup>α</sup> the decision rule obtained from r by the removal from
+    the left-hand side of r all equations that belong to α. Then S<sup>α</sup> is
+    the set of decision rules r<sup>α</sup> such that r ∈ S and the equation system
+    K(r) ∪ α is consistent.
+
+
+    <span id="page-4-2"></span>Lemma 1. *(follows from Lemma 6 [\[12\]](#page-8-9))
+    Let* S *be a decision rule system with* n(S) > 0*,* α = {ai<sup>1</sup> = δ1,
+    . . . , ai<sup>m</sup> = δm} *be a consistent equation system such that* ai<sup>1</sup>
+    , . . . , ai<sup>m</sup> ∈ A(S) *and, for* j = 1, . . . , m*,* δ<sup>j</sup> ∈
+    EVS(ai<sup>j</sup> )*. Then* hEAR(S) ≥ hEAR(Sα)*.*
+
+
+    We correspond to a decision rule system S a hypergraph G(S) with the set of nodes
+    A(S) and the set of edges {A(r) : r ∈ S}. A *node cover* of the hypergraph G(S)
+    is a subset B of the set of nodes A(S) such that A(r) ∩ B 6= ∅ for any rule r
+    ∈ S such that A(r) 6= ∅. If A(S) = ∅, then the empty set is the only node cover
+    of the hypergraph G(S). Denote by β(S) the minimum cardinality of a node cover
+    of the hypergraph G(S).
+
+
+    <span id="page-4-3"></span>Lemma 2. *(follows from Lemma 7 [\[12\]](#page-8-9))
+    Let* S *be a decision rule system. Then* hEAR(S) ≥ β(S)*.*
+
+
+    <span id="page-4-1"></span>Lemma 3. *(follows from Lemma 8 [\[12\]](#page-8-9))
+    Let* S *be a decision rule system. Then* hEAR(S) ≥ d(S)*.*
+
+
+    Let S be a decision rule system and S ′ be the set of rules of the length d(S)
+    from S. Two decision rules r<sup>1</sup> and r<sup>2</sup> from S ′ are called
+    *equivalent* if K(r1) = K(r2). This equivalence relation provides a partition
+    of the set S ′ into equivalence classes. We denote by S max the set of rules that
+    contains exactly one representative from each equivalence class and does not contain
+    any other rules.
+
+
+    <span id="page-4-4"></span>Lemma 4. *Let* S *be a decision rule system with* n(S)
+    > 0*. Then*
+
+
+    $$
+
+    h_{EAR}(S) \ge \ln |S^{\max}| / \ln(k(S) + 1).
+
+    $$
+
+
+    *Proof.* Let r ∈ S max and the rule r is equal to (ai<sup>1</sup> = δ1) ∧ · ·
+    · ∧ (ai<sup>m</sup> = δm) → σ. We now define a tuple ¯δ(r) ∈ EV (S). For j = 1,
+    . . . , m, the tuple ¯δ(r) in the position corresponding to the attribute ai<sup>j</sup>
+    contains the number δ<sup>j</sup> . All other positions of the tuple ¯δ(r) are
+    filled with the symbol ∗. We denote by S max( ¯δ(r)) the set of rules from S max
+    that are realizable for the tuple ¯δ(r). One can show that S max( ¯δ(r)) = {r}.
+    From here it follows that the problem EAR(S) has at least |S max| pairwise different
+    solutions.
+
+
+    Let Γ be a decision tree, which solves the problem EAR(S) and for which h(Γ) =
+    hEAR(S). Then the number of terminal nodes in Γ should be at least |S max|. It
+    is easy to show that the number of terminal nodes in Γ is at most (k(S) + 1)h(Γ).
+    Therefore (k(S) + 1)h(Γ) ≥ |S max| and h(Γ) ≥ ln |S max|/ ln(k(S) + 1). Thus,
+    hEAR(S) ≥ ln |S max|/ ln(k(S) + 1).
+
+
+    # <span id="page-5-0"></span>4 Algorithms
+
+
+    In this section, we consider an auxiliary algorithm Agreedy that constructs a
+    node cover for the hypergraph corresponding to a decision rule system and an algorithm
+    AEAR that describes the work of a decision tree solving the problem EAR(S) for
+    a decision rule system S with n(S) > 0.
+
+
+    ## 4.1 Auxiliary Algorithm Agreedy
+
+
+    Let S be a decision rule system with n(S) > 0. First, we describe a polynomial
+    time algorithm Agreedy for the construction of a node cover B for the hypergraph
+    G(S max) such that |B| ≤ β(S max) ln |S max| + 1.
+
+
+    ### *Algorithm* Agreedy
+
+
+    During each step, this algorithm chooses an attribute a<sup>i</sup> ∈ A(S max)
+    with the minimum index i, which covers the maximum number of rules from S max
+    uncovered during previous steps and add it to the set B (an attribute a<sup>i</sup>
+    covers a rule r ∈ S max if a<sup>i</sup> ∈ A(r)). The algorithm will finish the
+    work when all rules from S max are covered.
+
+
+    The considered algorithm is essentially a well-known greedy algorithm for the
+    set cover problem – see Sect. 4.1.1 of the book [\[34\]](#page-10-0).
+
+
+    <span id="page-5-1"></span>Lemma 5. *(follows from Theorem 4.1 [\[34\]](#page-10-0))
+    Let* S *be a decision rule system with* n(S) > 0*. The algorithm* Agreedy *constructs
+    a node cover* B *for the hypergraph* G(S max) *such that* |B| ≤ β(S max) ln |S
+    max| + 1*.*
+
+
+    ## 4.2 Greedy Algorithm AEAR
+
+
+    Let S be a decision rule system with n(S) > 0. We now describe a polynomial time
+    algorithm AEAR that, for a given tuple of attribute values from the set EV (S),
+    describes the work on this tuple of a decision tree Γ, which solves the problem
+    AER(S). Note that this algorithm is similar to the algorithm considered in [\[13\]](#page-8-10).
+
+
+    ## *Algorithm* AEAR
+
+
+    The work of the decision tree Γ consists of rounds.
+
+
+    *First round*. Using the algorithm Agreedy, we construct a node cover B<sup>1</sup>
+    of the hypergraph G(S max) with |B1| ≤ β(S max) ln |S max|+ 1. The decision tree
+    Γ sequentially computes values of the attributes from B1. As a result, we obtain
+    a system α<sup>1</sup> consisting of |B1| equations of the form ai<sup>j</sup>
+    = δ<sup>j</sup> , where ai<sup>j</sup> ∈ B<sup>1</sup> and δ<sup>j</sup> is the
+    computed value of the attribute ai<sup>j</sup> . If Sα<sup>1</sup> = ∅ or all
+    rules from Sα<sup>1</sup> have the empty left-hand side, then the tree Γ finishes
+    its work. The result of this work is the set of decision rules r from S for which
+    the system of equations K(r) ∪ α<sup>1</sup> is consistent. These rules correspond
+    to rules from Sα<sup>1</sup> with the empty left-hand side. Otherwise, we move
+    on to the second round of the decision tree Γ work.
+
+
+    *Second round*. Using the algorithm Agreedy, we construct a node cover B<sup>2</sup>
+    of the hypergraph G((Sα<sup>1</sup> ) max) with |B2| ≤ β((Sα<sup>1</sup> ) max)
+    ln |(Sα<sup>1</sup> ) max|+1. The decision tree Γ sequentially computes values
+    of the attributes from B2. As a result, we obtain a system α<sup>2</sup> consisting
+    of |B2| equations. If Sα1∪α<sup>2</sup> = ∅ or all rules from Sα1∪α<sup>2</sup>
+    have the empty left-hand side, then the tree Γ finishes its work. The result of
+    this work is the set of decision rules r from S for which the system of equations
+    K(r) ∪ α<sup>1</sup> ∪ α<sup>2</sup> is consistent. These rules correspond to
+    rules from Sα1∪α<sup>2</sup> with the empty left-hand side. Otherwise, we move
+    on to the third round of the decision tree Γ work, etc., until we obtain empty
+    system of rules or system in which all rules have empty left-hand side.
+
+
+    Theorem 1. *Let* S *be a decision rule system with* n(S) > 0*. The algorithm*
+    AEAR *describes the work of a decision tree* Γ*, which solves the problem* EAR(S)
+    *and for which* h(Γ) ≤ hEAR(S) 3 ln(k(S) + 1) + hEAR(S)*.*
+
+
+    *Proof.* It is clear that d(S) > d(Sα<sup>1</sup> ) > d(Sα1∪α<sup>2</sup> ) >
+    · · · . Therefore the number of rounds is at most d(S). By Lemma [3,](#page-4-1)
+    d(S) ≤ hEAR(S). We now show that the number of attributes values of which are
+    computed by Γ during each round is at most hEAR(S) 2 ln(k(S) + 1) + 1. We consider
+    only the second round: the proofs for other rounds are similar. From Lemma [5](#page-5-1)
+    it follows that the number of attributes values of which are computed by Γ during
+    the second round is at most β((Sα<sup>1</sup> ) max) ln |(Sα<sup>1</sup> ) max|
+    + 1. Evidently, β((Sα<sup>1</sup> ) max) ≤ β(Sα<sup>1</sup> ). By Lemmas [1](#page-4-2)
+    and [2,](#page-4-3) β(Sα<sup>1</sup> ) ≤ hEAR(Sα<sup>1</sup> ) ≤ hEAR(S). Therefore
+    β((Sα<sup>1</sup> ) max) ≤ hEAR(S). By Lemmas [1](#page-4-2) and [4,](#page-4-4)
+    ln |(Sα<sup>1</sup> ) max| ≤ hEAR(Sα<sup>1</sup> ) ln(k(S) + 1) ≤ hEAR(S) ln(k(S)
+    + 1). Therefore the number of attributes values of which are computed by Γ during
+    the second round is at most hEAR(S) 2 ln(k(S) + 1) + 1. This bound is true for
+    each round. The number of rounds is at most hEAR(S). Thus, the depth of the decision
+    tree Γ is at most hEAR(S) 3 ln(k(S) + 1) + hEAR(S).
+
+
+    # <span id="page-6-0"></span>5 Conclusions
+
+
+    In this paper, we considered a new algorithm with polynomial time complexity,
+    which models the behavior of a decision tree solving the problem EAR(S) for a
+    given tuple of attribute values. We studied the accuracy of this algorithm: we
+    compared the depth of the decision tree described by it and the minimum depth
+    of a decision tree. The obtained bound is a bit worse in the comparison with the
+    bound for the algorithm considered in [\[13\]](#page-8-10). However, we expect
+    that these two algorithms are mutually complementary: the old one will work better
+    for systems with short decision rules and the new one will work better for systems
+    with long decision rules. In the future, we are planning to do computer experiments
+    to explore this hypothesis. We are also planning to develop a dynamic programming
+    algorithm for the minimization of the depth of decision trees and to compare experimentally
+    the depth of decision trees constructed by the two considered algorithms with
+    the minimum depth.
+
+
+    ### Acknowledgements
+
+
+    Research reported in this publication was supported by King Abdullah University
+    of Science and Technology (KAUST).
+
+
+    # <span id="page-7-5"></span>References
+
+
+    - <span id="page-7-6"></span>[1] Abdelhalim, A., Traor´e, I., Nakkabi, Y.: Creating
+    decision trees from rules using RBDT-1. Comput. Intell. 32(2), 216–239 (2016)
+
+    - [2] Abdelhalim, A., Traor´e, I., Sayed, B.: RBDT-1: A new rule-based decision
+    tree generation technique. In: G. Governatori, J. Hall, A. Paschke (eds.) Rule
+    Interchange and Applications, International Symposium, RuleML 2009, Las Vegas,
+    Nevada, USA, November 5-7, 2009. Proceedings, *Lecture Notes in Computer Science*,
+    vol. 5858, pp. 108–121. Springer (2009)
+
+    - <span id="page-7-0"></span>[3] AbouEisha, H., Amin, T., Chikalov, I., Hussain,
+    S., Moshkov, M.: Extensions of Dynamic Programming for Combinatorial Optimization
+    and Data Mining, *Intelligent Systems Reference Library*, vol. 146. Springer (2019)
+
+    - <span id="page-7-1"></span>[4] Alsolami, F., Azad, M., Chikalov, I., Moshkov,
+    M.: Decision and Inhibitory Trees and Rules for Decision Tables with Many-valued
+    Decisions, *Intelligent Systems Reference Library*, vol. 156. Springer (2020)
+
+    - <span id="page-7-7"></span>[5] Blum, M., Impagliazzo, R.: Generic oracles and
+    oracle classes (extended abstract). In: 28th Annual Symposium on Foundations of
+    Computer Science, Los Angeles, California, USA, 27-29 October 1987, pp. 118–126.
+    IEEE Computer Society (1987)
+
+    - <span id="page-7-4"></span><span id="page-7-3"></span>[6] Boros, E., Hammer,
+    P.L., Ibaraki, T., Kogan, A.: Logical analysis of numerical data. Math. Program.
+    79, 163–190 (1997)
+
+    - [7] Boros, E., Hammer, P.L., Ibaraki, T., Kogan, A., Mayoraz, E., Muchnik, I.B.:
+    An implementation of logical analysis of data. IEEE Trans. Knowl. Data Eng. 12(2),
+    292– 306 (2000)
+
+    - <span id="page-7-2"></span>[8] Breiman, L., Friedman, J.H., Olshen, R.A., Stone,
+    C.J.: Classification and Regression Trees. Wadsworth and Brooks (1984)
+
+    - <span id="page-8-8"></span><span id="page-8-2"></span>[9] Buhrman, H., de Wolf,
+    R.: Complexity measures and decision tree complexity: a survey. Theor. Comput.
+    Sci. 288(1), 21–43 (2002)
+
+    - <span id="page-8-0"></span>[10] Cao, H.E.C., Sarlin, R., Jung, A.: Learning
+    explainable decision rules via maximum satisfiability. IEEE Access 8, 218180–218185
+    (2020)
+
+    - [11] Chikalov, I., Lozin, V.V., Lozina, I., Moshkov, M., Nguyen, H.S., Skowron,
+    A., Zielosko, B.: Three Approaches to Data Analysis - Test Theory, Rough Sets
+    and Logical Analysis of Data, *Intelligent Systems Reference Library*, vol. 41.
+    Springer (2013)
+
+    - <span id="page-8-9"></span>[12] Durdymyradov, K., Moshkov, M.: Bounds on depth
+    of decision trees derived from decision rule systems. arXiv:2302.07063 [cs.CC]
+    (2023). URL <https://doi.org/10.48550/arXiv.2302.07063>
+
+    - <span id="page-8-10"></span>[13] Durdymyradov, K., Moshkov, M.: Construction
+    of decision trees and acyclic decision graphs from decision rule systems. arXiv:2305.01721
+    [cs.AI] (2023). URL <https://doi.org/10.48550/arXiv.2305.01721>
+
+    - <span id="page-8-3"></span><span id="page-8-1"></span>[14] F¨urnkranz, J., Gamberger,
+    D., Lavrac, N.: Foundations of Rule Learning. Cognitive Technologies. Springer
+    (2012)
+
+    - [15] Gilmore, E., Estivill-Castro, V., Hexel, R.: More interpretable decision
+    trees. In: H. Sanjurjo-Gonz´alez, I. Pastor-L´opez, P.G. Bringas, H. Quinti´an,
+    E. Corchado (eds.) Hybrid Artificial Intelligent Systems - 16th International
+    Conference, HAIS 2021, Bilbao, Spain, September 22-24, 2021, Proceedings, *Lecture
+    Notes in Computer Science*, vol. 12886, pp. 280–292. Springer (2021)
+
+    - <span id="page-8-7"></span>[16] Hartmanis, J., Hemachandra, L.A.: One-way functions,
+    robustness, and the nonisomorphism of NP-complete sets. In: Proceedings of the
+    Second Annual Conference on Structure in Complexity Theory, Cornell University,
+    Ithaca, New York, USA, June 16-19, 1987. IEEE Computer Society (1987)
+
+    - <span id="page-8-5"></span><span id="page-8-4"></span>[17] Imam, I.F., Michalski,
+    R.S.: Learning decision trees from decision rules: A method and initial results
+    from a comparative study. J. Intell. Inf. Syst. 2(3), 279–304 (1993)
+
+    - [18] Imam, I.F., Michalski, R.S.: Should decision trees be learned from examples
+    of from decision rules? In: H.J. Komorowski, Z.W. Ras (eds.) Methodologies for
+    Intelligent Systems, 7th International Symposium, ISMIS ''93, Trondheim, Norway,
+    June 15-18, 1993, Proceedings, *Lecture Notes in Computer Science*, vol. 689,
+    pp. 395–404. Springer (1993)
+
+    - <span id="page-8-6"></span>[19] Imam, I.F., Michalski, R.S.: Learning for decision
+    making: the FRD approach and a comparative study. In: Z.W. Ras, M. Michalewicz
+    (eds.) Foundations of Intelligent Systems, 9th International Symposium, ISMIS
+    ''96, Zakopane, Poland, June 9-13, 1996, Proceedings, *Lecture Notes in Computer
+    Science*, vol. 1079, pp. 428–437. Springer (1996)
+
+    - <span id="page-9-2"></span>[20] Kaufman, K.A., Michalski, R.S., Pietrzykowski,
+    J., Wojtusiak, J.: An integrated multitask inductive database VINLEN: initial
+    implementation and early results. In: S. Dzeroski, J. Struyf (eds.) Knowledge
+    Discovery in Inductive Databases, 5th International Workshop, KDID 2006, Berlin,
+    Germany, September 18, 2006, Revised Selected and Invited Papers, *Lecture Notes
+    in Computer Science*, vol. 4747, pp. 116–133. Springer (2006)
+
+    - <span id="page-9-3"></span>[21] Michalski, R.S., Imam, I.F.: Learning problem-oriented
+    decision structures from decision rules: The AQDT-2 system. In: Z.W. Ras, M. Zemankova
+    (eds.) Methodologies for Intelligent Systems, 8th International Symposium, ISMIS
+    ''94, Charlotte, North Carolina, USA, October 16-19, 1994, Proceedings, *Lecture
+    Notes in Computer Science*, vol. 869, pp. 416–426. Springer (1994)
+
+    - <span id="page-9-4"></span><span id="page-9-1"></span>[22] Michalski, R.S.,
+    Imam, I.F.: On learning decision structures. Fundam. Informaticae 31(1), 49–64
+    (1997)
+
+    - <span id="page-9-5"></span>[23] Molnar, C.: Interpretable Machine Learning.
+    A Guide for Making Black Box Models Explainable, 2 edn. (2022). URL <christophm.github.io/interpretable-ml-book/>
+
+    - <span id="page-9-6"></span>[24] Moshkov, M.: About the depth of decision trees
+    computing Boolean functions. Fundam. Informaticae 22(3), 203–215 (1995)
+
+    - <span id="page-9-10"></span>[25] Moshkov, M.: Comparative analysis of deterministic
+    and nondeterministic decision tree complexity. Global approach. Fundam. Informaticae
+    25(2), 201–214 (1996)
+
+    - [26] Moshkov, M.: Some relationships between decision trees and decision rule
+    systems. In: L. Polkowski, A. Skowron (eds.) Rough Sets and Current Trends in
+    Computing, First International Conference, RSCTC''98, Warsaw, Poland, June 22-26,
+    1998, Proceedings, *Lecture Notes in Computer Science*, vol. 1424, pp. 499–505.
+    Springer (1998)
+
+    - <span id="page-9-11"></span><span id="page-9-7"></span>[27] Moshkov, M.: Deterministic
+    and nondeterministic decision trees for rough computing. Fundam. Informaticae
+    41(3), 301–311 (2000)
+
+    - [28] Moshkov, M.: On transformation of decision rule systems into decision trees
+    (in Russian). In: Proceedings of the Seventh International Workshop Discrete Mathematics
+    and its Applications, Moscow, Russia, January 29 – February 2, 2001, Part 1, pp.
+    21–26. Center for Applied Investigations of Faculty of Mathematics and Mechanics,
+    Moscow State University (2001)
+
+    - <span id="page-9-8"></span>[29] Moshkov, M.: Classification of infinite information
+    systems depending on complexity of decision trees and decision rule systems. Fundam.
+    Informaticae 54(4), 345–368 (2003)
+
+    - <span id="page-9-9"></span>[30] Moshkov, M.: Comparative analysis of deterministic
+    and nondeterministic decision tree complexity. Local approach. In: J.F. Peters,
+    A. Skowron (eds.) Trans. Rough Sets IV, *Lecture Notes in Computer Science*, vol.
+    3700, pp. 125–143. Springer (2005)
+
+    - <span id="page-9-0"></span>[31] Moshkov, M.: Time complexity of decision trees.
+    In: J.F. Peters, A. Skowron (eds.) Trans. Rough Sets III, *Lecture Notes in Computer
+    Science*, vol. 3400, pp. 244–459. Springer (2005)
+
+    - <span id="page-10-11"></span><span id="page-10-2"></span>[32] Moshkov, M.: Comparative
+    Analysis of Deterministic and Nondeterministic Decision Trees, *Intelligent Systems
+    Reference Library*, vol. 179. Springer (2020)
+
+    - [33] Moshkov, M., Piliszczuk, M., Zielosko, B.: Partial Covers, Reducts and
+    Decision Rules in Rough Sets - Theory and Applications, *Studies in Computational
+    Intelligence*, vol. 145. Springer (2008)
+
+    - <span id="page-10-3"></span><span id="page-10-0"></span>[34] Moshkov, M., Zielosko,
+    B.: Combinatorial Machine Learning - A Rough Set Approach, *Studies in Computational
+    Intelligence*, vol. 360. Springer (2011)
+
+    - [35] Pawlak, Z.: Rough Sets Theoretical Aspects of Reasoning about Data, *Theory
+    and Decision Library: Series D*, vol. 9. Kluwer (1991)
+
+    - <span id="page-10-6"></span><span id="page-10-4"></span>[36] Pawlak, Z., Skowron,
+    A.: Rudiments of rough sets. Inf. Sci. 177(1), 3–27 (2007)
+
+    - [37] Quinlan, J.R.: Generating production rules from decision trees. In: J.P.
+    McDermott (ed.) Proceedings of the 10th International Joint Conference on Artificial
+    Intelligence. Milan, Italy, August 23-28, 1987, pp. 304–307. Morgan Kaufmann (1987)
+
+    - <span id="page-10-8"></span><span id="page-10-7"></span>[38] Quinlan, J.R.:
+    C4.5: Programs for Machine Learning. Morgan Kaufmann (1993)
+
+    - [39] Quinlan, J.R.: Simplifying decision trees. Int. J. Hum. Comput. Stud. 51(2),
+    497–510 (1999)
+
+    - <span id="page-10-5"></span><span id="page-10-1"></span>[40] Rokach, L., Maimon,
+    O.: Data Mining with Decision Trees - Theory and Applications, *Series in Machine
+    Perception and Artificial Intelligence*, vol. 69. World Scientific (2007)
+
+    - [41] Silva, A., Gombolay, M.C., Killian, T.W., Jimenez, I.D.J., Son, S.: Optimization
+    methods for interpretable differentiable decision trees applied to reinforcement
+    learning. In: S. Chiappa, R. Calandra (eds.) The 23rd International Conference
+    on Artificial Intelligence and Statistics, AISTATS 2020, 26-28 August 2020, Online
+    [Palermo, Sicily, Italy], *Proceedings of Machine Learning Research*, vol. 108,
+    pp. 1855–1865. PMLR (2020)
+
+    - <span id="page-10-9"></span>[42] Szydlo, T., Sniezynski, B., Michalski, R.S.:
+    A rules-to-trees conversion in the inductive database system VINLEN. In: M.A.
+    Klopotek, S.T. Wierzchon, K. Trojanowski (eds.) Intelligent Information Processing
+    and Web Mining, Proceedings of the International IIS: IIPWM''05 Conference held
+    in Gdansk, Poland, June 13-16, 2005, *Advances in Soft Computing*, vol. 31, pp.
+    496–500. Springer (2005)
+
+    - <span id="page-10-10"></span>[43] Tardos, G.: Query complexity, or why is it
+    difficult to separate NP <sup>A</sup> ∩ coNP <sup>A</sup> from P A by random oracles
+    A? Comb. 9(4), 385–392 (1989)'
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: Qualified.
+    related_work_prompt: Qualified
+    novelty_prompt: Qualified
+    review_only_prompt: Qualified
+  llm_input_used: '## Abstract
+
+    Decision trees and decision rule systems play important roles as classifiers,
+
+    knowledge representation tools, and algorithms. They are easily interpretable
+
+    models for data analysis, making them widely used and studied in computer
+
+    science. Understanding the relationships between these two models is an
+
+    important task in this field. There are well-known methods for converting
+
+    decision trees into systems of decision rules. In this paper, we consider the
+
+    inverse transformation problem, which is not so simple. Instead of constructing
+
+    an entire decision tree, our study focuses on a greedy polynomial time
+
+    algorithm that simulates the operation of a decision tree on a given tuple of
+
+    attribute values.
+
+
+    ## Introduction
+
+    Decision trees [\[3,](#page-7-0) [4,](#page-7-1) [8,](#page-7-2) [31,](#page-9-0)
+    [34,](#page-10-0) [40\]](#page-10-1) and systems of decision rules [\[6,](#page-7-3)
+    [7,](#page-7-4) [11,](#page-8-0) [14,](#page-8-1) [33,](#page-10-2) [34,](#page-10-0)
+    [35,](#page-10-3) [36\]](#page-10-4) are widely used as classifiers, knowledge
+    representation tools, and algorithms. They are known for their interpretability
+    in data analysis [\[10,](#page-8-2) [15,](#page-8-3) [23,](#page-9-1) [41\]](#page-10-5).
+
+
+    Investigating the relationship between these two models is an important task in
+    computer science. Converting decision trees into decision rule systems is a well-known
+    and simple process [\[37,](#page-10-6) [38,](#page-10-7) [39\]](#page-10-8). This
+    paper focuses on the inverse transformation problem, which is not trivial.
+
+
+    The research related to this problem encompasses several directions:
+
+
+    • Two-stage construction of decision trees. This approach involves building decision
+    rules based on input data, followed by the construction of decision trees or decision
+    structures (which are generalizations of decision trees) using the generated rules.
+    The benefits of this two-stage construction method are explained in [\[1,](#page-7-5)
+    [2,](#page-7-6) [17,](#page-8-4) [18,](#page-8-5) [19,](#page-8-6) [20,](#page-9-2)
+    [21,](#page-9-3) [22,](#page-9-4) [42\]](#page-10-9).
+
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for computing Boolean functions [\[5,](#page-7-7) [16,](#page-8-7) [24,](#page-9-5)
+    [43\]](#page-10-10). Note that the nondeterministic decision trees can be interpreted
+    as decision rule systems. Note also that the minimum depth of a nondeterministic
+    decision tree for a Boolean function is equal to its certificate complexity [\[9\]](#page-8-8).
+
+    - Relationships between the depth of deterministic and nondeterministic decision
+    trees for problems over finite and infinite information systems [\[25,](#page-9-6)
+    [27,](#page-9-7) [29,](#page-9-8) [30,](#page-9-9) [32\]](#page-10-11). These
+    systems consist of a universe and a set of attributes defined on it [\[35\]](#page-10-3).
+
+
+    This paper builds upon the syntactic approach proposed in previous works [\[26,](#page-9-10)
+    [28\]](#page-9-11). The approach assumes that we have a system of decision rules
+    but lack knowledge of the input data, and our objective is to transform these
+    rules into a decision tree.
+
+
+    Let us consider a system of decision rules S, which consists of rules of the form
+
+
+    $$
+
+    (a_{i_1} = \delta_1) \wedge \cdots \wedge (a_{i_m} = \delta_m) \rightarrow \sigma,
+
+    $$
+
+
+    where ai<sup>1</sup> , . . . , ai<sup>m</sup> represent attributes, δ1, . . .
+    , δ<sup>m</sup> are the corresponding attribute values, and σ is the decision.
+
+
+    The problem associated with this system is to determine, for a given input (a
+    tuple of values of attributes included in S), all the realizable rules, i.e.,
+    rules with a true left-hand side. It is important to note that any attribute in
+    the input can take any value.
+
+
+    The objective of this paper is to minimize the number of queries required to determine
+    the attribute values. To achieve this, decision trees are explored as algorithms
+    for solving the problem at hand.
+
+
+    In our previous work [\[12\]](#page-8-9), we investigated the minimum depth of
+    decision trees for the considered problem and established both upper and lower
+    bounds. These bounds depend on three parameters of the decision rule system: the
+    total number of distinct attributes, the maximum length of a decision rule, and
+    the maximum number of attribute values. We demonstrated that there exist systems
+    of decision rules where the minimum depth of the decision trees is significantly
+    smaller than the total number of attributes in the rule system. This finding shows
+    that decision trees are a reasonable choice for such systems of decision rules.
+
+
+    In another study [\[13\]](#page-8-10), we examined the complexity of constructing
+    decision trees and acyclic decision graphs that represent decision trees. We found
+    that in many cases, the minimum number of nodes in decision trees can grow as
+    a superpolynomial function depending on the size of the decision rule systems.
+    To address this issue, we introduced two types of acyclic decision graphs as representations
+    of decision trees. However, simultaneously minimizing the depth and the number
+    of nodes in these graphs poses a challenging bi-criteria optimization problem.
+
+
+    We left this problem for future research and pursued an alternative approach:
+    instead of constructing the entire decision tree, we developed a polynomial time
+    algorithm that models the behavior of the decision tree for a given tuple of attribute
+    values. This algorithm is based on an auxiliary algorithm for the construction
+    of a node cover for a hypergraph corresponding to a decision rule system: nodes
+    of this hypergraph correspond to attributes and edges – to rules from the rule
+    system. The auxiliary algorithm is not greedy: at each step, this algorithm adds
+    to the cover being constructed all the attributes belonging to a rule that has
+    not yet been covered.
+
+
+    In this paper, we develop a new algorithm with polynomial time complexity, which
+    models the behavior of a decision tree solving the considered problem for a given
+    tuple of attribute values. The auxiliary algorithm for it is a standard greedy
+    algorithm for the set cover problem. Therefore we talk about the entire algorithm
+    for describing the operation of decision trees as greedy. We study the accuracy
+    of this algorithm, i.e., we compare the depth of the decision tree described by
+    it and the minimum depth of a decision tree. The obtained bound is a bit worse
+    in the comparison with the bound for the algorithm considered in [\[13\]](#page-8-10).
+    However, we expect that the considered algorithms are mutually complementary:
+    the old one will work better for systems with short decision rules and the new
+    one will work better for systems with long decision rules. In the future, we are
+    planning to do computer experiments to explore this hypothesis.
+
+
+    In this paper, we repeat the main definitions from [\[12\]](#page-8-9) and give
+    some lemmas from [\[12\]](#page-8-9) without proofs.
+
+
+    This paper consists of five sections. Section [2](#page-2-0) considers the main
+    definitions and notation. Section [3](#page-4-0) contains auxiliary statements.
+    Section [4](#page-5-0) discusses the greedy algorithm, which models the behavior
+    of a decision tree. Section [5](#page-6-0) contains short conclusions.'
+  token_usage: 7830
+  time_usage: 1.6078364849090576

@@ -1,0 +1,94 @@
+papers:
+- title: "On the Prospects of Incorporating Large Language Models (LLMs) in\n  Automated\
+    \ Planning and Scheduling (APS)"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes a comprehensive literature
+      review and discusses various applications of large language models (LLMs) in
+      automated planning and scheduling, with references to empirical evaluations,
+      including metrics, comparisons, and specific studies that demonstrate structured
+      evaluation of LLMs in this context.'
+    related_work_prompt: '- Qualified. Reason: The paper engages with prior research
+      by referencing foundational works in Automated Planning and Scheduling (e.g.,
+      Russell and Norvig 2003; Ghallab, Nau, and Traverso 2004) and discusses the
+      evolution of LLMs in relation to APS, indicating a synthesis of insights from
+      existing literature.'
+    novelty_prompt: 'Qualified. Reason: The paper claims novelty by investigating
+      the integration of LLMs with traditional symbolic planners, proposing a promising
+      neuro-symbolic approach to address complex planning challenges. This indicates
+      a new contribution to the field of Automated Planning and Scheduling.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 38733
+  time_usage: 10.69
+- title: 'Training and Serving System of Foundation Models: A Comprehensive Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper includes extensive empirical
+      evaluation through structured sections discussing training and serving methods,
+      optimization strategies, and various techniques, supported by tables, figures,
+      and references to specific methodologies and their performance.'
+    related_work_prompt: 'Qualified. Reason: The paper references prior work by mentioning
+      existing foundation models (e.g., GPT-3, LLaMA, PanGu-Σ, PengCheng Mind) and
+      discusses previous surveys on foundation models, highlighting their shortcomings
+      and the need for a comprehensive survey. This indicates engagement with prior
+      research.'
+    novelty_prompt: '- Qualified. Reason: The paper presents a comprehensive survey
+      of training and serving methods for foundation models, categorizing state-of-the-art
+      techniques and discussing challenges and future directions, which contributes
+      new insights and perspectives to the field.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 57987
+  time_usage: 14.31
+- title: "A Survey on Verification and Validation, Testing and Evaluations of\n  Neurosymbolic\
+    \ Artificial Intelligence"
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The abstract and introduction mention the
+      evaluation of neurosymbolic AI applications, the assessment of current testing
+      and evaluation (T&E) and validation & verification (V&V) techniques, and the
+      analysis of how different architectures impact these methods, indicating structured
+      evaluation is included.'
+    related_work_prompt: 'Qualified. Reason: The paper includes multiple academic
+      citations and references to prior work, discussing the concepts of symbolic
+      and sub-symbolic AI, and comparing its focus on validation and verification
+      (V&V) processes with existing literature and frameworks.'
+    novelty_prompt: 'Qualified. Reason: The paper explicitly states its contributions,
+      including presenting and comparing two taxonomies of neurosymbolic AI, mapping
+      V&V concepts to symbolic and sub-symbolic AI, and investigating how symbolic
+      AI can support the V&V process of sub-symbolic AI. These claims indicate new
+      contributions in the field of neurosymbolic AI.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 35475
+  time_usage: 8.1
+- title: 'Computational Argumentation-based Chatbots: a Survey'
+  id: ''
+  decisions:
+    language: '- Qualified. Reason: English Paper'
+    evaluation_prompt: 'Qualified. Reason: The paper provides structured evaluation
+      through a dedicated section discussing the evaluation of various argumentation-based
+      chatbots, including user studies and comparisons of performance, which demonstrates
+      empirical analysis.'
+    related_work_prompt: 'Qualified. Reason: The paper references multiple prior works,
+      including specific studies on chatbots and computational argumentation, and
+      discusses the evolution of chatbot technology and its comparison with standard
+      chatbots. It also highlights the novelty of its approach in combining computational
+      argumentation with chatbots, indicating engagement with existing research.'
+    novelty_prompt: 'Qualified. Reason: The paper explicitly claims novelty by stating,
+      "To the best of our knowledge, this is the first survey that combines computational
+      argumentation and chatbots," indicating a new contribution to the field. Additionally,
+      it discusses the potential for integrating computational argumentation with
+      chatbot technology, suggesting a novel approach to enhancing chatbot behaviors.'
+    review_only_prompt: 'Disqualified: review paper. Reason: The title contains the
+      word "survey" and the main body primarily summarizes existing work without introducing
+      new methods, datasets, experiments, or frameworks.'
+  token_usage: 59095
+  time_usage: 10.21
